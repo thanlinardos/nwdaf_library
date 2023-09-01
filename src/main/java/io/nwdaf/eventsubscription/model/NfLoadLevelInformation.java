@@ -2,6 +2,8 @@ package io.nwdaf.eventsubscription.model;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -28,6 +30,9 @@ public class NfLoadLevelInformation   {
   
   @JsonProperty("areaOfInterestId")
   private UUID areaOfInterestId = null;
+
+  @JsonProperty("supis")
+  private List<String> supis = new ArrayList<>();
 
   @JsonProperty("nfType")
   private NFType nfType = null;
@@ -324,6 +329,32 @@ public class NfLoadLevelInformation   {
     this.confidence = confidence;
   }
 
+  public NfLoadLevelInformation supis(List<String> supis) {
+    this.supis = supis;
+    return this;
+  }
+
+  public NfLoadLevelInformation addSupi(String supi) {
+    if (this.supis == null) {
+      this.supis = new ArrayList<String>();
+    }
+    this.supis.add(supi);
+    return this;
+  }
+
+  /**
+   * Contains a list of Supis that this nf instance serves.
+   * @return supis
+   **/
+  @Schema(description = "Contains a list of Supis that this nf instance serves.")
+      @Valid
+  public List<String> getSupis() {
+    return supis;
+  }
+
+  public void setSupis(List<String> supis) {
+    this.supis = supis;
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -335,6 +366,7 @@ public class NfLoadLevelInformation   {
     }
     NfLoadLevelInformation nfLoadLevelInformation = (NfLoadLevelInformation) o;
     return Objects.equals(this.nfType, nfLoadLevelInformation.nfType) &&
+        Objects.equals(this.areaOfInterestId, nfLoadLevelInformation.areaOfInterestId) &&
         Objects.equals(this.nfInstanceId, nfLoadLevelInformation.nfInstanceId) &&
         Objects.equals(this.nfSetId, nfLoadLevelInformation.nfSetId) &&
         Objects.equals(this.nfStatus, nfLoadLevelInformation.nfStatus) &&
@@ -345,12 +377,13 @@ public class NfLoadLevelInformation   {
         Objects.equals(this.nfLoadLevelpeak, nfLoadLevelInformation.nfLoadLevelpeak) &&
         Objects.equals(this.nfLoadAvgInAoi, nfLoadLevelInformation.nfLoadAvgInAoi) &&
         Objects.equals(this.snssai, nfLoadLevelInformation.snssai) &&
-        Objects.equals(this.confidence, nfLoadLevelInformation.confidence);
+        Objects.equals(this.confidence, nfLoadLevelInformation.confidence) &&
+        Objects.equals(this.supis, nfLoadLevelInformation.supis);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nfType, nfInstanceId, nfSetId, nfStatus, nfCpuUsage, nfMemoryUsage, nfStorageUsage, nfLoadLevelAverage, nfLoadLevelpeak, nfLoadAvgInAoi, snssai, confidence);
+    return Objects.hash(areaOfInterestId,nfType, nfInstanceId, nfSetId, nfStatus, nfCpuUsage, nfMemoryUsage, nfStorageUsage, nfLoadLevelAverage, nfLoadLevelpeak, nfLoadAvgInAoi, snssai, confidence, supis);
   }
 
   @Override
@@ -358,6 +391,7 @@ public class NfLoadLevelInformation   {
     StringBuilder sb = new StringBuilder();
     sb.append("class NfLoadLevelInformation {\n");
     
+    sb.append("    areaOfInterestId: ").append(toIndentedString(areaOfInterestId)).append("\n");
     sb.append("    nfType: ").append(toIndentedString(nfType)).append("\n");
     sb.append("    nfInstanceId: ").append(toIndentedString(nfInstanceId)).append("\n");
     sb.append("    nfSetId: ").append(toIndentedString(nfSetId)).append("\n");
@@ -370,6 +404,7 @@ public class NfLoadLevelInformation   {
     sb.append("    nfLoadAvgInAoi: ").append(toIndentedString(nfLoadAvgInAoi)).append("\n");
     sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
     sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+    sb.append("    supis: ").append(toIndentedString(supis)).append("\n");
     sb.append("}");
     return sb.toString();
   }

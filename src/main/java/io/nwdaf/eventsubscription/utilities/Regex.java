@@ -27,7 +27,4 @@ public class Regex {
 	public static String ipv6Prefix = "^((:|(0?|([1-9a-f][0-9a-f]{0,3}))):)((0?|([1-9a-f][0-9af]{0,3})):){0,6}(:|(0?|([1-9a-f][0-9a-f]{0,3})))(\\/(([0-9])|([0-9]{2})|(1[0-1][0-9])|(12[0-8])))|((([^:]+:){7}([^:]+))|((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?))(\\/.+)$";
 	public static String fqdn = "^([0-9A-Za-z]([-0-9A-Za-z]{0,61}[0-9A-Za-z])?\\.)+[A-Zaz]{2,63}\\.?$";
 	public static String packetErrorRate = "^([0-9]E-[0-9])$";
-	
-	//	String text = "setxyz.amfset.5gc.mnc012.mcc345";
-//	String text2 = "setxyz.smfset.5gc.nid000007ed9d5.mnc012.mcc345";
 }
