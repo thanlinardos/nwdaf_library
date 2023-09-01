@@ -131,6 +131,21 @@ public class ParserUtil {
 		return res;
 	}
 
+	public static String parseQuerryFilterContains(List<String> filterList, String subProperty){
+		String res = "";
+        if(filterList==null || filterList.size()==0){
+            return null;
+        }
+		for(int i=0;i<filterList.size();i++){
+			res += "data->'"+subProperty+"' @> '\""+filterList.get(i)+"\"'";
+			if(i!=filterList.size()-1){
+				res += " or ";
+			}
+		}
+
+		return res;
+	}
+
     // checks if input string is neither null nor empty string ("")
     public static Boolean checkNotNullNorEmptyString(String in){
         if(in!=null && !in.equals("")){
