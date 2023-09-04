@@ -249,4 +249,11 @@ public class ParserUtil {
         }
         return res;
     }
+
+    public static <T> Boolean safeParseContains(List<T> list, T item){
+        if(list!=null && list.size()!=0 && list.contains(item)){
+            return true;
+        }
+        return false;
+    }
 }

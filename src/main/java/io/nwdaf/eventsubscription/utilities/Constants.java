@@ -80,4 +80,6 @@ public class Constants {
 		res.put(AreaOfInterestExample3.getId(), AreaOfInterestExample3);
 		return res;
 	}
+
+	public static String nfloadPostgresColumnFormat = "CAST(ROUND(AVG(CAST(data->>'%1$s' as numeric))) as integer) AS %1$s,";
 }
