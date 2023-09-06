@@ -71,6 +71,7 @@ public class Constants {
 	;
 
 	public static Map<UUID,NetworkAreaInfo> ExampleAOIsMap = initExampleAOIsMap();
+	public static Map<NetworkAreaInfo,UUID> ExampleAOIsToUUIDsMap = initExampleAOIsToUUIDsMap();
 
 	public static Map<UUID,NetworkAreaInfo> initExampleAOIsMap(){
 		Map<UUID,NetworkAreaInfo> res = new HashMap<>();
@@ -78,6 +79,14 @@ public class Constants {
 		res.put(AreaOfInterestExample1.getId(), AreaOfInterestExample1);
 		res.put(AreaOfInterestExample2.getId(), AreaOfInterestExample2);
 		res.put(AreaOfInterestExample3.getId(), AreaOfInterestExample3);
+		return res;
+	}
+	public static Map<NetworkAreaInfo,UUID> initExampleAOIsToUUIDsMap(){
+		Map<NetworkAreaInfo,UUID> res = new HashMap<>();
+		res.put(ServingAreaOfInterest, ServingAreaOfInterest.getId());
+		res.put(AreaOfInterestExample1, AreaOfInterestExample1.getId());
+		res.put(AreaOfInterestExample2, AreaOfInterestExample2.getId());
+		res.put(AreaOfInterestExample3, AreaOfInterestExample3.getId());
 		return res;
 	}
 

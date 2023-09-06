@@ -3,7 +3,8 @@ package io.nwdaf.eventsubscription.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.nwdaf.eventsubscription.utilities.ParserUtil;
+import io.nwdaf.eventsubscription.utilities.CheckUtil;
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -49,7 +50,7 @@ public class Tai   {
   }
 
   public Tai tac(String tac) {
-    this.tac = ParserUtil.convertEmptyStringToNull(tac);
+    this.tac = ConvertUtil.convertEmptyStringToNull(tac);
     return this;
   }
 
@@ -65,11 +66,11 @@ public class Tai   {
   }
 
   public void setTac(String tac) {
-    this.tac = ParserUtil.convertEmptyStringToNull(tac);
+    this.tac = ConvertUtil.convertEmptyStringToNull(tac);
   }
 
   public Tai nid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
     return this;
   }
 
@@ -84,7 +85,7 @@ public class Tai   {
   }
 
   public void setNid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
   }
 
 
@@ -97,9 +98,9 @@ public class Tai   {
       return false;
     }
     Tai tai = (Tai) o;
-    return Objects.equals(this.plmnId, tai.plmnId) &&
-        Objects.equals(this.tac, tai.tac) &&
-        Objects.equals(this.nid, tai.nid);
+    return CheckUtil.safeCheckObjectsEquals(this.plmnId, tai.plmnId) &&
+           CheckUtil.safeCheckObjectsEquals(this.tac, tai.tac) &&
+           CheckUtil.safeCheckObjectsEquals(this.nid, tai.nid);
   }
 
   @Override

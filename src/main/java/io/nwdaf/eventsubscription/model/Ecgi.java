@@ -3,6 +3,8 @@ package io.nwdaf.eventsubscription.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.CheckUtil;
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
@@ -49,7 +51,7 @@ public class Ecgi   {
   }
 
   public Ecgi eutraCellId(String eutraCellId) {
-    this.eutraCellId = ParserUtil.convertEmptyStringToNull(eutraCellId);
+    this.eutraCellId = ConvertUtil.convertEmptyStringToNull(eutraCellId);
     return this;
   }
 
@@ -65,11 +67,11 @@ public class Ecgi   {
   }
 
   public void setEutraCellId(String eutraCellId) {
-    this.eutraCellId = ParserUtil.convertEmptyStringToNull(eutraCellId);
+    this.eutraCellId = ConvertUtil.convertEmptyStringToNull(eutraCellId);
   }
 
   public Ecgi nid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
     return this;
   }
 
@@ -84,7 +86,7 @@ public class Ecgi   {
   }
 
   public void setNid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
   }
 
 
@@ -97,9 +99,9 @@ public class Ecgi   {
       return false;
     }
     Ecgi ecgi = (Ecgi) o;
-    return Objects.equals(this.plmnId, ecgi.plmnId) &&
-        Objects.equals(this.eutraCellId, ecgi.eutraCellId) &&
-        Objects.equals(this.nid, ecgi.nid);
+    return CheckUtil.safeCheckObjectsEquals(this.plmnId, ecgi.plmnId) &&
+        CheckUtil.safeCheckObjectsEquals(this.eutraCellId, ecgi.eutraCellId) &&
+        CheckUtil.safeCheckObjectsEquals(this.nid, ecgi.nid);
   }
 
   @Override

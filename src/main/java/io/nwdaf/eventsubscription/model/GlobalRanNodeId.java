@@ -3,7 +3,8 @@ package io.nwdaf.eventsubscription.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.nwdaf.eventsubscription.utilities.ParserUtil;
+import io.nwdaf.eventsubscription.utilities.CheckUtil;
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -63,7 +64,7 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public GlobalRanNodeId n3IwfId(String n3IwfId) {
-    this.n3IwfId = ParserUtil.convertEmptyStringToNull(n3IwfId);
+    this.n3IwfId = ConvertUtil.convertEmptyStringToNull(n3IwfId);
     return this;
   }
 
@@ -78,7 +79,7 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public void setN3IwfId(String n3IwfId) {
-    this.n3IwfId = ParserUtil.convertEmptyStringToNull(n3IwfId);
+    this.n3IwfId = ConvertUtil.convertEmptyStringToNull(n3IwfId);
   }
 
   public GlobalRanNodeId gNbId(GNbId gNbId) {
@@ -102,7 +103,7 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public GlobalRanNodeId ngeNbId(String ngeNbId) {
-    this.ngeNbId = ParserUtil.convertEmptyStringToNull(ngeNbId);
+    this.ngeNbId = ConvertUtil.convertEmptyStringToNull(ngeNbId);
     return this;
   }
 
@@ -117,11 +118,11 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public void setNgeNbId(String ngeNbId) {
-    this.ngeNbId = ParserUtil.convertEmptyStringToNull(ngeNbId);
+    this.ngeNbId = ConvertUtil.convertEmptyStringToNull(ngeNbId);
   }
 
   public GlobalRanNodeId wagfId(String wagfId) {
-    this.wagfId = ParserUtil.convertEmptyStringToNull(wagfId);
+    this.wagfId = ConvertUtil.convertEmptyStringToNull(wagfId);
     return this;
   }
 
@@ -136,11 +137,11 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public void setWagfId(String wagfId) {
-    this.wagfId = ParserUtil.convertEmptyStringToNull(wagfId);
+    this.wagfId = ConvertUtil.convertEmptyStringToNull(wagfId);
   }
 
   public GlobalRanNodeId tngfId(String tngfId) {
-    this.tngfId = ParserUtil.convertEmptyStringToNull(tngfId);
+    this.tngfId = ConvertUtil.convertEmptyStringToNull(tngfId);
     return this;
   }
 
@@ -155,11 +156,11 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public void setTngfId(String tngfId) {
-    this.tngfId = ParserUtil.convertEmptyStringToNull(tngfId);
+    this.tngfId = ConvertUtil.convertEmptyStringToNull(tngfId);
   }
 
   public GlobalRanNodeId nid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
     return this;
   }
 
@@ -174,11 +175,11 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public void setNid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
   }
 
   public GlobalRanNodeId eNbId(String eNbId) {
-    this.eNbId = ParserUtil.convertEmptyStringToNull(eNbId);
+    this.eNbId = ConvertUtil.convertEmptyStringToNull(eNbId);
     return this;
   }
 
@@ -193,7 +194,7 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   }
 
   public void setENbId(String eNbId) {
-    this.eNbId = ParserUtil.convertEmptyStringToNull(eNbId);
+    this.eNbId = ConvertUtil.convertEmptyStringToNull(eNbId);
   }
 
 
@@ -206,14 +207,14 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
       return false;
     }
     GlobalRanNodeId globalRanNodeId = (GlobalRanNodeId) o;
-    return Objects.equals(this.plmnId, globalRanNodeId.plmnId) &&
-        Objects.equals(this.n3IwfId, globalRanNodeId.n3IwfId) &&
-        Objects.equals(this.gNbId, globalRanNodeId.gNbId) &&
-        Objects.equals(this.ngeNbId, globalRanNodeId.ngeNbId) &&
-        Objects.equals(this.wagfId, globalRanNodeId.wagfId) &&
-        Objects.equals(this.tngfId, globalRanNodeId.tngfId) &&
-        Objects.equals(this.nid, globalRanNodeId.nid) &&
-        Objects.equals(this.eNbId, globalRanNodeId.eNbId);
+    return CheckUtil.safeCheckObjectsEquals(this.plmnId, globalRanNodeId.plmnId) &&
+        CheckUtil.safeCheckObjectsEquals(this.n3IwfId, globalRanNodeId.n3IwfId) &&
+        CheckUtil.safeCheckObjectsEquals(this.gNbId, globalRanNodeId.gNbId) &&
+        CheckUtil.safeCheckObjectsEquals(this.ngeNbId, globalRanNodeId.ngeNbId) &&
+        CheckUtil.safeCheckObjectsEquals(this.wagfId, globalRanNodeId.wagfId) &&
+        CheckUtil.safeCheckObjectsEquals(this.tngfId, globalRanNodeId.tngfId) &&
+        CheckUtil.safeCheckObjectsEquals(this.nid, globalRanNodeId.nid) &&
+        CheckUtil.safeCheckObjectsEquals(this.eNbId, globalRanNodeId.eNbId);
   }
 
   @Override

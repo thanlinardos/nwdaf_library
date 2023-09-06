@@ -3,7 +3,8 @@ package io.nwdaf.eventsubscription.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.nwdaf.eventsubscription.utilities.ParserUtil;
+import io.nwdaf.eventsubscription.utilities.CheckUtil;
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -49,7 +50,7 @@ public class Ncgi   {
   }
 
   public Ncgi nrCellId(String nrCellId) {
-    this.nrCellId = ParserUtil.convertEmptyStringToNull(nrCellId);
+    this.nrCellId = ConvertUtil.convertEmptyStringToNull(nrCellId);
     return this;
   }
 
@@ -65,11 +66,11 @@ public class Ncgi   {
   }
 
   public void setNrCellId(String nrCellId) {
-    this.nrCellId = ParserUtil.convertEmptyStringToNull(nrCellId);
+    this.nrCellId = ConvertUtil.convertEmptyStringToNull(nrCellId);
   }
 
   public Ncgi nid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
     return this;
   }
 
@@ -84,7 +85,7 @@ public class Ncgi   {
   }
 
   public void setNid(String nid) {
-    this.nid = ParserUtil.convertEmptyStringToNull(nid);
+    this.nid = ConvertUtil.convertEmptyStringToNull(nid);
   }
 
 
@@ -97,9 +98,9 @@ public class Ncgi   {
       return false;
     }
     Ncgi ncgi = (Ncgi) o;
-    return Objects.equals(this.plmnId, ncgi.plmnId) &&
-        Objects.equals(this.nrCellId, ncgi.nrCellId) &&
-        Objects.equals(this.nid, ncgi.nid);
+    return CheckUtil.safeCheckObjectsEquals(this.plmnId, ncgi.plmnId) &&
+           CheckUtil.safeCheckObjectsEquals(this.nrCellId, ncgi.nrCellId) &&
+           CheckUtil.safeCheckObjectsEquals(this.nid, ncgi.nid);
   }
 
   @Override

@@ -3,7 +3,8 @@ package io.nwdaf.eventsubscription.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.nwdaf.eventsubscription.utilities.ParserUtil;
+import io.nwdaf.eventsubscription.utilities.CheckUtil;
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.*;
@@ -24,7 +25,7 @@ public class PlmnId   {
   private String mnc = null;
 
   public PlmnId mcc(String mcc) {
-    this.mcc = ParserUtil.convertEmptyStringToNull(mcc);
+    this.mcc = ConvertUtil.convertEmptyStringToNull(mcc);
     return this;
   }
 
@@ -40,11 +41,11 @@ public class PlmnId   {
   }
 
   public void setMcc(String mcc) {
-    this.mcc = ParserUtil.convertEmptyStringToNull(mcc);
+    this.mcc = ConvertUtil.convertEmptyStringToNull(mcc);
   }
 
   public PlmnId mnc(String mnc) {
-    this.mnc = ParserUtil.convertEmptyStringToNull(mnc);
+    this.mnc = ConvertUtil.convertEmptyStringToNull(mnc);
     return this;
   }
 
@@ -60,7 +61,7 @@ public class PlmnId   {
   }
 
   public void setMnc(String mnc) {
-    this.mnc = ParserUtil.convertEmptyStringToNull(mnc);
+    this.mnc = ConvertUtil.convertEmptyStringToNull(mnc);
   }
 
 
@@ -73,8 +74,8 @@ public class PlmnId   {
       return false;
     }
     PlmnId plmnId = (PlmnId) o;
-    return Objects.equals(this.mcc, plmnId.mcc) &&
-        Objects.equals(this.mnc, plmnId.mnc);
+    return CheckUtil.safeCheckObjectsEquals(this.mcc, plmnId.mcc) &&
+           CheckUtil.safeCheckObjectsEquals(this.mnc, plmnId.mnc);
   }
 
   @Override
