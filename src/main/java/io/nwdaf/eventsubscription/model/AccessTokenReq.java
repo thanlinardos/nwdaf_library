@@ -3,6 +3,7 @@ package io.nwdaf.eventsubscription.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class AccessTokenReq   {
   private NFType targetNfType = null;
 
   @JsonProperty("scope")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String scope = null;
 
   @JsonProperty("targetNfInstanceId")
@@ -79,6 +81,7 @@ public class AccessTokenReq   {
   private List<Snssai> requesterSnssaiList = null;
 
   @JsonProperty("requesterFqdn")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String requesterFqdn = null;
 
   @JsonProperty("requesterSnpnList")
@@ -100,13 +103,17 @@ public class AccessTokenReq   {
   private List<String> targetNsiList = null;
 
   @JsonProperty("targetNfSetId")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String targetNfSetId = null;
 
   @JsonProperty("targetNfServiceSetId")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String targetNfServiceSetId = null;
 
   @JsonProperty("hnrfAccessTokenUri")
-  private String hnrfAccessTokenUri = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String hnrfAccessTokenUri
+ = null;
 
   @JsonProperty("sourceNfInstanceId")
   private UUID sourceNfInstanceId = null;

@@ -1,6 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
@@ -26,15 +28,18 @@ public class AbnormalBehaviour   {
   private Exception excep = null;
 
   @JsonProperty("dnn")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String dnn = null;
 
   @JsonProperty("snssai")
   private Snssai snssai = null;
 
   @JsonProperty("ratio")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private Integer ratio = null;
 
   @JsonProperty("confidence")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private Integer confidence = null;
 
   @JsonProperty("addtMeasInfo")

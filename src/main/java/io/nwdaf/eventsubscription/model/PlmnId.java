@@ -1,6 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
@@ -19,9 +21,11 @@ import javax.validation.constraints.*;
 
 public class PlmnId   {
   @JsonProperty("mcc")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String mcc = null;
 
   @JsonProperty("mnc")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String mnc = null;
 
   public PlmnId mcc(String mcc) {

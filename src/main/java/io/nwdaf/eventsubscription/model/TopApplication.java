@@ -1,11 +1,17 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Top application that contributes the most to the traffic.
@@ -17,13 +23,17 @@ import javax.validation.constraints.*;
 
 public class TopApplication  implements OneOfTopApplication {
   @JsonProperty("appId")
-  private String appId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String appId
+ = null;
 
   @JsonProperty("ipTrafficFilter")
   private FlowInfo ipTrafficFilter = null;
 
   @JsonProperty("ratio")
-  private Integer ratio = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer ratio
+ = null;
 
   public TopApplication appId(String appId) {
     this.appId = appId;

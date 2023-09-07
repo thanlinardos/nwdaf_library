@@ -1,9 +1,13 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains a mean opinion score with the customized range.
@@ -15,13 +19,19 @@ import org.springframework.validation.annotation.Validated;
 
 public class SvcExperience   {
   @JsonProperty("mos")
-  private Float mos = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float mos
+ = null;
 
   @JsonProperty("upperRange")
-  private Float upperRange = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float upperRange
+ = null;
 
   @JsonProperty("lowerRange")
-  private Float lowerRange = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float lowerRange
+ = null;
 
   public SvcExperience mos(Float mos) {
     this.mos = mos;

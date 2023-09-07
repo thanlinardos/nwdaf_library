@@ -3,6 +3,7 @@ package io.nwdaf.eventsubscription.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
@@ -59,9 +60,11 @@ public class AccessTokenErr   {
   private ErrorEnum error = null;
 
   @JsonProperty("error_description")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String errorDescription = null;
 
   @JsonProperty("error_uri")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String errorUri = null;
 
   public AccessTokenErr error(ErrorEnum error) {

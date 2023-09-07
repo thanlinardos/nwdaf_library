@@ -1,13 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Identifies the detailed traffic characterization.
@@ -19,29 +25,41 @@ import javax.validation.constraints.*;
 
 public class TrafficCharacterization  implements AnyOfTrafficCharacterization {
   @JsonProperty("dnn")
-  private String dnn = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String dnn
+ = null;
 
   @JsonProperty("snssai")
   private Snssai snssai = null;
 
   @JsonProperty("appId")
-  private String appId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String appId
+ = null;
 
   @JsonProperty("fDescs")
   @Valid
   private List<IpEthFlowDescription> fDescs = null;
 
   @JsonProperty("ulVol")
-  private Long ulVol = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Long ulVol
+ = null;
 
   @JsonProperty("ulVolVariance")
-  private Float ulVolVariance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float ulVolVariance
+ = null;
 
   @JsonProperty("dlVol")
-  private Long dlVol = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Long dlVol
+ = null;
 
   @JsonProperty("dlVolVariance")
-  private Float dlVolVariance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float dlVolVariance
+ = null;
 
   public TrafficCharacterization dnn(String dnn) {
     this.dnn = dnn;

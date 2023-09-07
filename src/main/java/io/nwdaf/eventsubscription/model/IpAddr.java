@@ -1,10 +1,15 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Pattern;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains an IP adresse.
@@ -16,13 +21,19 @@ import javax.validation.constraints.*;
 
 public class IpAddr  implements OneOfIpAddr {
   @JsonProperty("ipv4Addr")
-  private String ipv4Addr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ipv4Addr
+ = null;
 
   @JsonProperty("ipv6Addr")
-  private String ipv6Addr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ipv6Addr
+ = null;
 
   @JsonProperty("ipv6Prefix")
-  private String ipv6Prefix = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ipv6Prefix
+ = null;
 
   public IpAddr ipv4Addr(String ipv4Addr) {
     this.ipv4Addr = ipv4Addr;

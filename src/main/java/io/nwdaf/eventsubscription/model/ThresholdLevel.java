@@ -1,10 +1,17 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents a threshold level.
@@ -16,37 +23,59 @@ import javax.validation.constraints.*;
 
 public class ThresholdLevel   {
   @JsonProperty("congLevel")
-  private Integer congLevel = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer congLevel
+ = null;
 
   @JsonProperty("nfLoadLevel")
-  private Integer nfLoadLevel = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfLoadLevel
+ = null;
 
   @JsonProperty("nfCpuUsage")
-  private Integer nfCpuUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfCpuUsage
+ = null;
 
   @JsonProperty("nfMemoryUsage")
-  private Integer nfMemoryUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfMemoryUsage
+ = null;
 
   @JsonProperty("nfStorageUsage")
-  private Integer nfStorageUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfStorageUsage
+ = null;
 
   @JsonProperty("avgTrafficRate")
-  private String avgTrafficRate = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String avgTrafficRate
+ = null;
 
   @JsonProperty("maxTrafficRate")
-  private String maxTrafficRate = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String maxTrafficRate
+ = null;
 
   @JsonProperty("avgPacketDelay")
-  private Integer avgPacketDelay = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avgPacketDelay
+ = null;
 
   @JsonProperty("maxPacketDelay")
-  private Integer maxPacketDelay = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer maxPacketDelay
+ = null;
 
   @JsonProperty("avgPacketLossRate")
-  private Integer avgPacketLossRate = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avgPacketLossRate
+ = null;
 
   @JsonProperty("svcExpLevel")
-  private Float svcExpLevel = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float svcExpLevel
+ = null;
 
   public ThresholdLevel congLevel(Integer congLevel) {
     this.congLevel = congLevel;

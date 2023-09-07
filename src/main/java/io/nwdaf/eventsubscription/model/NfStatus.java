@@ -1,10 +1,16 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains the percentage of time spent on various NF states.
@@ -16,13 +22,19 @@ import javax.validation.constraints.*;
 
 public class NfStatus  implements AnyOfNfStatus {
   @JsonProperty("statusRegistered")
-  private Integer statusRegistered = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer statusRegistered
+ = null;
 
   @JsonProperty("statusUnregistered")
-  private Integer statusUnregistered = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer statusUnregistered
+ = null;
 
   @JsonProperty("statusUndiscoverable")
-  private Integer statusUndiscoverable = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer statusUndiscoverable
+ = null;
 
   public NfStatus statusRegistered(Integer statusRegistered) {
     this.statusRegistered = statusRegistered;

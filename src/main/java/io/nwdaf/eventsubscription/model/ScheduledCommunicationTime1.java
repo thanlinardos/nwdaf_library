@@ -1,13 +1,18 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Identifies time and day of the week when the UE is available for communication.
@@ -23,10 +28,14 @@ public class ScheduledCommunicationTime1   {
   private List<Integer> daysOfWeek = null;
 
   @JsonProperty("timeOfDayStart")
-  private String timeOfDayStart = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String timeOfDayStart
+ = null;
 
   @JsonProperty("timeOfDayEnd")
-  private String timeOfDayEnd = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String timeOfDayEnd
+ = null;
 
   public ScheduledCommunicationTime1 daysOfWeek(List<Integer> daysOfWeek) {
     this.daysOfWeek = daysOfWeek;

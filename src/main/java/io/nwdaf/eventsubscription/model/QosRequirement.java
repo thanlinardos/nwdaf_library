@@ -1,11 +1,18 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents the QoS requirements.
@@ -17,22 +24,32 @@ import javax.validation.constraints.*;
 
 public class QosRequirement  implements OneOfQosRequirement {
   @JsonProperty("5qi")
-  private Integer _5qi = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer _5qi
+ = null;
 
   @JsonProperty("gfbrUl")
-  private String gfbrUl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String gfbrUl
+ = null;
 
   @JsonProperty("gfbrDl")
-  private String gfbrDl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String gfbrDl
+ = null;
 
   @JsonProperty("resType")
   private QosResourceType resType = null;
 
   @JsonProperty("pdb")
-  private Integer pdb = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer pdb
+ = null;
 
   @JsonProperty("per")
-  private String per = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String per
+ = null;
 
   public QosRequirement _5qi(Integer _5qi) {
     this._5qi = _5qi;

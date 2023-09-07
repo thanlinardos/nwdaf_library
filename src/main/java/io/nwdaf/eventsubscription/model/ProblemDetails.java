@@ -1,13 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Provides additional information in an error response.
@@ -19,29 +25,43 @@ import javax.validation.constraints.*;
 
 public class ProblemDetails   {
   @JsonProperty("type")
-  private String type = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String type
+ = null;
 
   @JsonProperty("title")
-  private String title = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String title
+ = null;
 
   @JsonProperty("status")
-  private Integer status = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer status
+ = null;
 
   @JsonProperty("detail")
-  private String detail = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String detail
+ = null;
 
   @JsonProperty("instance")
-  private String instance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String instance
+ = null;
 
   @JsonProperty("cause")
-  private String cause = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String cause
+ = null;
 
   @JsonProperty("invalidParams")
   @Valid
   private List<InvalidParam> invalidParams = null;
 
   @JsonProperty("supportedFeatures")
-  private String supportedFeatures = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String supportedFeatures
+ = null;
 
   @JsonProperty("accessTokenError")
   private AccessTokenErr accessTokenError = null;
@@ -50,7 +70,9 @@ public class ProblemDetails   {
   private AccessTokenReq accessTokenRequest = null;
 
   @JsonProperty("nrfId")
-  private String nrfId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nrfId
+ = null;
 
   public ProblemDetails type(String type) {
     this.type = type;

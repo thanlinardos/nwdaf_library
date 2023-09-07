@@ -1,11 +1,17 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains a Cell Global Identification as defined in 3GPP TS 23.003, clause 4.3.1.
@@ -20,10 +26,14 @@ public class CellGlobalId   {
   private PlmnId plmnId = null;
 
   @JsonProperty("lac")
-  private String lac = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String lac
+ = null;
 
   @JsonProperty("cellId")
-  private String cellId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String cellId
+ = null;
 
   public CellGlobalId plmnId(PlmnId plmnId) {
     this.plmnId = plmnId;

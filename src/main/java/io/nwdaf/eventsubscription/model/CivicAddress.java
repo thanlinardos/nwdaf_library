@@ -1,9 +1,13 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Indicates a Civic address.
@@ -15,106 +19,174 @@ import org.springframework.validation.annotation.Validated;
 
 public class CivicAddress   {
   @JsonProperty("country")
-  private String country = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String country
+ = null;
 
   @JsonProperty("A1")
-  private String a1 = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String a1
+ = null;
 
   @JsonProperty("A2")
-  private String a2 = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String a2
+ = null;
 
   @JsonProperty("A3")
-  private String a3 = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String a3
+ = null;
 
   @JsonProperty("A4")
-  private String a4 = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String a4
+ = null;
 
   @JsonProperty("A5")
-  private String a5 = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String a5
+ = null;
 
   @JsonProperty("A6")
-  private String a6 = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String a6
+ = null;
 
   @JsonProperty("PRD")
-  private String PRD = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String PRD
+ = null;
 
   @JsonProperty("POD")
-  private String POD = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String POD
+ = null;
 
   @JsonProperty("STS")
-  private String STS = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String STS
+ = null;
 
   @JsonProperty("HNO")
-  private String HNO = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String HNO
+ = null;
 
   @JsonProperty("HNS")
-  private String HNS = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String HNS
+ = null;
 
   @JsonProperty("LMK")
-  private String LMK = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String LMK
+ = null;
 
   @JsonProperty("LOC")
-  private String LOC = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String LOC
+ = null;
 
   @JsonProperty("NAM")
-  private String NAM = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String NAM
+ = null;
 
   @JsonProperty("PC")
-  private String PC = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String PC
+ = null;
 
   @JsonProperty("BLD")
-  private String BLD = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String BLD
+ = null;
 
   @JsonProperty("UNIT")
-  private String UNIT = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String UNIT
+ = null;
 
   @JsonProperty("FLR")
-  private String FLR = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String FLR
+ = null;
 
   @JsonProperty("ROOM")
-  private String ROOM = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ROOM
+ = null;
 
   @JsonProperty("PLC")
-  private String PLC = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String PLC
+ = null;
 
   @JsonProperty("PCN")
-  private String PCN = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String PCN
+ = null;
 
   @JsonProperty("POBOX")
-  private String POBOX = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String POBOX
+ = null;
 
   @JsonProperty("ADDCODE")
-  private String ADDCODE = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ADDCODE
+ = null;
 
   @JsonProperty("SEAT")
-  private String SEAT = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String SEAT
+ = null;
 
   @JsonProperty("RD")
-  private String RD = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String RD
+ = null;
 
   @JsonProperty("RDSEC")
-  private String RDSEC = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String RDSEC
+ = null;
 
   @JsonProperty("RDBR")
-  private String RDBR = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String RDBR
+ = null;
 
   @JsonProperty("RDSUBBR")
-  private String RDSUBBR = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String RDSUBBR
+ = null;
 
   @JsonProperty("PRM")
-  private String PRM = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String PRM
+ = null;
 
   @JsonProperty("POM")
-  private String POM = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String POM
+ = null;
 
   @JsonProperty("usageRules")
-  private String usageRules = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String usageRules
+ = null;
 
   @JsonProperty("method")
-  private String method = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String method
+ = null;
 
   @JsonProperty("providedBy")
-  private String providedBy = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String providedBy
+ = null;
 
   public CivicAddress country(String country) {
     this.country = country;

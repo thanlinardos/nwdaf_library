@@ -1,12 +1,18 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents the QoS Sustainability information.
@@ -30,13 +36,17 @@ public class QosSustainabilityInfo  implements OneOfQosSustainabilityInfo {
   private RetainabilityThreshold qosFlowRetThd = null;
 
   @JsonProperty("ranUeThrouThd")
-  private String ranUeThrouThd = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ranUeThrouThd
+ = null;
 
   @JsonProperty("snssai")
   private Snssai snssai = null;
 
   @JsonProperty("confidence")
-  private Integer confidence = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer confidence
+ = null;
 
   public QosSustainabilityInfo areaInfo(NetworkAreaInfo areaInfo) {
     this.areaInfo = areaInfo;

@@ -1,10 +1,16 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains the serving core network operator PLMN ID and, for an SNPN, the NID that together with the PLMN ID identifies the SNPN. 
@@ -16,13 +22,19 @@ import javax.validation.constraints.*;
 
 public class PlmnIdNid   {
   @JsonProperty("mcc")
-  private String mcc = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String mcc
+ = null;
 
   @JsonProperty("mnc")
-  private String mnc = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String mnc
+ = null;
 
   @JsonProperty("nid")
-  private String nid = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nid
+ = null;
 
   public PlmnIdNid mcc(String mcc) {
     this.mcc = mcc;

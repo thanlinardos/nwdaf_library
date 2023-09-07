@@ -1,14 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * One of the six attributes n3IwfId, gNbIdm, ngeNbId, wagfId, tngfId, eNbId shall be present. 
@@ -22,25 +27,37 @@ public class GlobalRanNodeId  implements OneOfGlobalRanNodeId {
   private PlmnId plmnId = null;
 
   @JsonProperty("n3IwfId")
-  private String n3IwfId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String n3IwfId
+ = null;
 
   @JsonProperty("gNbId")
   private GNbId gNbId = null;
 
   @JsonProperty("ngeNbId")
-  private String ngeNbId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ngeNbId
+ = null;
 
   @JsonProperty("wagfId")
-  private String wagfId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String wagfId
+ = null;
 
   @JsonProperty("tngfId")
-  private String tngfId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String tngfId
+ = null;
 
   @JsonProperty("nid")
-  private String nid = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nid
+ = null;
 
   @JsonProperty("eNbId")
-  private String eNbId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String eNbId
+ = null;
 
   public GlobalRanNodeId plmnId(PlmnId plmnId) {
     this.plmnId = plmnId;

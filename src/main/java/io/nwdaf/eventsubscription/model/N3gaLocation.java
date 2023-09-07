@@ -1,11 +1,17 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains the Non-3GPP access user location.
@@ -20,16 +26,24 @@ public class N3gaLocation   {
   private Tai n3gppTai = null;
 
   @JsonProperty("n3IwfId")
-  private String n3IwfId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String n3IwfId
+ = null;
 
   @JsonProperty("ueIpv4Addr")
-  private String ueIpv4Addr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ueIpv4Addr
+ = null;
 
   @JsonProperty("ueIpv6Addr")
-  private String ueIpv6Addr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ueIpv6Addr
+ = null;
 
   @JsonProperty("portNumber")
-  private Integer portNumber = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer portNumber
+ = null;
 
   @JsonProperty("protocol")
   private TransportProtocol protocol = null;
@@ -50,7 +64,9 @@ public class N3gaLocation   {
   private LineType w5gbanLineType = null;
 
   @JsonProperty("gci")
-  private String gci = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String gci
+ = null;
 
   public N3gaLocation n3gppTai(Tai n3gppTai) {
     this.n3gppTai = n3gppTai;

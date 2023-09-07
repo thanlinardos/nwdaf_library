@@ -1,10 +1,16 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents bandwidth requirements.
@@ -16,19 +22,29 @@ import javax.validation.constraints.*;
 
 public class BwRequirement   {
   @JsonProperty("appId")
-  private String appId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String appId
+ = null;
 
   @JsonProperty("marBwDl")
-  private String marBwDl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String marBwDl
+ = null;
 
   @JsonProperty("marBwUl")
-  private String marBwUl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String marBwUl
+ = null;
 
   @JsonProperty("mirBwDl")
-  private String mirBwDl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String mirBwDl
+ = null;
 
   @JsonProperty("mirBwUl")
-  private String mirBwUl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String mirBwUl
+ = null;
 
   public BwRequirement appId(String appId) {
     this.appId = appId;

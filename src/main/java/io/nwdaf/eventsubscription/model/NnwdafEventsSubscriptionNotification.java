@@ -1,13 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents an Individual NWDAF Event Subscription Notification resource.
@@ -23,13 +29,19 @@ public class NnwdafEventsSubscriptionNotification  implements OneOfNnwdafEventsS
   private List<EventNotification> eventNotifications = null;
 
   @JsonProperty("subscriptionId")
-  private String subscriptionId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String subscriptionId
+ = null;
 
   @JsonProperty("notifCorrId")
-  private String notifCorrId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String notifCorrId
+ = null;
 
   @JsonProperty("oldSubscriptionId")
-  private String oldSubscriptionId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String oldSubscriptionId
+ = null;
 
   public NnwdafEventsSubscriptionNotification eventNotifications(List<EventNotification> eventNotifications) {
     this.eventNotifications = eventNotifications;

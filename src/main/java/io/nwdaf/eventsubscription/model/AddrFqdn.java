@@ -1,6 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +21,9 @@ public class AddrFqdn   {
   private IpAddr ipAddr = null;
 
   @JsonProperty("fqdn")
-  private String fqdn = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String fqdn
+ = null;
 
   public AddrFqdn ipAddr(IpAddr ipAddr) {
     this.ipAddr = ipAddr;

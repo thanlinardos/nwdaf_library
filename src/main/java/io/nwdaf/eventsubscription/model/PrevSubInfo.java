@@ -1,14 +1,20 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Information of the previous subscription.
@@ -23,10 +29,14 @@ public class PrevSubInfo  implements OneOfPrevSubInfo {
   private UUID producerId = null;
 
   @JsonProperty("producerSetId")
-  private String producerSetId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String producerSetId
+ = null;
 
   @JsonProperty("subscriptionId")
-  private String subscriptionId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String subscriptionId
+ = null;
 
   @JsonProperty("nfAnaEvents")
   @Valid

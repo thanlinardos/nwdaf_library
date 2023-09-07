@@ -3,6 +3,7 @@ package io.nwdaf.eventsubscription.utilities;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -98,7 +99,7 @@ public class ParserUtil {
 	}
 
 	public static String parseQuerryFilter(List<String> filterList){
-		String res = "";
+		String res = "(";
         if(filterList==null || filterList.size()==0){
             return null;
         }
@@ -108,7 +109,7 @@ public class ParserUtil {
 				res += " or ";
 			}
 		}
-
+        res += ")";
 		return res;
 	}
 
@@ -149,5 +150,9 @@ public class ParserUtil {
             return true;
         }
         return false;
+    }
+
+    public static <T> List<T> removeDuplicates(List<T> list){
+        return new ArrayList<>(new LinkedHashSet<>(list));
     }
 }

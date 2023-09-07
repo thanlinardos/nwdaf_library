@@ -1,13 +1,20 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents the network slice and optionally the associated network slice instance and the  load level information. 
@@ -19,19 +26,25 @@ import javax.validation.constraints.*;
 
 public class NsiLoadLevelInfo   {
   @JsonProperty("loadLevelInformation")
-  private Integer loadLevelInformation = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer loadLevelInformation
+ = null;
 
   @JsonProperty("snssai")
   private Snssai snssai = null;
 
   @JsonProperty("nsiId")
-  private String nsiId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nsiId
+ = null;
 
   @JsonProperty("resUsage")
   private ResourceUsage resUsage = null;
 
   @JsonProperty("numOfExceedLoadLevelThr")
-  private Integer numOfExceedLoadLevelThr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer numOfExceedLoadLevelThr
+ = null;
 
   @JsonProperty("exceedLoadLevelThrInd")
   private Boolean exceedLoadLevelThrInd = null;
@@ -53,7 +66,9 @@ public class NsiLoadLevelInfo   {
   private NumberAverage numOfPduSess = null;
 
   @JsonProperty("confidence")
-  private Integer confidence = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer confidence
+ = null;
 
   public NsiLoadLevelInfo loadLevelInformation(Integer loadLevelInformation) {
     this.loadLevelInformation = loadLevelInformation;

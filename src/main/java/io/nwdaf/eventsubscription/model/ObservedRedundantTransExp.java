@@ -1,10 +1,16 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents the observed redundant transmission experience related information.
@@ -16,28 +22,44 @@ import javax.validation.constraints.*;
 
 public class ObservedRedundantTransExp   {
   @JsonProperty("avgPktDropRateUl")
-  private Integer avgPktDropRateUl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avgPktDropRateUl
+ = null;
 
   @JsonProperty("varPktDropRateUl")
-  private Float varPktDropRateUl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float varPktDropRateUl
+ = null;
 
   @JsonProperty("avgPktDropRateDl")
-  private Integer avgPktDropRateDl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avgPktDropRateDl
+ = null;
 
   @JsonProperty("varPktDropRateDl")
-  private Float varPktDropRateDl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float varPktDropRateDl
+ = null;
 
   @JsonProperty("avgPktDelayUl")
-  private Integer avgPktDelayUl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avgPktDelayUl
+ = null;
 
   @JsonProperty("varPktDelayUl")
-  private Float varPktDelayUl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float varPktDelayUl
+ = null;
 
   @JsonProperty("avgPktDelayDl")
-  private Integer avgPktDelayDl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avgPktDelayDl
+ = null;
 
   @JsonProperty("varPktDelayDl")
-  private Float varPktDelayDl = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float varPktDelayDl
+ = null;
 
   public ObservedRedundantTransExp avgPktDropRateUl(Integer avgPktDropRateUl) {
     this.avgPktDropRateUl = avgPktDropRateUl;

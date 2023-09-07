@@ -1,14 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains information about an ML models.
@@ -27,7 +32,9 @@ public class MLModelInfo  implements OneOfMLModelInfo {
   private UUID modelProvId = null;
 
   @JsonProperty("modelProvSetId")
-  private String modelProvSetId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String modelProvSetId
+ = null;
 
   public MLModelInfo mlFileAddrs(List<MLModelAddr> mlFileAddrs) {
     this.mlFileAddrs = mlFileAddrs;

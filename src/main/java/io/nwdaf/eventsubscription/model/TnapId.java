@@ -1,11 +1,14 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contain the TNAP Identifier see clause5.6.2 of 3GPP TS 23.501.
@@ -17,10 +20,14 @@ import org.springframework.validation.annotation.Validated;
 
 public class TnapId   {
   @JsonProperty("ssId")
-  private String ssId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ssId
+ = null;
 
   @JsonProperty("bssId")
-  private String bssId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String bssId
+ = null;
 
   @JsonProperty("civicAddress")
   @Schema(type = "string", format = "byte",description = "string with format 'bytes' as defined in OpenAPI")

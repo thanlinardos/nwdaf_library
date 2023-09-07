@@ -1,13 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * Ellipsoid point with altitude.
@@ -22,7 +28,9 @@ public class PointAltitude extends GADShape implements GeographicArea {
   private GeographicalCoordinates point = null;
 
   @JsonProperty("altitude")
-  private Double altitude = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Double altitude
+ = null;
 
   public PointAltitude point(GeographicalCoordinates point) {
     this.point = point;

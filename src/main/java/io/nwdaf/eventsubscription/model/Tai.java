@@ -1,14 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * Contains the tracking area identity as described in 3GPP 23.003
@@ -23,10 +28,14 @@ public class Tai   {
   private PlmnId plmnId = null;
 
   @JsonProperty("tac")
-  private String tac = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String tac
+ = null;
 
   @JsonProperty("nid")
-  private String nid = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nid
+ = null;
 
   public Tai plmnId(PlmnId plmnId) {
     this.plmnId = plmnId;

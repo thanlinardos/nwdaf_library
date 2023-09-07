@@ -1,10 +1,17 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Geographical coordinates.
@@ -16,10 +23,14 @@ import javax.validation.constraints.*;
 
 public class GeographicalCoordinates   {
   @JsonProperty("lon")
-  private Double lon = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Double lon
+ = null;
 
   @JsonProperty("lat")
-  private Double lat = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Double lat
+ = null;
 
   public GeographicalCoordinates lon(Double lon) {
     this.lon = lon;

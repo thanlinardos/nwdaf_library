@@ -1,11 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Ellipsoid Arc.
@@ -20,19 +28,29 @@ public class EllipsoidArc extends GADShape implements GeographicArea {
   private GeographicalCoordinates point = null;
 
   @JsonProperty("innerRadius")
-  private Integer innerRadius = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer innerRadius
+ = null;
 
   @JsonProperty("uncertaintyRadius")
-  private Float uncertaintyRadius = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float uncertaintyRadius
+ = null;
 
   @JsonProperty("offsetAngle")
-  private Integer offsetAngle = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer offsetAngle
+ = null;
 
   @JsonProperty("includedAngle")
-  private Integer includedAngle = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer includedAngle
+ = null;
 
   @JsonProperty("confidence")
-  private Integer confidence = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer confidence
+ = null;
 
   public EllipsoidArc point(GeographicalCoordinates point) {
     this.point = point;

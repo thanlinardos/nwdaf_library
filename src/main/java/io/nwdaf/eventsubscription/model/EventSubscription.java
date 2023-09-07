@@ -1,14 +1,21 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents a subscription to a single event.
@@ -45,7 +52,9 @@ public class EventSubscription   {
   private List<String> ladnDnns = null;
 
   @JsonProperty("loadLevelThreshold")
-  private Integer loadLevelThreshold = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer loadLevelThreshold
+ = null;
 
   @JsonProperty("notificationMethod")
   private NotificationMethod notificationMethod = null;
@@ -77,10 +86,14 @@ public class EventSubscription   {
   private List<NetworkAreaInfo> visitedAreas = null;
 
   @JsonProperty("maxTopAppUlNbr")
-  private Integer maxTopAppUlNbr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer maxTopAppUlNbr
+ = null;
 
   @JsonProperty("maxTopAppDlNbr")
-  private Integer maxTopAppDlNbr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer maxTopAppDlNbr
+ = null;
 
   @JsonProperty("nsiIdInfos")
   @Valid
@@ -102,7 +115,9 @@ public class EventSubscription   {
   private List<String> ranUeThrouThds = null;
 
   @JsonProperty("repetitionPeriod")
-  private Integer repetitionPeriod = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer repetitionPeriod
+ = null;
 
   @JsonProperty("snssaia")
   @Valid

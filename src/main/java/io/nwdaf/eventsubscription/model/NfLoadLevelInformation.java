@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
+import java.util.UUID;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.UUID;
-
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * Represents load level information of a given NF instance.
@@ -41,34 +44,50 @@ public class NfLoadLevelInformation   {
   private UUID nfInstanceId = null;
 
   @JsonProperty("nfSetId")
-  private String nfSetId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nfSetId
+ = null;
 
   @JsonProperty("nfStatus")
   private NfStatus nfStatus = null;
 
   @JsonProperty("nfCpuUsage")
-  private Integer nfCpuUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfCpuUsage
+ = null;
 
   @JsonProperty("nfMemoryUsage")
-  private Integer nfMemoryUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfMemoryUsage
+ = null;
 
   @JsonProperty("nfStorageUsage")
-  private Integer nfStorageUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfStorageUsage
+ = null;
 
   @JsonProperty("nfLoadLevelAverage")
-  private Integer nfLoadLevelAverage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfLoadLevelAverage
+ = null;
 
   @JsonProperty("nfLoadLevelpeak")
-  private Integer nfLoadLevelpeak = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfLoadLevelpeak
+ = null;
 
   @JsonProperty("nfLoadAvgInAoi")
-  private Integer nfLoadAvgInAoi = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer nfLoadAvgInAoi
+ = null;
 
   @JsonProperty("snssai")
   private Snssai snssai = null;
 
   @JsonProperty("confidence")
-  private Integer confidence = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer confidence
+ = null;
 
   public NfLoadLevelInformation areaOfInterestId(UUID id){
     this.areaOfInterestId = id;

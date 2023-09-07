@@ -1,11 +1,18 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Indicates the dispersion class criterion for fixed, camper and/or traveller UE, and/or the  top-heavy UE dispersion class criterion. 
@@ -20,7 +27,9 @@ public class ClassCriterion   {
   private DispersionClass disperClass = null;
 
   @JsonProperty("classThreshold")
-  private Integer classThreshold = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer classThreshold
+ = null;
 
   @JsonProperty("thresMatch")
   private MatchingDirection thresMatch = null;

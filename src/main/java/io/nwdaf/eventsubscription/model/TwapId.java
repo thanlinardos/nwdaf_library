@@ -1,12 +1,16 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotNull;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contain the TWAP Identifier as defined in clause 4.2.8.5.3 of 3GPP TS 23.501 or the WLAN location information as defined in clause 4.5.7.2.8 of 3GPP TS 23.402. 
@@ -18,10 +22,14 @@ import javax.validation.constraints.*;
 
 public class TwapId   {
   @JsonProperty("ssId")
-  private String ssId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ssId
+ = null;
 
   @JsonProperty("bssId")
-  private String bssId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String bssId
+ = null;
 
   @JsonProperty("civicAddress")
   @Schema(type = "string", format = "byte",description = "string with format 'bytes' as defined in OpenAPI")

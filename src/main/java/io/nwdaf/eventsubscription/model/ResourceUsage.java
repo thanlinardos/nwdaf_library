@@ -1,10 +1,15 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Min;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * The current usage of the virtual resources assigned to the NF instances belonging to a  particular network slice instance. 
@@ -16,13 +21,19 @@ import javax.validation.constraints.*;
 
 public class ResourceUsage   {
   @JsonProperty("cpuUsage")
-  private Integer cpuUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer cpuUsage
+ = null;
 
   @JsonProperty("memoryUsage")
-  private Integer memoryUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer memoryUsage
+ = null;
 
   @JsonProperty("storageUsage")
-  private Integer storageUsage = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer storageUsage
+ = null;
 
   public ResourceUsage cpuUsage(Integer cpuUsage) {
     this.cpuUsage = cpuUsage;

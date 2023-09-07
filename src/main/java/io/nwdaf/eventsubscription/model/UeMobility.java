@@ -1,14 +1,20 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents UE mobility information.
@@ -26,10 +32,14 @@ public class UeMobility   {
   private ScheduledCommunicationTime recurringTime = null;
 
   @JsonProperty("duration")
-  private Integer duration = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer duration
+ = null;
 
   @JsonProperty("durationVariance")
-  private Float durationVariance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float durationVariance
+ = null;
 
   @JsonProperty("locInfos")
   @Valid

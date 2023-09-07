@@ -1,12 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * The redundant transmission experience per Time Slot.
@@ -21,7 +28,9 @@ public class RedundantTransmissionExpPerTS   {
   private OffsetDateTime tsStart = null;
 
   @JsonProperty("tsDuration")
-  private Integer tsDuration = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer tsDuration
+ = null;
 
   @JsonProperty("obsvRedTransExp")
   private ObservedRedundantTransExp obsvRedTransExp = null;
@@ -30,10 +39,14 @@ public class RedundantTransmissionExpPerTS   {
   private Boolean redTransStatus = null;
 
   @JsonProperty("ueRatio")
-  private Integer ueRatio = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer ueRatio
+ = null;
 
   @JsonProperty("confidence")
-  private Integer confidence = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer confidence
+ = null;
 
   public RedundantTransmissionExpPerTS tsStart(OffsetDateTime tsStart) {
     this.tsStart = tsStart;

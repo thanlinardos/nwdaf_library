@@ -1,10 +1,18 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Provides the G-NB identifier.
@@ -16,10 +24,14 @@ import javax.validation.constraints.*;
 
 public class GNbId   {
   @JsonProperty("bitLength")
-  private Integer bitLength = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer bitLength
+ = null;
 
   @JsonProperty("gNBValue")
-  private String gNBValue = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String gNBValue
+ = null;
 
   public GNbId bitLength(Integer bitLength) {
     this.bitLength = bitLength;

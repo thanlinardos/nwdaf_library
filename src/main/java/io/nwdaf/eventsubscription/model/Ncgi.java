@@ -1,14 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * Contains the NCGI (NR Cell Global Identity), as described in 3GPP 23.003
@@ -23,10 +28,14 @@ public class Ncgi   {
   private PlmnId plmnId = null;
 
   @JsonProperty("nrCellId")
-  private String nrCellId = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nrCellId
+ = null;
 
   @JsonProperty("nid")
-  private String nid = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String nid
+ = null;
 
   public Ncgi plmnId(PlmnId plmnId) {
     this.plmnId = plmnId;

@@ -1,10 +1,17 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents DN performance data.
@@ -16,19 +23,29 @@ import javax.validation.constraints.*;
 
 public class PerfData   {
   @JsonProperty("avgTrafficRate")
-  private String avgTrafficRate = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String avgTrafficRate
+ = null;
 
   @JsonProperty("maxTrafficRate")
-  private String maxTrafficRate = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String maxTrafficRate
+ = null;
 
   @JsonProperty("avePacketDelay")
-  private Integer avePacketDelay = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avePacketDelay
+ = null;
 
   @JsonProperty("maxPacketDelay")
-  private Integer maxPacketDelay = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer maxPacketDelay
+ = null;
 
   @JsonProperty("avgPacketLossRate")
-  private Integer avgPacketLossRate = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer avgPacketLossRate
+ = null;
 
   public PerfData avgTrafficRate(String avgTrafficRate) {
     this.avgTrafficRate = avgTrafficRate;

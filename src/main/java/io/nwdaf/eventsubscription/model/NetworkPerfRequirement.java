@@ -1,11 +1,18 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents a network performance requirement.
@@ -20,10 +27,14 @@ public class NetworkPerfRequirement   {
   private NetworkPerfType nwPerfType = null;
 
   @JsonProperty("relativeRatio")
-  private Integer relativeRatio = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer relativeRatio
+ = null;
 
   @JsonProperty("absoluteNum")
-  private Integer absoluteNum = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer absoluteNum
+ = null;
 
   public NetworkPerfRequirement nwPerfType(NetworkPerfType nwPerfType) {
     this.nwPerfType = nwPerfType;

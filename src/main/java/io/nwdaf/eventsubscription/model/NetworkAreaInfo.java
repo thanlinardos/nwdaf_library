@@ -41,6 +41,10 @@ public class NetworkAreaInfo   {
   @Valid
   private List<Tai> tais = null;
 
+  @JsonProperty("containerAreaIds")
+  @Valid
+  private List<UUID> containerAreaIds = null;
+
   public NetworkAreaInfo id(UUID id){
     this.id = id;
     return this;
@@ -162,6 +166,32 @@ public class NetworkAreaInfo   {
     this.tais = tais;
   }
 
+  public NetworkAreaInfo containerAreaIds(List<UUID> containerAreaIds) {
+    this.containerAreaIds = containerAreaIds;
+    return this;
+  }
+
+  public NetworkAreaInfo addContainerAreaIdsItem(UUID containerAreaIdsItem) {
+    if (this.containerAreaIds == null) {
+      this.containerAreaIds = new ArrayList<UUID>();
+    }
+    this.containerAreaIds.add(containerAreaIdsItem);
+    return this;
+  }
+
+  /**
+   * Contains a list of tracking area identities.
+   * @return containerAreaIds
+   **/
+  @Schema(description = "Contains a list of tracking area identities.")
+      @Valid
+  @Size(min=1)   public List<UUID> getContainerAreaIds() {
+    return containerAreaIds;
+  }
+
+  public void setContainerAreaIds(List<UUID> containerAreaIds) {
+    this.containerAreaIds = containerAreaIds;
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -188,10 +218,12 @@ public class NetworkAreaInfo   {
     StringBuilder sb = new StringBuilder();
     sb.append("class NetworkAreaInfo {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    ecgis: ").append(toIndentedString(ecgis)).append("\n");
     sb.append("    ncgis: ").append(toIndentedString(ncgis)).append("\n");
     sb.append("    gRanNodeIds: ").append(toIndentedString(gRanNodeIds)).append("\n");
     sb.append("    tais: ").append(toIndentedString(tais)).append("\n");
+    sb.append("    containerAreaIds: ").append(toIndentedString(containerAreaIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -212,7 +244,7 @@ public class NetworkAreaInfo   {
     if(area.getEcgis()!=null){
       if(this.ecgis!=null){
         for(int i=0;i<area.getEcgis().size();i++){
-          if(!this.getEcgis().contains(area.getEcgis().get(i))){
+          if(area.getEcgis().get(i)!=null && !this.getEcgis().contains(area.getEcgis().get(i))){
             return false;
           }
         }
@@ -230,7 +262,7 @@ public class NetworkAreaInfo   {
     if(area.getGRanNodeIds()!=null){
       if(this.gRanNodeIds!=null){
         for(int i=0;i<area.getGRanNodeIds().size();i++){
-          if(!this.getGRanNodeIds().contains(area.getGRanNodeIds().get(i))){
+          if(area.getGRanNodeIds().get(i)!=null && !this.getGRanNodeIds().contains(area.getGRanNodeIds().get(i))){
             return false;
           }
         }
@@ -248,7 +280,7 @@ public class NetworkAreaInfo   {
     if(area.getNcgis()!=null){
       if(this.ncgis!=null){
         for(int i=0;i<area.getNcgis().size();i++){
-          if(!this.getNcgis().contains(area.getNcgis().get(i))){
+          if(area.getNcgis().get(i)!=null && !this.getNcgis().contains(area.getNcgis().get(i))){
             return false;
           }
         }
@@ -266,7 +298,7 @@ public class NetworkAreaInfo   {
     if(area.getTais()!=null){
       if(this.tais!=null){
         for(int i=0;i<area.getTais().size();i++){
-          if(!this.getTais().contains(area.getTais().get(i))){
+          if(area.getTais().get(i)!=null && !this.getTais().contains(area.getTais().get(i))){
             return false;
           }
         }

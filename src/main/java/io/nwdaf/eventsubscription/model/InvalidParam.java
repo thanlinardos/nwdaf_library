@@ -1,10 +1,15 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotNull;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * It contains an invalid parameter and a related description.
@@ -16,10 +21,14 @@ import javax.validation.constraints.*;
 
 public class InvalidParam   {
   @JsonProperty("param")
-  private String param = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String param
+ = null;
 
   @JsonProperty("reason")
-  private String reason = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String reason
+ = null;
 
   public InvalidParam param(String param) {
     this.param = param;

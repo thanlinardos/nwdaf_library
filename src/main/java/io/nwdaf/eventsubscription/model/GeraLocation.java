@@ -1,12 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Exactly one of cgi, sai or lai shall be present.
@@ -18,7 +25,9 @@ import javax.validation.constraints.*;
 
 public class GeraLocation  implements OneOfGeraLocation {
   @JsonProperty("locationNumber")
-  private String locationNumber = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String locationNumber
+ = null;
 
   @JsonProperty("cgi")
   private CellGlobalId cgi = null;
@@ -33,22 +42,32 @@ public class GeraLocation  implements OneOfGeraLocation {
   private LocationAreaId lai = null;
 
   @JsonProperty("vlrNumber")
-  private String vlrNumber = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String vlrNumber
+ = null;
 
   @JsonProperty("mscNumber")
-  private String mscNumber = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String mscNumber
+ = null;
 
   @JsonProperty("ageOfLocationInformation")
-  private Integer ageOfLocationInformation = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer ageOfLocationInformation
+ = null;
 
   @JsonProperty("ueLocationTimestamp")
   private OffsetDateTime ueLocationTimestamp = null;
 
   @JsonProperty("geographicalInformation")
-  private String geographicalInformation = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String geographicalInformation
+ = null;
 
   @JsonProperty("geodeticInformation")
-  private String geodeticInformation = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String geodeticInformation
+ = null;
 
   public GeraLocation locationNumber(String locationNumber) {
     this.locationNumber = locationNumber;

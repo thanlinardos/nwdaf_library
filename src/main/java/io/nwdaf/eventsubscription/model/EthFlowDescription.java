@@ -1,13 +1,20 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Identifies an Ethernet flow.
@@ -19,29 +26,41 @@ import javax.validation.constraints.*;
 
 public class EthFlowDescription   {
   @JsonProperty("destMacAddr")
-  private String destMacAddr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String destMacAddr
+ = null;
 
   @JsonProperty("ethType")
-  private String ethType = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String ethType
+ = null;
 
   @JsonProperty("fDesc")
-  private String fDesc = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String fDesc
+ = null;
 
   @JsonProperty("fDir")
   private FlowDirection fDir = null;
 
   @JsonProperty("sourceMacAddr")
-  private String sourceMacAddr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String sourceMacAddr
+ = null;
 
   @JsonProperty("vlanTags")
   @Valid
   private List<String> vlanTags = null;
 
   @JsonProperty("srcMacAddrEnd")
-  private String srcMacAddrEnd = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String srcMacAddrEnd
+ = null;
 
   @JsonProperty("destMacAddrEnd")
-  private String destMacAddrEnd = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String destMacAddrEnd
+ = null;
 
   public EthFlowDescription destMacAddr(String destMacAddr) {
     this.destMacAddr = destMacAddr;

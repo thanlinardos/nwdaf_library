@@ -1,10 +1,15 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotNull;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Relative Cartesian Location
@@ -16,13 +21,19 @@ import javax.validation.constraints.*;
 
 public class RelativeCartesianLocation   {
   @JsonProperty("x")
-  private Float x = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float x
+ = null;
 
   @JsonProperty("y")
-  private Float y = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float y
+ = null;
 
   @JsonProperty("z")
-  private Float z = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float z
+ = null;
 
   public RelativeCartesianLocation x(Float x) {
     this.x = x;

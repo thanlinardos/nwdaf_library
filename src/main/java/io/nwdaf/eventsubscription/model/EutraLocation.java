@@ -1,12 +1,20 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Contains the E-UTRA user location.
@@ -30,16 +38,22 @@ public class EutraLocation   {
   private Boolean ignoreEcgi = false;
 
   @JsonProperty("ageOfLocationInformation")
-  private Integer ageOfLocationInformation = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer ageOfLocationInformation
+ = null;
 
   @JsonProperty("ueLocationTimestamp")
   private OffsetDateTime ueLocationTimestamp = null;
 
   @JsonProperty("geographicalInformation")
-  private String geographicalInformation = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String geographicalInformation
+ = null;
 
   @JsonProperty("geodeticInformation")
-  private String geodeticInformation = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private String geodeticInformation
+ = null;
 
   @JsonProperty("globalNgenbId")
   private GlobalRanNodeId globalNgenbId = null;

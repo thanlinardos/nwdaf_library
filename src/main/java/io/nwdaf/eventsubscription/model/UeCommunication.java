@@ -1,12 +1,19 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents UE communication information.
@@ -18,22 +25,32 @@ import javax.validation.constraints.*;
 
 public class UeCommunication   {
   @JsonProperty("commDur")
-  private Integer commDur = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer commDur
+ = null;
 
   @JsonProperty("commDurVariance")
-  private Float commDurVariance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float commDurVariance
+ = null;
 
   @JsonProperty("perioTime")
-  private Integer perioTime = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer perioTime
+ = null;
 
   @JsonProperty("perioTimeVariance")
-  private Float perioTimeVariance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float perioTimeVariance
+ = null;
 
   @JsonProperty("ts")
   private OffsetDateTime ts = null;
 
   @JsonProperty("tsVariance")
-  private Float tsVariance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float tsVariance
+ = null;
 
   @JsonProperty("recurringTime")
   private ScheduledCommunicationTime recurringTime = null;
@@ -42,13 +59,17 @@ public class UeCommunication   {
   private TrafficCharacterization trafChar = null;
 
   @JsonProperty("ratio")
-  private Integer ratio = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer ratio
+ = null;
 
   @JsonProperty("perioCommInd")
   private Boolean perioCommInd = null;
 
   @JsonProperty("confidence")
-  private Integer confidence = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer confidence
+ = null;
 
   @JsonProperty("anaOfAppList")
   private AppListForUeComm anaOfAppList = null;

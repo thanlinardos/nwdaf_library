@@ -1,13 +1,20 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Dispersion collection per UE location or per slice.
@@ -37,22 +44,32 @@ public class DispersionCollection   {
   private List<ApplicationVolume> appVolumes = null;
 
   @JsonProperty("disperAmount")
-  private Integer disperAmount = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer disperAmount
+ = null;
 
   @JsonProperty("disperClass")
   private DispersionClass disperClass = null;
 
   @JsonProperty("usageRank")
-  private Integer usageRank = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer usageRank
+ = null;
 
   @JsonProperty("percentileRank")
-  private Integer percentileRank = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer percentileRank
+ = null;
 
   @JsonProperty("ueRatio")
-  private Integer ueRatio = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer ueRatio
+ = null;
 
   @JsonProperty("confidence")
-  private Integer confidence = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer confidence
+ = null;
 
   public DispersionCollection ueLoc(UserLocation ueLoc) {
     this.ueLoc = ueLoc;

@@ -1,15 +1,22 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.OffsetDateTime;
+import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents the type of reporting that the subscription requires.
@@ -36,16 +43,24 @@ public class EventReportingRequirement   {
   private OffsetDateTime endTs = null;
 
   @JsonProperty("offsetPeriod")
-  private Integer offsetPeriod = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer offsetPeriod
+ = null;
 
   @JsonProperty("sampRatio")
-  private Integer sampRatio = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer sampRatio
+ = null;
 
   @JsonProperty("maxObjectNbr")
-  private Integer maxObjectNbr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer maxObjectNbr
+ = null;
 
   @JsonProperty("maxSupiNbr")
-  private Integer maxSupiNbr = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer maxSupiNbr
+ = null;
 
   @JsonProperty("timeAnaNeeded")
   @DateTimeFormat

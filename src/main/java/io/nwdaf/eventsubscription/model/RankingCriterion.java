@@ -1,10 +1,17 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Indicates the usage ranking criterion between the high, medium and low usage UE.
@@ -16,10 +23,14 @@ import javax.validation.constraints.*;
 
 public class RankingCriterion   {
   @JsonProperty("highBase")
-  private Integer highBase = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer highBase
+ = null;
 
   @JsonProperty("lowBase")
-  private Integer lowBase = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer lowBase
+ = null;
 
   public RankingCriterion highBase(Integer highBase) {
     this.highBase = highBase;

@@ -1,10 +1,18 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Ellipsoid with uncertainty
@@ -16,16 +24,24 @@ import javax.validation.constraints.*;
 
 public class UncertaintyEllipsoid   {
   @JsonProperty("semiMajor")
-  private Float semiMajor = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float semiMajor
+ = null;
 
   @JsonProperty("semiMinor")
-  private Float semiMinor = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float semiMinor
+ = null;
 
   @JsonProperty("vertical")
-  private Float vertical = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float vertical
+ = null;
 
   @JsonProperty("orientationMajor")
-  private Integer orientationMajor = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Integer orientationMajor
+ = null;
 
   public UncertaintyEllipsoid semiMajor(Float semiMajor) {
     this.semiMajor = semiMajor;

@@ -1,10 +1,15 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import javax.validation.constraints.NotNull;
+
 import org.springframework.validation.annotation.Validated;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Represents average and variance information.
@@ -16,13 +21,19 @@ import javax.validation.constraints.*;
 
 public class NumberAverage   {
   @JsonProperty("number")
-  private Float number = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float number
+ = null;
 
   @JsonProperty("variance")
-  private Float variance = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float variance
+ = null;
 
   @JsonProperty("skewness")
-  private Float skewness = null;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+private Float skewness
+ = null;
 
   public NumberAverage number(Float number) {
     this.number = number;
