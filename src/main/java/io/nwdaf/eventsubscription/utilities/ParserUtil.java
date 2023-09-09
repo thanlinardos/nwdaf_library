@@ -7,6 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
 
+import io.nwdaf.eventsubscription.model.NfLoadLevelInformation;
+
 public class ParserUtil {
     public static Integer safeParseInteger(String str) {
         try {
@@ -114,7 +116,7 @@ public class ParserUtil {
 	}
 
 	public static String parseQuerryFilterContains(List<String> filterList, String subProperty){
-		String res = "";
+		String res = "(";
         if(filterList==null || filterList.size()==0){
             return null;
         }
@@ -124,7 +126,7 @@ public class ParserUtil {
 				res += " or ";
 			}
 		}
-
+        res+=")";
 		return res;
 	}
 
@@ -154,5 +156,22 @@ public class ParserUtil {
 
     public static <T> List<T> removeDuplicates(List<T> list){
         return new ArrayList<>(new LinkedHashSet<>(list));
+    }
+
+    // get only the current time nfloadlevelinfo (remove past offset nfloadlevelinfos)
+    public static List<NfLoadLevelInformation> parsePresentNfLoadLevelInformations(List<NfLoadLevelInformation> nfLoadLevelInformations){
+        List<NfLoadLevelInformation> res = new ArrayList<>();
+        OffsetDateTime latest = nfLoadLevelInformations.get(0).getTimeStamp();
+        for(int i=1;i<nfLoadLevelInformations.size();i++){
+            if(nfLoadLevelInformations.get(i).getTimeStamp().compareTo(latest)>0){
+                latest = nfLoadLevelInformations.get(i).getTimeStamp();
+            }
+        }
+        for(int i=0;i<nfLoadLevelInformations.size();i++){
+            if(nfLoadLevelInformations.get(i).getTimeStamp().compareTo(latest.minusNanos((long)((Constants.MIN_PERIOD_SECONDS / 2)*1000000000)))>=0){
+                res.add(nfLoadLevelInformations.get(i));
+            }
+        }
+        return res;
     }
 }

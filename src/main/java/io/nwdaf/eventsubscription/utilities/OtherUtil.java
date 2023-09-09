@@ -89,6 +89,18 @@ public class OtherUtil {
     }
 
 	public static List<NfLoadLevelInformation> setNfloadNonIncludedInfoNull(List<NfLoadLevelInformation> nfloadlevels, List<AnalyticsSubset> listOfAnaSubsets){
+		if(listOfAnaSubsets==null || listOfAnaSubsets.size() == 0){
+			return nfloadlevels;
+		}
+		boolean cont = false;
+		for(int i=0;i<listOfAnaSubsets.size();i++){
+			if(listOfAnaSubsets.get(i).getAnaSubset()!=null){
+				cont = true;
+			}
+		}
+		if(!cont){
+			return nfloadlevels;
+		}
 		if(!ParserUtil.safeParseContains(listOfAnaSubsets,new AnalyticsSubset().anaSubset(AnalyticsSubsetEnum.NF_RESOURCE_USAGE))){
 			for(int i=0;i<nfloadlevels.size();i++){
 				nfloadlevels.get(i).nfCpuUsage(null).nfMemoryUsage(null).nfStorageUsage(null);

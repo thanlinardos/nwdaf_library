@@ -41,9 +41,9 @@ public class NetworkAreaInfo   {
   @Valid
   private List<Tai> tais = null;
 
-  @JsonProperty("containerAreaIds")
+  @JsonProperty("containedAreaIds")
   @Valid
-  private List<UUID> containerAreaIds = null;
+  private List<UUID> containedAreaIds = null;
 
   public NetworkAreaInfo id(UUID id){
     this.id = id;
@@ -166,31 +166,31 @@ public class NetworkAreaInfo   {
     this.tais = tais;
   }
 
-  public NetworkAreaInfo containerAreaIds(List<UUID> containerAreaIds) {
-    this.containerAreaIds = containerAreaIds;
+  public NetworkAreaInfo containedAreaIds(List<UUID> containedAreaIds) {
+    this.containedAreaIds = containedAreaIds;
     return this;
   }
 
-  public NetworkAreaInfo addContainerAreaIdsItem(UUID containerAreaIdsItem) {
-    if (this.containerAreaIds == null) {
-      this.containerAreaIds = new ArrayList<UUID>();
+  public NetworkAreaInfo addContainedAreaIdsItem(UUID containedAreaIdsItem) {
+    if (this.containedAreaIds == null) {
+      this.containedAreaIds = new ArrayList<UUID>();
     }
-    this.containerAreaIds.add(containerAreaIdsItem);
+    this.containedAreaIds.add(containedAreaIdsItem);
     return this;
   }
 
   /**
-   * Contains a list of tracking area identities.
-   * @return containerAreaIds
+   * Contains a list of aois inside of this aoi.
+   * @return containedAreaIds
    **/
-  @Schema(description = "Contains a list of tracking area identities.")
+  @Schema(description = "Contains a list of aois inside of this aoi.")
       @Valid
-  @Size(min=1)   public List<UUID> getContainerAreaIds() {
-    return containerAreaIds;
+  @Size(min=1)   public List<UUID> getContainedAreaIds() {
+    return containedAreaIds;
   }
 
-  public void setContainerAreaIds(List<UUID> containerAreaIds) {
-    this.containerAreaIds = containerAreaIds;
+  public void setContainedAreaIds(List<UUID> containedAreaIds) {
+    this.containedAreaIds = containedAreaIds;
   }
 
   @Override
@@ -223,7 +223,7 @@ public class NetworkAreaInfo   {
     sb.append("    ncgis: ").append(toIndentedString(ncgis)).append("\n");
     sb.append("    gRanNodeIds: ").append(toIndentedString(gRanNodeIds)).append("\n");
     sb.append("    tais: ").append(toIndentedString(tais)).append("\n");
-    sb.append("    containerAreaIds: ").append(toIndentedString(containerAreaIds)).append("\n");
+    sb.append("    containedAreaIds: ").append(toIndentedString(containedAreaIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

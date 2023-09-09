@@ -47,7 +47,7 @@ public class Constants {
 	.id(UUID.fromString("f6af027d-9084-4f5f-a039-b863d7b1f540"))
 	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("FFFFFFF"))
 	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").nrCellId("000000000"))
-	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").nrCellId("FFFFFFFFF"))
+	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").nrCellId("000000000"))
 	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").tac("0000"))
 	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").tac("FFFF"))
 	;
@@ -57,11 +57,9 @@ public class Constants {
 	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").tac("0000"))
 	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").tac("FFFF"))
 	;
-	// not inside serving aoi in this example:
 	public static NetworkAreaInfo AreaOfInterestExample3 = new NetworkAreaInfo()
 	.id(UUID.fromString("c7d7cb53-f345-4753-8a3f-0c821c4ed961"))
 	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("FFFFFFF"))
-	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("0000001"))
 	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(new PlmnId().mcc("123").mnc("123")).eNbId("MacroeNB-00000"))
 	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(new PlmnId().mcc("123").mnc("123")).eNbId("MacroeNB-FFFFF"))
 	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").nrCellId("000000000"))

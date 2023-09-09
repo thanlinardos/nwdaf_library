@@ -3,6 +3,8 @@ package io.nwdaf.eventsubscription.utilities;
 import java.util.List;
 import java.util.Objects;
 
+import io.nwdaf.eventsubscription.model.NetworkAreaInfo;
+
 public class CheckUtil {
     // checks if input string is neither null nor empty string ("")
     public static Boolean checkNotNullNorEmptyString(String in){
@@ -58,5 +60,13 @@ public class CheckUtil {
         else{
             return Objects.equals(o1,o2);
         }
+    }
+
+    public static Boolean safeCheckNetworkAreaNotEmpty(NetworkAreaInfo area){
+        if(area == null){
+            return false;
+        }
+        return CheckUtil.safeCheckListNotEmpty(area.getEcgis()) || CheckUtil.safeCheckListNotEmpty(area.getNcgis()) || 
+			   CheckUtil.safeCheckListNotEmpty(area.getGRanNodeIds()) || CheckUtil.safeCheckListNotEmpty(area.getTais());
     }
 }

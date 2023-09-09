@@ -29,8 +29,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class NfLoadLevelInformation   {
   private Instant time;
   
+  @JsonProperty("timeStamp")
   private OffsetDateTime timeStamp=null;
-  
+
+  @JsonProperty("thresholdProperty")
+  private String thresholdProperty=null;
+
+  @JsonProperty("thresholdValue")
+  private Integer thresholdValue=null;
+
   @JsonProperty("areaOfInterestId")
   private UUID areaOfInterestId = null;
 
@@ -410,6 +417,9 @@ private Integer confidence
     StringBuilder sb = new StringBuilder();
     sb.append("class NfLoadLevelInformation {\n");
     
+    sb.append("    timeStamp: ").append(toIndentedString(timeStamp)).append("\n");
+    sb.append("    thresholdProperty: ").append(toIndentedString(thresholdProperty)).append("\n");
+    sb.append("    thresholdValue: ").append(toIndentedString(thresholdValue)).append("\n");
     sb.append("    areaOfInterestId: ").append(toIndentedString(areaOfInterestId)).append("\n");
     sb.append("    nfType: ").append(toIndentedString(nfType)).append("\n");
     sb.append("    nfInstanceId: ").append(toIndentedString(nfInstanceId)).append("\n");
@@ -447,5 +457,21 @@ public OffsetDateTime getTimeStamp() {
 
 public void setTimeStamp(OffsetDateTime timeStamp) {
 	this.timeStamp = timeStamp;
+}
+
+public String getThresholdProperty() {
+    return thresholdProperty;
+}
+
+public void setThresholdProperty(String thresholdProperty) {
+    this.thresholdProperty = thresholdProperty;
+}
+
+public Integer getThresholdValue() {
+    return thresholdValue;
+}
+
+public void setThresholdValue(Integer thresholdValue) {
+    this.thresholdValue = thresholdValue;
 }
 }
