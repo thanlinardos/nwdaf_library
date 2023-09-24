@@ -108,4 +108,8 @@ public class PlmnId   {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+  public String toFormattedString(){
+    return "mcc"+this.mcc+".mnc"+this.mnc;
+  }
 }

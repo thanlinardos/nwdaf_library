@@ -1,9 +1,12 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.TimeZone;
+import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -25,6 +28,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 public class UeMobility   {
+  private Instant time;
+
   @JsonProperty("ts")
   private OffsetDateTime ts = null;
 
@@ -44,6 +49,18 @@ private Float durationVariance
   @JsonProperty("locInfos")
   @Valid
   private List<LocationInfo> locInfos = new ArrayList<LocationInfo>();
+
+  // list of aois the ue has visited matching the location infos list (for each user location match it to an aoi or if it doesnt exist create a new one for this location)
+  @JsonProperty("areaOfInterestIds")
+  private List<UUID> areaOfInterestIds = new ArrayList<>();
+  
+  @JsonProperty("supi")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private String supi = null;
+
+  @JsonProperty("intGroupId")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private String intGroupId = null;
 
   public UeMobility ts(OffsetDateTime ts) {
     this.ts = ts;
@@ -148,6 +165,74 @@ private Float durationVariance
     this.locInfos = locInfos;
   }
 
+  public UeMobility areaOfInterestIds(List<UUID> areaOfInterestIds) {
+    this.areaOfInterestIds = areaOfInterestIds;
+    return this;
+  }
+  public UeMobility addAreaOfInterestIdsItem(UUID areaOfInterestIdsItem) {
+    this.areaOfInterestIds.add(areaOfInterestIdsItem);
+    return this;
+  }
+  /**
+   * string with format 'UUID' as defined in OpenAPI.
+   * @return areaOfInterestId
+   **/
+  @Schema(description = "string with format 'UUID' as defined in OpenAPI.")
+  
+  public List<UUID> getAreaOfInterestIds() {
+    return areaOfInterestIds;
+  }
+
+  public void setAreaOfInterestIds(List<UUID> areaOfInterestIds) {
+    this.areaOfInterestIds = areaOfInterestIds;
+  }
+
+  public UeMobility supi(String supi) {
+    this.supi = supi;
+    return this;
+  }
+  /**
+   * string with format 'SUPI' as defined in 3GPP.
+   * @return supi
+   **/
+  @Schema(description = "string with format 'SUPI' as defined in 3GPP.")
+  public String getSupi() {
+    return supi;
+  }
+
+  public void setSupi(String supi) {
+    this.supi = supi;
+  }
+
+  public UeMobility intGroupId(String intGroupId) {
+    this.intGroupId = intGroupId;
+    return this;
+  }
+  /**
+   * string with format 'intGroupId' as defined in 3GPP.
+   * @return intGroupId
+   **/
+  @Schema(description = "string with format 'intGroupId' as defined in 3GPP.")
+  public String getIntGroupId() {
+    return intGroupId;
+  }
+
+  public void setIntGroupId(String intGroupId) {
+    this.intGroupId = intGroupId;
+  }
+
+  public UeMobility time(Instant time){
+    this.time = time;
+    this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+    return this;
+  }
+  public Instant getTime() {
+      return time;
+  }
+  public void setTime(Instant time) {
+      this.time = time;
+      this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -175,6 +260,9 @@ private Float durationVariance
     StringBuilder sb = new StringBuilder();
     sb.append("class UeMobility {\n");
     
+    sb.append("    areaOfInterestIds: ").append(toIndentedString(areaOfInterestIds)).append("\n");
+    sb.append("    supi: ").append(toIndentedString(supi)).append("\n");
+    sb.append("    intGroupId: ").append(toIndentedString(intGroupId)).append("\n");
     sb.append("    ts: ").append(toIndentedString(ts)).append("\n");
     sb.append("    recurringTime: ").append(toIndentedString(recurringTime)).append("\n");
     sb.append("    duration: ").append(toIndentedString(duration)).append("\n");

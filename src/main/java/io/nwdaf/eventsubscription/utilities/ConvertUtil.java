@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 public class ConvertUtil {
     // converts empty string to null
     public static String convertEmptyStringToNull(String in){
+        if(in == null){
+            return null;
+        }
         if(in.equals("")){
             return null;
         }

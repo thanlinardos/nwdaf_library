@@ -2,8 +2,11 @@ package io.nwdaf.eventsubscription.model;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.nwdaf.eventsubscription.utilities.Regex;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
@@ -311,6 +314,131 @@ public class NetworkAreaInfo   {
             }
           }
         }
+      }
+    }
+    return true;
+  }
+
+  public boolean hasPlmnId(PlmnId plmnId){
+    if(this.ncgis!=null && this.ncgis.size()!=0){
+          for(int i=0;i<this.ncgis.size();i++){
+            if(this.ncgis.get(i).getPlmnId().equals(plmnId)){
+              return true;
+            }
+          }
+        }
+        if(this.ecgis.size()!=0){
+          for(int i=0;i<this.ecgis.size();i++){
+            if(this.ecgis.get(i).getPlmnId().equals(plmnId)){
+              return true;
+            }
+          }
+        }
+        if(this.gRanNodeIds.size()!=0){
+          for(int i=0;i<this.gRanNodeIds.size();i++){
+            if(this.gRanNodeIds.get(i).getPlmnId().equals(plmnId)){
+              return true;
+            }
+          }
+        }
+        if(this.tais.size()!=0){
+          for(int i=0;i<this.tais.size();i++){
+            if(this.tais.get(i).getPlmnId().equals(plmnId)){
+              return true;
+            }
+          }
+        }
+    return false;
+  }
+
+  public boolean containsLocationInfo(LocationInfo locationInfo){
+    UserLocation userLocation = locationInfo.getLoc();
+    if(userLocation.getEutraLocation()!=null){
+      EutraLocation eutraLocation = userLocation.getEutraLocation();
+      if(eutraLocation.getEcgi()!=null){
+        if(this.ecgis==null || this.ecgis.size()==0 || !this.ecgis.contains(eutraLocation.getEcgi())){
+          return false;
+        }
+      }
+      if(eutraLocation.getGlobalENbId()!=null && eutraLocation.getGlobalENbId().getENbId()!=null && Pattern.matches(Regex.eNbId, eutraLocation.getGlobalENbId().getENbId())){
+        if(this.gRanNodeIds==null || this.gRanNodeIds.size()==0 || !this.gRanNodeIds.contains(eutraLocation.getGlobalENbId())){
+          return false;
+        }
+      }
+      if(eutraLocation.getGlobalNgenbId()!=null && eutraLocation.getGlobalNgenbId().getNgeNbId()!=null && Pattern.matches(Regex.ngeNbId, eutraLocation.getGlobalNgenbId().getNgeNbId())){
+        if(this.gRanNodeIds==null || this.gRanNodeIds.size()==0 || !this.gRanNodeIds.contains(eutraLocation.getGlobalNgenbId())){
+          return false;
+        }
+      }
+      if(eutraLocation.getTai()!=null){
+        if(this.tais==null || this.tais.size()==0 || !this.tais.contains(eutraLocation.getTai())){
+          return false;
+        }
+      }
+    }
+    if(userLocation.getN3gaLocation()!=null){
+      N3gaLocation n3gaLocation = userLocation.getN3gaLocation();
+      if(n3gaLocation.getN3gppTai()!=null){
+        if(this.tais==null || this.tais.size()==0 || !this.tais.contains(n3gaLocation.getN3gppTai())){
+          return false;
+        }
+      }
+      if(n3gaLocation.getN3IwfId()!=null && Pattern.matches(Regex.n3IwfId, n3gaLocation.getN3IwfId())){
+        if(this.gRanNodeIds==null || this.gRanNodeIds.size()==0){
+          return false;
+        }
+        boolean found = false;
+        for(int i=0;i<this.gRanNodeIds.size();i++){
+          if(this.gRanNodeIds.get(i).getN3IwfId().equals(n3gaLocation.getN3IwfId())){
+            found = true;
+          }
+        }
+        if(!found){
+          return false;
+        }
+      }
+    }
+    if(userLocation.getNrLocation()!=null){
+      NrLocation nrLocation = userLocation.getNrLocation();
+      if(nrLocation.getNcgi()!=null){
+        if(this.ncgis==null || this.ncgis.size()==0 || !this.ncgis.contains(nrLocation.getNcgi())){
+          return false;
+        }
+      }
+      if(nrLocation.getTai()!=null){
+        if(this.tais==null || this.tais.size()==0 || !this.tais.contains(nrLocation.getTai())){
+          return false;
+        }
+      }
+    }
+    if(userLocation.getGeraLocation()!=null){
+      GeraLocation geraLocation = userLocation.getGeraLocation();
+      if(geraLocation.getCgi()!=null && !this.hasPlmnId(geraLocation.getCgi().getPlmnId())){
+          return false;
+      }
+      if(geraLocation.getRai()!=null && !this.hasPlmnId(geraLocation.getRai().getPlmnId())){
+          return false;
+      }
+      if(geraLocation.getLai()!=null && !this.hasPlmnId(geraLocation.getLai().getPlmnId())){
+          return false;
+      }
+    }
+    if(userLocation.getUtraLocation()!=null){
+      UtraLocation utraLocation = userLocation.getUtraLocation();
+      if(utraLocation.getCgi()!=null && !this.hasPlmnId(utraLocation.getCgi().getPlmnId())){
+          return false;
+      }
+      if(utraLocation.getRai()!=null && !this.hasPlmnId(utraLocation.getRai().getPlmnId())){
+          return false;
+      }
+      if(utraLocation.getLai()!=null && !this.hasPlmnId(utraLocation.getLai().getPlmnId())){
+          return false;
+      }
+      if(utraLocation.getLai()!=null && !this.hasPlmnId(utraLocation.getLai().getPlmnId())){
+          return false;
+      }
+      if(utraLocation.getSai()!=null && !this.hasPlmnId(utraLocation.getSai().getPlmnId())){
+          return false;
       }
     }
     return true;

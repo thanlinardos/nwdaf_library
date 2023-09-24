@@ -18,7 +18,7 @@ import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
 public class Constants {
 	public static Integer MIN_PERIOD_SECONDS = 1;
 	public static Integer MAX_PERIOD_SECONDS = 600;
-	public static List<NwdafEventEnum> supportedEvents = new ArrayList<>(Arrays.asList(NwdafEventEnum.NF_LOAD));
+	public static List<NwdafEventEnum> supportedEvents = new ArrayList<>(Arrays.asList(NwdafEventEnum.NF_LOAD,NwdafEventEnum.UE_MOBILITY));
 	//check 5.1.8-1 table (135) from 3gpp 29520-h80 and for encoding : 29571-h80 (17) table 5.2.2-3
 	//Events supported: 2(UeMobility), 7(NfLoad), 11(EneNA), 17(NfLoadExt), 22(UeMobilityExt)
 	public static String supportedFeatures = "210442";  //all 24 features: FFFFFF
@@ -31,41 +31,44 @@ public class Constants {
 	public static String maxCpuQuerry = "max by (name,id,nfType) (rate(container_cpu_usage_seconds_total{image!=\"\",container_label_org_label_schema_group=\"\"}[1m])) * 100";
 	public static String maxMemQuerry = "sum by (name,id,nfType)(max_over_time(container_memory_usage_bytes{image!=\"\",container_label_org_label_schema_group=\"\",nfType!=\"\"}[1m])) / scalar(sum(node_memory_MemTotal_bytes)) * 100";
 	public static String maxStorageQuerry = "sum by (name,id,nfType)(max_over_time(container_fs_usage_bytes{image!=\"\",container_label_org_label_schema_group=\"\",nfType!=\"\"}[1m])) / scalar(sum(node_filesystem_size_bytes{fstype=\"tmpfs\"})) * 100";
+	public static PlmnId plmnId = new PlmnId().mcc("123").mnc("123");
 	public static NetworkAreaInfo ServingAreaOfInterest = new NetworkAreaInfo()
 	.id(UUID.fromString("dca7adaa-834e-4d05-b373-297a986a5256"))
-	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("FFFFFFF"))
-	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("0000000"))
-	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(new PlmnId().mcc("123").mnc("123")).eNbId("MacroeNB-00000"))
-	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(new PlmnId().mcc("123").mnc("123")).eNbId("MacroeNB-FFFFF"))
-	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").nrCellId("000000000"))
-	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").nrCellId("000000000"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").tac("0000"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").tac("FFFF"))
+	.addEcgisItem(new Ecgi().plmnId(plmnId).eutraCellId("FFFFFFF"))
+	.addEcgisItem(new Ecgi().plmnId(plmnId).eutraCellId("0000000"))
+	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(plmnId).ngeNbId("MacroNGeNB-00000"))
+	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(plmnId).eNbId("MacroeNB-00000"))
+	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(plmnId).n3IwfId("FFFFFFFFFFFF"))
+	.addNcgisItem(new Ncgi().plmnId(plmnId).nid("00000000000").nrCellId("000000000"))
+	.addNcgisItem(new Ncgi().plmnId(plmnId).nid("FFFFFFFFFFF").nrCellId("000000000"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("00000000000").tac("0000"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("FFFFFFFFFFF").tac("FFFF"))
 	;
 	// inside serving aoi in this example:
 	public static NetworkAreaInfo AreaOfInterestExample1 = new NetworkAreaInfo()
 	.id(UUID.fromString("f6af027d-9084-4f5f-a039-b863d7b1f540"))
-	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("FFFFFFF"))
-	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").nrCellId("000000000"))
-	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").nrCellId("000000000"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").tac("0000"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").tac("FFFF"))
+	.addEcgisItem(new Ecgi().plmnId(plmnId).eutraCellId("FFFFFFF"))
+	.addNcgisItem(new Ncgi().plmnId(plmnId).nid("00000000000").nrCellId("000000000"))
+	.addNcgisItem(new Ncgi().plmnId(plmnId).nid("FFFFFFFFFFF").nrCellId("000000000"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("00000000000").tac("0000"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("FFFFFFFFFFF").tac("FFFF"))
 	;
 	public static NetworkAreaInfo AreaOfInterestExample2 = new NetworkAreaInfo()
 	.id(UUID.fromString("80bff104-c082-4d55-8514-d9243e7ba1d1"))
-	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("FFFFFFF"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").tac("0000"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").tac("FFFF"))
+	.addEcgisItem(new Ecgi().plmnId(plmnId).eutraCellId("FFFFFFF"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("00000000000").tac("0000"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("FFFFFFFFFFF").tac("FFFF"))
 	;
 	public static NetworkAreaInfo AreaOfInterestExample3 = new NetworkAreaInfo()
 	.id(UUID.fromString("c7d7cb53-f345-4753-8a3f-0c821c4ed961"))
-	.addEcgisItem(new Ecgi().plmnId(new PlmnId().mcc("123").mnc("123")).eutraCellId("FFFFFFF"))
-	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(new PlmnId().mcc("123").mnc("123")).eNbId("MacroeNB-00000"))
-	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(new PlmnId().mcc("123").mnc("123")).eNbId("MacroeNB-FFFFF"))
-	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").nrCellId("000000000"))
-	.addNcgisItem(new Ncgi().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").nrCellId("000000000"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("00000000000").tac("0000"))
-	.addTaisItem(new Tai().plmnId(new PlmnId().mcc("123").mnc("123")).nid("FFFFFFFFFFF").tac("FFFF"))
+	.addEcgisItem(new Ecgi().plmnId(plmnId).eutraCellId("FFFFFFF"))
+	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(plmnId).ngeNbId("MacroNGeNB-00000"))
+	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(plmnId).eNbId("MacroeNB-00000"))
+	.addGRanNodeIdsItem(new GlobalRanNodeId().plmnId(plmnId).n3IwfId("FFFFFFFFFFFF"))
+	.addNcgisItem(new Ncgi().plmnId(plmnId).nid("00000000000").nrCellId("000000000"))
+	.addNcgisItem(new Ncgi().plmnId(plmnId).nid("FFFFFFFFFFF").nrCellId("000000000"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("00000000000").tac("0000"))
+	.addTaisItem(new Tai().plmnId(plmnId).nid("FFFFFFFFFFF").tac("FFFF"))
 	;
 
 	public static Map<UUID,NetworkAreaInfo> ExampleAOIsMap = initExampleAOIsMap();
