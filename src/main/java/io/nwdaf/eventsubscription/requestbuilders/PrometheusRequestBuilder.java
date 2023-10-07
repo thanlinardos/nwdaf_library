@@ -110,7 +110,14 @@ public class PrometheusRequestBuilder {
 				if(dataOptionals.get(c).get(1)==null) {
 					// add hyphens '-' to docker/id/[first 32 digits] -> nf instance id (UUID)
 					String str = vectorData.getMetric().get("id");
-					int start = str.indexOf("docker-")+"docker-".length();
+					String modifier = "docker-";
+					int st_index = str.indexOf(modifier);
+					// in windows docker desktop it is usually formatted with slash instead of hyphen as below:
+					if(st_index==-1 || str.charAt(st_index+modifier.length())=='r'){
+						modifier = "docker/";
+						st_index = str.indexOf(modifier);
+					}
+					int start = st_index + modifier.length();
 					String uuid = str.substring(start,start+32).replaceFirst( "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5" );
 					uuid = uuid.substring(0, 14) + "4" + uuid.substring(15);
 					uuid = uuid.substring(0, 19) + "8" + uuid.substring(20);
