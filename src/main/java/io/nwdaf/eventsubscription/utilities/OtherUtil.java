@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.nwdaf.eventsubscription.model.AnalyticsSubset;
 import io.nwdaf.eventsubscription.model.NfLoadLevelInformation;
+import io.nwdaf.eventsubscription.model.NnwdafEventsSubscription;
 import io.nwdaf.eventsubscription.model.SupportedGADShapes;
 import io.nwdaf.eventsubscription.model.SupportedGADShapes.SupportedGADShapesEnum;
 import io.nwdaf.eventsubscription.model.AnalyticsSubset.AnalyticsSubsetEnum;
@@ -49,6 +50,17 @@ public class OtherUtil {
 			}
 		}
 		return e;	
+	}
+	
+	public static NnwdafEventsSubscription setupShapes(NnwdafEventsSubscription s){
+		if(s!=null){
+			if(s.getEventSubscriptions()!=null){
+				for(int i=0;i<s.getEventSubscriptions().size();i++){
+					s.getEventSubscriptions().set(i,setShapes(s.getEventSubscriptions().get(i)));
+				}
+			}
+		}
+		return s;
 	}
 	
     public static String setNfloadPostgresColumns(String columns, List<AnalyticsSubset> listOfAnaSubsets){

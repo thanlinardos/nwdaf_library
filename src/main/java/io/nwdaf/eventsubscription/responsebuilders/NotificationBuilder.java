@@ -19,7 +19,7 @@ import io.nwdaf.eventsubscription.model.UeMobility;
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
 
 public class NotificationBuilder {
-	public NnwdafEventsSubscriptionNotification initNotification(Long subId) {
+	public NnwdafEventsSubscriptionNotification build(Long subId) {
 		return new NnwdafEventsSubscriptionNotification().subscriptionId(subId.toString());
 	}
 	@SuppressWarnings("unchecked")
