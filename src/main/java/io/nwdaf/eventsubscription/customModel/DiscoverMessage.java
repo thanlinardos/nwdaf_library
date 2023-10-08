@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.customModel;
 
+import java.time.OffsetDateTime;
+
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
 import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import lombok.AllArgsConstructor;
@@ -10,6 +12,8 @@ import lombok.Setter;
 
 @Getter @Setter @Builder @AllArgsConstructor @NoArgsConstructor
 public class DiscoverMessage {
+    @Builder.Default
+    private OffsetDateTime timestamp = OffsetDateTime.now();
     private NwdafEventEnum requestedEvent;
     // (in seconds)
     private Integer requestedOffset;
@@ -20,10 +24,11 @@ public class DiscoverMessage {
     private Integer expectedWaitTime; 
 
     public String toString(){
-        return "{\"event\":\""+ParserUtil.safeParseString(requestedEvent)
-            +"\",\"offset\":\""+ParserUtil.safeParseString(requestedOffset)+"\""
-            +"\",\"hasData\":\""+ParserUtil.safeParseString(hasData)+"\""
-            +"\",\"availableOffset\":\""+ParserUtil.safeParseString(availableOffset)+"\""
-            +"\",\"expectedWaitTime\":\""+ParserUtil.safeParseString(expectedWaitTime)+"\"}";
+        return "{\"timestamp\":\"" + timestamp
+                +"\"requestedEvent\":\"" + ParserUtil.safeParseString(requestedEvent)
+                +"\",\"requestedOffset\":\"" + ParserUtil.safeParseString(requestedOffset)+"\"}"
+                +"\",\"hasData\":\"" + ParserUtil.safeParseString(hasData)+"\""
+                +"\",\"availableOffset\":\"" + ParserUtil.safeParseString(availableOffset)+"\""
+                +"\",\"expectedWaitTime\":\"" + ParserUtil.safeParseString(expectedWaitTime)+"\"}";
     }
 }
