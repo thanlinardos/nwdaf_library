@@ -25,10 +25,10 @@ public class DiscoverMessage {
 
     public String toString(){
         return "{\"timestamp\":\"" + timestamp
-                +"\"requestedEvent\":\"" + ParserUtil.safeParseString(requestedEvent)
-                +"\",\"requestedOffset\":\"" + ParserUtil.safeParseString(requestedOffset)+"\"}"
-                +"\",\"hasData\":\"" + ParserUtil.safeParseString(hasData)+"\""
-                +"\",\"availableOffset\":\"" + ParserUtil.safeParseString(availableOffset)+"\""
+                +"\",\"requestedEvent\":\"" + ParserUtil.safeParseString(requestedEvent)
+                +"\",\"requestedOffset\":\"" + ParserUtil.safeParseString(requestedOffset)
+                +"\",\"hasData\":\"" + ParserUtil.safeParseString(hasData)
+                +"\",\"availableOffset\":\"" + ParserUtil.safeParseString(availableOffset)
                 +"\",\"expectedWaitTime\":\"" + ParserUtil.safeParseString(expectedWaitTime)+"\"}";
     }
 }

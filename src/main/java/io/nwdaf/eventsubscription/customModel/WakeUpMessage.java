@@ -20,7 +20,7 @@ public class WakeUpMessage {
 
     public String toString(){
         return "{\"timestamp\":\"" + timestamp
-                +"\"requestedEvent\":\"" + ParserUtil.safeParseString(requestedEvent)
+                +"\",\"requestedEvent\":\"" + ParserUtil.safeParseString(requestedEvent)
                 +"\",\"requestedOffset\":\"" + ParserUtil.safeParseString(requestedOffset)+"\"}";
     }
 }

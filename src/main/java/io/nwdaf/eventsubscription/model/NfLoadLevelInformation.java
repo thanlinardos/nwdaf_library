@@ -1,5 +1,6 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
-public class NfLoadLevelInformation   {
+public class NfLoadLevelInformation implements Serializable{
   private Instant time;
   
   @JsonProperty("timeStamp")
