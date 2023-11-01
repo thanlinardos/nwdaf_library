@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 import io.nwdaf.eventsubscription.model.NetworkAreaInfo;
+import io.nwdaf.eventsubscription.model.NnwdafEventsSubscriptionNotification;
+import io.nwdaf.eventsubscription.model.TimeUnit;
 
 public class CheckUtil {
     // checks if input string is neither null nor empty string ("")
@@ -68,5 +70,16 @@ public class CheckUtil {
         }
         return CheckUtil.safeCheckListNotEmpty(area.getEcgis()) || CheckUtil.safeCheckListNotEmpty(area.getNcgis()) || 
 			   CheckUtil.safeCheckListNotEmpty(area.getGRanNodeIds()) || CheckUtil.safeCheckListNotEmpty(area.getTais());
+    }
+
+    public static Boolean safeCheckEventNotificationWithinMilli(NnwdafEventsSubscriptionNotification notification, long milliseconds) {
+        if(notification!= null && notification.getEventNotifications()!=null && notification.getEventNotifications().size()>0 && notification.getEventNotifications().get(0)!=null &&
+           notification.getEventNotifications().get(0).getTimeStampGen()!=null) {
+            long notificationSeconds = notification.getEventNotifications().get(0).getTimeStampGen().toInstant().toEpochMilli();
+            if(notificationSeconds<=milliseconds) {
+                return true;
+            }
+        }
+        return false;
     }
 }
