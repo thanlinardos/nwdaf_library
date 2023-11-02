@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfRetainabilityThreshold
-*/
+ * OneOfRetainabilityThreshold
+ */
 
 public interface OneOfRetainabilityThreshold {
 

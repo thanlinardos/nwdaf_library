@@ -16,155 +16,157 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class AccessTokenErr {
+	/**
+	 * Gets or Sets error
+	 */
+	public enum ErrorEnum {
+		INVALID_REQUEST("invalid_request"),
 
-public class AccessTokenErr   {
-  /**
-   * Gets or Sets error
-   */
-  public enum ErrorEnum {
-    INVALID_REQUEST("invalid_request"),
-    
-    INVALID_CLIENT("invalid_client"),
-    
-    INVALID_GRANT("invalid_grant"),
-    
-    UNAUTHORIZED_CLIENT("unauthorized_client"),
-    
-    UNSUPPORTED_GRANT_TYPE("unsupported_grant_type"),
-    
-    INVALID_SCOPE("invalid_scope");
+		INVALID_CLIENT("invalid_client"),
 
-    private String value;
+		INVALID_GRANT("invalid_grant"),
 
-    ErrorEnum(String value) {
-      this.value = value;
-    }
+		UNAUTHORIZED_CLIENT("unauthorized_client"),
 
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
+		UNSUPPORTED_GRANT_TYPE("unsupported_grant_type"),
 
-    @JsonCreator
-    public static ErrorEnum fromValue(String text) {
-      for (ErrorEnum b : ErrorEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-  @JsonProperty("error")
-  private ErrorEnum error = null;
+		INVALID_SCOPE("invalid_scope");
 
-  @JsonProperty("error_description")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String errorDescription = null;
+		private String value;
 
-  @JsonProperty("error_uri")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String errorUri = null;
+		ErrorEnum(String value) {
+			this.value = value;
+		}
 
-  public AccessTokenErr error(ErrorEnum error) {
-    this.error = error;
-    return this;
-  }
+		@Override
+		@JsonValue
+		public String toString() {
+			return String.valueOf(value);
+		}
 
-  /**
-   * Get error
-   * @return error
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
+		@JsonCreator
+		public static ErrorEnum fromValue(String text) {
+			for (ErrorEnum b : ErrorEnum.values()) {
+				if (String.valueOf(b.value).equals(text)) {
+					return b;
+				}
+			}
+			return null;
+		}
+	}
 
-    public ErrorEnum getError() {
-    return error;
-  }
+	@JsonProperty("error")
+	private ErrorEnum error = null;
 
-  public void setError(ErrorEnum error) {
-    this.error = error;
-  }
+	@JsonProperty("error_description")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String errorDescription = null;
 
-  public AccessTokenErr errorDescription(String errorDescription) {
-    this.errorDescription = errorDescription;
-    return this;
-  }
+	@JsonProperty("error_uri")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String errorUri = null;
 
-  /**
-   * Get errorDescription
-   * @return errorDescription
-   **/
-  @Schema(description = "")
-  
-    public String getErrorDescription() {
-    return errorDescription;
-  }
+	public AccessTokenErr error(ErrorEnum error) {
+		this.error = error;
+		return this;
+	}
 
-  public void setErrorDescription(String errorDescription) {
-    this.errorDescription = errorDescription;
-  }
+	/**
+	 * Get error
+	 * 
+	 * @return error
+	 **/
+	@Schema(required = true, description = "")
+	@NotNull
 
-  public AccessTokenErr errorUri(String errorUri) {
-    this.errorUri = errorUri;
-    return this;
-  }
+	public ErrorEnum getError() {
+		return error;
+	}
 
-  /**
-   * Get errorUri
-   * @return errorUri
-   **/
-  @Schema(description = "")
-  
-    public String getErrorUri() {
-    return errorUri;
-  }
+	public void setError(ErrorEnum error) {
+		this.error = error;
+	}
 
-  public void setErrorUri(String errorUri) {
-    this.errorUri = errorUri;
-  }
+	public AccessTokenErr errorDescription(String errorDescription) {
+		this.errorDescription = errorDescription;
+		return this;
+	}
 
+	/**
+	 * Get errorDescription
+	 * 
+	 * @return errorDescription
+	 **/
+	@Schema(description = "")
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AccessTokenErr accessTokenErr = (AccessTokenErr) o;
-    return Objects.equals(this.error, accessTokenErr.error) &&
-        Objects.equals(this.errorDescription, accessTokenErr.errorDescription) &&
-        Objects.equals(this.errorUri, accessTokenErr.errorUri);
-  }
+	public String getErrorDescription() {
+		return errorDescription;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(error, errorDescription, errorUri);
-  }
+	public void setErrorDescription(String errorDescription) {
+		this.errorDescription = errorDescription;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class AccessTokenErr {\n");
-    
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
-    sb.append("    errorDescription: ").append(toIndentedString(errorDescription)).append("\n");
-    sb.append("    errorUri: ").append(toIndentedString(errorUri)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	public AccessTokenErr errorUri(String errorUri) {
+		this.errorUri = errorUri;
+		return this;
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * Get errorUri
+	 * 
+	 * @return errorUri
+	 **/
+	@Schema(description = "")
+
+	public String getErrorUri() {
+		return errorUri;
+	}
+
+	public void setErrorUri(String errorUri) {
+		this.errorUri = errorUri;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		AccessTokenErr accessTokenErr = (AccessTokenErr) o;
+		return Objects.equals(this.error, accessTokenErr.error) &&
+				Objects.equals(this.errorDescription, accessTokenErr.errorDescription) &&
+				Objects.equals(this.errorUri, accessTokenErr.errorUri);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(error, errorDescription, errorUri);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class AccessTokenErr {\n");
+
+		sb.append("    error: ").append(toIndentedString(error)).append("\n");
+		sb.append("    errorDescription: ").append(toIndentedString(errorDescription)).append("\n");
+		sb.append("    errorUri: ").append(toIndentedString(errorUri)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

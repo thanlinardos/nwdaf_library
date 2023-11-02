@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfQosSustainabilityInfo
-*/
+ * OneOfQosSustainabilityInfo
+ */
 
 public interface OneOfQosSustainabilityInfo {
 

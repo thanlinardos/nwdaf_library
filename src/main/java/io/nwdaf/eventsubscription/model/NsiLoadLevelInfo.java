@@ -17,363 +17,377 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * Represents the network slice and optionally the associated network slice instance and the  load level information. 
+ * Represents the network slice and optionally the associated network slice
+ * instance and the load level information.
  */
 @Schema(description = "Represents the network slice and optionally the associated network slice instance and the  load level information. ")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class NsiLoadLevelInfo {
+	@JsonProperty("loadLevelInformation")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer loadLevelInformation = null;
 
-public class NsiLoadLevelInfo   {
-  @JsonProperty("loadLevelInformation")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer loadLevelInformation
- = null;
+	@JsonProperty("snssai")
+	private Snssai snssai = null;
 
-  @JsonProperty("snssai")
-  private Snssai snssai = null;
+	@JsonProperty("nsiId")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String nsiId = null;
 
-  @JsonProperty("nsiId")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String nsiId
- = null;
+	@JsonProperty("resUsage")
+	private ResourceUsage resUsage = null;
 
-  @JsonProperty("resUsage")
-  private ResourceUsage resUsage = null;
+	@JsonProperty("numOfExceedLoadLevelThr")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer numOfExceedLoadLevelThr = null;
 
-  @JsonProperty("numOfExceedLoadLevelThr")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer numOfExceedLoadLevelThr
- = null;
+	@JsonProperty("exceedLoadLevelThrInd")
+	private Boolean exceedLoadLevelThrInd = null;
 
-  @JsonProperty("exceedLoadLevelThrInd")
-  private Boolean exceedLoadLevelThrInd = null;
+	@JsonProperty("networkArea")
+	private NetworkAreaInfo networkArea = null;
 
-  @JsonProperty("networkArea")
-  private NetworkAreaInfo networkArea = null;
+	@JsonProperty("timePeriod")
+	private TimeWindow timePeriod = null;
 
-  @JsonProperty("timePeriod")
-  private TimeWindow timePeriod = null;
+	@JsonProperty("resUsgThrCrossTimePeriod")
+	@Valid
+	private List<TimeWindow> resUsgThrCrossTimePeriod = null;
 
-  @JsonProperty("resUsgThrCrossTimePeriod")
-  @Valid
-  private List<TimeWindow> resUsgThrCrossTimePeriod = null;
+	@JsonProperty("numOfUes")
+	private NumberAverage numOfUes = null;
 
-  @JsonProperty("numOfUes")
-  private NumberAverage numOfUes = null;
+	@JsonProperty("numOfPduSess")
+	private NumberAverage numOfPduSess = null;
 
-  @JsonProperty("numOfPduSess")
-  private NumberAverage numOfPduSess = null;
+	@JsonProperty("confidence")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer confidence = null;
 
-  @JsonProperty("confidence")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer confidence
- = null;
+	public NsiLoadLevelInfo loadLevelInformation(Integer loadLevelInformation) {
+		this.loadLevelInformation = loadLevelInformation;
+		return this;
+	}
 
-  public NsiLoadLevelInfo loadLevelInformation(Integer loadLevelInformation) {
-    this.loadLevelInformation = loadLevelInformation;
-    return this;
-  }
+	/**
+	 * Load level information of the network slice and the optionally associated
+	 * network slice instance.
+	 * 
+	 * @return loadLevelInformation
+	 **/
+	@Schema(required = true, description = "Load level information of the network slice and the optionally associated network slice  instance. ")
+	@NotNull
 
-  /**
-   * Load level information of the network slice and the optionally associated network slice  instance. 
-   * @return loadLevelInformation
-   **/
-  @Schema(required = true, description = "Load level information of the network slice and the optionally associated network slice  instance. ")
-      @NotNull
+	public Integer getLoadLevelInformation() {
+		return loadLevelInformation;
+	}
 
-    public Integer getLoadLevelInformation() {
-    return loadLevelInformation;
-  }
+	public void setLoadLevelInformation(Integer loadLevelInformation) {
+		this.loadLevelInformation = loadLevelInformation;
+	}
 
-  public void setLoadLevelInformation(Integer loadLevelInformation) {
-    this.loadLevelInformation = loadLevelInformation;
-  }
+	public NsiLoadLevelInfo snssai(Snssai snssai) {
+		this.snssai = snssai;
+		return this;
+	}
 
-  public NsiLoadLevelInfo snssai(Snssai snssai) {
-    this.snssai = snssai;
-    return this;
-  }
+	/**
+	 * Get snssai
+	 * 
+	 * @return snssai
+	 **/
+	@Schema(required = true, description = "")
+	@NotNull
 
-  /**
-   * Get snssai
-   * @return snssai
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
+	@Valid
+	public Snssai getSnssai() {
+		return snssai;
+	}
 
-    @Valid
-    public Snssai getSnssai() {
-    return snssai;
-  }
+	public void setSnssai(Snssai snssai) {
+		this.snssai = snssai;
+	}
 
-  public void setSnssai(Snssai snssai) {
-    this.snssai = snssai;
-  }
+	public NsiLoadLevelInfo nsiId(String nsiId) {
+		this.nsiId = nsiId;
+		return this;
+	}
 
-  public NsiLoadLevelInfo nsiId(String nsiId) {
-    this.nsiId = nsiId;
-    return this;
-  }
+	/**
+	 * Contains the Identifier of the selected Network Slice instance
+	 * 
+	 * @return nsiId
+	 **/
+	@Schema(description = "Contains the Identifier of the selected Network Slice instance")
 
-  /**
-   * Contains the Identifier of the selected Network Slice instance
-   * @return nsiId
-   **/
-  @Schema(description = "Contains the Identifier of the selected Network Slice instance")
-  
-    public String getNsiId() {
-    return nsiId;
-  }
+	public String getNsiId() {
+		return nsiId;
+	}
 
-  public void setNsiId(String nsiId) {
-    this.nsiId = nsiId;
-  }
+	public void setNsiId(String nsiId) {
+		this.nsiId = nsiId;
+	}
 
-  public NsiLoadLevelInfo resUsage(ResourceUsage resUsage) {
-    this.resUsage = resUsage;
-    return this;
-  }
+	public NsiLoadLevelInfo resUsage(ResourceUsage resUsage) {
+		this.resUsage = resUsage;
+		return this;
+	}
 
-  /**
-   * Get resUsage
-   * @return resUsage
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public ResourceUsage getResUsage() {
-    return resUsage;
-  }
+	/**
+	 * Get resUsage
+	 * 
+	 * @return resUsage
+	 **/
+	@Schema(description = "")
 
-  public void setResUsage(ResourceUsage resUsage) {
-    this.resUsage = resUsage;
-  }
+	@Valid
+	public ResourceUsage getResUsage() {
+		return resUsage;
+	}
 
-  public NsiLoadLevelInfo numOfExceedLoadLevelThr(Integer numOfExceedLoadLevelThr) {
-    this.numOfExceedLoadLevelThr = numOfExceedLoadLevelThr;
-    return this;
-  }
+	public void setResUsage(ResourceUsage resUsage) {
+		this.resUsage = resUsage;
+	}
 
-  /**
-   * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
-   * minimum: 0
-   * @return numOfExceedLoadLevelThr
-   **/
-  @Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
-  
-  @Min(0)  public Integer getNumOfExceedLoadLevelThr() {
-    return numOfExceedLoadLevelThr;
-  }
+	public NsiLoadLevelInfo numOfExceedLoadLevelThr(Integer numOfExceedLoadLevelThr) {
+		this.numOfExceedLoadLevelThr = numOfExceedLoadLevelThr;
+		return this;
+	}
 
-  public void setNumOfExceedLoadLevelThr(Integer numOfExceedLoadLevelThr) {
-    this.numOfExceedLoadLevelThr = numOfExceedLoadLevelThr;
-  }
+	/**
+	 * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
+	 * minimum: 0
+	 * 
+	 * @return numOfExceedLoadLevelThr
+	 **/
+	@Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
 
-  public NsiLoadLevelInfo exceedLoadLevelThrInd(Boolean exceedLoadLevelThrInd) {
-    this.exceedLoadLevelThrInd = exceedLoadLevelThrInd;
-    return this;
-  }
+	@Min(0)
+	public Integer getNumOfExceedLoadLevelThr() {
+		return numOfExceedLoadLevelThr;
+	}
 
-  /**
-   * Get exceedLoadLevelThrInd
-   * @return exceedLoadLevelThrInd
-   **/
-  @Schema(description = "")
-  
-    public Boolean isExceedLoadLevelThrInd() {
-    return exceedLoadLevelThrInd;
-  }
+	public void setNumOfExceedLoadLevelThr(Integer numOfExceedLoadLevelThr) {
+		this.numOfExceedLoadLevelThr = numOfExceedLoadLevelThr;
+	}
 
-  public void setExceedLoadLevelThrInd(Boolean exceedLoadLevelThrInd) {
-    this.exceedLoadLevelThrInd = exceedLoadLevelThrInd;
-  }
+	public NsiLoadLevelInfo exceedLoadLevelThrInd(Boolean exceedLoadLevelThrInd) {
+		this.exceedLoadLevelThrInd = exceedLoadLevelThrInd;
+		return this;
+	}
 
-  public NsiLoadLevelInfo networkArea(NetworkAreaInfo networkArea) {
-    this.networkArea = networkArea;
-    return this;
-  }
+	/**
+	 * Get exceedLoadLevelThrInd
+	 * 
+	 * @return exceedLoadLevelThrInd
+	 **/
+	@Schema(description = "")
 
-  /**
-   * Get networkArea
-   * @return networkArea
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public NetworkAreaInfo getNetworkArea() {
-    return networkArea;
-  }
+	public Boolean isExceedLoadLevelThrInd() {
+		return exceedLoadLevelThrInd;
+	}
 
-  public void setNetworkArea(NetworkAreaInfo networkArea) {
-    this.networkArea = networkArea;
-  }
+	public void setExceedLoadLevelThrInd(Boolean exceedLoadLevelThrInd) {
+		this.exceedLoadLevelThrInd = exceedLoadLevelThrInd;
+	}
 
-  public NsiLoadLevelInfo timePeriod(TimeWindow timePeriod) {
-    this.timePeriod = timePeriod;
-    return this;
-  }
+	public NsiLoadLevelInfo networkArea(NetworkAreaInfo networkArea) {
+		this.networkArea = networkArea;
+		return this;
+	}
 
-  /**
-   * Get timePeriod
-   * @return timePeriod
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public TimeWindow getTimePeriod() {
-    return timePeriod;
-  }
+	/**
+	 * Get networkArea
+	 * 
+	 * @return networkArea
+	 **/
+	@Schema(description = "")
 
-  public void setTimePeriod(TimeWindow timePeriod) {
-    this.timePeriod = timePeriod;
-  }
+	@Valid
+	public NetworkAreaInfo getNetworkArea() {
+		return networkArea;
+	}
 
-  public NsiLoadLevelInfo resUsgThrCrossTimePeriod(List<TimeWindow> resUsgThrCrossTimePeriod) {
-    this.resUsgThrCrossTimePeriod = resUsgThrCrossTimePeriod;
-    return this;
-  }
+	public void setNetworkArea(NetworkAreaInfo networkArea) {
+		this.networkArea = networkArea;
+	}
 
-  public NsiLoadLevelInfo addResUsgThrCrossTimePeriodItem(TimeWindow resUsgThrCrossTimePeriodItem) {
-    if (this.resUsgThrCrossTimePeriod == null) {
-      this.resUsgThrCrossTimePeriod = new ArrayList<TimeWindow>();
-    }
-    this.resUsgThrCrossTimePeriod.add(resUsgThrCrossTimePeriodItem);
-    return this;
-  }
+	public NsiLoadLevelInfo timePeriod(TimeWindow timePeriod) {
+		this.timePeriod = timePeriod;
+		return this;
+	}
 
-  /**
-   * Each element indicates the time elapsed between times each threshold is met or exceeded or crossed. 
-   * @return resUsgThrCrossTimePeriod
-   **/
-  @Schema(description = "Each element indicates the time elapsed between times each threshold is met or exceeded or crossed. ")
-      @Valid
-  @Size(min=1)   public List<TimeWindow> getResUsgThrCrossTimePeriod() {
-    return resUsgThrCrossTimePeriod;
-  }
+	/**
+	 * Get timePeriod
+	 * 
+	 * @return timePeriod
+	 **/
+	@Schema(description = "")
 
-  public void setResUsgThrCrossTimePeriod(List<TimeWindow> resUsgThrCrossTimePeriod) {
-    this.resUsgThrCrossTimePeriod = resUsgThrCrossTimePeriod;
-  }
+	@Valid
+	public TimeWindow getTimePeriod() {
+		return timePeriod;
+	}
 
-  public NsiLoadLevelInfo numOfUes(NumberAverage numOfUes) {
-    this.numOfUes = numOfUes;
-    return this;
-  }
+	public void setTimePeriod(TimeWindow timePeriod) {
+		this.timePeriod = timePeriod;
+	}
 
-  /**
-   * Get numOfUes
-   * @return numOfUes
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public NumberAverage getNumOfUes() {
-    return numOfUes;
-  }
+	public NsiLoadLevelInfo resUsgThrCrossTimePeriod(List<TimeWindow> resUsgThrCrossTimePeriod) {
+		this.resUsgThrCrossTimePeriod = resUsgThrCrossTimePeriod;
+		return this;
+	}
 
-  public void setNumOfUes(NumberAverage numOfUes) {
-    this.numOfUes = numOfUes;
-  }
+	public NsiLoadLevelInfo addResUsgThrCrossTimePeriodItem(TimeWindow resUsgThrCrossTimePeriodItem) {
+		if (this.resUsgThrCrossTimePeriod == null) {
+			this.resUsgThrCrossTimePeriod = new ArrayList<TimeWindow>();
+		}
+		this.resUsgThrCrossTimePeriod.add(resUsgThrCrossTimePeriodItem);
+		return this;
+	}
 
-  public NsiLoadLevelInfo numOfPduSess(NumberAverage numOfPduSess) {
-    this.numOfPduSess = numOfPduSess;
-    return this;
-  }
+	/**
+	 * Each element indicates the time elapsed between times each threshold is met
+	 * or exceeded or crossed.
+	 * 
+	 * @return resUsgThrCrossTimePeriod
+	 **/
+	@Schema(description = "Each element indicates the time elapsed between times each threshold is met or exceeded or crossed. ")
+	@Valid
+	@Size(min = 1)
+	public List<TimeWindow> getResUsgThrCrossTimePeriod() {
+		return resUsgThrCrossTimePeriod;
+	}
 
-  /**
-   * Get numOfPduSess
-   * @return numOfPduSess
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public NumberAverage getNumOfPduSess() {
-    return numOfPduSess;
-  }
+	public void setResUsgThrCrossTimePeriod(List<TimeWindow> resUsgThrCrossTimePeriod) {
+		this.resUsgThrCrossTimePeriod = resUsgThrCrossTimePeriod;
+	}
 
-  public void setNumOfPduSess(NumberAverage numOfPduSess) {
-    this.numOfPduSess = numOfPduSess;
-  }
+	public NsiLoadLevelInfo numOfUes(NumberAverage numOfUes) {
+		this.numOfUes = numOfUes;
+		return this;
+	}
 
-  public NsiLoadLevelInfo confidence(Integer confidence) {
-    this.confidence = confidence;
-    return this;
-  }
+	/**
+	 * Get numOfUes
+	 * 
+	 * @return numOfUes
+	 **/
+	@Schema(description = "")
 
-  /**
-   * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
-   * minimum: 0
-   * @return confidence
-   **/
-  @Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
-  
-  @Min(0)  public Integer getConfidence() {
-    return confidence;
-  }
+	@Valid
+	public NumberAverage getNumOfUes() {
+		return numOfUes;
+	}
 
-  public void setConfidence(Integer confidence) {
-    this.confidence = confidence;
-  }
+	public void setNumOfUes(NumberAverage numOfUes) {
+		this.numOfUes = numOfUes;
+	}
 
+	public NsiLoadLevelInfo numOfPduSess(NumberAverage numOfPduSess) {
+		this.numOfPduSess = numOfPduSess;
+		return this;
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    NsiLoadLevelInfo nsiLoadLevelInfo = (NsiLoadLevelInfo) o;
-    return Objects.equals(this.loadLevelInformation, nsiLoadLevelInfo.loadLevelInformation) &&
-        Objects.equals(this.snssai, nsiLoadLevelInfo.snssai) &&
-        Objects.equals(this.nsiId, nsiLoadLevelInfo.nsiId) &&
-        Objects.equals(this.resUsage, nsiLoadLevelInfo.resUsage) &&
-        Objects.equals(this.numOfExceedLoadLevelThr, nsiLoadLevelInfo.numOfExceedLoadLevelThr) &&
-        Objects.equals(this.exceedLoadLevelThrInd, nsiLoadLevelInfo.exceedLoadLevelThrInd) &&
-        Objects.equals(this.networkArea, nsiLoadLevelInfo.networkArea) &&
-        Objects.equals(this.timePeriod, nsiLoadLevelInfo.timePeriod) &&
-        Objects.equals(this.resUsgThrCrossTimePeriod, nsiLoadLevelInfo.resUsgThrCrossTimePeriod) &&
-        Objects.equals(this.numOfUes, nsiLoadLevelInfo.numOfUes) &&
-        Objects.equals(this.numOfPduSess, nsiLoadLevelInfo.numOfPduSess) &&
-        Objects.equals(this.confidence, nsiLoadLevelInfo.confidence);
-  }
+	/**
+	 * Get numOfPduSess
+	 * 
+	 * @return numOfPduSess
+	 **/
+	@Schema(description = "")
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(loadLevelInformation, snssai, nsiId, resUsage, numOfExceedLoadLevelThr, exceedLoadLevelThrInd, networkArea, timePeriod, resUsgThrCrossTimePeriod, numOfUes, numOfPduSess, confidence);
-  }
+	@Valid
+	public NumberAverage getNumOfPduSess() {
+		return numOfPduSess;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class NsiLoadLevelInfo {\n");
-    
-    sb.append("    loadLevelInformation: ").append(toIndentedString(loadLevelInformation)).append("\n");
-    sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
-    sb.append("    nsiId: ").append(toIndentedString(nsiId)).append("\n");
-    sb.append("    resUsage: ").append(toIndentedString(resUsage)).append("\n");
-    sb.append("    numOfExceedLoadLevelThr: ").append(toIndentedString(numOfExceedLoadLevelThr)).append("\n");
-    sb.append("    exceedLoadLevelThrInd: ").append(toIndentedString(exceedLoadLevelThrInd)).append("\n");
-    sb.append("    networkArea: ").append(toIndentedString(networkArea)).append("\n");
-    sb.append("    timePeriod: ").append(toIndentedString(timePeriod)).append("\n");
-    sb.append("    resUsgThrCrossTimePeriod: ").append(toIndentedString(resUsgThrCrossTimePeriod)).append("\n");
-    sb.append("    numOfUes: ").append(toIndentedString(numOfUes)).append("\n");
-    sb.append("    numOfPduSess: ").append(toIndentedString(numOfPduSess)).append("\n");
-    sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	public void setNumOfPduSess(NumberAverage numOfPduSess) {
+		this.numOfPduSess = numOfPduSess;
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	public NsiLoadLevelInfo confidence(Integer confidence) {
+		this.confidence = confidence;
+		return this;
+	}
+
+	/**
+	 * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
+	 * minimum: 0
+	 * 
+	 * @return confidence
+	 **/
+	@Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
+
+	@Min(0)
+	public Integer getConfidence() {
+		return confidence;
+	}
+
+	public void setConfidence(Integer confidence) {
+		this.confidence = confidence;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		NsiLoadLevelInfo nsiLoadLevelInfo = (NsiLoadLevelInfo) o;
+		return Objects.equals(this.loadLevelInformation, nsiLoadLevelInfo.loadLevelInformation) &&
+				Objects.equals(this.snssai, nsiLoadLevelInfo.snssai) &&
+				Objects.equals(this.nsiId, nsiLoadLevelInfo.nsiId) &&
+				Objects.equals(this.resUsage, nsiLoadLevelInfo.resUsage) &&
+				Objects.equals(this.numOfExceedLoadLevelThr, nsiLoadLevelInfo.numOfExceedLoadLevelThr) &&
+				Objects.equals(this.exceedLoadLevelThrInd, nsiLoadLevelInfo.exceedLoadLevelThrInd) &&
+				Objects.equals(this.networkArea, nsiLoadLevelInfo.networkArea) &&
+				Objects.equals(this.timePeriod, nsiLoadLevelInfo.timePeriod) &&
+				Objects.equals(this.resUsgThrCrossTimePeriod, nsiLoadLevelInfo.resUsgThrCrossTimePeriod) &&
+				Objects.equals(this.numOfUes, nsiLoadLevelInfo.numOfUes) &&
+				Objects.equals(this.numOfPduSess, nsiLoadLevelInfo.numOfPduSess) &&
+				Objects.equals(this.confidence, nsiLoadLevelInfo.confidence);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(loadLevelInformation, snssai, nsiId, resUsage, numOfExceedLoadLevelThr,
+				exceedLoadLevelThrInd, networkArea, timePeriod, resUsgThrCrossTimePeriod, numOfUes, numOfPduSess,
+				confidence);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class NsiLoadLevelInfo {\n");
+
+		sb.append("    loadLevelInformation: ").append(toIndentedString(loadLevelInformation)).append("\n");
+		sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
+		sb.append("    nsiId: ").append(toIndentedString(nsiId)).append("\n");
+		sb.append("    resUsage: ").append(toIndentedString(resUsage)).append("\n");
+		sb.append("    numOfExceedLoadLevelThr: ").append(toIndentedString(numOfExceedLoadLevelThr)).append("\n");
+		sb.append("    exceedLoadLevelThrInd: ").append(toIndentedString(exceedLoadLevelThrInd)).append("\n");
+		sb.append("    networkArea: ").append(toIndentedString(networkArea)).append("\n");
+		sb.append("    timePeriod: ").append(toIndentedString(timePeriod)).append("\n");
+		sb.append("    resUsgThrCrossTimePeriod: ").append(toIndentedString(resUsgThrCrossTimePeriod)).append("\n");
+		sb.append("    numOfUes: ").append(toIndentedString(numOfUes)).append("\n");
+		sb.append("    numOfPduSess: ").append(toIndentedString(numOfPduSess)).append("\n");
+		sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

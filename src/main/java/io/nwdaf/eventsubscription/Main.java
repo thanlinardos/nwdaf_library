@@ -1,20 +1,33 @@
 package io.nwdaf.eventsubscription;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.UUID;
 
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import io.nwdaf.eventsubscription.customModel.DiscoverMessage;
-import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
+import io.nwdaf.eventsubscription.model.NfLoadLevelInformation;
+import io.nwdaf.eventsubscription.model.Snssai;
 
 public class Main {
     public static void main(String args[]) throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        DiscoverMessage msg = DiscoverMessage.builder().availableOffset(12).requestedEvent(NwdafEventEnum.NF_LOAD).availableOffset(1).expectedWaitTime(12).hasData(true).requestedOffset(12).build();
-        String msg_str = msg.toString();
-        DiscoverMessage originalMsg = objectMapper.reader().readValue(msg_str,DiscoverMessage.class);
-        System.out.println(originalMsg.toString());
+        NfLoadLevelInformation nfLoadLevelInformation = new NfLoadLevelInformation()
+                .nfInstanceId(UUID.randomUUID())
+                .nfSetId("setxyz")
+                .confidence(100)
+                .nfCpuUsage(23)
+                .snssai(new Snssai().sd("sd").sst(12));
+        System.out.println();
+        System.out.println(nfLoadLevelInformation.toMap());
+        System.out.println();
+        System.out.println(objectMapper.convertValue(nfLoadLevelInformation,new TypeReference<Map<String, Object>>() {}));
+        System.out.println();System.out.println();
+        System.out.println(objectMapper.readValue((new JSONObject(nfLoadLevelInformation.toMap())).toString(),NfLoadLevelInformation.class));
     }
 }

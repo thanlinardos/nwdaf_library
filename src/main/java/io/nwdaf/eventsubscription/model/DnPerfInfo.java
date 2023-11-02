@@ -23,177 +23,183 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class DnPerfInfo {
+	@JsonProperty("appId")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String appId = null;
 
-public class DnPerfInfo   {
-  @JsonProperty("appId")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String appId
- = null;
+	@JsonProperty("dnn")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String dnn = null;
 
-  @JsonProperty("dnn")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String dnn
- = null;
+	@JsonProperty("snssai")
+	private Snssai snssai = null;
 
-  @JsonProperty("snssai")
-  private Snssai snssai = null;
+	@JsonProperty("dnPerf")
+	@Valid
+	private List<DnPerf> dnPerf = new ArrayList<DnPerf>();
 
-  @JsonProperty("dnPerf")
-  @Valid
-  private List<DnPerf> dnPerf = new ArrayList<DnPerf>();
+	@JsonProperty("confidence")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer confidence = null;
 
-  @JsonProperty("confidence")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer confidence
- = null;
+	public DnPerfInfo appId(String appId) {
+		this.appId = appId;
+		return this;
+	}
 
-  public DnPerfInfo appId(String appId) {
-    this.appId = appId;
-    return this;
-  }
+	/**
+	 * String providing an application identifier.
+	 * 
+	 * @return appId
+	 **/
+	@Schema(description = "String providing an application identifier.")
 
-  /**
-   * String providing an application identifier.
-   * @return appId
-   **/
-  @Schema(description = "String providing an application identifier.")
-  
-    public String getAppId() {
-    return appId;
-  }
+	public String getAppId() {
+		return appId;
+	}
 
-  public void setAppId(String appId) {
-    this.appId = appId;
-  }
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
 
-  public DnPerfInfo dnn(String dnn) {
-    this.dnn = dnn;
-    return this;
-  }
+	public DnPerfInfo dnn(String dnn) {
+		this.dnn = dnn;
+		return this;
+	}
 
-  /**
-   * String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\"). 
-   * @return dnn
-   **/
-  @Schema(description = "String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\"). ")
-  
-    public String getDnn() {
-    return dnn;
-  }
+	/**
+	 * String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;
+	 * it shall contain either a DNN Network Identifier, or a full DNN with both the
+	 * Network Identifier and Operator Identifier, as specified in 3GPP TS 23.003
+	 * clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are
+	 * separated by dots (e.g. \"Label1.Label2.Label3\").
+	 * 
+	 * @return dnn
+	 **/
+	@Schema(description = "String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\"). ")
 
-  public void setDnn(String dnn) {
-    this.dnn = dnn;
-  }
+	public String getDnn() {
+		return dnn;
+	}
 
-  public DnPerfInfo snssai(Snssai snssai) {
-    this.snssai = snssai;
-    return this;
-  }
+	public void setDnn(String dnn) {
+		this.dnn = dnn;
+	}
 
-  /**
-   * Get snssai
-   * @return snssai
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public Snssai getSnssai() {
-    return snssai;
-  }
+	public DnPerfInfo snssai(Snssai snssai) {
+		this.snssai = snssai;
+		return this;
+	}
 
-  public void setSnssai(Snssai snssai) {
-    this.snssai = snssai;
-  }
+	/**
+	 * Get snssai
+	 * 
+	 * @return snssai
+	 **/
+	@Schema(description = "")
 
-  public DnPerfInfo dnPerf(List<DnPerf> dnPerf) {
-    this.dnPerf = dnPerf;
-    return this;
-  }
+	@Valid
+	public Snssai getSnssai() {
+		return snssai;
+	}
 
-  public DnPerfInfo addDnPerfItem(DnPerf dnPerfItem) {
-    this.dnPerf.add(dnPerfItem);
-    return this;
-  }
+	public void setSnssai(Snssai snssai) {
+		this.snssai = snssai;
+	}
 
-  /**
-   * Get dnPerf
-   * @return dnPerf
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
-    @Valid
-  @Size(min=1)   public List<DnPerf> getDnPerf() {
-    return dnPerf;
-  }
+	public DnPerfInfo dnPerf(List<DnPerf> dnPerf) {
+		this.dnPerf = dnPerf;
+		return this;
+	}
 
-  public void setDnPerf(List<DnPerf> dnPerf) {
-    this.dnPerf = dnPerf;
-  }
+	public DnPerfInfo addDnPerfItem(DnPerf dnPerfItem) {
+		this.dnPerf.add(dnPerfItem);
+		return this;
+	}
 
-  public DnPerfInfo confidence(Integer confidence) {
-    this.confidence = confidence;
-    return this;
-  }
+	/**
+	 * Get dnPerf
+	 * 
+	 * @return dnPerf
+	 **/
+	@Schema(required = true, description = "")
+	@NotNull
+	@Valid
+	@Size(min = 1)
+	public List<DnPerf> getDnPerf() {
+		return dnPerf;
+	}
 
-  /**
-   * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
-   * minimum: 0
-   * @return confidence
-   **/
-  @Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
-  
-  @Min(0)  public Integer getConfidence() {
-    return confidence;
-  }
+	public void setDnPerf(List<DnPerf> dnPerf) {
+		this.dnPerf = dnPerf;
+	}
 
-  public void setConfidence(Integer confidence) {
-    this.confidence = confidence;
-  }
+	public DnPerfInfo confidence(Integer confidence) {
+		this.confidence = confidence;
+		return this;
+	}
 
+	/**
+	 * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
+	 * minimum: 0
+	 * 
+	 * @return confidence
+	 **/
+	@Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    DnPerfInfo dnPerfInfo = (DnPerfInfo) o;
-    return Objects.equals(this.appId, dnPerfInfo.appId) &&
-        Objects.equals(this.dnn, dnPerfInfo.dnn) &&
-        Objects.equals(this.snssai, dnPerfInfo.snssai) &&
-        Objects.equals(this.dnPerf, dnPerfInfo.dnPerf) &&
-        Objects.equals(this.confidence, dnPerfInfo.confidence);
-  }
+	@Min(0)
+	public Integer getConfidence() {
+		return confidence;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(appId, dnn, snssai, dnPerf, confidence);
-  }
+	public void setConfidence(Integer confidence) {
+		this.confidence = confidence;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class DnPerfInfo {\n");
-    
-    sb.append("    appId: ").append(toIndentedString(appId)).append("\n");
-    sb.append("    dnn: ").append(toIndentedString(dnn)).append("\n");
-    sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
-    sb.append("    dnPerf: ").append(toIndentedString(dnPerf)).append("\n");
-    sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		DnPerfInfo dnPerfInfo = (DnPerfInfo) o;
+		return Objects.equals(this.appId, dnPerfInfo.appId) &&
+				Objects.equals(this.dnn, dnPerfInfo.dnn) &&
+				Objects.equals(this.snssai, dnPerfInfo.snssai) &&
+				Objects.equals(this.dnPerf, dnPerfInfo.dnPerf) &&
+				Objects.equals(this.confidence, dnPerfInfo.confidence);
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(appId, dnn, snssai, dnPerf, confidence);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class DnPerfInfo {\n");
+
+		sb.append("    appId: ").append(toIndentedString(appId)).append("\n");
+		sb.append("    dnn: ").append(toIndentedString(dnn)).append("\n");
+		sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
+		sb.append("    dnPerf: ").append(toIndentedString(dnPerf)).append("\n");
+		sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

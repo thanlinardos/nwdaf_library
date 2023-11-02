@@ -12,104 +12,110 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.*;
 
 /**
- * When PlmnId needs to be converted to string (e.g. when used in maps as key), the string  shall be composed of three digits \&quot;mcc\&quot; followed by \&quot;-\&quot; and two or three digits \&quot;mnc\&quot;. 
+ * When PlmnId needs to be converted to string (e.g. when used in maps as key),
+ * the string shall be composed of three digits \&quot;mcc\&quot; followed by
+ * \&quot;-\&quot; and two or three digits \&quot;mnc\&quot;.
  */
 @Schema(description = "When PlmnId needs to be converted to string (e.g. when used in maps as key), the string  shall be composed of three digits \"mcc\" followed by \"-\" and two or three digits \"mnc\". ")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class PlmnId {
+	@JsonProperty("mcc")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String mcc = null;
 
-public class PlmnId   {
-  @JsonProperty("mcc")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String mcc = null;
+	@JsonProperty("mnc")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String mnc = null;
 
-  @JsonProperty("mnc")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String mnc = null;
+	public PlmnId mcc(String mcc) {
+		this.mcc = ConvertUtil.convertEmptyStringToNull(mcc);
+		return this;
+	}
 
-  public PlmnId mcc(String mcc) {
-    this.mcc = ConvertUtil.convertEmptyStringToNull(mcc);
-    return this;
-  }
+	/**
+	 * Mobile Country Code part of the PLMN, comprising 3 digits, as defined in
+	 * clause 9.3.3.5 of 3GPP TS 38.413.
+	 * 
+	 * @return mcc
+	 **/
+	@Schema(required = true, description = "Mobile Country Code part of the PLMN, comprising 3 digits, as defined in clause 9.3.3.5 of 3GPP TS 38.413.  ")
+	@NotNull
 
-  /**
-   * Mobile Country Code part of the PLMN, comprising 3 digits, as defined in clause 9.3.3.5 of 3GPP TS 38.413.  
-   * @return mcc
-   **/
-  @Schema(required = true, description = "Mobile Country Code part of the PLMN, comprising 3 digits, as defined in clause 9.3.3.5 of 3GPP TS 38.413.  ")
-      @NotNull
+	@Pattern(regexp = "^\\d{3}$")
+	public String getMcc() {
+		return mcc;
+	}
 
-  @Pattern(regexp="^\\d{3}$")   public String getMcc() {
-    return mcc;
-  }
+	public void setMcc(String mcc) {
+		this.mcc = ConvertUtil.convertEmptyStringToNull(mcc);
+	}
 
-  public void setMcc(String mcc) {
-    this.mcc = ConvertUtil.convertEmptyStringToNull(mcc);
-  }
+	public PlmnId mnc(String mnc) {
+		this.mnc = ConvertUtil.convertEmptyStringToNull(mnc);
+		return this;
+	}
 
-  public PlmnId mnc(String mnc) {
-    this.mnc = ConvertUtil.convertEmptyStringToNull(mnc);
-    return this;
-  }
+	/**
+	 * Mobile Network Code part of the PLMN, comprising 2 or 3 digits, as defined in
+	 * clause 9.3.3.5 of 3GPP TS 38.413.
+	 * 
+	 * @return mnc
+	 **/
+	@Schema(required = true, description = "Mobile Network Code part of the PLMN, comprising 2 or 3 digits, as defined in clause 9.3.3.5 of 3GPP TS 38.413.")
+	@NotNull
 
-  /**
-   * Mobile Network Code part of the PLMN, comprising 2 or 3 digits, as defined in clause 9.3.3.5 of 3GPP TS 38.413.
-   * @return mnc
-   **/
-  @Schema(required = true, description = "Mobile Network Code part of the PLMN, comprising 2 or 3 digits, as defined in clause 9.3.3.5 of 3GPP TS 38.413.")
-      @NotNull
+	@Pattern(regexp = "^\\d{2,3}$")
+	public String getMnc() {
+		return mnc;
+	}
 
-  @Pattern(regexp="^\\d{2,3}$")   public String getMnc() {
-    return mnc;
-  }
+	public void setMnc(String mnc) {
+		this.mnc = ConvertUtil.convertEmptyStringToNull(mnc);
+	}
 
-  public void setMnc(String mnc) {
-    this.mnc = ConvertUtil.convertEmptyStringToNull(mnc);
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		PlmnId plmnId = (PlmnId) o;
+		return CheckUtil.safeCheckObjectsEquals(this.mcc, plmnId.mcc) &&
+				CheckUtil.safeCheckObjectsEquals(this.mnc, plmnId.mnc);
+	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(mcc, mnc);
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PlmnId plmnId = (PlmnId) o;
-    return CheckUtil.safeCheckObjectsEquals(this.mcc, plmnId.mcc) &&
-           CheckUtil.safeCheckObjectsEquals(this.mnc, plmnId.mnc);
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class PlmnId {\n");
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(mcc, mnc);
-  }
+		sb.append("    mcc: ").append(toIndentedString(mcc)).append("\n");
+		sb.append("    mnc: ").append(toIndentedString(mnc)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PlmnId {\n");
-    
-    sb.append("    mcc: ").append(toIndentedString(mcc)).append("\n");
-    sb.append("    mnc: ").append(toIndentedString(mnc)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
-
-  public String toFormattedString(){
-    return "mcc"+this.mcc+".mnc"+this.mnc;
-  }
+	public String toFormattedString() {
+		return "mcc" + this.mcc + ".mnc" + this.mnc;
+	}
 }

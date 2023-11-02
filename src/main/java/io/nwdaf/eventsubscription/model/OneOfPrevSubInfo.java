@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfPrevSubInfo
-*/
+ * OneOfPrevSubInfo
+ */
 
 public interface OneOfPrevSubInfo {
 

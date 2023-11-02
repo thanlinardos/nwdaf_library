@@ -13,262 +13,272 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * Represents the observed redundant transmission experience related information.
+ * Represents the observed redundant transmission experience related
+ * information.
  */
 @Schema(description = "Represents the observed redundant transmission experience related information.")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class ObservedRedundantTransExp {
+	@JsonProperty("avgPktDropRateUl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer avgPktDropRateUl = null;
 
-public class ObservedRedundantTransExp   {
-  @JsonProperty("avgPktDropRateUl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer avgPktDropRateUl
- = null;
+	@JsonProperty("varPktDropRateUl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Float varPktDropRateUl = null;
 
-  @JsonProperty("varPktDropRateUl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float varPktDropRateUl
- = null;
+	@JsonProperty("avgPktDropRateDl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer avgPktDropRateDl = null;
 
-  @JsonProperty("avgPktDropRateDl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer avgPktDropRateDl
- = null;
+	@JsonProperty("varPktDropRateDl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Float varPktDropRateDl = null;
 
-  @JsonProperty("varPktDropRateDl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float varPktDropRateDl
- = null;
+	@JsonProperty("avgPktDelayUl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer avgPktDelayUl = null;
 
-  @JsonProperty("avgPktDelayUl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer avgPktDelayUl
- = null;
+	@JsonProperty("varPktDelayUl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Float varPktDelayUl = null;
 
-  @JsonProperty("varPktDelayUl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float varPktDelayUl
- = null;
+	@JsonProperty("avgPktDelayDl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer avgPktDelayDl = null;
 
-  @JsonProperty("avgPktDelayDl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer avgPktDelayDl
- = null;
+	@JsonProperty("varPktDelayDl")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Float varPktDelayDl = null;
 
-  @JsonProperty("varPktDelayDl")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float varPktDelayDl
- = null;
+	public ObservedRedundantTransExp avgPktDropRateUl(Integer avgPktDropRateUl) {
+		this.avgPktDropRateUl = avgPktDropRateUl;
+		return this;
+	}
 
-  public ObservedRedundantTransExp avgPktDropRateUl(Integer avgPktDropRateUl) {
-    this.avgPktDropRateUl = avgPktDropRateUl;
-    return this;
-  }
+	/**
+	 * Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4
+	 * of 3GPP TS 23.501), expressed in tenth of percent.
+	 * minimum: 0
+	 * maximum: 1000
+	 * 
+	 * @return avgPktDropRateUl
+	 **/
+	@Schema(description = "Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4 of 3GPP TS 23.501), expressed in tenth of percent. ")
 
-  /**
-   * Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4 of 3GPP TS 23.501), expressed in tenth of percent. 
-   * minimum: 0
-   * maximum: 1000
-   * @return avgPktDropRateUl
-   **/
-  @Schema(description = "Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4 of 3GPP TS 23.501), expressed in tenth of percent. ")
-  
-  @Min(0) @Max(1000)   public Integer getAvgPktDropRateUl() {
-    return avgPktDropRateUl;
-  }
+	@Min(0)
+	@Max(1000)
+	public Integer getAvgPktDropRateUl() {
+		return avgPktDropRateUl;
+	}
 
-  public void setAvgPktDropRateUl(Integer avgPktDropRateUl) {
-    this.avgPktDropRateUl = avgPktDropRateUl;
-  }
+	public void setAvgPktDropRateUl(Integer avgPktDropRateUl) {
+		this.avgPktDropRateUl = avgPktDropRateUl;
+	}
 
-  public ObservedRedundantTransExp varPktDropRateUl(Float varPktDropRateUl) {
-    this.varPktDropRateUl = varPktDropRateUl;
-    return this;
-  }
+	public ObservedRedundantTransExp varPktDropRateUl(Float varPktDropRateUl) {
+		this.varPktDropRateUl = varPktDropRateUl;
+		return this;
+	}
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return varPktDropRateUl
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
-    public Float getVarPktDropRateUl() {
-    return varPktDropRateUl;
-  }
+	/**
+	 * string with format 'float' as defined in OpenAPI.
+	 * 
+	 * @return varPktDropRateUl
+	 **/
+	@Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-  public void setVarPktDropRateUl(Float varPktDropRateUl) {
-    this.varPktDropRateUl = varPktDropRateUl;
-  }
+	public Float getVarPktDropRateUl() {
+		return varPktDropRateUl;
+	}
 
-  public ObservedRedundantTransExp avgPktDropRateDl(Integer avgPktDropRateDl) {
-    this.avgPktDropRateDl = avgPktDropRateDl;
-    return this;
-  }
+	public void setVarPktDropRateUl(Float varPktDropRateUl) {
+		this.varPktDropRateUl = varPktDropRateUl;
+	}
 
-  /**
-   * Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4 of 3GPP TS 23.501), expressed in tenth of percent. 
-   * minimum: 0
-   * maximum: 1000
-   * @return avgPktDropRateDl
-   **/
-  @Schema(description = "Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4 of 3GPP TS 23.501), expressed in tenth of percent. ")
-  
-  @Min(0) @Max(1000)   public Integer getAvgPktDropRateDl() {
-    return avgPktDropRateDl;
-  }
+	public ObservedRedundantTransExp avgPktDropRateDl(Integer avgPktDropRateDl) {
+		this.avgPktDropRateDl = avgPktDropRateDl;
+		return this;
+	}
 
-  public void setAvgPktDropRateDl(Integer avgPktDropRateDl) {
-    this.avgPktDropRateDl = avgPktDropRateDl;
-  }
+	/**
+	 * Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4
+	 * of 3GPP TS 23.501), expressed in tenth of percent.
+	 * minimum: 0
+	 * maximum: 1000
+	 * 
+	 * @return avgPktDropRateDl
+	 **/
+	@Schema(description = "Unsigned integer indicating Packet Loss Rate (see clauses 5.7.2.8 and 5.7.4 of 3GPP TS 23.501), expressed in tenth of percent. ")
 
-  public ObservedRedundantTransExp varPktDropRateDl(Float varPktDropRateDl) {
-    this.varPktDropRateDl = varPktDropRateDl;
-    return this;
-  }
+	@Min(0)
+	@Max(1000)
+	public Integer getAvgPktDropRateDl() {
+		return avgPktDropRateDl;
+	}
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return varPktDropRateDl
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
-    public Float getVarPktDropRateDl() {
-    return varPktDropRateDl;
-  }
+	public void setAvgPktDropRateDl(Integer avgPktDropRateDl) {
+		this.avgPktDropRateDl = avgPktDropRateDl;
+	}
 
-  public void setVarPktDropRateDl(Float varPktDropRateDl) {
-    this.varPktDropRateDl = varPktDropRateDl;
-  }
+	public ObservedRedundantTransExp varPktDropRateDl(Float varPktDropRateDl) {
+		this.varPktDropRateDl = varPktDropRateDl;
+		return this;
+	}
 
-  public ObservedRedundantTransExp avgPktDelayUl(Integer avgPktDelayUl) {
-    this.avgPktDelayUl = avgPktDelayUl;
-    return this;
-  }
+	/**
+	 * string with format 'float' as defined in OpenAPI.
+	 * 
+	 * @return varPktDropRateDl
+	 **/
+	@Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-  /**
-   * Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and 5.7.4 of 3GPP TS 23.501), expressed in milliseconds. 
-   * minimum: 1
-   * @return avgPktDelayUl
-   **/
-  @Schema(description = "Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and 5.7.4 of 3GPP TS 23.501), expressed in milliseconds. ")
-  
-  @Min(1)  public Integer getAvgPktDelayUl() {
-    return avgPktDelayUl;
-  }
+	public Float getVarPktDropRateDl() {
+		return varPktDropRateDl;
+	}
 
-  public void setAvgPktDelayUl(Integer avgPktDelayUl) {
-    this.avgPktDelayUl = avgPktDelayUl;
-  }
+	public void setVarPktDropRateDl(Float varPktDropRateDl) {
+		this.varPktDropRateDl = varPktDropRateDl;
+	}
 
-  public ObservedRedundantTransExp varPktDelayUl(Float varPktDelayUl) {
-    this.varPktDelayUl = varPktDelayUl;
-    return this;
-  }
+	public ObservedRedundantTransExp avgPktDelayUl(Integer avgPktDelayUl) {
+		this.avgPktDelayUl = avgPktDelayUl;
+		return this;
+	}
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return varPktDelayUl
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
-    public Float getVarPktDelayUl() {
-    return varPktDelayUl;
-  }
+	/**
+	 * Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and
+	 * 5.7.4 of 3GPP TS 23.501), expressed in milliseconds.
+	 * minimum: 1
+	 * 
+	 * @return avgPktDelayUl
+	 **/
+	@Schema(description = "Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and 5.7.4 of 3GPP TS 23.501), expressed in milliseconds. ")
 
-  public void setVarPktDelayUl(Float varPktDelayUl) {
-    this.varPktDelayUl = varPktDelayUl;
-  }
+	@Min(1)
+	public Integer getAvgPktDelayUl() {
+		return avgPktDelayUl;
+	}
 
-  public ObservedRedundantTransExp avgPktDelayDl(Integer avgPktDelayDl) {
-    this.avgPktDelayDl = avgPktDelayDl;
-    return this;
-  }
+	public void setAvgPktDelayUl(Integer avgPktDelayUl) {
+		this.avgPktDelayUl = avgPktDelayUl;
+	}
 
-  /**
-   * Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and 5.7.4 of 3GPP TS 23.501), expressed in milliseconds. 
-   * minimum: 1
-   * @return avgPktDelayDl
-   **/
-  @Schema(description = "Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and 5.7.4 of 3GPP TS 23.501), expressed in milliseconds. ")
-  
-  @Min(1)  public Integer getAvgPktDelayDl() {
-    return avgPktDelayDl;
-  }
+	public ObservedRedundantTransExp varPktDelayUl(Float varPktDelayUl) {
+		this.varPktDelayUl = varPktDelayUl;
+		return this;
+	}
 
-  public void setAvgPktDelayDl(Integer avgPktDelayDl) {
-    this.avgPktDelayDl = avgPktDelayDl;
-  }
+	/**
+	 * string with format 'float' as defined in OpenAPI.
+	 * 
+	 * @return varPktDelayUl
+	 **/
+	@Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-  public ObservedRedundantTransExp varPktDelayDl(Float varPktDelayDl) {
-    this.varPktDelayDl = varPktDelayDl;
-    return this;
-  }
+	public Float getVarPktDelayUl() {
+		return varPktDelayUl;
+	}
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return varPktDelayDl
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
-    public Float getVarPktDelayDl() {
-    return varPktDelayDl;
-  }
+	public void setVarPktDelayUl(Float varPktDelayUl) {
+		this.varPktDelayUl = varPktDelayUl;
+	}
 
-  public void setVarPktDelayDl(Float varPktDelayDl) {
-    this.varPktDelayDl = varPktDelayDl;
-  }
+	public ObservedRedundantTransExp avgPktDelayDl(Integer avgPktDelayDl) {
+		this.avgPktDelayDl = avgPktDelayDl;
+		return this;
+	}
 
+	/**
+	 * Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and
+	 * 5.7.4 of 3GPP TS 23.501), expressed in milliseconds.
+	 * minimum: 1
+	 * 
+	 * @return avgPktDelayDl
+	 **/
+	@Schema(description = "Unsigned integer indicating Packet Delay Budget (see clauses 5.7.3.4 and 5.7.4 of 3GPP TS 23.501), expressed in milliseconds. ")
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    ObservedRedundantTransExp observedRedundantTransExp = (ObservedRedundantTransExp) o;
-    return Objects.equals(this.avgPktDropRateUl, observedRedundantTransExp.avgPktDropRateUl) &&
-        Objects.equals(this.varPktDropRateUl, observedRedundantTransExp.varPktDropRateUl) &&
-        Objects.equals(this.avgPktDropRateDl, observedRedundantTransExp.avgPktDropRateDl) &&
-        Objects.equals(this.varPktDropRateDl, observedRedundantTransExp.varPktDropRateDl) &&
-        Objects.equals(this.avgPktDelayUl, observedRedundantTransExp.avgPktDelayUl) &&
-        Objects.equals(this.varPktDelayUl, observedRedundantTransExp.varPktDelayUl) &&
-        Objects.equals(this.avgPktDelayDl, observedRedundantTransExp.avgPktDelayDl) &&
-        Objects.equals(this.varPktDelayDl, observedRedundantTransExp.varPktDelayDl);
-  }
+	@Min(1)
+	public Integer getAvgPktDelayDl() {
+		return avgPktDelayDl;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(avgPktDropRateUl, varPktDropRateUl, avgPktDropRateDl, varPktDropRateDl, avgPktDelayUl, varPktDelayUl, avgPktDelayDl, varPktDelayDl);
-  }
+	public void setAvgPktDelayDl(Integer avgPktDelayDl) {
+		this.avgPktDelayDl = avgPktDelayDl;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class ObservedRedundantTransExp {\n");
-    
-    sb.append("    avgPktDropRateUl: ").append(toIndentedString(avgPktDropRateUl)).append("\n");
-    sb.append("    varPktDropRateUl: ").append(toIndentedString(varPktDropRateUl)).append("\n");
-    sb.append("    avgPktDropRateDl: ").append(toIndentedString(avgPktDropRateDl)).append("\n");
-    sb.append("    varPktDropRateDl: ").append(toIndentedString(varPktDropRateDl)).append("\n");
-    sb.append("    avgPktDelayUl: ").append(toIndentedString(avgPktDelayUl)).append("\n");
-    sb.append("    varPktDelayUl: ").append(toIndentedString(varPktDelayUl)).append("\n");
-    sb.append("    avgPktDelayDl: ").append(toIndentedString(avgPktDelayDl)).append("\n");
-    sb.append("    varPktDelayDl: ").append(toIndentedString(varPktDelayDl)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	public ObservedRedundantTransExp varPktDelayDl(Float varPktDelayDl) {
+		this.varPktDelayDl = varPktDelayDl;
+		return this;
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	/**
+	 * string with format 'float' as defined in OpenAPI.
+	 * 
+	 * @return varPktDelayDl
+	 **/
+	@Schema(description = "string with format 'float' as defined in OpenAPI.")
+
+	public Float getVarPktDelayDl() {
+		return varPktDelayDl;
+	}
+
+	public void setVarPktDelayDl(Float varPktDelayDl) {
+		this.varPktDelayDl = varPktDelayDl;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		ObservedRedundantTransExp observedRedundantTransExp = (ObservedRedundantTransExp) o;
+		return Objects.equals(this.avgPktDropRateUl, observedRedundantTransExp.avgPktDropRateUl) &&
+				Objects.equals(this.varPktDropRateUl, observedRedundantTransExp.varPktDropRateUl) &&
+				Objects.equals(this.avgPktDropRateDl, observedRedundantTransExp.avgPktDropRateDl) &&
+				Objects.equals(this.varPktDropRateDl, observedRedundantTransExp.varPktDropRateDl) &&
+				Objects.equals(this.avgPktDelayUl, observedRedundantTransExp.avgPktDelayUl) &&
+				Objects.equals(this.varPktDelayUl, observedRedundantTransExp.varPktDelayUl) &&
+				Objects.equals(this.avgPktDelayDl, observedRedundantTransExp.avgPktDelayDl) &&
+				Objects.equals(this.varPktDelayDl, observedRedundantTransExp.varPktDelayDl);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(avgPktDropRateUl, varPktDropRateUl, avgPktDropRateDl, varPktDropRateDl, avgPktDelayUl,
+				varPktDelayUl, avgPktDelayDl, varPktDelayDl);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class ObservedRedundantTransExp {\n");
+
+		sb.append("    avgPktDropRateUl: ").append(toIndentedString(avgPktDropRateUl)).append("\n");
+		sb.append("    varPktDropRateUl: ").append(toIndentedString(varPktDropRateUl)).append("\n");
+		sb.append("    avgPktDropRateDl: ").append(toIndentedString(avgPktDropRateDl)).append("\n");
+		sb.append("    varPktDropRateDl: ").append(toIndentedString(varPktDropRateDl)).append("\n");
+		sb.append("    avgPktDelayUl: ").append(toIndentedString(avgPktDelayUl)).append("\n");
+		sb.append("    varPktDelayUl: ").append(toIndentedString(varPktDelayUl)).append("\n");
+		sb.append("    avgPktDelayDl: ").append(toIndentedString(avgPktDelayDl)).append("\n");
+		sb.append("    varPktDelayDl: ").append(toIndentedString(varPktDelayDl)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfMLModelInfo
-*/
+ * OneOfMLModelInfo
+ */
 
 public interface OneOfMLModelInfo {
 

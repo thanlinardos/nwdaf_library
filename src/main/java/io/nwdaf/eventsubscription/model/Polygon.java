@@ -18,71 +18,72 @@ import javax.validation.constraints.*;
 
 @JsonTypeName("Polygon")
 public class Polygon extends GADShape implements GeographicArea {
-  @JsonProperty("pointList")
-  private PointList pointList = null;
+	@JsonProperty("pointList")
+	private PointList pointList = null;
 
-  public Polygon pointList(PointList pointList) {
-    this.pointList = pointList;
-    return this;
-  }
+	public Polygon pointList(PointList pointList) {
+		this.pointList = pointList;
+		return this;
+	}
 
-  /**
-   * Get pointList
-   * @return pointList
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
+	/**
+	 * Get pointList
+	 * 
+	 * @return pointList
+	 **/
+	@Schema(required = true, description = "")
+	@NotNull
 
-    @Valid
-    public PointList getPointList() {
-    return pointList;
-  }
+	@Valid
+	public PointList getPointList() {
+		return pointList;
+	}
 
-  public void setPointList(PointList pointList) {
-    this.pointList = pointList;
-  }
+	public void setPointList(PointList pointList) {
+		this.pointList = pointList;
+	}
 
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Polygon polygon = (Polygon) o;
+		return Objects.equals(this.pointList, polygon.pointList) &&
+				super.equals(o);
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Polygon polygon = (Polygon) o;
-    return Objects.equals(this.pointList, polygon.pointList) &&
-        super.equals(o);
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(pointList, super.hashCode());
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(pointList, super.hashCode());
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class Polygon {\n");
+		sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+		sb.append("    pointList: ").append(toIndentedString(pointList)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class Polygon {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    pointList: ").append(toIndentedString(pointList)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
-  @Override
-  public String getType() {
-    return getClass().getSimpleName();
-  }
+	@Override
+	public String getType() {
+		return getClass().getSimpleName();
+	}
 }

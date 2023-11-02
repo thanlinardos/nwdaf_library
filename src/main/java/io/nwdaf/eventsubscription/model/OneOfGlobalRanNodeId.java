@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfGlobalRanNodeId
-*/
+ * OneOfGlobalRanNodeId
+ */
 
 public interface OneOfGlobalRanNodeId {
 

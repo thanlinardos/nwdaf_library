@@ -16,125 +16,127 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class DnPerformanceReq {
+	@JsonProperty("dnPerfOrderCriter")
+	private DnPerfOrderingCriterion dnPerfOrderCriter = null;
 
-public class DnPerformanceReq   {
-  @JsonProperty("dnPerfOrderCriter")
-  private DnPerfOrderingCriterion dnPerfOrderCriter = null;
+	@JsonProperty("order")
+	private MatchingDirection order = null;
 
-  @JsonProperty("order")
-  private MatchingDirection order = null;
+	@JsonProperty("reportThresholds")
+	@Valid
+	private List<ThresholdLevel> reportThresholds = null;
 
-  @JsonProperty("reportThresholds")
-  @Valid
-  private List<ThresholdLevel> reportThresholds = null;
+	public DnPerformanceReq dnPerfOrderCriter(DnPerfOrderingCriterion dnPerfOrderCriter) {
+		this.dnPerfOrderCriter = dnPerfOrderCriter;
+		return this;
+	}
 
-  public DnPerformanceReq dnPerfOrderCriter(DnPerfOrderingCriterion dnPerfOrderCriter) {
-    this.dnPerfOrderCriter = dnPerfOrderCriter;
-    return this;
-  }
+	/**
+	 * Get dnPerfOrderCriter
+	 * 
+	 * @return dnPerfOrderCriter
+	 **/
+	@Schema(description = "")
 
-  /**
-   * Get dnPerfOrderCriter
-   * @return dnPerfOrderCriter
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public DnPerfOrderingCriterion getDnPerfOrderCriter() {
-    return dnPerfOrderCriter;
-  }
+	@Valid
+	public DnPerfOrderingCriterion getDnPerfOrderCriter() {
+		return dnPerfOrderCriter;
+	}
 
-  public void setDnPerfOrderCriter(DnPerfOrderingCriterion dnPerfOrderCriter) {
-    this.dnPerfOrderCriter = dnPerfOrderCriter;
-  }
+	public void setDnPerfOrderCriter(DnPerfOrderingCriterion dnPerfOrderCriter) {
+		this.dnPerfOrderCriter = dnPerfOrderCriter;
+	}
 
-  public DnPerformanceReq order(MatchingDirection order) {
-    this.order = order;
-    return this;
-  }
+	public DnPerformanceReq order(MatchingDirection order) {
+		this.order = order;
+		return this;
+	}
 
-  /**
-   * Get order
-   * @return order
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public MatchingDirection getOrder() {
-    return order;
-  }
+	/**
+	 * Get order
+	 * 
+	 * @return order
+	 **/
+	@Schema(description = "")
 
-  public void setOrder(MatchingDirection order) {
-    this.order = order;
-  }
+	@Valid
+	public MatchingDirection getOrder() {
+		return order;
+	}
 
-  public DnPerformanceReq reportThresholds(List<ThresholdLevel> reportThresholds) {
-    this.reportThresholds = reportThresholds;
-    return this;
-  }
+	public void setOrder(MatchingDirection order) {
+		this.order = order;
+	}
 
-  public DnPerformanceReq addReportThresholdsItem(ThresholdLevel reportThresholdsItem) {
-    if (this.reportThresholds == null) {
-      this.reportThresholds = new ArrayList<ThresholdLevel>();
-    }
-    this.reportThresholds.add(reportThresholdsItem);
-    return this;
-  }
+	public DnPerformanceReq reportThresholds(List<ThresholdLevel> reportThresholds) {
+		this.reportThresholds = reportThresholds;
+		return this;
+	}
 
-  /**
-   * Get reportThresholds
-   * @return reportThresholds
-   **/
-  @Schema(description = "")
-      @Valid
-  @Size(min=1)   public List<ThresholdLevel> getReportThresholds() {
-    return reportThresholds;
-  }
+	public DnPerformanceReq addReportThresholdsItem(ThresholdLevel reportThresholdsItem) {
+		if (this.reportThresholds == null) {
+			this.reportThresholds = new ArrayList<ThresholdLevel>();
+		}
+		this.reportThresholds.add(reportThresholdsItem);
+		return this;
+	}
 
-  public void setReportThresholds(List<ThresholdLevel> reportThresholds) {
-    this.reportThresholds = reportThresholds;
-  }
+	/**
+	 * Get reportThresholds
+	 * 
+	 * @return reportThresholds
+	 **/
+	@Schema(description = "")
+	@Valid
+	@Size(min = 1)
+	public List<ThresholdLevel> getReportThresholds() {
+		return reportThresholds;
+	}
 
+	public void setReportThresholds(List<ThresholdLevel> reportThresholds) {
+		this.reportThresholds = reportThresholds;
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    DnPerformanceReq dnPerformanceReq = (DnPerformanceReq) o;
-    return Objects.equals(this.dnPerfOrderCriter, dnPerformanceReq.dnPerfOrderCriter) &&
-        Objects.equals(this.order, dnPerformanceReq.order) &&
-        Objects.equals(this.reportThresholds, dnPerformanceReq.reportThresholds);
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		DnPerformanceReq dnPerformanceReq = (DnPerformanceReq) o;
+		return Objects.equals(this.dnPerfOrderCriter, dnPerformanceReq.dnPerfOrderCriter) &&
+				Objects.equals(this.order, dnPerformanceReq.order) &&
+				Objects.equals(this.reportThresholds, dnPerformanceReq.reportThresholds);
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(dnPerfOrderCriter, order, reportThresholds);
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(dnPerfOrderCriter, order, reportThresholds);
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class DnPerformanceReq {\n");
-    
-    sb.append("    dnPerfOrderCriter: ").append(toIndentedString(dnPerfOrderCriter)).append("\n");
-    sb.append("    order: ").append(toIndentedString(order)).append("\n");
-    sb.append("    reportThresholds: ").append(toIndentedString(reportThresholds)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class DnPerformanceReq {\n");
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+		sb.append("    dnPerfOrderCriter: ").append(toIndentedString(dnPerfOrderCriter)).append("\n");
+		sb.append("    order: ").append(toIndentedString(order)).append("\n");
+		sb.append("    reportThresholds: ").append(toIndentedString(reportThresholds)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

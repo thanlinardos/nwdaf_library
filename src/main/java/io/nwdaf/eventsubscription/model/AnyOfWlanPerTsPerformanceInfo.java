@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* AnyOfWlanPerTsPerformanceInfo
-*/
+ * AnyOfWlanPerTsPerformanceInfo
+ */
 
 public interface AnyOfWlanPerTsPerformanceInfo {
 

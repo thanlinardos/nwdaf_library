@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfGeraLocation
-*/
+ * OneOfGeraLocation
+ */
 
 public interface OneOfGeraLocation {
 

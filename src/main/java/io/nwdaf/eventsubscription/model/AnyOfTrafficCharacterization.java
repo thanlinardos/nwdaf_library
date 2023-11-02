@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* AnyOfTrafficCharacterization
-*/
+ * AnyOfTrafficCharacterization
+ */
 
 public interface AnyOfTrafficCharacterization {
 

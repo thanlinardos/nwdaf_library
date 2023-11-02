@@ -21,220 +21,227 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class QosSustainabilityInfo implements OneOfQosSustainabilityInfo {
+	@JsonProperty("areaInfo")
+	private NetworkAreaInfo areaInfo = null;
 
-public class QosSustainabilityInfo  implements OneOfQosSustainabilityInfo {
-  @JsonProperty("areaInfo")
-  private NetworkAreaInfo areaInfo = null;
+	@JsonProperty("startTs")
+	private OffsetDateTime startTs = null;
 
-  @JsonProperty("startTs")
-  private OffsetDateTime startTs = null;
+	@JsonProperty("endTs")
+	private OffsetDateTime endTs = null;
 
-  @JsonProperty("endTs")
-  private OffsetDateTime endTs = null;
+	@JsonProperty("qosFlowRetThd")
+	private RetainabilityThreshold qosFlowRetThd = null;
 
-  @JsonProperty("qosFlowRetThd")
-  private RetainabilityThreshold qosFlowRetThd = null;
+	@JsonProperty("ranUeThrouThd")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String ranUeThrouThd = null;
 
-  @JsonProperty("ranUeThrouThd")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String ranUeThrouThd
- = null;
+	@JsonProperty("snssai")
+	private Snssai snssai = null;
 
-  @JsonProperty("snssai")
-  private Snssai snssai = null;
+	@JsonProperty("confidence")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer confidence = null;
 
-  @JsonProperty("confidence")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer confidence
- = null;
+	public QosSustainabilityInfo areaInfo(NetworkAreaInfo areaInfo) {
+		this.areaInfo = areaInfo;
+		return this;
+	}
 
-  public QosSustainabilityInfo areaInfo(NetworkAreaInfo areaInfo) {
-    this.areaInfo = areaInfo;
-    return this;
-  }
+	/**
+	 * Get areaInfo
+	 * 
+	 * @return areaInfo
+	 **/
+	@Schema(description = "")
 
-  /**
-   * Get areaInfo
-   * @return areaInfo
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public NetworkAreaInfo getAreaInfo() {
-    return areaInfo;
-  }
+	@Valid
+	public NetworkAreaInfo getAreaInfo() {
+		return areaInfo;
+	}
 
-  public void setAreaInfo(NetworkAreaInfo areaInfo) {
-    this.areaInfo = areaInfo;
-  }
+	public void setAreaInfo(NetworkAreaInfo areaInfo) {
+		this.areaInfo = areaInfo;
+	}
 
-  public QosSustainabilityInfo startTs(OffsetDateTime startTs) {
-    this.startTs = startTs;
-    return this;
-  }
+	public QosSustainabilityInfo startTs(OffsetDateTime startTs) {
+		this.startTs = startTs;
+		return this;
+	}
 
-  /**
-   * string with format 'date-time' as defined in OpenAPI.
-   * @return startTs
-   **/
-  @Schema(description = "string with format 'date-time' as defined in OpenAPI.")
-  
-    @Valid
-    public OffsetDateTime getStartTs() {
-    return startTs;
-  }
+	/**
+	 * string with format 'date-time' as defined in OpenAPI.
+	 * 
+	 * @return startTs
+	 **/
+	@Schema(description = "string with format 'date-time' as defined in OpenAPI.")
 
-  public void setStartTs(OffsetDateTime startTs) {
-    this.startTs = startTs;
-  }
+	@Valid
+	public OffsetDateTime getStartTs() {
+		return startTs;
+	}
 
-  public QosSustainabilityInfo endTs(OffsetDateTime endTs) {
-    this.endTs = endTs;
-    return this;
-  }
+	public void setStartTs(OffsetDateTime startTs) {
+		this.startTs = startTs;
+	}
 
-  /**
-   * string with format 'date-time' as defined in OpenAPI.
-   * @return endTs
-   **/
-  @Schema(description = "string with format 'date-time' as defined in OpenAPI.")
-  
-    @Valid
-    public OffsetDateTime getEndTs() {
-    return endTs;
-  }
+	public QosSustainabilityInfo endTs(OffsetDateTime endTs) {
+		this.endTs = endTs;
+		return this;
+	}
 
-  public void setEndTs(OffsetDateTime endTs) {
-    this.endTs = endTs;
-  }
+	/**
+	 * string with format 'date-time' as defined in OpenAPI.
+	 * 
+	 * @return endTs
+	 **/
+	@Schema(description = "string with format 'date-time' as defined in OpenAPI.")
 
-  public QosSustainabilityInfo qosFlowRetThd(RetainabilityThreshold qosFlowRetThd) {
-    this.qosFlowRetThd = qosFlowRetThd;
-    return this;
-  }
+	@Valid
+	public OffsetDateTime getEndTs() {
+		return endTs;
+	}
 
-  /**
-   * Get qosFlowRetThd
-   * @return qosFlowRetThd
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public RetainabilityThreshold getQosFlowRetThd() {
-    return qosFlowRetThd;
-  }
+	public void setEndTs(OffsetDateTime endTs) {
+		this.endTs = endTs;
+	}
 
-  public void setQosFlowRetThd(RetainabilityThreshold qosFlowRetThd) {
-    this.qosFlowRetThd = qosFlowRetThd;
-  }
+	public QosSustainabilityInfo qosFlowRetThd(RetainabilityThreshold qosFlowRetThd) {
+		this.qosFlowRetThd = qosFlowRetThd;
+		return this;
+	}
 
-  public QosSustainabilityInfo ranUeThrouThd(String ranUeThrouThd) {
-    this.ranUeThrouThd = ranUeThrouThd;
-    return this;
-  }
+	/**
+	 * Get qosFlowRetThd
+	 * 
+	 * @return qosFlowRetThd
+	 **/
+	@Schema(description = "")
 
-  /**
-   * String representing a bit rate; the prefixes follow the standard symbols from The International System of Units, and represent x1000 multipliers, with the exception that prefix \"K\" is used to represent the standard symbol \"k\". 
-   * @return ranUeThrouThd
-   **/
-  @Schema(description = "String representing a bit rate; the prefixes follow the standard symbols from The International System of Units, and represent x1000 multipliers, with the exception that prefix \"K\" is used to represent the standard symbol \"k\". ")
-  
-  @Pattern(regexp="^\\d+(\\.\\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$")   public String getRanUeThrouThd() {
-    return ranUeThrouThd;
-  }
+	@Valid
+	public RetainabilityThreshold getQosFlowRetThd() {
+		return qosFlowRetThd;
+	}
 
-  public void setRanUeThrouThd(String ranUeThrouThd) {
-    this.ranUeThrouThd = ranUeThrouThd;
-  }
+	public void setQosFlowRetThd(RetainabilityThreshold qosFlowRetThd) {
+		this.qosFlowRetThd = qosFlowRetThd;
+	}
 
-  public QosSustainabilityInfo snssai(Snssai snssai) {
-    this.snssai = snssai;
-    return this;
-  }
+	public QosSustainabilityInfo ranUeThrouThd(String ranUeThrouThd) {
+		this.ranUeThrouThd = ranUeThrouThd;
+		return this;
+	}
 
-  /**
-   * Get snssai
-   * @return snssai
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public Snssai getSnssai() {
-    return snssai;
-  }
+	/**
+	 * String representing a bit rate; the prefixes follow the standard symbols from
+	 * The International System of Units, and represent x1000 multipliers, with the
+	 * exception that prefix \"K\" is used to represent the standard symbol \"k\".
+	 * 
+	 * @return ranUeThrouThd
+	 **/
+	@Schema(description = "String representing a bit rate; the prefixes follow the standard symbols from The International System of Units, and represent x1000 multipliers, with the exception that prefix \"K\" is used to represent the standard symbol \"k\". ")
 
-  public void setSnssai(Snssai snssai) {
-    this.snssai = snssai;
-  }
+	@Pattern(regexp = "^\\d+(\\.\\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$")
+	public String getRanUeThrouThd() {
+		return ranUeThrouThd;
+	}
 
-  public QosSustainabilityInfo confidence(Integer confidence) {
-    this.confidence = confidence;
-    return this;
-  }
+	public void setRanUeThrouThd(String ranUeThrouThd) {
+		this.ranUeThrouThd = ranUeThrouThd;
+	}
 
-  /**
-   * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
-   * minimum: 0
-   * @return confidence
-   **/
-  @Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
-  
-  @Min(0)  public Integer getConfidence() {
-    return confidence;
-  }
+	public QosSustainabilityInfo snssai(Snssai snssai) {
+		this.snssai = snssai;
+		return this;
+	}
 
-  public void setConfidence(Integer confidence) {
-    this.confidence = confidence;
-  }
+	/**
+	 * Get snssai
+	 * 
+	 * @return snssai
+	 **/
+	@Schema(description = "")
 
+	@Valid
+	public Snssai getSnssai() {
+		return snssai;
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    QosSustainabilityInfo qosSustainabilityInfo = (QosSustainabilityInfo) o;
-    return Objects.equals(this.areaInfo, qosSustainabilityInfo.areaInfo) &&
-        Objects.equals(this.startTs, qosSustainabilityInfo.startTs) &&
-        Objects.equals(this.endTs, qosSustainabilityInfo.endTs) &&
-        Objects.equals(this.qosFlowRetThd, qosSustainabilityInfo.qosFlowRetThd) &&
-        Objects.equals(this.ranUeThrouThd, qosSustainabilityInfo.ranUeThrouThd) &&
-        Objects.equals(this.snssai, qosSustainabilityInfo.snssai) &&
-        Objects.equals(this.confidence, qosSustainabilityInfo.confidence);
-  }
+	public void setSnssai(Snssai snssai) {
+		this.snssai = snssai;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(areaInfo, startTs, endTs, qosFlowRetThd, ranUeThrouThd, snssai, confidence);
-  }
+	public QosSustainabilityInfo confidence(Integer confidence) {
+		this.confidence = confidence;
+		return this;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class QosSustainabilityInfo {\n");
-    
-    sb.append("    areaInfo: ").append(toIndentedString(areaInfo)).append("\n");
-    sb.append("    startTs: ").append(toIndentedString(startTs)).append("\n");
-    sb.append("    endTs: ").append(toIndentedString(endTs)).append("\n");
-    sb.append("    qosFlowRetThd: ").append(toIndentedString(qosFlowRetThd)).append("\n");
-    sb.append("    ranUeThrouThd: ").append(toIndentedString(ranUeThrouThd)).append("\n");
-    sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
-    sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	/**
+	 * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
+	 * minimum: 0
+	 * 
+	 * @return confidence
+	 **/
+	@Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Min(0)
+	public Integer getConfidence() {
+		return confidence;
+	}
+
+	public void setConfidence(Integer confidence) {
+		this.confidence = confidence;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		QosSustainabilityInfo qosSustainabilityInfo = (QosSustainabilityInfo) o;
+		return Objects.equals(this.areaInfo, qosSustainabilityInfo.areaInfo) &&
+				Objects.equals(this.startTs, qosSustainabilityInfo.startTs) &&
+				Objects.equals(this.endTs, qosSustainabilityInfo.endTs) &&
+				Objects.equals(this.qosFlowRetThd, qosSustainabilityInfo.qosFlowRetThd) &&
+				Objects.equals(this.ranUeThrouThd, qosSustainabilityInfo.ranUeThrouThd) &&
+				Objects.equals(this.snssai, qosSustainabilityInfo.snssai) &&
+				Objects.equals(this.confidence, qosSustainabilityInfo.confidence);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(areaInfo, startTs, endTs, qosFlowRetThd, ranUeThrouThd, snssai, confidence);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class QosSustainabilityInfo {\n");
+
+		sb.append("    areaInfo: ").append(toIndentedString(areaInfo)).append("\n");
+		sb.append("    startTs: ").append(toIndentedString(startTs)).append("\n");
+		sb.append("    endTs: ").append(toIndentedString(endTs)).append("\n");
+		sb.append("    qosFlowRetThd: ").append(toIndentedString(qosFlowRetThd)).append("\n");
+		sb.append("    ranUeThrouThd: ").append(toIndentedString(ranUeThrouThd)).append("\n");
+		sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
+		sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfNnwdafEventsSubscriptionNotification
-*/
+ * OneOfNnwdafEventsSubscriptionNotification
+ */
 
 public interface OneOfNnwdafEventsSubscriptionNotification {
 

@@ -23,99 +23,101 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @JsonTypeName("PointUncertaintyCircle")
 public class PointUncertaintyCircle extends GADShape implements GeographicArea {
-  @JsonProperty("point")
-  private GeographicalCoordinates point = null;
+	@JsonProperty("point")
+	private GeographicalCoordinates point = null;
 
-  @JsonProperty("uncertainty")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float uncertainty
- = null;
+	@JsonProperty("uncertainty")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Float uncertainty = null;
 
-  public PointUncertaintyCircle point(GeographicalCoordinates point) {
-    this.point = point;
-    return this;
-  }
+	public PointUncertaintyCircle point(GeographicalCoordinates point) {
+		this.point = point;
+		return this;
+	}
 
-  /**
-   * Get point
-   * @return point
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
+	/**
+	 * Get point
+	 * 
+	 * @return point
+	 **/
+	@Schema(required = true, description = "")
+	@NotNull
 
-    @Valid
-    public GeographicalCoordinates getPoint() {
-    return point;
-  }
+	@Valid
+	public GeographicalCoordinates getPoint() {
+		return point;
+	}
 
-  public void setPoint(GeographicalCoordinates point) {
-    this.point = point;
-  }
+	public void setPoint(GeographicalCoordinates point) {
+		this.point = point;
+	}
 
-  public PointUncertaintyCircle uncertainty(Float uncertainty) {
-    this.uncertainty = uncertainty;
-    return this;
-  }
+	public PointUncertaintyCircle uncertainty(Float uncertainty) {
+		this.uncertainty = uncertainty;
+		return this;
+	}
 
-  /**
-   * Indicates value of uncertainty.
-   * minimum: 0
-   * @return uncertainty
-   **/
-  @Schema(required = true, description = "Indicates value of uncertainty.")
-      @NotNull
+	/**
+	 * Indicates value of uncertainty.
+	 * minimum: 0
+	 * 
+	 * @return uncertainty
+	 **/
+	@Schema(required = true, description = "Indicates value of uncertainty.")
+	@NotNull
 
-  @DecimalMin("0")  public Float getUncertainty() {
-    return uncertainty;
-  }
+	@DecimalMin("0")
+	public Float getUncertainty() {
+		return uncertainty;
+	}
 
-  public void setUncertainty(Float uncertainty) {
-    this.uncertainty = uncertainty;
-  }
+	public void setUncertainty(Float uncertainty) {
+		this.uncertainty = uncertainty;
+	}
 
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		PointUncertaintyCircle pointUncertaintyCircle = (PointUncertaintyCircle) o;
+		return Objects.equals(this.point, pointUncertaintyCircle.point) &&
+				Objects.equals(this.uncertainty, pointUncertaintyCircle.uncertainty) &&
+				super.equals(o);
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PointUncertaintyCircle pointUncertaintyCircle = (PointUncertaintyCircle) o;
-    return Objects.equals(this.point, pointUncertaintyCircle.point) &&
-        Objects.equals(this.uncertainty, pointUncertaintyCircle.uncertainty) &&
-        super.equals(o);
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(point, uncertainty, super.hashCode());
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(point, uncertainty, super.hashCode());
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class PointUncertaintyCircle {\n");
+		sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+		sb.append("    point: ").append(toIndentedString(point)).append("\n");
+		sb.append("    uncertainty: ").append(toIndentedString(uncertainty)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PointUncertaintyCircle {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    point: ").append(toIndentedString(point)).append("\n");
-    sb.append("    uncertainty: ").append(toIndentedString(uncertainty)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
-  @Override
-  public String getType() {
-    return getClass().getSimpleName();
-  }
+	@Override
+	public String getType() {
+		return getClass().getSimpleName();
+	}
 }

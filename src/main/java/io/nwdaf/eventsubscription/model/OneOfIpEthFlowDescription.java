@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfIpEthFlowDescription
-*/
+ * OneOfIpEthFlowDescription
+ */
 
 public interface OneOfIpEthFlowDescription {
 

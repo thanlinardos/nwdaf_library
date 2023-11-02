@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfIpAddr
-*/
+ * OneOfIpAddr
+ */
 
 public interface OneOfIpAddr {
 

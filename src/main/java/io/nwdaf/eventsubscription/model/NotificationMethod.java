@@ -9,93 +9,101 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
-* Possible values are: - PERIODIC: The subscribe of NWDAF Event is periodically. The periodic of the notification is identified by repetitionPeriod defined in clause 5.1.6.2.3.   - THRESHOLD: The subscribe of NWDAF Event is upon threshold exceeded. 
-*/
+ * Possible values are: - PERIODIC: The subscribe of NWDAF Event is
+ * periodically. The periodic of the notification is identified by
+ * repetitionPeriod defined in clause 5.1.6.2.3. - THRESHOLD: The subscribe of
+ * NWDAF Event is upon threshold exceeded.
+ */
 @Schema(description = "Represents the notification methods that can be subscribed.")
 @Validated
 public class NotificationMethod {
-  public enum NotificationMethodEnum {
-	  THRESHOLD("THRESHOLD"),
-	  PERIODIC("PERIODIC");
-    private String value;
+	public enum NotificationMethodEnum {
+		THRESHOLD("THRESHOLD"),
+		PERIODIC("PERIODIC");
 
-    NotificationMethodEnum(String value) {
-      this.value = value;
-    }
+		private String value;
 
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
+		NotificationMethodEnum(String value) {
+			this.value = value;
+		}
 
-    @JsonCreator
-    public static NotificationMethodEnum fromValue(String text) {
-      for (NotificationMethodEnum b : NotificationMethodEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-  @JsonProperty("notifMethod")
-  private NotificationMethodEnum notifMethod = null;
+		@Override
+		@JsonValue
+		public String toString() {
+			return String.valueOf(value);
+		}
 
-  public NotificationMethod notifMethod(NotificationMethodEnum notifMethod){
-    this.notifMethod = notifMethod;
-    return this;
-  }
+		@JsonCreator
+		public static NotificationMethodEnum fromValue(String text) {
+			for (NotificationMethodEnum b : NotificationMethodEnum.values()) {
+				if (String.valueOf(b.value).equals(text)) {
+					return b;
+				}
+			}
+			return null;
+		}
+	}
 
-  /** Get notifMethod
-  * @return notifMethod
-  **/
-  @Schema(description="notifMethod")
+	@JsonProperty("notifMethod")
+	private NotificationMethodEnum notifMethod = null;
 
-  public NotificationMethodEnum getNotifMethod(){
-    return notifMethod;
-  }
+	public NotificationMethod notifMethod(NotificationMethodEnum notifMethod) {
+		this.notifMethod = notifMethod;
+		return this;
+	}
 
-  public void setNotifMethod(NotificationMethodEnum notifMethod){
-    this.notifMethod = notifMethod;
-  }
+	/**
+	 * Get notifMethod
+	 * 
+	 * @return notifMethod
+	 **/
+	@Schema(description = "notifMethod")
 
-   @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    NotificationMethod notificationMethodObject = (NotificationMethod) o;
-    return Objects.equals(this.notifMethod, notificationMethodObject.notifMethod);
-  }
+	public NotificationMethodEnum getNotifMethod() {
+		return notifMethod;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(notifMethod);
-  }
+	public void setNotifMethod(NotificationMethodEnum notifMethod) {
+		this.notifMethod = notifMethod;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class NotificationMethod {\n");
-    
-    sb.append("    notifMethod: ").append(toIndentedString(notifMethod)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		NotificationMethod notificationMethodObject = (NotificationMethod) o;
+		return Objects.equals(this.notifMethod, notificationMethodObject.notifMethod);
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(notifMethod);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class NotificationMethod {\n");
+
+		sb.append("    notifMethod: ").append(toIndentedString(notifMethod)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

@@ -20,145 +20,146 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class CircumstanceDescription {
+	@JsonProperty("freq")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Float freq = null;
 
-public class CircumstanceDescription   {
-  @JsonProperty("freq")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float freq
- = null;
+	@JsonProperty("tm")
+	private OffsetDateTime tm = null;
 
-  @JsonProperty("tm")
-  private OffsetDateTime tm = null;
+	@JsonProperty("locArea")
+	private NetworkAreaInfo locArea = null;
 
-  @JsonProperty("locArea")
-  private NetworkAreaInfo locArea = null;
+	@JsonProperty("vol")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Long vol = null;
 
-  @JsonProperty("vol")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Long vol
- = null;
+	public CircumstanceDescription freq(Float freq) {
+		this.freq = freq;
+		return this;
+	}
 
-  public CircumstanceDescription freq(Float freq) {
-    this.freq = freq;
-    return this;
-  }
+	/**
+	 * string with format 'float' as defined in OpenAPI.
+	 * 
+	 * @return freq
+	 **/
+	@Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return freq
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
-    public Float getFreq() {
-    return freq;
-  }
+	public Float getFreq() {
+		return freq;
+	}
 
-  public void setFreq(Float freq) {
-    this.freq = freq;
-  }
+	public void setFreq(Float freq) {
+		this.freq = freq;
+	}
 
-  public CircumstanceDescription tm(OffsetDateTime tm) {
-    this.tm = tm;
-    return this;
-  }
+	public CircumstanceDescription tm(OffsetDateTime tm) {
+		this.tm = tm;
+		return this;
+	}
 
-  /**
-   * string with format 'date-time' as defined in OpenAPI.
-   * @return tm
-   **/
-  @Schema(description = "string with format 'date-time' as defined in OpenAPI.")
-  
-    @Valid
-    public OffsetDateTime getTm() {
-    return tm;
-  }
+	/**
+	 * string with format 'date-time' as defined in OpenAPI.
+	 * 
+	 * @return tm
+	 **/
+	@Schema(description = "string with format 'date-time' as defined in OpenAPI.")
 
-  public void setTm(OffsetDateTime tm) {
-    this.tm = tm;
-  }
+	@Valid
+	public OffsetDateTime getTm() {
+		return tm;
+	}
 
-  public CircumstanceDescription locArea(NetworkAreaInfo locArea) {
-    this.locArea = locArea;
-    return this;
-  }
+	public void setTm(OffsetDateTime tm) {
+		this.tm = tm;
+	}
 
-  /**
-   * Get locArea
-   * @return locArea
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public NetworkAreaInfo getLocArea() {
-    return locArea;
-  }
+	public CircumstanceDescription locArea(NetworkAreaInfo locArea) {
+		this.locArea = locArea;
+		return this;
+	}
 
-  public void setLocArea(NetworkAreaInfo locArea) {
-    this.locArea = locArea;
-  }
+	/**
+	 * Get locArea
+	 * 
+	 * @return locArea
+	 **/
+	@Schema(description = "")
 
-  public CircumstanceDescription vol(Long vol) {
-    this.vol = vol;
-    return this;
-  }
+	@Valid
+	public NetworkAreaInfo getLocArea() {
+		return locArea;
+	}
 
-  /**
-   * Unsigned integer identifying a volume in units of bytes.
-   * minimum: 0
-   * @return vol
-   **/
-  @Schema(description = "Unsigned integer identifying a volume in units of bytes.")
-  
-  @Min(0L)  public Long getVol() {
-    return vol;
-  }
+	public void setLocArea(NetworkAreaInfo locArea) {
+		this.locArea = locArea;
+	}
 
-  public void setVol(Long vol) {
-    this.vol = vol;
-  }
+	public CircumstanceDescription vol(Long vol) {
+		this.vol = vol;
+		return this;
+	}
 
+	/**
+	 * Unsigned integer identifying a volume in units of bytes.
+	 * minimum: 0
+	 * 
+	 * @return vol
+	 **/
+	@Schema(description = "Unsigned integer identifying a volume in units of bytes.")
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    CircumstanceDescription circumstanceDescription = (CircumstanceDescription) o;
-    return Objects.equals(this.freq, circumstanceDescription.freq) &&
-        Objects.equals(this.tm, circumstanceDescription.tm) &&
-        Objects.equals(this.locArea, circumstanceDescription.locArea) &&
-        Objects.equals(this.vol, circumstanceDescription.vol);
-  }
+	@Min(0L)
+	public Long getVol() {
+		return vol;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(freq, tm, locArea, vol);
-  }
+	public void setVol(Long vol) {
+		this.vol = vol;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class CircumstanceDescription {\n");
-    
-    sb.append("    freq: ").append(toIndentedString(freq)).append("\n");
-    sb.append("    tm: ").append(toIndentedString(tm)).append("\n");
-    sb.append("    locArea: ").append(toIndentedString(locArea)).append("\n");
-    sb.append("    vol: ").append(toIndentedString(vol)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		CircumstanceDescription circumstanceDescription = (CircumstanceDescription) o;
+		return Objects.equals(this.freq, circumstanceDescription.freq) &&
+				Objects.equals(this.tm, circumstanceDescription.tm) &&
+				Objects.equals(this.locArea, circumstanceDescription.locArea) &&
+				Objects.equals(this.vol, circumstanceDescription.vol);
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(freq, tm, locArea, vol);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class CircumstanceDescription {\n");
+
+		sb.append("    freq: ").append(toIndentedString(freq)).append("\n");
+		sb.append("    tm: ").append(toIndentedString(tm)).append("\n");
+		sb.append("    locArea: ").append(toIndentedString(locArea)).append("\n");
+		sb.append("    vol: ").append(toIndentedString(vol)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

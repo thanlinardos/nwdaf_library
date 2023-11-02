@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* AnyOfNfStatus
-*/
+ * AnyOfNfStatus
+ */
 
 public interface AnyOfNfStatus {
 

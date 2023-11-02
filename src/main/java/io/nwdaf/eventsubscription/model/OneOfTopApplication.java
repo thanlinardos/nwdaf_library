@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfTopApplication
-*/
+ * OneOfTopApplication
+ */
 
 public interface OneOfTopApplication {
 

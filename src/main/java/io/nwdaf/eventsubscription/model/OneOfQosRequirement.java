@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfQosRequirement
-*/
+ * OneOfQosRequirement
+ */
 
 public interface OneOfQosRequirement {
 

@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfMLModelAddr
-*/
+ * OneOfMLModelAddr
+ */
 
 public interface OneOfMLModelAddr {
 

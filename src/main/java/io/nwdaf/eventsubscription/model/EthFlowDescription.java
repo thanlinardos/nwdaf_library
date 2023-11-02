@@ -23,257 +23,266 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class EthFlowDescription {
+	@JsonProperty("destMacAddr")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String destMacAddr = null;
 
-public class EthFlowDescription   {
-  @JsonProperty("destMacAddr")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String destMacAddr
- = null;
+	@JsonProperty("ethType")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String ethType = null;
 
-  @JsonProperty("ethType")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String ethType
- = null;
+	@JsonProperty("fDesc")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String fDesc = null;
 
-  @JsonProperty("fDesc")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String fDesc
- = null;
+	@JsonProperty("fDir")
+	private FlowDirection fDir = null;
 
-  @JsonProperty("fDir")
-  private FlowDirection fDir = null;
+	@JsonProperty("sourceMacAddr")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String sourceMacAddr = null;
 
-  @JsonProperty("sourceMacAddr")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String sourceMacAddr
- = null;
+	@JsonProperty("vlanTags")
+	@Valid
+	private List<String> vlanTags = null;
 
-  @JsonProperty("vlanTags")
-  @Valid
-  private List<String> vlanTags = null;
+	@JsonProperty("srcMacAddrEnd")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String srcMacAddrEnd = null;
 
-  @JsonProperty("srcMacAddrEnd")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String srcMacAddrEnd
- = null;
+	@JsonProperty("destMacAddrEnd")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String destMacAddrEnd = null;
 
-  @JsonProperty("destMacAddrEnd")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String destMacAddrEnd
- = null;
+	public EthFlowDescription destMacAddr(String destMacAddr) {
+		this.destMacAddr = destMacAddr;
+		return this;
+	}
 
-  public EthFlowDescription destMacAddr(String destMacAddr) {
-    this.destMacAddr = destMacAddr;
-    return this;
-  }
+	/**
+	 * String identifying a MAC address formatted in the hexadecimal notation
+	 * according to clause 1.1 and clause 2.1 of RFC 7042.
+	 * 
+	 * @return destMacAddr
+	 **/
+	@Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
 
-  /**
-   * String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. 
-   * @return destMacAddr
-   **/
-  @Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
-  
-  @Pattern(regexp="^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")   public String getDestMacAddr() {
-    return destMacAddr;
-  }
+	@Pattern(regexp = "^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")
+	public String getDestMacAddr() {
+		return destMacAddr;
+	}
 
-  public void setDestMacAddr(String destMacAddr) {
-    this.destMacAddr = destMacAddr;
-  }
+	public void setDestMacAddr(String destMacAddr) {
+		this.destMacAddr = destMacAddr;
+	}
 
-  public EthFlowDescription ethType(String ethType) {
-    this.ethType = ethType;
-    return this;
-  }
+	public EthFlowDescription ethType(String ethType) {
+		this.ethType = ethType;
+		return this;
+	}
 
-  /**
-   * Get ethType
-   * @return ethType
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
+	/**
+	 * Get ethType
+	 * 
+	 * @return ethType
+	 **/
+	@Schema(required = true, description = "")
+	@NotNull
 
-    public String getEthType() {
-    return ethType;
-  }
+	public String getEthType() {
+		return ethType;
+	}
 
-  public void setEthType(String ethType) {
-    this.ethType = ethType;
-  }
+	public void setEthType(String ethType) {
+		this.ethType = ethType;
+	}
 
-  public EthFlowDescription fDesc(String fDesc) {
-    this.fDesc = fDesc;
-    return this;
-  }
+	public EthFlowDescription fDesc(String fDesc) {
+		this.fDesc = fDesc;
+		return this;
+	}
 
-  /**
-   * Defines a packet filter of an IP flow.
-   * @return fDesc
-   **/
-  @Schema(description = "Defines a packet filter of an IP flow.")
-  
-    public String getFDesc() {
-    return fDesc;
-  }
+	/**
+	 * Defines a packet filter of an IP flow.
+	 * 
+	 * @return fDesc
+	 **/
+	@Schema(description = "Defines a packet filter of an IP flow.")
 
-  public void setFDesc(String fDesc) {
-    this.fDesc = fDesc;
-  }
+	public String getFDesc() {
+		return fDesc;
+	}
 
-  public EthFlowDescription fDir(FlowDirection fDir) {
-    this.fDir = fDir;
-    return this;
-  }
+	public void setFDesc(String fDesc) {
+		this.fDesc = fDesc;
+	}
 
-  /**
-   * Get fDir
-   * @return fDir
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public FlowDirection getFDir() {
-    return fDir;
-  }
+	public EthFlowDescription fDir(FlowDirection fDir) {
+		this.fDir = fDir;
+		return this;
+	}
 
-  public void setFDir(FlowDirection fDir) {
-    this.fDir = fDir;
-  }
+	/**
+	 * Get fDir
+	 * 
+	 * @return fDir
+	 **/
+	@Schema(description = "")
 
-  public EthFlowDescription sourceMacAddr(String sourceMacAddr) {
-    this.sourceMacAddr = sourceMacAddr;
-    return this;
-  }
+	@Valid
+	public FlowDirection getFDir() {
+		return fDir;
+	}
 
-  /**
-   * String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. 
-   * @return sourceMacAddr
-   **/
-  @Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
-  
-  @Pattern(regexp="^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")   public String getSourceMacAddr() {
-    return sourceMacAddr;
-  }
+	public void setFDir(FlowDirection fDir) {
+		this.fDir = fDir;
+	}
 
-  public void setSourceMacAddr(String sourceMacAddr) {
-    this.sourceMacAddr = sourceMacAddr;
-  }
+	public EthFlowDescription sourceMacAddr(String sourceMacAddr) {
+		this.sourceMacAddr = sourceMacAddr;
+		return this;
+	}
 
-  public EthFlowDescription vlanTags(List<String> vlanTags) {
-    this.vlanTags = vlanTags;
-    return this;
-  }
+	/**
+	 * String identifying a MAC address formatted in the hexadecimal notation
+	 * according to clause 1.1 and clause 2.1 of RFC 7042.
+	 * 
+	 * @return sourceMacAddr
+	 **/
+	@Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
 
-  public EthFlowDescription addVlanTagsItem(String vlanTagsItem) {
-    if (this.vlanTags == null) {
-      this.vlanTags = new ArrayList<String>();
-    }
-    this.vlanTags.add(vlanTagsItem);
-    return this;
-  }
+	@Pattern(regexp = "^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")
+	public String getSourceMacAddr() {
+		return sourceMacAddr;
+	}
 
-  /**
-   * Get vlanTags
-   * @return vlanTags
-   **/
-  @Schema(description = "")
-  
-  @Size(min=1,max=2)   public List<String> getVlanTags() {
-    return vlanTags;
-  }
+	public void setSourceMacAddr(String sourceMacAddr) {
+		this.sourceMacAddr = sourceMacAddr;
+	}
 
-  public void setVlanTags(List<String> vlanTags) {
-    this.vlanTags = vlanTags;
-  }
+	public EthFlowDescription vlanTags(List<String> vlanTags) {
+		this.vlanTags = vlanTags;
+		return this;
+	}
 
-  public EthFlowDescription srcMacAddrEnd(String srcMacAddrEnd) {
-    this.srcMacAddrEnd = srcMacAddrEnd;
-    return this;
-  }
+	public EthFlowDescription addVlanTagsItem(String vlanTagsItem) {
+		if (this.vlanTags == null) {
+			this.vlanTags = new ArrayList<String>();
+		}
+		this.vlanTags.add(vlanTagsItem);
+		return this;
+	}
 
-  /**
-   * String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. 
-   * @return srcMacAddrEnd
-   **/
-  @Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
-  
-  @Pattern(regexp="^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")   public String getSrcMacAddrEnd() {
-    return srcMacAddrEnd;
-  }
+	/**
+	 * Get vlanTags
+	 * 
+	 * @return vlanTags
+	 **/
+	@Schema(description = "")
 
-  public void setSrcMacAddrEnd(String srcMacAddrEnd) {
-    this.srcMacAddrEnd = srcMacAddrEnd;
-  }
+	@Size(min = 1, max = 2)
+	public List<String> getVlanTags() {
+		return vlanTags;
+	}
 
-  public EthFlowDescription destMacAddrEnd(String destMacAddrEnd) {
-    this.destMacAddrEnd = destMacAddrEnd;
-    return this;
-  }
+	public void setVlanTags(List<String> vlanTags) {
+		this.vlanTags = vlanTags;
+	}
 
-  /**
-   * String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. 
-   * @return destMacAddrEnd
-   **/
-  @Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
-  
-  @Pattern(regexp="^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")   public String getDestMacAddrEnd() {
-    return destMacAddrEnd;
-  }
+	public EthFlowDescription srcMacAddrEnd(String srcMacAddrEnd) {
+		this.srcMacAddrEnd = srcMacAddrEnd;
+		return this;
+	}
 
-  public void setDestMacAddrEnd(String destMacAddrEnd) {
-    this.destMacAddrEnd = destMacAddrEnd;
-  }
+	/**
+	 * String identifying a MAC address formatted in the hexadecimal notation
+	 * according to clause 1.1 and clause 2.1 of RFC 7042.
+	 * 
+	 * @return srcMacAddrEnd
+	 **/
+	@Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
 
+	@Pattern(regexp = "^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")
+	public String getSrcMacAddrEnd() {
+		return srcMacAddrEnd;
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    EthFlowDescription ethFlowDescription = (EthFlowDescription) o;
-    return Objects.equals(this.destMacAddr, ethFlowDescription.destMacAddr) &&
-        Objects.equals(this.ethType, ethFlowDescription.ethType) &&
-        Objects.equals(this.fDesc, ethFlowDescription.fDesc) &&
-        Objects.equals(this.fDir, ethFlowDescription.fDir) &&
-        Objects.equals(this.sourceMacAddr, ethFlowDescription.sourceMacAddr) &&
-        Objects.equals(this.vlanTags, ethFlowDescription.vlanTags) &&
-        Objects.equals(this.srcMacAddrEnd, ethFlowDescription.srcMacAddrEnd) &&
-        Objects.equals(this.destMacAddrEnd, ethFlowDescription.destMacAddrEnd);
-  }
+	public void setSrcMacAddrEnd(String srcMacAddrEnd) {
+		this.srcMacAddrEnd = srcMacAddrEnd;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(destMacAddr, ethType, fDesc, fDir, sourceMacAddr, vlanTags, srcMacAddrEnd, destMacAddrEnd);
-  }
+	public EthFlowDescription destMacAddrEnd(String destMacAddrEnd) {
+		this.destMacAddrEnd = destMacAddrEnd;
+		return this;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class EthFlowDescription {\n");
-    
-    sb.append("    destMacAddr: ").append(toIndentedString(destMacAddr)).append("\n");
-    sb.append("    ethType: ").append(toIndentedString(ethType)).append("\n");
-    sb.append("    fDesc: ").append(toIndentedString(fDesc)).append("\n");
-    sb.append("    fDir: ").append(toIndentedString(fDir)).append("\n");
-    sb.append("    sourceMacAddr: ").append(toIndentedString(sourceMacAddr)).append("\n");
-    sb.append("    vlanTags: ").append(toIndentedString(vlanTags)).append("\n");
-    sb.append("    srcMacAddrEnd: ").append(toIndentedString(srcMacAddrEnd)).append("\n");
-    sb.append("    destMacAddrEnd: ").append(toIndentedString(destMacAddrEnd)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	/**
+	 * String identifying a MAC address formatted in the hexadecimal notation
+	 * according to clause 1.1 and clause 2.1 of RFC 7042.
+	 * 
+	 * @return destMacAddrEnd
+	 **/
+	@Schema(description = "String identifying a MAC address formatted in the hexadecimal notation according to clause 1.1 and clause 2.1 of RFC 7042. ")
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Pattern(regexp = "^([0-9a-fA-F]{2})((-[0-9a-fA-F]{2}){5})$")
+	public String getDestMacAddrEnd() {
+		return destMacAddrEnd;
+	}
+
+	public void setDestMacAddrEnd(String destMacAddrEnd) {
+		this.destMacAddrEnd = destMacAddrEnd;
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		EthFlowDescription ethFlowDescription = (EthFlowDescription) o;
+		return Objects.equals(this.destMacAddr, ethFlowDescription.destMacAddr) &&
+				Objects.equals(this.ethType, ethFlowDescription.ethType) &&
+				Objects.equals(this.fDesc, ethFlowDescription.fDesc) &&
+				Objects.equals(this.fDir, ethFlowDescription.fDir) &&
+				Objects.equals(this.sourceMacAddr, ethFlowDescription.sourceMacAddr) &&
+				Objects.equals(this.vlanTags, ethFlowDescription.vlanTags) &&
+				Objects.equals(this.srcMacAddrEnd, ethFlowDescription.srcMacAddrEnd) &&
+				Objects.equals(this.destMacAddrEnd, ethFlowDescription.destMacAddrEnd);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(destMacAddr, ethType, fDesc, fDir, sourceMacAddr, vlanTags, srcMacAddrEnd, destMacAddrEnd);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class EthFlowDescription {\n");
+
+		sb.append("    destMacAddr: ").append(toIndentedString(destMacAddr)).append("\n");
+		sb.append("    ethType: ").append(toIndentedString(ethType)).append("\n");
+		sb.append("    fDesc: ").append(toIndentedString(fDesc)).append("\n");
+		sb.append("    fDir: ").append(toIndentedString(fDir)).append("\n");
+		sb.append("    sourceMacAddr: ").append(toIndentedString(sourceMacAddr)).append("\n");
+		sb.append("    vlanTags: ").append(toIndentedString(vlanTags)).append("\n");
+		sb.append("    srcMacAddrEnd: ").append(toIndentedString(srcMacAddrEnd)).append("\n");
+		sb.append("    destMacAddrEnd: ").append(toIndentedString(destMacAddrEnd)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
 }

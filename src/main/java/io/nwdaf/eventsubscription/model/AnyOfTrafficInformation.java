@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* AnyOfTrafficInformation
-*/
+ * AnyOfTrafficInformation
+ */
 
 public interface AnyOfTrafficInformation {
 

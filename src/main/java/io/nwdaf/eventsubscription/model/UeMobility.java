@@ -3,7 +3,9 @@ package io.nwdaf.eventsubscription.model;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -27,256 +29,287 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
 public class UeMobility {
-  private Instant time;
+	private Instant time;
 
-  @JsonProperty("ts")
-  private OffsetDateTime ts = null;
+	@JsonProperty("ts")
+	private OffsetDateTime ts = null;
 
-  @JsonProperty("recurringTime")
-  private ScheduledCommunicationTime recurringTime = null;
+	@JsonProperty("recurringTime")
+	private ScheduledCommunicationTime recurringTime = null;
 
-  @JsonProperty("duration")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private Integer duration = null;
+	@JsonProperty("duration")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Integer duration = null;
 
-  @JsonProperty("durationVariance")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private Float durationVariance = null;
+	@JsonProperty("durationVariance")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Float durationVariance = null;
 
-  @JsonProperty("locInfos")
-  @Valid
-  private List<LocationInfo> locInfos = new ArrayList<LocationInfo>();
+	@JsonProperty("locInfos")
+	@Valid
+	private List<LocationInfo> locInfos = new ArrayList<LocationInfo>();
 
-  // list of aois the ue has visited matching the location infos list (for each user location match it to an aoi or if it doesnt exist create a new one for this location)
-  @JsonProperty("areaOfInterestIds")
-  private List<UUID> areaOfInterestIds = new ArrayList<>();
-  
-  @JsonProperty("supi")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String supi = null;
+	// list of aois the ue has visited matching the location infos list (for each
+	// user location match it to an aoi or if it doesnt exist create a new one for
+	// this location)
+	@JsonProperty("areaOfInterestIds")
+	private List<UUID> areaOfInterestIds = new ArrayList<>();
 
-  @JsonProperty("intGroupId")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-  private String intGroupId = null;
+	@JsonProperty("supi")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String supi = null;
 
-  public UeMobility ts(OffsetDateTime ts) {
-    this.ts = ts;
-    return this;
-  }
+	@JsonProperty("intGroupId")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String intGroupId = null;
 
-  /**
-   * string with format 'date-time' as defined in OpenAPI.
-   * @return ts
-   **/
-  @Schema(description = "string with format 'date-time' as defined in OpenAPI.")
-  
-    @Valid
-    public OffsetDateTime getTs() {
-    return ts;
-  }
+	public UeMobility ts(OffsetDateTime ts) {
+		this.ts = ts;
+		return this;
+	}
 
-  public void setTs(OffsetDateTime ts) {
-    this.ts = ts;
-  }
+	/**
+	 * string with format 'date-time' as defined in OpenAPI.
+	 * 
+	 * @return ts
+	 **/
+	@Schema(description = "string with format 'date-time' as defined in OpenAPI.")
 
-  public UeMobility recurringTime(ScheduledCommunicationTime recurringTime) {
-    this.recurringTime = recurringTime;
-    return this;
-  }
+	@Valid
+	public OffsetDateTime getTs() {
+		return ts;
+	}
 
-  /**
-   * Get recurringTime
-   * @return recurringTime
-   **/
-  @Schema(description = "")
-  
-  @Valid
-  public ScheduledCommunicationTime getRecurringTime() {
-    return recurringTime;
-  }
+	public void setTs(OffsetDateTime ts) {
+		this.ts = ts;
+	}
 
-  public void setRecurringTime(ScheduledCommunicationTime recurringTime) {
-    this.recurringTime = recurringTime;
-  }
+	public UeMobility recurringTime(ScheduledCommunicationTime recurringTime) {
+		this.recurringTime = recurringTime;
+		return this;
+	}
 
-  public UeMobility duration(Integer duration) {
-    this.duration = duration;
-    return this;
-  }
+	/**
+	 * Get recurringTime
+	 * 
+	 * @return recurringTime
+	 **/
+	@Schema(description = "")
 
-  /**
-   * indicating a time in seconds.
-   * @return duration
-   **/
-  @Schema(description = "indicating a time in seconds.")
-  
-    public Integer getDuration() {
-    return duration;
-  }
+	@Valid
+	public ScheduledCommunicationTime getRecurringTime() {
+		return recurringTime;
+	}
 
-  public void setDuration(Integer duration) {
-    this.duration = duration;
-  }
+	public void setRecurringTime(ScheduledCommunicationTime recurringTime) {
+		this.recurringTime = recurringTime;
+	}
 
-  public UeMobility durationVariance(Float durationVariance) {
-    this.durationVariance = durationVariance;
-    return this;
-  }
+	public UeMobility duration(Integer duration) {
+		this.duration = duration;
+		return this;
+	}
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return durationVariance
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
-    public Float getDurationVariance() {
-    return durationVariance;
-  }
+	/**
+	 * indicating a time in seconds.
+	 * 
+	 * @return duration
+	 **/
+	@Schema(description = "indicating a time in seconds.")
 
-  public void setDurationVariance(Float durationVariance) {
-    this.durationVariance = durationVariance;
-  }
+	public Integer getDuration() {
+		return duration;
+	}
 
-  public UeMobility locInfos(List<LocationInfo> locInfos) {
-    this.locInfos = locInfos;
-    return this;
-  }
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
 
-  public UeMobility addLocInfosItem(LocationInfo locInfosItem) {
-    this.locInfos.add(locInfosItem);
-    return this;
-  }
+	public UeMobility durationVariance(Float durationVariance) {
+		this.durationVariance = durationVariance;
+		return this;
+	}
 
-  /**
-   * Get locInfos
-   * @return locInfos
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
-    @Valid
-  @Size(min=1)   public List<LocationInfo> getLocInfos() {
-    return locInfos;
-  }
+	/**
+	 * string with format 'float' as defined in OpenAPI.
+	 * 
+	 * @return durationVariance
+	 **/
+	@Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-  public void setLocInfos(List<LocationInfo> locInfos) {
-    this.locInfos = locInfos;
-  }
+	public Float getDurationVariance() {
+		return durationVariance;
+	}
 
-  public UeMobility areaOfInterestIds(List<UUID> areaOfInterestIds) {
-    this.areaOfInterestIds = areaOfInterestIds;
-    return this;
-  }
-  public UeMobility addAreaOfInterestIdsItem(UUID areaOfInterestIdsItem) {
-    this.areaOfInterestIds.add(areaOfInterestIdsItem);
-    return this;
-  }
-  /**
-   * string with format 'UUID' as defined in OpenAPI.
-   * @return areaOfInterestId
-   **/
-  @Schema(description = "string with format 'UUID' as defined in OpenAPI.")
-  
-  public List<UUID> getAreaOfInterestIds() {
-    return areaOfInterestIds;
-  }
+	public void setDurationVariance(Float durationVariance) {
+		this.durationVariance = durationVariance;
+	}
 
-  public void setAreaOfInterestIds(List<UUID> areaOfInterestIds) {
-    this.areaOfInterestIds = areaOfInterestIds;
-  }
+	public UeMobility locInfos(List<LocationInfo> locInfos) {
+		this.locInfos = locInfos;
+		return this;
+	}
 
-  public UeMobility supi(String supi) {
-    this.supi = supi;
-    return this;
-  }
-  /**
-   * string with format 'SUPI' as defined in 3GPP.
-   * @return supi
-   **/
-  @Schema(description = "string with format 'SUPI' as defined in 3GPP.")
-  public String getSupi() {
-    return supi;
-  }
+	public UeMobility addLocInfosItem(LocationInfo locInfosItem) {
+		this.locInfos.add(locInfosItem);
+		return this;
+	}
 
-  public void setSupi(String supi) {
-    this.supi = supi;
-  }
+	/**
+	 * Get locInfos
+	 * 
+	 * @return locInfos
+	 **/
+	@Schema(required = true, description = "")
+	@NotNull
+	@Valid
+	@Size(min = 1)
+	public List<LocationInfo> getLocInfos() {
+		return locInfos;
+	}
 
-  public UeMobility intGroupId(String intGroupId) {
-    this.intGroupId = intGroupId;
-    return this;
-  }
-  /**
-   * string with format 'intGroupId' as defined in 3GPP.
-   * @return intGroupId
-   **/
-  @Schema(description = "string with format 'intGroupId' as defined in 3GPP.")
-  public String getIntGroupId() {
-    return intGroupId;
-  }
+	public void setLocInfos(List<LocationInfo> locInfos) {
+		this.locInfos = locInfos;
+	}
 
-  public void setIntGroupId(String intGroupId) {
-    this.intGroupId = intGroupId;
-  }
+	public UeMobility areaOfInterestIds(List<UUID> areaOfInterestIds) {
+		this.areaOfInterestIds = areaOfInterestIds;
+		return this;
+	}
 
-  public UeMobility time(Instant time){
-    this.time = time;
-    this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
-    return this;
-  }
-  public Instant getTime() {
-      return time;
-  }
-  public void setTime(Instant time) {
-      this.time = time;
-      this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
-  }
+	public UeMobility addAreaOfInterestIdsItem(UUID areaOfInterestIdsItem) {
+		this.areaOfInterestIds.add(areaOfInterestIdsItem);
+		return this;
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    UeMobility ueMobility = (UeMobility) o;
-    return Objects.equals(this.ts, ueMobility.ts) &&
-        Objects.equals(this.recurringTime, ueMobility.recurringTime) &&
-        Objects.equals(this.duration, ueMobility.duration) &&
-        Objects.equals(this.durationVariance, ueMobility.durationVariance) &&
-        Objects.equals(this.locInfos, ueMobility.locInfos);
-  }
+	/**
+	 * string with format 'UUID' as defined in OpenAPI.
+	 * 
+	 * @return areaOfInterestId
+	 **/
+	@Schema(description = "string with format 'UUID' as defined in OpenAPI.")
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(ts, recurringTime, duration, durationVariance, locInfos);
-  }
+	public List<UUID> getAreaOfInterestIds() {
+		return areaOfInterestIds;
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class UeMobility {\n");
-    
-    sb.append("    areaOfInterestIds: ").append(toIndentedString(areaOfInterestIds)).append("\n");
-    sb.append("    supi: ").append(toIndentedString(supi)).append("\n");
-    sb.append("    intGroupId: ").append(toIndentedString(intGroupId)).append("\n");
-    sb.append("    ts: ").append(toIndentedString(ts)).append("\n");
-    sb.append("    recurringTime: ").append(toIndentedString(recurringTime)).append("\n");
-    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
-    sb.append("    durationVariance: ").append(toIndentedString(durationVariance)).append("\n");
-    sb.append("    locInfos: ").append(toIndentedString(locInfos)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	public void setAreaOfInterestIds(List<UUID> areaOfInterestIds) {
+		this.areaOfInterestIds = areaOfInterestIds;
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	public UeMobility supi(String supi) {
+		this.supi = supi;
+		return this;
+	}
+
+	/**
+	 * string with format 'SUPI' as defined in 3GPP.
+	 * 
+	 * @return supi
+	 **/
+	@Schema(description = "string with format 'SUPI' as defined in 3GPP.")
+	public String getSupi() {
+		return supi;
+	}
+
+	public void setSupi(String supi) {
+		this.supi = supi;
+	}
+
+	public UeMobility intGroupId(String intGroupId) {
+		this.intGroupId = intGroupId;
+		return this;
+	}
+
+	/**
+	 * string with format 'intGroupId' as defined in 3GPP.
+	 * 
+	 * @return intGroupId
+	 **/
+	@Schema(description = "string with format 'intGroupId' as defined in 3GPP.")
+	public String getIntGroupId() {
+		return intGroupId;
+	}
+
+	public void setIntGroupId(String intGroupId) {
+		this.intGroupId = intGroupId;
+	}
+
+	public UeMobility time(Instant time) {
+		this.time = time;
+		this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+		return this;
+	}
+
+	public Instant getTime() {
+		return time;
+	}
+
+	public void setTime(Instant time) {
+		this.time = time;
+		this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+	}
+
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		UeMobility ueMobility = (UeMobility) o;
+		return Objects.equals(this.ts, ueMobility.ts) &&
+				Objects.equals(this.recurringTime, ueMobility.recurringTime) &&
+				Objects.equals(this.duration, ueMobility.duration) &&
+				Objects.equals(this.durationVariance, ueMobility.durationVariance) &&
+				Objects.equals(this.locInfos, ueMobility.locInfos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ts, recurringTime, duration, durationVariance, locInfos);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class UeMobility {\n");
+
+		sb.append("    areaOfInterestIds: ").append(toIndentedString(areaOfInterestIds)).append("\n");
+		sb.append("    supi: ").append(toIndentedString(supi)).append("\n");
+		sb.append("    intGroupId: ").append(toIndentedString(intGroupId)).append("\n");
+		sb.append("    ts: ").append(toIndentedString(ts)).append("\n");
+		sb.append("    recurringTime: ").append(toIndentedString(recurringTime)).append("\n");
+		sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
+		sb.append("    durationVariance: ").append(toIndentedString(durationVariance)).append("\n");
+		sb.append("    locInfos: ").append(toIndentedString(locInfos)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("time", (Object) this.getTime());
+		map.put("ts", (Object) this.getTs());
+		map.put("recurringTime", (Object) this.getRecurringTime());
+		map.put("duration", (Object) this.getDuration());
+		map.put("durationVariance", (Object) this.getDurationVariance());
+		map.put("locInfos", (Object) this.getLocInfos());
+		map.put("areaOfInterestIds", (Object) this.getAreaOfInterestIds());
+		map.put("supi", (Object) this.getSupi());
+		map.put("intGroupId", (Object) this.getIntGroupId());
+		return map;
+	}
 }

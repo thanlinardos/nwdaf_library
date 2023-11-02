@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* OneOfUtraLocation
-*/
+ * OneOfUtraLocation
+ */
 
 public interface OneOfUtraLocation {
 

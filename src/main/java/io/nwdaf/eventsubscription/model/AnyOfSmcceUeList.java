@@ -1,7 +1,8 @@
 package io.nwdaf.eventsubscription.model;
+
 /**
-* AnyOfSmcceUeList
-*/
+ * AnyOfSmcceUeList
+ */
 
 public interface AnyOfSmcceUeList {
 
