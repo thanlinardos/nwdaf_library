@@ -519,4 +519,27 @@ public class NfLoadLevelInformation implements Serializable {
 		map.put("confidence", (Object) this.getConfidence());
 		return map;
 	}
+
+	public static NfLoadLevelInformation fromMap(Map<String, Object> map) {
+        NfLoadLevelInformation result = new NfLoadLevelInformation();
+        result.setTime((Instant) map.get("time"));
+        result.setTimeStamp((OffsetDateTime) map.get("timeStamp"));
+        result.setThresholdProperty((String) map.get("thresholdProperty"));
+        result.setThresholdValue((Integer) map.get("thresholdValue"));
+        result.setAreaOfInterestId((UUID) map.get("areaOfInterestId"));
+        result.setSupis((List<String>) map.get("supis"));
+        result.setNfType((NFType) map.get("nfType"));
+        result.setNfInstanceId((UUID) map.get("nfInstanceId"));
+        result.setNfSetId((String) map.get("nfSetId"));
+        result.setNfStatus((NfStatus) map.get("nfStatus"));
+        result.setNfCpuUsage((Integer) map.get("nfCpuUsage"));
+        result.setNfMemoryUsage((Integer) map.get("nfMemoryUsage"));
+        result.setNfStorageUsage((Integer) map.get("nfStorageUsage"));
+        result.setNfLoadLevelAverage((Integer) map.get("nfLoadLevelAverage"));
+        result.setNfLoadLevelpeak((Integer) map.get("nfLoadLevelpeak"));
+        result.setNfLoadAvgInAoi((Integer) map.get("nfLoadAvgInAoi"));
+        result.setSnssai((Snssai) map.get("snssai"));
+        result.setConfidence((Integer) map.get("confidence"));
+        return result;
+    }
 }

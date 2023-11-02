@@ -312,4 +312,18 @@ public class UeMobility {
 		map.put("intGroupId", (Object) this.getIntGroupId());
 		return map;
 	}
+	
+	public static UeMobility fromMap(Map<String, Object> map) {
+        UeMobility result = new UeMobility();
+        result.setTime((Instant) map.get("time"));
+        result.setTs((OffsetDateTime) map.get("ts"));
+        result.setRecurringTime((ScheduledCommunicationTime) map.get("recurringTime"));
+        result.setDuration((Integer) map.get("duration"));
+        result.setDurationVariance((Float) map.get("durationVariance"));
+        result.setLocInfos((List<LocationInfo>) map.get("locInfos"));
+        result.setAreaOfInterestIds((List<UUID>) map.get("areaOfInterestIds"));
+        result.setSupi((String) map.get("supi"));
+        result.setIntGroupId((String) map.get("intGroupId"));
+        return result;
+    }
 }

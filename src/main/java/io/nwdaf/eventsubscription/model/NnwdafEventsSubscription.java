@@ -358,4 +358,19 @@ public class NnwdafEventsSubscription {
 		map.put("consNfInfo", (Object) this.getConsNfInfo());
 		return map;
 	}
+
+	public static NnwdafEventsSubscription fromMap(Map<String, Object> map) {
+        NnwdafEventsSubscription result = new NnwdafEventsSubscription();
+        result.setId((Long) map.get("id"));
+        result.setEventSubscriptions((List<EventSubscription>) map.get("eventSubscriptions"));
+        result.setEvtReq((ReportingInformation) map.get("evtReq"));
+        result.setNotificationURI((String) map.get("notificationURI"));
+        result.setNotifCorrId((String) map.get("notifCorrId"));
+        result.setSupportedFeatures((String) map.get("supportedFeatures"));
+        result.setEventNotifications((List<EventNotification>) map.get("eventNotifications"));
+        result.setFailEventReports((List<FailureEventInfo>) map.get("failEventReports"));
+        result.setPrevSub((PrevSubInfo) map.get("prevSub"));
+        result.setConsNfInfo((ConsumerNfInformation) map.get("consNfInfo"));
+        return result;
+    }
 }
