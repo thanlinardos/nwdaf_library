@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import io.nwdaf.eventsubscription.model.NetworkAreaInfo;
 import io.nwdaf.eventsubscription.model.NnwdafEventsSubscriptionNotification;
-import io.nwdaf.eventsubscription.model.TimeUnit;
 
 public class CheckUtil {
     // checks if input string is neither null nor empty string ("")

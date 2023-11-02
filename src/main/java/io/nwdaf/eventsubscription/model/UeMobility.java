@@ -26,8 +26,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
-
-public class UeMobility   {
+public class UeMobility {
   private Instant time;
 
   @JsonProperty("ts")
@@ -38,13 +37,11 @@ public class UeMobility   {
 
   @JsonProperty("duration")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer duration
- = null;
+  private Integer duration = null;
 
   @JsonProperty("durationVariance")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float durationVariance
- = null;
+  private Float durationVariance = null;
 
   @JsonProperty("locInfos")
   @Valid
@@ -93,8 +90,8 @@ private Float durationVariance
    **/
   @Schema(description = "")
   
-    @Valid
-    public ScheduledCommunicationTime getRecurringTime() {
+  @Valid
+  public ScheduledCommunicationTime getRecurringTime() {
     return recurringTime;
   }
 
