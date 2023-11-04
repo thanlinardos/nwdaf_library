@@ -1,5 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -7,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -143,5 +147,26 @@ public class Ecgi {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.plmnId != null) {
+			map.put("plmnId", this.plmnId.toMap());
+		}
+		map.put("eutraCellId", this.eutraCellId);
+		map.put("nid", this.nid);
+		return map;
+	}
+
+	public static Ecgi fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		Ecgi result = new Ecgi();
+		result.setEutraCellId((String) map.get("eutraCellId"));
+		result.setNid((String) map.get("nid"));
+		result.setPlmnId(PlmnId.fromMap((Map<String, Object>) map.get("plmnId")));
+		return result;
 	}
 }

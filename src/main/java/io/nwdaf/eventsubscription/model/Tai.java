@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -13,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -139,4 +142,25 @@ private String nid
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+  public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.plmnId != null) {
+			map.put("plmnId", this.plmnId.toMap());
+		}
+		map.put("tac", this.tac);
+		map.put("nid", this.nid);
+		return map;
+	}
+
+  public static Tai fromMap(Map<String, Object> map) {
+    if(map==null) {
+			return null;
+		}
+		Tai result = new Tai();
+		result.setTac((String) map.get("tac"));
+		result.setNid((String) map.get("nid"));
+		result.setPlmnId(PlmnId.fromMap((Map<String, Object>) map.get("plmnId")));
+		return result;
+	}
 }

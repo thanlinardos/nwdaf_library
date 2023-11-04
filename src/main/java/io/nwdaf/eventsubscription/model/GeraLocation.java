@@ -1,6 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -13,6 +15,8 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -360,5 +364,48 @@ public class GeraLocation implements OneOfGeraLocation {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.cgi != null) {
+			map.put("cgi", this.cgi.toMap());
+		}
+		if (this.lai != null) {
+			map.put("lai", this.lai.toMap());
+		}
+		if (this.rai != null) {
+			map.put("rai", this.rai.toMap());
+		}
+		if (this.sai != null) {
+			map.put("sai", this.sai.toMap());
+		}
+		map.put("ueLocationTimestamp", ConvertUtil.convertOffsetDateTimeToDouble(this.ueLocationTimestamp));
+		map.put("ageOfLocationInformation", this.ageOfLocationInformation);
+		map.put("geodeticInformation", this.geodeticInformation);
+		map.put("geographicalInformation", this.geographicalInformation);
+		map.put("vlrNumber", this.vlrNumber);
+		map.put("mscNumber", this.mscNumber);
+		map.put("locationNumber", this.locationNumber);
+		return map;
+	}
+
+	public static GeraLocation fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		GeraLocation result = new GeraLocation();
+		result.setAgeOfLocationInformation((Integer) map.get("ageOfLocationInformation"));
+		result.setCgi(CellGlobalId.fromMap((Map<String, Object>)map.get("cgi")));
+		result.setRai(RoutingAreaId.fromMap((Map<String, Object>)map.get("rai")));
+		result.setLai(LocationAreaId.fromMap((Map<String, Object>)map.get("lai")));
+		result.setSai(ServiceAreaId.fromMap((Map<String, Object>)map.get("sai")));
+		result.setVlrNumber((String) map.get("vlrNumber"));
+		result.setMscNumber((String) map.get("mscNumber"));
+		result.setLocationNumber((String) map.get("locationNumber"));
+		result.setGeodeticInformation((String) map.get("geodeticInformation"));
+		result.setGeographicalInformation((String) map.get("geographicalInformation"));
+		result.setUeLocationTimestamp(ConvertUtil.convertDoubleToOffSetDateTime((Double) map.get("ueLocationTimestamp")));
+		return result;
 	}
 }

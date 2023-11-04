@@ -16,6 +16,7 @@ import io.nwdaf.eventsubscription.model.NwdafEvent;
 import io.nwdaf.eventsubscription.model.NwdafFailureCode;
 import io.nwdaf.eventsubscription.model.Snssai;
 import io.nwdaf.eventsubscription.model.UeMobility;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
 
 public class NotificationBuilder {
@@ -67,7 +68,7 @@ public class NotificationBuilder {
 					info.confidence(Integer.parseInt(dataOptionals.get(i).get(8)));
 				}
 				if(dataOptionals.get(i).get(9)!=null) {
-					info.time(OffsetDateTime.parse(dataOptionals.get(i).get(9)).toInstant());
+					info.time(ParserUtil.safeParseOffsetDateTime(dataOptionals.get(i).get(9)).toInstant());
 				}
 				
 			}

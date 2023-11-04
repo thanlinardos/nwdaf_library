@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import org.springframework.validation.annotation.Validated;
 
@@ -66,5 +68,20 @@ public class Gli {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("data",this.data);
+		return map;
+	}
+
+	public static Gli fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		Gli result = new Gli();
+		result.setData((String) map.get("data"));
+		return result;
 	}
 }

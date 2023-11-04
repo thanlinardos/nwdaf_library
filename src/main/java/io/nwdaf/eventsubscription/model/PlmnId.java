@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -7,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.*;
@@ -117,5 +120,22 @@ public class PlmnId {
 
 	public String toFormattedString() {
 		return "mcc" + this.mcc + ".mnc" + this.mnc;
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("mcc", ParserUtil.safeParseString(this.mcc));
+		map.put("mnc", this.mnc);
+		return map;
+	}
+
+	public static PlmnId fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		PlmnId result = new PlmnId();
+		result.setMcc((String) map.get("mcc"));
+		result.setMnc((String) map.get("mnc"));
+		return result;
 	}
 }

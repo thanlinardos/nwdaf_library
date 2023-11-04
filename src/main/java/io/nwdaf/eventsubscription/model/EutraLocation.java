@@ -1,6 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -14,6 +16,8 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -337,5 +341,46 @@ public class EutraLocation {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.ecgi != null) {
+			map.put("ecgi", this.ecgi.toMap());
+		}
+		if (this.globalENbId != null) {
+			map.put("globalENbId", this.globalENbId.toMap());
+		}
+		if (this.globalNgenbId != null) {
+			map.put("globalNgenbId", this.globalNgenbId.toMap());
+		}
+		if (this.tai != null) {
+			map.put("tai", this.tai.toMap());
+		}
+		map.put("ueLocationTimestamp", ConvertUtil.convertOffsetDateTimeToDouble(this.ueLocationTimestamp));
+		map.put("ageOfLocationInformation", this.ageOfLocationInformation);
+		map.put("geodeticInformation", this.geodeticInformation);
+		map.put("geographicalInformation", this.geographicalInformation);
+		map.put("ignoreEcgi", this.ignoreEcgi);
+		map.put("ignoreTai", this.ignoreTai);
+		return map;
+	}
+
+	public static EutraLocation fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		EutraLocation result = new EutraLocation();
+		result.setAgeOfLocationInformation((Integer) map.get("ageOfLocationInformation"));
+		result.setEcgi(Ecgi.fromMap((Map<String, Object>)map.get("ecgi")));
+		result.setGeodeticInformation((String) map.get("geodeticInformation"));
+		result.setGeographicalInformation((String) map.get("geographicalInformation"));
+		result.setGlobalENbId(GlobalRanNodeId.fromMap((Map<String, Object>) map.get("globalENbId")));
+		result.setGlobalNgenbId(GlobalRanNodeId.fromMap((Map<String, Object>) map.get("globalNgenbId")));
+		result.setIgnoreEcgi((Boolean) map.get("ignoreEcgi"));
+		result.setIgnoreTai((Boolean) map.get("ignoreTai"));
+		result.setTai(Tai.fromMap((Map<String,Object>) map.get("tai")));
+		result.setUeLocationTimestamp(ConvertUtil.convertDoubleToOffSetDateTime((Double) map.get("ueLocationTimestamp")));
+		return result;
 	}
 }

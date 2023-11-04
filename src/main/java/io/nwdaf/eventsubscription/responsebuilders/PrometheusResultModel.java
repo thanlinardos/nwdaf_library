@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
+
 public class PrometheusResultModel {
 	@JsonProperty("metric")
 	private PrometheusMetricModel metric = null;
@@ -21,7 +23,7 @@ public class PrometheusResultModel {
 
 	public void setValue(List<String> value) {
 		if(this.timeStamp==null && value.size()>0) {
-			this.timeStamp = OffsetDateTime.parse(value.get(0));
+			this.timeStamp = ParserUtil.safeParseOffsetDateTime(value.get(0));
 		}
 		this.value = value;
 	}
@@ -32,7 +34,7 @@ public class PrometheusResultModel {
 
 	public void setTimeStamp(OffsetDateTime timeStamp) {
 		if(timeStamp==null && value.size()>0) {
-			timeStamp = OffsetDateTime.parse(value.get(0));
+			timeStamp = ParserUtil.safeParseOffsetDateTime(value.get(0));
 		}
 		this.timeStamp = timeStamp;
 	}

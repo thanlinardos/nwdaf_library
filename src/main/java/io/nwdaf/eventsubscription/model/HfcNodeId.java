@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
@@ -84,5 +86,20 @@ public class HfcNodeId {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("hfcNId", this.hfcNId);
+		return map;
+	}
+
+	public static HfcNodeId fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		HfcNodeId result = new HfcNodeId();
+		result.setHfcNId((String) map.get("hfcNId"));
+		return result;
 	}
 }

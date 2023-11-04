@@ -20,6 +20,8 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -500,46 +502,54 @@ public class NfLoadLevelInformation implements Serializable {
 
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("timeStamp", (Object) this.getTimeStamp());
-		map.put("thresholdProperty", (Object) this.getThresholdProperty());
-		map.put("thresholdValue", (Object) this.getThresholdValue());
-		map.put("areaOfInterestId", (Object) this.getAreaOfInterestId());
-		map.put("supis", (Object) this.getSupis());
-		map.put("nfType", (Object) this.getNfType());
-		map.put("nfInstanceId", (Object) this.getNfInstanceId());
-		map.put("nfSetId", (Object) this.getNfSetId());
-		map.put("nfStatus", (Object) this.getNfStatus());
-		map.put("nfCpuUsage", (Object) this.getNfCpuUsage());
-		map.put("nfMemoryUsage", (Object) this.getNfMemoryUsage());
-		map.put("nfStorageUsage", (Object) this.getNfStorageUsage());
-		map.put("nfLoadLevelAverage", (Object) this.getNfLoadLevelAverage());
-		map.put("nfLoadLevelpeak", (Object) this.getNfLoadLevelpeak());
-		map.put("nfLoadAvgInAoi", (Object) this.getNfLoadAvgInAoi());
-		map.put("snssai", (Object) this.getSnssai());
-		map.put("confidence", (Object) this.getConfidence());
+		map.put("time", ConvertUtil.convertInstantToDouble(this.getTime()));
+		map.put("thresholdProperty", this.getThresholdProperty());
+		map.put("thresholdValue", this.getThresholdValue());
+		map.put("areaOfInterestId", ParserUtil.safeParseString(this.getAreaOfInterestId()));
+		map.put("supis", this.getSupis());
+		if(this.getNfType()!=null) {
+			map.put("nfType", this.getNfType().toMap());
+		}
+		map.put("nfInstanceId", ParserUtil.safeParseString(this.getNfInstanceId()));
+		map.put("nfSetId", this.getNfSetId());
+		if(this.getNfStatus()!=null) {
+			map.put("nfStatus", this.getNfStatus().toMap());
+		}
+		map.put("nfCpuUsage", this.getNfCpuUsage());
+		map.put("nfMemoryUsage", this.getNfMemoryUsage());
+		map.put("nfStorageUsage", this.getNfStorageUsage());
+		map.put("nfLoadLevelAverage", this.getNfLoadLevelAverage());
+		map.put("nfLoadLevelpeak", this.getNfLoadLevelpeak());
+		map.put("nfLoadAvgInAoi", this.getNfLoadAvgInAoi());
+		if(this.getSnssai()!=null) {
+			map.put("snssai", this.getSnssai().toMap());
+		}
+		map.put("confidence", this.getConfidence());
 		return map;
 	}
 
 	public static NfLoadLevelInformation fromMap(Map<String, Object> map) {
-        NfLoadLevelInformation result = new NfLoadLevelInformation();
-        result.setTime((Instant) map.get("time"));
-        result.setTimeStamp((OffsetDateTime) map.get("timeStamp"));
-        result.setThresholdProperty((String) map.get("thresholdProperty"));
-        result.setThresholdValue((Integer) map.get("thresholdValue"));
-        result.setAreaOfInterestId((UUID) map.get("areaOfInterestId"));
-        result.setSupis((List<String>) map.get("supis"));
-        result.setNfType((NFType) map.get("nfType"));
-        result.setNfInstanceId((UUID) map.get("nfInstanceId"));
-        result.setNfSetId((String) map.get("nfSetId"));
-        result.setNfStatus((NfStatus) map.get("nfStatus"));
-        result.setNfCpuUsage((Integer) map.get("nfCpuUsage"));
-        result.setNfMemoryUsage((Integer) map.get("nfMemoryUsage"));
-        result.setNfStorageUsage((Integer) map.get("nfStorageUsage"));
-        result.setNfLoadLevelAverage((Integer) map.get("nfLoadLevelAverage"));
-        result.setNfLoadLevelpeak((Integer) map.get("nfLoadLevelpeak"));
-        result.setNfLoadAvgInAoi((Integer) map.get("nfLoadAvgInAoi"));
-        result.setSnssai((Snssai) map.get("snssai"));
-        result.setConfidence((Integer) map.get("confidence"));
-        return result;
-    }
+		if(map==null) {
+			return null;
+		}
+		NfLoadLevelInformation result = new NfLoadLevelInformation();
+		result.setTime(ConvertUtil.convertDoubleToInstant((Double) map.get("time")));
+		result.setThresholdProperty((String) map.get("thresholdProperty"));
+		result.setThresholdValue((Integer) map.get("thresholdValue"));
+		result.setAreaOfInterestId(ParserUtil.safeParseUUID((String) map.get("areaOfInterestId")));
+		result.setSupis((List<String>) map.get("supis"));
+		result.setNfType(NFType.fromMap((Map<String, Object>) map.get("nfType")));
+		result.setNfInstanceId(ParserUtil.safeParseUUID((String) map.get("nfInstanceId")));
+		result.setNfSetId((String) map.get("nfSetId"));
+		result.setNfStatus(NfStatus.fromMap((Map<String,Object>) map.get("nfStatus")));
+		result.setNfCpuUsage((Integer) map.get("nfCpuUsage"));
+		result.setNfMemoryUsage((Integer) map.get("nfMemoryUsage"));
+		result.setNfStorageUsage((Integer) map.get("nfStorageUsage"));
+		result.setNfLoadLevelAverage((Integer) map.get("nfLoadLevelAverage"));
+		result.setNfLoadLevelpeak((Integer) map.get("nfLoadLevelpeak"));
+		result.setNfLoadAvgInAoi((Integer) map.get("nfLoadAvgInAoi"));
+		result.setSnssai(Snssai.fromMap((Map<String,Object>) map.get("snssai")));
+		result.setConfidence((Integer) map.get("confidence"));
+		return result;
+	}
 }

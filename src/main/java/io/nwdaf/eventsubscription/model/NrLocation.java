@@ -1,6 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -14,6 +16,8 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -284,5 +288,40 @@ public class NrLocation {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.ncgi != null) {
+			map.put("ncgi", this.ncgi.toMap());
+		}
+		if (this.globalGnbId != null) {
+			map.put("globalGnbId", this.globalGnbId.toMap());
+		}
+		if (this.tai != null) {
+			map.put("tai", this.tai.toMap());
+		}
+		map.put("ueLocationTimestamp", ConvertUtil.convertOffsetDateTimeToDouble(this.ueLocationTimestamp));
+		map.put("ageOfLocationInformation", this.ageOfLocationInformation);
+		map.put("geodeticInformation", this.geodeticInformation);
+		map.put("geographicalInformation", this.geographicalInformation);
+		map.put("ignoreNcgi", this.ignoreNcgi);
+		return map;
+	}
+
+	public static NrLocation fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		NrLocation result = new NrLocation();
+		result.setAgeOfLocationInformation((Integer) map.get("ageOfLocationInformation"));
+		result.setNcgi(Ncgi.fromMap((Map<String, Object>)map.get("ncgi")));
+		result.setGeodeticInformation((String) map.get("geodeticInformation"));
+		result.setGeographicalInformation((String) map.get("geographicalInformation"));
+		result.setGlobalGnbId(GlobalRanNodeId.fromMap((Map<String, Object>) map.get("globalENbId")));
+		result.setIgnoreNcgi((Boolean) map.get("ignoreNcgi"));
+		result.setTai(Tai.fromMap((Map<String,Object>) map.get("tai")));
+		result.setUeLocationTimestamp(ConvertUtil.convertDoubleToOffSetDateTime((Double) map.get("ueLocationTimestamp")));
+		return result;
 	}
 }

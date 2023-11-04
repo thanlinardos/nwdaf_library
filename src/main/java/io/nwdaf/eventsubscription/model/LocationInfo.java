@@ -1,5 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -142,5 +145,26 @@ public class LocationInfo {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+		map.put("confidence", this.confidence);
+		map.put("ratio", this.ratio);
+		if(this.loc!=null) {
+			map.put("loc", this.loc.toMap());
+		}
+		return map;
+    }
+
+	public static LocationInfo fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		LocationInfo result = new LocationInfo();
+		result.setConfidence((Integer) map.get("confidence"));
+		result.setLoc(UserLocation.fromMap((Map<String, Object>)map.get("loc")));
+		result.setRatio((Integer) map.get("ratio"));
+		return result;
 	}
 }

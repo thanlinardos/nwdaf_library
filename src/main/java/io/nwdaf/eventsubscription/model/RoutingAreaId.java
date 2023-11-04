@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -138,4 +140,25 @@ private String rac
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+  public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.plmnId != null) {
+			map.put("plmnId", this.plmnId.toMap());
+		}
+		map.put("lac", this.lac);
+		map.put("rac", this.rac);
+		return map;
+	}
+
+  public static RoutingAreaId fromMap(Map<String, Object> map) {
+    if(map==null) {
+			return null;
+		}
+		RoutingAreaId result = new RoutingAreaId();
+		result.setLac((String) map.get("lac"));
+		result.setRac((String) map.get("rac"));
+		result.setPlmnId(PlmnId.fromMap((Map<String, Object>) map.get("plmnId")));
+		return result;
+	}
 }

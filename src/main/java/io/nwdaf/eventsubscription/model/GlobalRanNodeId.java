@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -13,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.CheckUtil;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -310,5 +313,38 @@ public class GlobalRanNodeId implements OneOfGlobalRanNodeId {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.plmnId != null) {
+			map.put("plmnId", this.plmnId.toMap());
+		}
+		if (this.gNbId != null) {
+			map.put("gNbId", this.gNbId.toMap());
+		}
+		map.put("eNbId", this.eNbId);
+		map.put("n3IwfId", this.n3IwfId);
+		map.put("ngeNbId", this.ngeNbId);
+		map.put("tngfId", this.tngfId);
+		map.put("wagfId", this.wagfId);
+		map.put("nid", this.nid);
+		return map;
+	}
+
+	public static GlobalRanNodeId fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		GlobalRanNodeId result = new GlobalRanNodeId();
+		result.setENbId((String) map.get("eNbId"));
+		result.setGNbId(GNbId.fromMap((Map<String, Object>) map.get("gNbId")));
+		result.setN3IwfId((String) map.get("n3IwfId"));
+		result.setNgeNbId((String) map.get("ngeNbId"));
+		result.setWagfId((String) map.get("wagfId"));
+		result.setTngfId((String) map.get("tngfId"));
+		result.setNid((String) map.get("nid"));
+		result.setPlmnId(PlmnId.fromMap((Map<String, Object>) map.get("plmnId")));
+		return result;
 	}
 }

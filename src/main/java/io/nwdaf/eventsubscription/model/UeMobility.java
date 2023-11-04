@@ -19,6 +19,8 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -301,26 +303,38 @@ public class UeMobility {
 
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("time", (Object) this.getTime());
-		map.put("ts", (Object) this.getTs());
-		map.put("recurringTime", (Object) this.getRecurringTime());
-		map.put("duration", (Object) this.getDuration());
-		map.put("durationVariance", (Object) this.getDurationVariance());
-		map.put("locInfos", (Object) this.getLocInfos());
-		map.put("areaOfInterestIds", (Object) this.getAreaOfInterestIds());
-		map.put("supi", (Object) this.getSupi());
-		map.put("intGroupId", (Object) this.getIntGroupId());
+		map.put("time", ConvertUtil.convertInstantToDouble(this.getTime()));
+		map.put("recurringTime",  this.getRecurringTime());
+		map.put("duration",  this.getDuration());
+		map.put("durationVariance",  this.getDurationVariance());
+		List<Map<String,Object>> locMapList = new ArrayList<>();
+		if(this.locInfos!=null) {
+			for(int i=0;i<this.locInfos.size();i++) {
+				if(this.locInfos.get(i)!=null) {
+					locMapList.add(this.locInfos.get(i).toMap());
+				}
+			}
+		}
+		map.put("locInfos",  locMapList);
+		map.put("areaOfInterestIds",  this.getAreaOfInterestIds());
+		map.put("supi",  this.getSupi());
+		map.put("intGroupId",  this.getIntGroupId());
 		return map;
 	}
 	
 	public static UeMobility fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
         UeMobility result = new UeMobility();
-        result.setTime((Instant) map.get("time"));
-        result.setTs((OffsetDateTime) map.get("ts"));
+        result.setTime(ConvertUtil.convertDoubleToInstant((Double) map.get("time")));
         result.setRecurringTime((ScheduledCommunicationTime) map.get("recurringTime"));
         result.setDuration((Integer) map.get("duration"));
         result.setDurationVariance((Float) map.get("durationVariance"));
-        result.setLocInfos((List<LocationInfo>) map.get("locInfos"));
+		List<Map<String, Object>> locInfos = (List<Map<String, Object>>) map.get("locInfos");
+		for (Map<String,Object> locInfo : locInfos) {
+			result.addLocInfosItem(LocationInfo.fromMap(locInfo));	
+		}
         result.setAreaOfInterestIds((List<UUID>) map.get("areaOfInterestIds"));
         result.setSupi((String) map.get("supi"));
         result.setIntGroupId((String) map.get("intGroupId"));

@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.constraints.Max;
@@ -12,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -123,5 +126,22 @@ public class GNbId {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("bitLength", this.bitLength);
+		map.put("gNBValue", this.gNBValue);
+		return map;
+	}
+
+	public static GNbId fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		GNbId result = new GNbId();
+		result.setBitLength((Integer) map.get("bitLength"));
+		result.setGNBValue((String) map.get("gNBValue"));
+		return result;
 	}
 }

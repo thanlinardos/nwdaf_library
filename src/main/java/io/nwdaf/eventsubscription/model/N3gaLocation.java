@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -383,5 +385,56 @@ public class N3gaLocation {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		if (this.hfcNodeId != null) {
+			map.put("hfcNodeId", this.hfcNodeId.toMap());
+		}
+		if (this.protocol != null) {
+			map.put("protocol", this.protocol.toMap());
+		}
+		if (this.n3gppTai != null) {
+			map.put("n3gppTai", this.n3gppTai.toMap());
+		}
+		if (this.gli != null) {
+			map.put("gli", this.gli.toMap());
+		}
+		if (this.tnapId != null) {
+			map.put("tnapId", this.tnapId.toMap());
+		}
+		if (this.twapId != null) {
+			map.put("twapId", this.twapId.toMap());
+		}
+		if (this.w5gbanLineType != null) {
+			map.put("w5gbanLineType", this.w5gbanLineType.toMap());
+		}
+		map.put("gci", this.gci);
+		map.put("n3IwfId", this.n3IwfId);
+		map.put("portNumber", this.portNumber);
+		map.put("ueIpv4Addr", this.ueIpv4Addr);
+		map.put("ueIpv6Addr", this.ueIpv6Addr);
+		return map;
+	}
+
+	public static N3gaLocation fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		N3gaLocation result = new N3gaLocation();
+		result.setGci((String) map.get("gci"));
+		result.setGli(Gli.fromMap((Map<String, Object>) map.get("gli")));
+		result.setHfcNodeId(HfcNodeId.fromMap((Map<String, Object>) map.get("hfcNodeId")));
+		result.setN3IwfId((String) map.get("n3IwfId"));
+		result.setN3gppTai(Tai.fromMap((Map<String, Object>) map.get("tai")));
+		result.setPortNumber((Integer) map.get("portNumber"));
+		result.setProtocol(TransportProtocol.fromMap((Map<String, Object>) map.get("protocol")));
+		result.setTnapId(TnapId.fromMap((Map<String, Object>) map.get("tnapId")));
+		result.setTwapId(TwapId.fromMap((Map<String, Object>) map.get("twapId")));
+		result.setUeIpv4Addr((String) map.get("ueIpv4Addr"));
+		result.setUeIpv6Addr((String) map.get("ueIpv6Addr"));
+		result.setW5gbanLineType(LineType.fromMap((Map<String,Object>) map.get("w5gbanLineType")));
+		return result;
 	}
 }

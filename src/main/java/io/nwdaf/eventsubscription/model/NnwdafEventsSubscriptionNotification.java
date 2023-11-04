@@ -1,13 +1,10 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.time.Instant;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -182,19 +179,22 @@ public class NnwdafEventsSubscriptionNotification implements OneOfNnwdafEventsSu
 
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("eventNotifications", (Object) this.getEventNotifications());
-		map.put("subscriptionId", (Object) this.getSubscriptionId());
-		map.put("notifCorrId", (Object) this.getNotifCorrId());
-		map.put("oldSubscriptionId", (Object) this.getOldSubscriptionId());
+		map.put("eventNotifications", this.getEventNotifications());
+		map.put("subscriptionId", this.getSubscriptionId());
+		map.put("notifCorrId", this.getNotifCorrId());
+		map.put("oldSubscriptionId", this.getOldSubscriptionId());
 		return map;
 	}
 
 	public static NnwdafEventsSubscriptionNotification fromMap(Map<String, Object> map) {
-        NnwdafEventsSubscriptionNotification result = new NnwdafEventsSubscriptionNotification();
-        result.setEventNotifications((List<EventNotification>) map.get("eventNotifications"));
-        result.setSubscriptionId((String) map.get("subscriptionId"));
-        result.setNotifCorrId((String) map.get("notifCorrId"));
-        result.setOldSubscriptionId((String) map.get("oldSubscriptionId"));
-        return result;
-    }
+		if(map==null) {
+			return null;
+		}
+		NnwdafEventsSubscriptionNotification result = new NnwdafEventsSubscriptionNotification();
+		result.setEventNotifications((List<EventNotification>) map.get("eventNotifications"));
+		result.setSubscriptionId((String) map.get("subscriptionId"));
+		result.setNotifCorrId((String) map.get("notifCorrId"));
+		result.setOldSubscriptionId((String) map.get("oldSubscriptionId"));
+		return result;
+	}
 }

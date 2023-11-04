@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.validation.annotation.Validated;
@@ -8,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.nwdaf.eventsubscription.model.TransportProtocol.TransportProtocolEnum;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -103,5 +107,20 @@ public class LineType {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("lType", ParserUtil.safeParseString(this.lType));
+		return map;
+	}
+
+	public static LineType fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		LineType result = new LineType();
+		result.setLType(LineTypeEnum.fromValue((String) map.get("lType")));
+		return result;
 	}
 }

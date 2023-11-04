@@ -113,6 +113,7 @@ import io.nwdaf.eventsubscription.model.UpfInformation;
 import io.nwdaf.eventsubscription.model.WlanOrderingCriterion;
 import io.nwdaf.eventsubscription.model.WlanOrderingCriterion.WlanOrderingCriterionEnum;
 import io.nwdaf.eventsubscription.model.WlanPerformanceReq;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 
 public class CreateSubscriptionRequestBuilder {
 	
@@ -147,16 +148,16 @@ public class CreateSubscriptionRequestBuilder {
 				extraRepReq.maxSupiNbr(Integer.parseInt(optionals.get(1)));
 			}
 			if(optionals.get(2)!=null) {
-				extraRepReq.startTs(OffsetDateTime.parse(optionals.get(2)));
+				extraRepReq.startTs(ParserUtil.safeParseOffsetDateTime(optionals.get(2)));
 			}
 			if(optionals.get(3)!=null) {
-				extraRepReq.endTs(OffsetDateTime.parse(optionals.get(3)));
+				extraRepReq.endTs(ParserUtil.safeParseOffsetDateTime(optionals.get(3)));
 			}
 			if(optionals.get(4)!=null) {
 				extraRepReq.accuracy(new Accuracy().accuracy(AccuracyEnum.fromValue(optionals.get(4))));
 			}
 			if(optionals.get(5)!=null) {
-				extraRepReq.timeAnaNeeded(OffsetDateTime.parse(optionals.get(5)));
+				extraRepReq.timeAnaNeeded(ParserUtil.safeParseOffsetDateTime(optionals.get(5)));
 			}
 			if(optionals.get(6)!=null) {
 				extraRepReq.offsetPeriod(Integer.parseInt(optionals.get(6)));
@@ -173,10 +174,10 @@ public class CreateSubscriptionRequestBuilder {
 			AnalyticsMetadataIndication anametaind = new AnalyticsMetadataIndication();
 			TimeWindow tw = new TimeWindow();
 			if(anaMetaInd.get(0)!=null) {
-				tw.startTime(OffsetDateTime.parse(anaMetaInd.get(0)));
+				tw.startTime(ParserUtil.safeParseOffsetDateTime(anaMetaInd.get(0)));
 			}
 			if(anaMetaInd.get(1)!=null) {
-				tw.stopTime(OffsetDateTime.parse(anaMetaInd.get(1)));
+				tw.stopTime(ParserUtil.safeParseOffsetDateTime(anaMetaInd.get(1)));
 			}
 			if((anaMetaInd.get(0)!=null)||(anaMetaInd.get(1)!=null)) {
 				anametaind.dataWindow(tw);
@@ -520,7 +521,7 @@ public class CreateSubscriptionRequestBuilder {
 				expUe.trafficProfile(new TrafficProfile().trafficProfile(TrafficProfileEnum.fromValue(exptUeBehav.get(0).get(0).get(0).get(0).get(0).get(4))));
 			}
 			if(exptUeBehav.get(0).get(0).get(0).get(0).get(0).get(5)!=null) {
-				expUe.validityTime(OffsetDateTime.parse(exptUeBehav.get(0).get(0).get(0).get(0).get(0).get(5)));
+				expUe.validityTime(ParserUtil.safeParseOffsetDateTime(exptUeBehav.get(0).get(0).get(0).get(0).get(0).get(5)));
 			}
 			ScheduledCommunicationTime1 schTime = new ScheduledCommunicationTime1();
 			if(exptUeBehav.get(1).get(0).get(0).get(0).get(0).size()>0) {
@@ -766,7 +767,7 @@ public class CreateSubscriptionRequestBuilder {
 			evtReq.maxReportNbr(Integer.parseInt(optionals.get(2)));
 		}
 		if(optionals.get(3)!=null) {
-			evtReq.monDur(OffsetDateTime.parse(optionals.get(3)));
+			evtReq.monDur(ParserUtil.safeParseOffsetDateTime(optionals.get(3)));
 		}
 		if(optionals.get(4)!=null) {
 			evtReq.repPeriod(Integer.parseInt(optionals.get(4)));

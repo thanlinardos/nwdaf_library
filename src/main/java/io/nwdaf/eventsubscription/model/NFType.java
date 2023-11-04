@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.validation.annotation.Validated;
@@ -8,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -156,5 +159,20 @@ public class NFType {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("nfType", ParserUtil.safeParseString(this.nfType));
+		return map;
+	}
+
+	public static NFType fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		NFType nfType = new NFType();
+		nfType.setNfType(NFTypeEnum.fromValue((String)map.get("nfType")));
+		return nfType;
 	}
 }

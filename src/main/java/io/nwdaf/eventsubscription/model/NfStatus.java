@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.constraints.Max;
@@ -10,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -147,5 +150,24 @@ public class NfStatus implements AnyOfNfStatus {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("statusRegistered", this.statusRegistered);
+		map.put("statusUnregistered", this.statusUnregistered);
+		map.put("statusUndiscoverable", this.statusUndiscoverable);
+		return map;
+	}
+
+	public static NfStatus fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		NfStatus result = new NfStatus();
+    	result.setStatusRegistered((Integer) map.get("statusRegistered"));
+    	result.setStatusUndiscoverable((Integer) map.get("statusUndiscoverable"));
+		result.setStatusUnregistered((Integer) map.get("statusUnregistered"));
+		return result;
 	}
 }

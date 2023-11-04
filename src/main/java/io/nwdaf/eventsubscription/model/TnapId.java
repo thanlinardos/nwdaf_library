@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -89,6 +91,10 @@ private String bssId
     this.civicAddress = Base64.decodeBase64(civicAddressString);
   }
 
+  public void setCivicAddressRaw(byte[] civicAddress) {
+    this.civicAddress = civicAddress;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -131,4 +137,23 @@ private String bssId
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+  public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("bssId",this.bssId);
+    map.put("ssId",this.ssId);
+    map.put("civicAddress", this.civicAddress);
+		return map;
+	}
+
+	public static TnapId fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		TnapId result = new TnapId();
+		result.setBssId((String) map.get("bssId"));
+    result.setSsId((String) map.get("ssId"));
+    result.setCivicAddressRaw((byte[]) map.get("civicAddress"));
+		return result;
+	}
 }

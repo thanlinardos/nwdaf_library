@@ -346,31 +346,34 @@ public class NnwdafEventsSubscription {
 
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("id", (Object) this.getId());
-		map.put("eventSubscriptions", (Object) this.getEventSubscriptions());
-		map.put("evtReq", (Object) this.getEvtReq());
-		map.put("notificationURI", (Object) this.getNotificationURI());
-		map.put("notifCorrId", (Object) this.getNotifCorrId());
-		map.put("supportedFeatures", (Object) this.getSupportedFeatures());
-		map.put("eventNotifications", (Object) this.getEventNotifications());
-		map.put("failEventReports", (Object) this.getFailEventReports());
-		map.put("prevSub", (Object) this.getPrevSub());
-		map.put("consNfInfo", (Object) this.getConsNfInfo());
+		map.put("id", this.getId());
+		map.put("eventSubscriptions", this.getEventSubscriptions());
+		map.put("evtReq", this.getEvtReq());
+		map.put("notificationURI", this.getNotificationURI());
+		map.put("notifCorrId", this.getNotifCorrId());
+		map.put("supportedFeatures", this.getSupportedFeatures());
+		map.put("eventNotifications", this.getEventNotifications());
+		map.put("failEventReports", this.getFailEventReports());
+		map.put("prevSub", this.getPrevSub());
+		map.put("consNfInfo", this.getConsNfInfo());
 		return map;
 	}
 
 	public static NnwdafEventsSubscription fromMap(Map<String, Object> map) {
-        NnwdafEventsSubscription result = new NnwdafEventsSubscription();
-        result.setId((Long) map.get("id"));
-        result.setEventSubscriptions((List<EventSubscription>) map.get("eventSubscriptions"));
-        result.setEvtReq((ReportingInformation) map.get("evtReq"));
-        result.setNotificationURI((String) map.get("notificationURI"));
-        result.setNotifCorrId((String) map.get("notifCorrId"));
-        result.setSupportedFeatures((String) map.get("supportedFeatures"));
-        result.setEventNotifications((List<EventNotification>) map.get("eventNotifications"));
-        result.setFailEventReports((List<FailureEventInfo>) map.get("failEventReports"));
-        result.setPrevSub((PrevSubInfo) map.get("prevSub"));
-        result.setConsNfInfo((ConsumerNfInformation) map.get("consNfInfo"));
-        return result;
-    }
+		if(map==null) {
+			return null;
+		}
+		NnwdafEventsSubscription result = new NnwdafEventsSubscription();
+		result.setId((Long) map.get("id"));
+		result.setEventSubscriptions((List<EventSubscription>) map.get("eventSubscriptions"));
+		result.setEvtReq((ReportingInformation) map.get("evtReq"));
+		result.setNotificationURI((String) map.get("notificationURI"));
+		result.setNotifCorrId((String) map.get("notifCorrId"));
+		result.setSupportedFeatures((String) map.get("supportedFeatures"));
+		result.setEventNotifications((List<EventNotification>) map.get("eventNotifications"));
+		result.setFailEventReports((List<FailureEventInfo>) map.get("failEventReports"));
+		result.setPrevSub((PrevSubInfo) map.get("prevSub"));
+		result.setConsNfInfo((ConsumerNfInformation) map.get("consNfInfo"));
+		return result;
+	}
 }
