@@ -1,5 +1,6 @@
 package io.nwdaf.eventsubscription.utilities;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -66,6 +67,17 @@ public class ConvertUtil {
         long secondsSinceEpoch = (long) d.doubleValue();
         double fractionalPart = d.doubleValue() - secondsSinceEpoch;
         long nanoAdjustment = (long) (fractionalPart * 1_000_000_000);
+        return Instant.ofEpochSecond(secondsSinceEpoch, nanoAdjustment);
+    }
+
+    public static Instant convertDoubleToInstantWithBigDecimal(String d) {
+        if (d == null) {
+            return null;
+        }
+        BigDecimal bigDecimalValue = new BigDecimal(d);
+        long secondsSinceEpoch = bigDecimalValue.longValue();
+        BigDecimal fractionalPart = bigDecimalValue.remainder(BigDecimal.ONE);
+        long nanoAdjustment = fractionalPart.multiply(Constants.ONE_BILLION).longValue();
         return Instant.ofEpochSecond(secondsSinceEpoch, nanoAdjustment);
     }
 

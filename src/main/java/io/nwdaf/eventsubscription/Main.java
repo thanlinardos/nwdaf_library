@@ -50,6 +50,7 @@ public class Main {
                 .addSupi("1341356fe").addSupi("wsgwrg")
                 .time(Instant.now());
         UeMobility ueMobility = new UeMobility()
+                .durationVariance(0.0f)
                 .time(Instant.now())
                 .addAreaOfInterestIdsItem(UUID.randomUUID()).addAreaOfInterestIdsItem(UUID.randomUUID())
                 .addLocInfosItem(new LocationInfo()
@@ -98,20 +99,33 @@ public class Main {
         // System.out.println();
         // System.out.println("objFromMap:"+objectMapper.readValue((new JSONObject(objectMapper.convertValue(ueMobility,new TypeReference<Map<String, Object>>() {}))).toString(),UeMobility.class));
         // System.out.println("fromMap:"+UeMobility.fromMap(objectMapper.convertValue(ueMobility,new TypeReference<Map<String, Object>>() {})));
-        long st = System.nanoTime();
+        // long st = System.nanoTime();
         // for(int i=0;i<100000;i++) {
         //     objectMapper.readValue((new JSONObject(objectMapper.convertValue(ueMobility,new TypeReference<Map<String, Object>>() {}))).toString(),UeMobility.class);
         // }
         // long end1 = (System.nanoTime()-st) / 1000000l;
         // System.out.println("with obj: "+end1+" ms");
         // st = System.nanoTime();
-        for(int i=0;i<1;i++) {
-            System.out.println(UeMobility.fromMap(ueMobility.toMap()));
-        }
-        long end2 = (System.nanoTime()-st) / 1000000l;
-        System.out.println("with fromMap & toMap: "+end2+" ms");
+        // for(int i=0;i<1;i++) {
+        //     System.out.println(UeMobility.fromMap(ueMobility.toMap()));
+        // }
+        // long end2 = (System.nanoTime()-st) / 1000000l;
+        // System.out.println("with fromMap & toMap: "+end2+" ms");
         // System.out.println("fromMap times faster: "+(double)end1/end2);
-
-        System.out.println(ConvertUtil.convertDoubleToOffSetDateTime(Double.valueOf(1699121755.7130346)));
+        double doubleValue = 1677648023.123456789;
+        System.out.println(ConvertUtil.convertDoubleToInstant(Double.valueOf(1699181962.188051078)));
+        System.out.println(ConvertUtil.convertDoubleToInstantWithBigDecimal("1677648023.123456789"));
+        // long st = System.nanoTime();
+        // for(int i=0;i<1000000;i++) {
+        //     ConvertUtil.convertDoubleToInstant(Double.valueOf(doubleValue));
+        // }
+        // long end1 = (System.nanoTime()-st) / 1000000l;
+        // System.out.println("convert with double: "+end1+"ms");
+        // st = System.nanoTime();
+        // for(int i=0;i<1000000;i++) {
+        //     ConvertUtil.convertDoubleToInstantWithBigDecimal("1677648023.123456789");
+        // }
+        // long end2 = (System.nanoTime()-st) / 1000000l;
+        // System.out.println("convert with bigdecimal: "+end2+"ms");
     }
 }

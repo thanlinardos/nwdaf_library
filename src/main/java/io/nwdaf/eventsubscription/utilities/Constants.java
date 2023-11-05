@@ -1,5 +1,6 @@
 package io.nwdaf.eventsubscription.utilities;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -92,4 +93,6 @@ public class Constants {
 	}
 
 	public static String nfloadPostgresColumnFormat = "CAST(ROUND(AVG(CAST(data->>'%1$s' as numeric))) as integer) AS %1$s,";
+
+	public static BigDecimal ONE_BILLION = new BigDecimal(1_000_000_000);
 }
