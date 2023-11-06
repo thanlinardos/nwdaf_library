@@ -158,7 +158,7 @@ public class DummyDataGenerator {
                 default:
                     break;
             }
-            res.get(i).ts(now).duration(1).durationVariance(0.0f);
+            res.get(i).ts(now).duration(1).durationVariance(0.0);
             res.get(i).addLocInfosItem(new LocationInfo().ratio(r.nextInt(1,101)).confidence(r.nextInt(101))
             .loc(userLocation));
         }

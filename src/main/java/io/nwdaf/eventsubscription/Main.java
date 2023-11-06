@@ -3,6 +3,9 @@ package io.nwdaf.eventsubscription;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +28,7 @@ import io.nwdaf.eventsubscription.model.NfStatus;
 import io.nwdaf.eventsubscription.model.NrLocation;
 import io.nwdaf.eventsubscription.model.PlmnId;
 import io.nwdaf.eventsubscription.model.RoutingAreaId;
+import io.nwdaf.eventsubscription.model.ScheduledCommunicationTime;
 import io.nwdaf.eventsubscription.model.ServiceAreaId;
 import io.nwdaf.eventsubscription.model.Snssai;
 import io.nwdaf.eventsubscription.model.UeMobility;
@@ -50,7 +54,8 @@ public class Main {
                 .addSupi("1341356fe").addSupi("wsgwrg")
                 .time(Instant.now());
         UeMobility ueMobility = new UeMobility()
-                .durationVariance(0.0f)
+                .durationVariance(0.0)
+                .recurringTime(new ScheduledCommunicationTime().daysOfWeek(List.of(1,2,3)).timeOfDayEnd("0:0").timeOfDayStart("12:12"))
                 .time(Instant.now())
                 .addAreaOfInterestIdsItem(UUID.randomUUID()).addAreaOfInterestIdsItem(UUID.randomUUID())
                 .addLocInfosItem(new LocationInfo()
@@ -90,7 +95,17 @@ public class Main {
                             .ueLocationTimestamp(OffsetDateTime.now())
                             .vlrNumber("sge"))
                         .utraLocation(new UtraLocation().ueLocationTimestamp(OffsetDateTime.now()).cgi(new CellGlobalId().cellId("egf")))
-                        .n3gaLocation(new N3gaLocation().gli(new Gli().data("wgerg")).gci("srg").hfcNodeId(new HfcNodeId().hfcNId("fsrg")))));
+                        .n3gaLocation(new N3gaLocation().gli(new Gli().data("wgerg")).gci("srg").hfcNodeId(new HfcNodeId().hfcNId("fsrg")))))
+                .addLocInfosItem(new LocationInfo()
+                    .confidence(12)
+                    .ratio(99)
+                    .loc(new UserLocation()
+                        .eutraLocation(new EutraLocation()
+                            .ageOfLocationInformation(12)
+                            .ecgi(new Ecgi()
+                                .eutraCellId("srgerg")
+                                .plmnId(new PlmnId()
+                                    .mcc("123").mnc("123"))))));
         // System.out.println("objToMap:"+objectMapper.convertValue(nfLoadLevelInformation,new TypeReference<Map<String, Object>>() {}));
         // System.out.println();System.out.println();
         // System.out.println("objFromMap:"+objectMapper.readValue((new JSONObject(nfLoadLevelInformation.toMap())).toString(),NfLoadLevelInformation.class));
@@ -105,16 +120,20 @@ public class Main {
         // }
         // long end1 = (System.nanoTime()-st) / 1000000l;
         // System.out.println("with obj: "+end1+" ms");
-        // st = System.nanoTime();
-        // for(int i=0;i<1;i++) {
-        //     System.out.println(UeMobility.fromMap(ueMobility.toMap()));
-        // }
-        // long end2 = (System.nanoTime()-st) / 1000000l;
+        Map<String,Object> map = ueMobility.toMap();
+        long st = System.nanoTime();
+        for(int i=0;i<1;i++) {
+            System.out.println(UeMobility.fromMap(ueMobility.toMap()));
+            // objectMapper.writeValueAsString(map);
+            // System.out.println(objectMapper.writeValueAsString(map));
+        }
+        long end2 = (System.nanoTime()-st) / 1000000l;
+        System.out.println("dur:"+end2+"ms");
         // System.out.println("with fromMap & toMap: "+end2+" ms");
         // System.out.println("fromMap times faster: "+(double)end1/end2);
-        double doubleValue = 1677648023.123456789;
-        System.out.println(ConvertUtil.convertDoubleToInstant(Double.valueOf(1699181962.188051078)));
-        System.out.println(ConvertUtil.convertDoubleToInstantWithBigDecimal("1677648023.123456789"));
+        // double doubleValue = 1677648023.123456789;
+        // System.out.println(ConvertUtil.convertDoubleToInstant(Double.valueOf(1699208779.796562872)));
+        // System.out.println(ConvertUtil.convertDoubleToInstantWithBigDecimal("1677648023.123456789"));
         // long st = System.nanoTime();
         // for(int i=0;i<1000000;i++) {
         //     ConvertUtil.convertDoubleToInstant(Double.valueOf(doubleValue));

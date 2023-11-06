@@ -115,4 +115,11 @@ public class ConvertUtil {
         }
         return convertInstantToDouble(date.toInstant());
     }
+
+    public static Float convertDoubleToFloat(Double d) {
+        if(d==null) {
+            return null;
+        }
+        return Float.valueOf((float) d.doubleValue());
+    }
 }

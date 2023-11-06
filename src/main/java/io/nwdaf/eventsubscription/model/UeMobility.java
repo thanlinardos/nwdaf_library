@@ -1,5 +1,6 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -29,7 +31,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
-public class UeMobility {
+public class UeMobility implements Serializable {
 	private Instant time;
 
 	@JsonProperty("ts")
@@ -44,7 +46,7 @@ public class UeMobility {
 
 	@JsonProperty("durationVariance")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Float durationVariance = null;
+	private Double durationVariance = null;
 
 	@JsonProperty("locInfos")
 	@Valid
@@ -126,7 +128,7 @@ public class UeMobility {
 		this.duration = duration;
 	}
 
-	public UeMobility durationVariance(Float durationVariance) {
+	public UeMobility durationVariance(Double durationVariance) {
 		this.durationVariance = durationVariance;
 		return this;
 	}
@@ -138,11 +140,11 @@ public class UeMobility {
 	 **/
 	@Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-	public Float getDurationVariance() {
+	public Double getDurationVariance() {
 		return durationVariance;
 	}
 
-	public void setDurationVariance(Float durationVariance) {
+	public void setDurationVariance(Double durationVariance) {
 		this.durationVariance = durationVariance;
 	}
 
@@ -303,40 +305,42 @@ public class UeMobility {
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("time", ConvertUtil.convertInstantToDouble(this.getTime()));
-		map.put("recurringTime",  this.getRecurringTime());
-		map.put("duration",  this.getDuration());
-		map.put("durationVariance",  this.getDurationVariance());
-		List<Map<String,Object>> locMapList = new ArrayList<>();
-		if(this.locInfos!=null) {
-			for(int i=0;i<this.locInfos.size();i++) {
-				if(this.locInfos.get(i)!=null) {
+		if (this.getRecurringTime() != null) {
+			map.put("recurringTime", this.getRecurringTime().toMap());
+		}
+		map.put("duration", this.getDuration());
+		map.put("durationVariance", this.getDurationVariance());
+		List<Map<String, Object>> locMapList = new ArrayList<>();
+		if (this.locInfos != null) {
+			for (int i = 0; i < this.locInfos.size(); i++) {
+				if (this.locInfos.get(i) != null) {
 					locMapList.add(this.locInfos.get(i).toMap());
 				}
 			}
 		}
-		map.put("locInfos",  locMapList);
-		map.put("areaOfInterestIds",  this.getAreaOfInterestIds());
-		map.put("supi",  this.getSupi());
-		map.put("intGroupId",  this.getIntGroupId());
+		map.put("locInfos", locMapList);
+		map.put("areaOfInterestIds", this.getAreaOfInterestIds());
+		map.put("supi", this.getSupi());
+		map.put("intGroupId", this.getIntGroupId());
 		return map;
 	}
-	
+
 	public static UeMobility fromMap(Map<String, Object> map) {
-		if(map==null) {
+		if (map == null) {
 			return null;
 		}
-        UeMobility result = new UeMobility();
-        result.setTime(ConvertUtil.convertDoubleToInstant((Double) map.get("time")));
-        result.setRecurringTime((ScheduledCommunicationTime) map.get("recurringTime"));
-        result.setDuration((Integer) map.get("duration"));
-        result.setDurationVariance((Float) map.get("durationVariance"));
+		UeMobility result = new UeMobility();
+		result.setTime(ConvertUtil.convertDoubleToInstant((Double) map.get("time")));
+		result.setRecurringTime(ScheduledCommunicationTime.fromMap((Map<String, Object>) map.get("recurringTime")));
+		result.setDuration((Integer) map.get("duration"));
+		result.setDurationVariance((Double) map.get("durationVariance"));
 		List<Map<String, Object>> locInfos = (List<Map<String, Object>>) map.get("locInfos");
-		for (Map<String,Object> locInfo : locInfos) {
-			result.addLocInfosItem(LocationInfo.fromMap(locInfo));	
+		for (Map<String, Object> locInfo : locInfos) {
+			result.addLocInfosItem(LocationInfo.fromMap(locInfo));
 		}
-        result.setAreaOfInterestIds((List<UUID>) map.get("areaOfInterestIds"));
-        result.setSupi((String) map.get("supi"));
-        result.setIntGroupId((String) map.get("intGroupId"));
-        return result;
-    }
+		result.setAreaOfInterestIds((List<UUID>) map.get("areaOfInterestIds"));
+		result.setSupi((String) map.get("supi"));
+		result.setIntGroupId((String) map.get("intGroupId"));
+		return result;
+	}
 }
