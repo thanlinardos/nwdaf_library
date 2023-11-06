@@ -3,7 +3,6 @@ package io.nwdaf.eventsubscription;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -35,7 +34,6 @@ import io.nwdaf.eventsubscription.model.UeMobility;
 import io.nwdaf.eventsubscription.model.UserLocation;
 import io.nwdaf.eventsubscription.model.UtraLocation;
 import io.nwdaf.eventsubscription.model.NFType.NFTypeEnum;
-import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 
 public class Main {
     public static void main(String args[]) throws IOException{
