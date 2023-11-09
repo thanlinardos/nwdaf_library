@@ -30,6 +30,8 @@ import io.nwdaf.eventsubscription.model.RoutingAreaId;
 import io.nwdaf.eventsubscription.model.ScheduledCommunicationTime;
 import io.nwdaf.eventsubscription.model.ServiceAreaId;
 import io.nwdaf.eventsubscription.model.Snssai;
+import io.nwdaf.eventsubscription.model.TnapId;
+import io.nwdaf.eventsubscription.model.TwapId;
 import io.nwdaf.eventsubscription.model.UeMobility;
 import io.nwdaf.eventsubscription.model.UserLocation;
 import io.nwdaf.eventsubscription.model.UtraLocation;
@@ -93,7 +95,16 @@ public class Main {
                             .ueLocationTimestamp(OffsetDateTime.now())
                             .vlrNumber("sge"))
                         .utraLocation(new UtraLocation().ueLocationTimestamp(OffsetDateTime.now()).cgi(new CellGlobalId().cellId("egf")))
-                        .n3gaLocation(new N3gaLocation().gli(new Gli().data("wgerg")).gci("srg").hfcNodeId(new HfcNodeId().hfcNId("fsrg")))))
+                        .n3gaLocation(new N3gaLocation()
+                            .gli(new Gli()
+                                .data("wgerg"))
+                                .gci("srg")
+                                .hfcNodeId(new HfcNodeId()
+                                    .hfcNId("fsrg"))
+                            .tnapId(new TnapId()
+                                .civicAddress("agioukonst12"))
+                            .twapId(new TwapId()
+                                .civicAddress("trgnikso234")))))
                 .addLocInfosItem(new LocationInfo()
                     .confidence(12)
                     .ratio(99)

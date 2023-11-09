@@ -15,147 +15,151 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * Contain the TWAP Identifier as defined in clause 4.2.8.5.3 of 3GPP TS 23.501 or the WLAN location information as defined in clause 4.5.7.2.8 of 3GPP TS 23.402. 
+ * Contain the TWAP Identifier as defined in clause 4.2.8.5.3 of 3GPP TS 23.501
+ * or the WLAN location information as defined in clause 4.5.7.2.8 of 3GPP TS
+ * 23.402.
  */
 @Schema(description = "Contain the TWAP Identifier as defined in clause 4.2.8.5.3 of 3GPP TS 23.501 or the WLAN location information as defined in clause 4.5.7.2.8 of 3GPP TS 23.402. ")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+public class TwapId {
+	@JsonProperty("ssId")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String ssId = null;
 
-public class TwapId   {
-  @JsonProperty("ssId")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String ssId
- = null;
+	@JsonProperty("bssId")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String bssId = null;
 
-  @JsonProperty("bssId")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String bssId
- = null;
+	@JsonProperty("civicAddress")
+	@Schema(type = "string", format = "byte", description = "string with format 'bytes' as defined in OpenAPI")
+	private byte[] civicAddress = null;
 
-  @JsonProperty("civicAddress")
-  @Schema(type = "string", format = "byte",description = "string with format 'bytes' as defined in OpenAPI")
-  private byte[] civicAddress = null;
+	public TwapId ssId(String ssId) {
+		this.ssId = ssId;
+		return this;
+	}
 
-  public TwapId ssId(String ssId) {
-    this.ssId = ssId;
-    return this;
-  }
+	/**
+	 * This IE shall contain the SSID of the access point to which the UE is
+	 * attached, that is received over NGAP, see IEEE Std 802.11-2012.
+	 * 
+	 * @return ssId
+	 **/
+	@Schema(required = true, description = "This IE shall contain the SSID of the access point to which the UE is attached, that is received over NGAP, see IEEE Std 802.11-2012.  ")
+	@NotNull
 
-  /**
-   * This IE shall contain the SSID of the access point to which the UE is attached, that is received over NGAP, see IEEE Std 802.11-2012.  
-   * @return ssId
-   **/
-  @Schema(required = true, description = "This IE shall contain the SSID of the access point to which the UE is attached, that is received over NGAP, see IEEE Std 802.11-2012.  ")
-      @NotNull
+	public String getSsId() {
+		return ssId;
+	}
 
-    public String getSsId() {
-    return ssId;
-  }
+	public void setSsId(String ssId) {
+		this.ssId = ssId;
+	}
 
-  public void setSsId(String ssId) {
-    this.ssId = ssId;
-  }
+	public TwapId bssId(String bssId) {
+		this.bssId = bssId;
+		return this;
+	}
 
-  public TwapId bssId(String bssId) {
-    this.bssId = bssId;
-    return this;
-  }
+	/**
+	 * When present, it shall contain the BSSID of the access point to which the UE
+	 * is attached, for trusted WLAN access, see IEEE Std 802.11-2012.
+	 * 
+	 * @return bssId
+	 **/
+	@Schema(description = "When present, it shall contain the BSSID of the access point to which the UE is attached, for trusted WLAN access, see IEEE Std 802.11-2012.  ")
 
-  /**
-   * When present, it shall contain the BSSID of the access point to which the UE is attached, for trusted WLAN access, see IEEE Std 802.11-2012.  
-   * @return bssId
-   **/
-  @Schema(description = "When present, it shall contain the BSSID of the access point to which the UE is attached, for trusted WLAN access, see IEEE Std 802.11-2012.  ")
-  
-    public String getBssId() {
-    return bssId;
-  }
+	public String getBssId() {
+		return bssId;
+	}
 
-  public void setBssId(String bssId) {
-    this.bssId = bssId;
-  }
+	public void setBssId(String bssId) {
+		this.bssId = bssId;
+	}
 
-  public TwapId civicAddress(String civicAddressString) {
-    this.civicAddress = Base64.decodeBase64(civicAddressString);
-    return this;
-  }
+	public TwapId civicAddress(String civicAddressString) {
+		this.civicAddress = Base64.decodeBase64(civicAddressString);
+		return this;
+	}
 
-  /**
-   * string with format 'bytes' as defined in OpenAPI
-   * @return civicAddress
-   **/
-  
-    public byte[] getCivicAddress() {
-    return civicAddress;
-  }
+	/**
+	 * string with format 'bytes' as defined in OpenAPI
+	 * 
+	 * @return civicAddress
+	 **/
 
-  public void setCivicAddress(String civicAddressString) {
-    this.civicAddress = Base64.decodeBase64(civicAddressString);
-  }
+	public byte[] getCivicAddress() {
+		return civicAddress;
+	}
 
-  public void setCivicAddressRaw(byte[] civicAddress) {
-    this.civicAddress = civicAddress;
-  }
+	public void setCivicAddress(String civicAddressString) {
+		this.civicAddress = Base64.decodeBase64(civicAddressString);
+	}
 
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    TwapId twapId = (TwapId) o;
-    return Objects.equals(this.ssId, twapId.ssId) &&
-        Objects.equals(this.bssId, twapId.bssId) &&
-        Objects.equals(this.civicAddress, twapId.civicAddress);
-  }
+	public void setCivicAddressRaw(byte[] civicAddress) {
+		this.civicAddress = civicAddress;
+	}
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(ssId, bssId, civicAddress);
-  }
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		TwapId twapId = (TwapId) o;
+		return Objects.equals(this.ssId, twapId.ssId) &&
+				Objects.equals(this.bssId, twapId.bssId) &&
+				Objects.equals(this.civicAddress, twapId.civicAddress);
+	}
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class TwapId {\n");
-    
-    sb.append("    ssId: ").append(toIndentedString(ssId)).append("\n");
-    sb.append("    bssId: ").append(toIndentedString(bssId)).append("\n");
-    sb.append("    civicAddress: ").append(toIndentedString(civicAddress)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(ssId, bssId, civicAddress);
+	}
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class TwapId {\n");
 
-  public Map<String, Object> toMap() {
+		sb.append("    ssId: ").append(toIndentedString(ssId)).append("\n");
+		sb.append("    bssId: ").append(toIndentedString(bssId)).append("\n");
+		sb.append("    civicAddress: ").append(toIndentedString(civicAddress)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("bssId",this.bssId);
-    map.put("ssId",this.ssId);
-    map.put("civicAddress", this.civicAddress);
+		map.put("bssId", this.bssId);
+		map.put("ssId", this.ssId);
+		map.put("civicAddress", Base64.encodeBase64String(this.civicAddress));
 		return map;
 	}
 
 	public static TwapId fromMap(Map<String, Object> map) {
-		if(map==null) {
+		if (map == null) {
 			return null;
 		}
 		TwapId result = new TwapId();
 		result.setBssId((String) map.get("bssId"));
-    result.setSsId((String) map.get("ssId"));
-    result.setCivicAddressRaw((byte[]) map.get("civicAddress"));
+		result.setSsId((String) map.get("ssId"));
+		result.setCivicAddress((String) map.get("civicAddress"));
 		return result;
 	}
 }
