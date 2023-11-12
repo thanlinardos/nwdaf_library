@@ -6,6 +6,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -36,12 +37,12 @@ import io.nwdaf.eventsubscription.model.UeMobility;
 import io.nwdaf.eventsubscription.model.UserLocation;
 import io.nwdaf.eventsubscription.model.UtraLocation;
 import io.nwdaf.eventsubscription.model.NFType.NFTypeEnum;
+import io.nwdaf.eventsubscription.utilities.Regex;
 
 public class Main {
     public static void main(String args[]) throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        // objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         NfLoadLevelInformation nfLoadLevelInformation = new NfLoadLevelInformation()
                 .areaOfInterestId(UUID.randomUUID())
                 .nfInstanceId(UUID.randomUUID())
@@ -115,45 +116,11 @@ public class Main {
                                 .eutraCellId("srgerg")
                                 .plmnId(new PlmnId()
                                     .mcc("123").mnc("123"))))));
-        // System.out.println("objToMap:"+objectMapper.convertValue(nfLoadLevelInformation,new TypeReference<Map<String, Object>>() {}));
-        // System.out.println();System.out.println();
-        // System.out.println("objFromMap:"+objectMapper.readValue((new JSONObject(nfLoadLevelInformation.toMap())).toString(),NfLoadLevelInformation.class));
-        // System.out.println();
-        // System.out.println("fromMap:"+NfLoadLevelInformation.fromMap(nfLoadLevelInformation.toMap()));
-        // System.out.println();
-        // System.out.println("objFromMap:"+objectMapper.readValue((new JSONObject(objectMapper.convertValue(ueMobility,new TypeReference<Map<String, Object>>() {}))).toString(),UeMobility.class));
-        // System.out.println("fromMap:"+UeMobility.fromMap(objectMapper.convertValue(ueMobility,new TypeReference<Map<String, Object>>() {})));
-        // long st = System.nanoTime();
-        // for(int i=0;i<100000;i++) {
-        //     objectMapper.readValue((new JSONObject(objectMapper.convertValue(ueMobility,new TypeReference<Map<String, Object>>() {}))).toString(),UeMobility.class);
-        // }
-        // long end1 = (System.nanoTime()-st) / 1000000l;
-        // System.out.println("with obj: "+end1+" ms");
-        Map<String,Object> map = ueMobility.toMap();
-        long st = System.nanoTime();
-        for(int i=0;i<1;i++) {
-            System.out.println(UeMobility.fromMap(ueMobility.toMap()));
-            // objectMapper.writeValueAsString(map);
-            // System.out.println(objectMapper.writeValueAsString(map));
+        Pattern pattern = Pattern.compile(Regex.group_id);
+        if(pattern.matcher("2A3BC9EF-456-78-ABCD1234EF").matches()) {
+            System.out.println("yes");
+        } else {
+            System.out.println("no");
         }
-        long end2 = (System.nanoTime()-st) / 1000000l;
-        System.out.println("dur:"+end2+"ms");
-        // System.out.println("with fromMap & toMap: "+end2+" ms");
-        // System.out.println("fromMap times faster: "+(double)end1/end2);
-        // double doubleValue = 1677648023.123456789;
-        // System.out.println(ConvertUtil.convertDoubleToInstant(Double.valueOf(1699208779.796562872)));
-        // System.out.println(ConvertUtil.convertDoubleToInstantWithBigDecimal("1677648023.123456789"));
-        // long st = System.nanoTime();
-        // for(int i=0;i<1000000;i++) {
-        //     ConvertUtil.convertDoubleToInstant(Double.valueOf(doubleValue));
-        // }
-        // long end1 = (System.nanoTime()-st) / 1000000l;
-        // System.out.println("convert with double: "+end1+"ms");
-        // st = System.nanoTime();
-        // for(int i=0;i<1000000;i++) {
-        //     ConvertUtil.convertDoubleToInstantWithBigDecimal("1677648023.123456789");
-        // }
-        // long end2 = (System.nanoTime()-st) / 1000000l;
-        // System.out.println("convert with bigdecimal: "+end2+"ms");
     }
 }

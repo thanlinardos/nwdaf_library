@@ -1,5 +1,6 @@
 package io.nwdaf.eventsubscription.utilities;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import io.nwdaf.eventsubscription.model.AnalyticsSubset;
@@ -139,5 +140,28 @@ public class OtherUtil {
 			}
 		}
 		return nfloadlevels;
+	}
+
+	public static String generateRandomNumericString(int length) {
+		SecureRandom random = new SecureRandom();
+		StringBuilder sb = new StringBuilder(length);
+
+		for (int i = 0; i < length; i++) {
+			sb.append(random.nextInt(10));
+		}
+
+		return sb.toString();
+	}
+
+	public static String generateRandomHexString(int length) {
+		SecureRandom random = new SecureRandom();
+		StringBuilder sb = new StringBuilder(length);
+
+		for (int i = 0; i < length; i++) {
+			int randomInt = random.nextInt(16);
+			sb.append(Integer.toHexString(randomInt));
+		}
+
+		return sb.toString().toUpperCase();
 	}
 }

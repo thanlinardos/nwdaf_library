@@ -8,7 +8,7 @@ public class Regex {
 	public static final String nid = "^[A-Fa-f0-9]{11}$";
 	public static final String mcc = "^\\d{3}$";
 	public static final String mnc = "^\\d{2,3}$";
-	public static final String supi = "^(imsi-[0-9]{5,15}|nai-.+|gci-.+|gli-.+|.+)$";
+	public static final String supi = "^(imsi-[0-9]{5,15}|nai-.+|gci-.+|gli-.+)$";
 	public static final String correlation_id = "[0-9a-fA-F]{2}\\b-[0-9a-fA-F]{2}\\b-[0-9a-fA-F]{2}\\b-[0-9a-fA-F]{2}";
 	public static final String group_id = "^[A-Fa-f0-9]{8}-[0-9]{3}-[0-9]{2,3}-([A-Fa-f0-9][A-Fa-f0-9]){1,10}$";
 	public static final String dnn = "\\.nid([A-Za-z0-9]){11}\\.mnc([0-9]){3}\\.mcc([0-9]){3}\\.gprs";

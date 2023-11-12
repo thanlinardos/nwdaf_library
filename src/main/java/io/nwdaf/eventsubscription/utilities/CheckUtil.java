@@ -72,13 +72,11 @@ public class CheckUtil {
 			   CheckUtil.safeCheckListNotEmpty(area.getGRanNodeIds()) || CheckUtil.safeCheckListNotEmpty(area.getTais());
     }
 
-    public static Boolean safeCheckEventNotificationWithinMilli(NnwdafEventsSubscriptionNotification notification, long milliseconds) {
-        if(notification!= null && notification.getEventNotifications()!=null && notification.getEventNotifications().size()>0 && notification.getEventNotifications().get(0)!=null &&
+    public static Boolean safeCheckEventNotificationWithinMilli(NnwdafEventsSubscriptionNotification notification, long milliseconds, long now) {
+        if(notification!= null && notification.getEventNotifications()!=null && !notification.getEventNotifications().isEmpty() && notification.getEventNotifications().get(0)!=null &&
            notification.getEventNotifications().get(0).getTimeStampGen()!=null) {
-            long notificationSeconds = notification.getEventNotifications().get(0).getTimeStampGen().toInstant().toEpochMilli();
-            if(notificationSeconds<=milliseconds) {
-                return true;
-            }
+            long notificationMilliSeconds = now - notification.getEventNotifications().get(0).getTimeStampGen().toInstant().toEpochMilli();
+            return notificationMilliSeconds <= milliseconds;
         }
         return false;
     }
