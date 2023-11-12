@@ -11,32 +11,10 @@ import java.util.regex.Pattern;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import io.nwdaf.eventsubscription.model.CellGlobalId;
-import io.nwdaf.eventsubscription.model.Ecgi;
-import io.nwdaf.eventsubscription.model.EutraLocation;
-import io.nwdaf.eventsubscription.model.GNbId;
-import io.nwdaf.eventsubscription.model.GeraLocation;
-import io.nwdaf.eventsubscription.model.Gli;
-import io.nwdaf.eventsubscription.model.GlobalRanNodeId;
-import io.nwdaf.eventsubscription.model.HfcNodeId;
-import io.nwdaf.eventsubscription.model.LocationAreaId;
-import io.nwdaf.eventsubscription.model.LocationInfo;
-import io.nwdaf.eventsubscription.model.N3gaLocation;
-import io.nwdaf.eventsubscription.model.NFType;
-import io.nwdaf.eventsubscription.model.NfLoadLevelInformation;
-import io.nwdaf.eventsubscription.model.NfStatus;
-import io.nwdaf.eventsubscription.model.NrLocation;
-import io.nwdaf.eventsubscription.model.PlmnId;
-import io.nwdaf.eventsubscription.model.RoutingAreaId;
-import io.nwdaf.eventsubscription.model.ScheduledCommunicationTime;
-import io.nwdaf.eventsubscription.model.ServiceAreaId;
-import io.nwdaf.eventsubscription.model.Snssai;
-import io.nwdaf.eventsubscription.model.TnapId;
-import io.nwdaf.eventsubscription.model.TwapId;
-import io.nwdaf.eventsubscription.model.UeMobility;
-import io.nwdaf.eventsubscription.model.UserLocation;
-import io.nwdaf.eventsubscription.model.UtraLocation;
+import io.nwdaf.eventsubscription.model.*;
 import io.nwdaf.eventsubscription.model.NFType.NFTypeEnum;
+import io.nwdaf.eventsubscription.utilities.Constants;
+import io.nwdaf.eventsubscription.utilities.DummyDataGenerator;
 import io.nwdaf.eventsubscription.utilities.Regex;
 
 public class Main {
@@ -122,5 +100,7 @@ public class Main {
         } else {
             System.out.println("no");
         }
+        System.out.println(Constants.exampleIpv4FilterRule.toAvp());
+        List<UeCommunication> ueCommunications = DummyDataGenerator.generateDummyUeCommunications(10);
     }
 }

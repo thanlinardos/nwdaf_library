@@ -1,7 +1,9 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -24,6 +26,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 public class UeCommunication   {
+
+  private Instant time;
   @JsonProperty("commDur")
   @JsonInclude(JsonInclude.Include.NON_NULL)
 private Integer commDur
@@ -333,6 +337,20 @@ private Integer confidence
     this.sessInactTimer = sessInactTimer;
   }
 
+  public UeCommunication time(Instant time) {
+    this.time = time;
+    this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+    return this;
+  }
+
+  public Instant getTime() {
+    return time;
+  }
+
+  public void setTime(Instant time) {
+    this.time = time;
+    this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {

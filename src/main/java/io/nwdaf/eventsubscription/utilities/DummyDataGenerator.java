@@ -43,7 +43,7 @@ public class DummyDataGenerator {
                     );
                     break;
                 case 2:
-                    nfLoadLevelInfo.snssai(new Snssai().sd(Integer.toHexString(r.nextInt(0, 16777216))).sst(r.nextInt(0, 256)));
+                    nfLoadLevelInfo.snssai(randomSnssai(r));
                     break;
                 case 3:
                     for (int j = 0; j < 3; j++) {
@@ -144,7 +144,66 @@ public class DummyDataGenerator {
         return ueMobilities;
     }
 
-    private static String randomSupi(boolean randomPlmnId) {
+    public static List<UeCommunication> generateDummyUeCommunications(int c){
+        List<UeCommunication> ueCommunications = new ArrayList<>();
+        for(int i=0;i<c;i++){
+            ueCommunications.add(new UeCommunication());
+        }
+        Random r = new Random();
+        OffsetDateTime now = OffsetDateTime.now();
+        for (UeCommunication ueCommunication : ueCommunications) {
+            NetworkAreaInfo spacialValidity;
+            int locNum = r.nextInt(4);
+            spacialValidity = switch (locNum) {
+                case 0 -> Constants.AreaOfInterestExample1;
+                case 1 -> Constants.AreaOfInterestExample2;
+                case 2 -> Constants.AreaOfInterestExample3;
+                default -> Constants.ServingAreaOfInterest;
+            };
+            ueCommunication.ts(now).commDur(r.nextInt(100)).commDurVariance(r.nextFloat(1)).confidence(r.nextInt(100))
+                    .recurringTime(new ScheduledCommunicationTime()
+                            .daysOfWeek(List.of(1,2,5,7))
+                            .timeOfDayStart("12:00")
+                            .timeOfDayEnd("18:00"))
+                    .anaOfAppList(new AppListForUeComm()
+                            .appId("nwdafSubCollector")
+                            .appDur(r.nextInt(1000))
+                            .occurRatio(r.nextInt(100))
+                            .spatialValidity(spacialValidity)
+                            .startTime(randomOffsetDateTime(now, r)))
+                    .perioTime(Constants.MIN_PERIOD_SECONDS)
+                    .perioTimeVariance(r.nextFloat(1))
+                    .perioCommInd(true)
+                    .sessInactTimer(new SessInactTimerForUeComm()
+                            .sessInactiveTimer(r.nextInt(10))
+                            .n4SessId(r.nextInt(256)))
+                    .trafChar(new TrafficCharacterization()
+                            .addFDescsItem(new IpEthFlowDescription()
+                                    .ethTrafficFilter(new EthFlowDescription()
+                                            .ethType(Constants.ethernetTypes.get(r.nextInt(32)))
+                                            .addVlanTagsItem(OtherUtil.generateRandomHexString(4))  // customer-vlan tag
+                                            .addVlanTagsItem(OtherUtil.generateRandomHexString(4))  // service-vlan tag
+                                            .destMacAddr(randomMacAddress(r))
+                                            .fDir(new FlowDirection()
+                                                    .fDir(FlowDirection.FlowDirectionEnum.UPLINK))
+                                            .fDesc(Constants.exampleIpv4FilterRule.toAvp())
+                                            .sourceMacAddr(randomMacAddress(r))
+                                            .destMacAddrEnd(randomMacAddress(r)))
+                                    .ipTrafficFilter(Constants.exampleIpv4FilterRule.toAvp()))
+                            .dnn(Constants.exampleDnn)
+                            .dlVol(r.nextLong(1_000_000L))
+                            .appId("nwdafSubCollector")
+                            .dlVolVariance(r.nextFloat(1))
+                            .snssai(randomSnssai(r))
+                            .ulVol(r.nextLong(1_000_000L))
+                            .ulVolVariance(r.nextFloat(1)))
+                    .tsVariance(r.nextFloat(1))
+                    .ratio(r.nextInt(100));
+        }
+        return ueCommunications;
+    }
+
+    public static String randomSupi(boolean randomPlmnId) {
         String mcc,mnc,msin;
         if(randomPlmnId) {
             mcc = OtherUtil.generateRandomNumericString(3);
@@ -157,7 +216,7 @@ public class DummyDataGenerator {
         return "imsi-"+mcc+mnc+msin;
     }
 
-    private static String randomInternalGroupId(boolean randomPlmnId) {
+    public static String randomInternalGroupId(boolean randomPlmnId) {
         String mcc,mnc,serviceId,localGroupId;
         if(randomPlmnId) {
             mcc = OtherUtil.generateRandomNumericString(3);
@@ -169,6 +228,23 @@ public class DummyDataGenerator {
         serviceId = OtherUtil.generateRandomHexString(8);
         localGroupId = OtherUtil.generateRandomHexString(10);
         return mcc+"-"+mnc+"-"+serviceId+"-"+localGroupId;
+    }
+
+    public static OffsetDateTime randomOffsetDateTime(OffsetDateTime now, Random r) {
+        return OffsetDateTime.of(now.getYear(),now.getMonthValue(),now.getDayOfMonth(),r.nextInt(24),r.nextInt(60), r.nextInt(60),r.nextInt(1_000_000_000), now.getOffset());
+    }
+
+    public static Snssai randomSnssai(Random r) {
+        return new Snssai().sd(Integer.toHexString(r.nextInt(0, 16777216))).sst(r.nextInt(0, 256));
+    }
+
+    public static String randomMacAddress(Random r) {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<6;i++) {
+            sb.append(OtherUtil.generateRandomHexString(2));
+            if(i!=5) sb.append("-");
+        }
+        return sb.toString();
     }
 
     public static List<UeMobility> changeUeMobilitiesTimeDependentProperties(List<UeMobility> ueMobilities){
@@ -193,5 +269,14 @@ public class DummyDataGenerator {
             }
         }
         return ueMobilities;
+    }
+
+    public static List<UeCommunication> changeUeCommunicationsTimeDependentProperties(List<UeCommunication> ueCommunications){
+        Instant now = Instant.now();
+        OffsetDateTime date = OffsetDateTime.ofInstant(now, TimeZone.getDefault().toZoneId());
+        for (UeCommunication ueCommunication : ueCommunications) {
+            ueCommunication.time(now);
+        }
+        return ueCommunications;
     }
 }

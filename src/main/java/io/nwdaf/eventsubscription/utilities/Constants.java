@@ -8,13 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import io.nwdaf.eventsubscription.model.Ecgi;
-import io.nwdaf.eventsubscription.model.GlobalRanNodeId;
-import io.nwdaf.eventsubscription.model.Ncgi;
-import io.nwdaf.eventsubscription.model.NetworkAreaInfo;
-import io.nwdaf.eventsubscription.model.PlmnId;
-import io.nwdaf.eventsubscription.model.Tai;
+import io.nwdaf.eventsubscription.model.*;
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
+
+import static java.util.Map.entry;
 
 public class Constants {
 	public static Integer MIN_PERIOD_SECONDS = 1;
@@ -95,4 +92,66 @@ public class Constants {
 	public static String nfloadPostgresColumnFormat = "CAST(ROUND(AVG(CAST(data->>'%1$s' as numeric))) as integer) AS %1$s,";
 	public static BigDecimal ONE_BILLION = new BigDecimal(1_000_000_000);
 	public static String[] nfLoadThresholdProps = { "nfCpuUsage", "nfMemoryUsage", "nfStorageUsage", "nfLoadLevelAverage" };
+	public static Map<String,String> ethernetTypesDescription = Map.ofEntries(
+			entry("0800", "Internet Protocol Version 4 (IPv4)"),
+			entry("0806", "Address Resolution Protocol (ARP)"),
+			entry("0808", "Frame Relay ARP"),
+			entry("22F3", "TRILL"),
+			entry("22F4", "L2-IS-IS"),
+			entry("8035", "Reverse Address Resolution Protocol (RARP)"),
+			entry("86DD", "Internet Protocol Version 6 (IPv6)"),
+			entry("880B", "Point-to-Point Protocol (PPP)"),
+			entry("880C", "General Switch Management Protocol (GSMP)"),
+			entry("8847", "MPLS"),
+			entry("8848", "MPLS with upstream-assigned label"),
+			entry("8861", "Multicast Channel Allocation Protocol (MCAP)"),
+			entry("8863", "PPP over Ethernet (PPPoE) Discovery Stage"),
+			entry("8864", "PPP over Ethernet (PPPoE) Session Stage"),
+			entry("893B", "TRILL Fine Grained Labeling (FGL)"),
+			entry("8946", "TRILL RBridge Channel"),
+			entry("8100", "IEEE Std 802.1Q - Customer VLAN Tag Type (C-Tag, formerly called the Q-Tag)"),
+			entry("8808", "IEEE Std 802.3 - Ethernet Passive Optical Network (EPON)"),
+			entry("888E", "IEEE Std 802.1X - Port-based network access control"),
+			entry("88A8", "IEEE Std 802.1Q - Service VLAN tag identifier (S-Tag)"),
+			entry("88B5", "IEEE Std 802 - Local Experimental Ethertype"),
+			entry("88B6", "IEEE Std 802 - Local Experimental Ethertype"),
+			entry("88B7", "IEEE Std 802 - OUI Extended Ethertype"),
+			entry("88C7", "IEEE Std 802.11 - Pre-Authentication (802.11i)"),
+			entry("88CC", "IEEE Std 802.1AB - Link Layer Discovery Protocol (LLDP)"),
+			entry("88E5", "IEEE Std 802.1AE - Media Access Control Security"),
+			entry("88F5", "IEEE Std 802.1Q - Multiple VLAN Registration Protocol (MVRP)"),
+			entry("88F6", "IEEE Std 802.1Q - Multiple Multicast Registration Protocol (MMRP)"),
+			entry("890D", "IEEE Std 802.11 - Fast Roaming Remote Request (802.11r)"),
+			entry("8917", "IEEE Std 802.21 - Media Independent Handover Protocol"),
+			entry("8929", "IEEE Std 802.1Qbe - Multiple I-SID Registration Protocol"),
+			entry("8940", "IEEE Std 802.1Qbg - ECP Protocol (also used in 802.1BR)")
+	);
+	public static List<String> ethernetTypes = new ArrayList<>(ethernetTypesDescription.keySet());
+	public static IpFilterRule exampleIpv4FilterRule = IpFilterRule.builder()
+															.code(507)
+															.vendorId(10415)
+															.ipVersion("4")
+															.sourceIpAddr(new IpAddr().ipv4Addr("192.168.1.1"))
+															.sourceIpAddrMask(new IpAddr().ipv4Addr("255.255.255.0"))
+															.destIpAddr(new IpAddr().ipv4Addr("10.0.0.1"))
+															.destIpAddrMask(new IpAddr().ipv4Addr("255.255.255.255"))
+															.transportProtocol(new TransportProtocol().transportProtocol(TransportProtocol.TransportProtocolEnum.TCP))
+															.sourcePort(80)
+															.destinationPort(8080)
+															.direction(new FlowDirection().fDir(FlowDirection.FlowDirectionEnum.UPLINK))
+															.build();
+	public static String exampleIpFilterRule = """
+                                                    IPFilterRule AVP:
+                                                    Code: 507
+                                                    Vendor ID: 10415
+                                                    IP Version: 4
+                                                    IP Source Address: 192.168.1.1
+                                                    IP Source Mask: 255.255.255.0
+                                                    IP Destination Address: 10.0.0.1
+                                                    IP Destination Mask: 255.255.255.255
+                                                    Protocol: TCP (6)
+                                                    Source Port: 80
+                                                    Destination Port: 8080
+                                                    Direction: Uplink""";
+	public static String exampleDnn = "nidFFFFFFFFFFF.mcc123.mnc123.gprs";
 }

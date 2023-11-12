@@ -6,8 +6,10 @@ import java.util.Objects;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import io.nwdaf.eventsubscription.utilities.Regex;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -71,7 +73,7 @@ private Float dlVolVariance
    * @return dnn
    **/
   @Schema(description = "String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\"). ")
-  
+  @Pattern(regexp = Regex.dnn)
     public String getDnn() {
     return dnn;
   }

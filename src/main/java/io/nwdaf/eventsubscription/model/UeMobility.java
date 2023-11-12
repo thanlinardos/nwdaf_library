@@ -53,9 +53,10 @@ public class UeMobility implements Serializable {
 	@Valid
 	private List<LocationInfo> locInfos = new ArrayList<LocationInfo>();
 
-	// list of aois the ue has visited matching the location infos list (for each
-	// user location match it to an aoi or if it doesnt exist create a new one for
-	// this location)
+	/** List of the ids of areaOfInterests the ue has visited matching the location infos list (for each
+	* user location match it to an aoi or if it doesnt exist create a new one for
+	* this location)
+	**/
 	@JsonProperty("areaOfInterestIds")
 	private List<UUID> areaOfInterestIds = new ArrayList<>();
 
@@ -189,9 +190,12 @@ public class UeMobility implements Serializable {
 	}
 
 	/**
-	 * string with format 'UUID' as defined in OpenAPI.
+	 * List of the ids of areaOfInterests the ue has visited matching the location infos list (for each
+	 * user location match it to an aoi or if it doesnt exist create a new one for
+	 * this location)
+	 * Get list of strings with format 'UUID' as defined in OpenAPI.
 	 * 
-	 * @return areaOfInterestId
+	 * @return areaOfInterestIds
 	 **/
 	@Schema(description = "string with format 'UUID' as defined in OpenAPI.")
 
