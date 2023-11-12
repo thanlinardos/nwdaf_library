@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.Regex;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -59,10 +61,12 @@ public class UeMobility implements Serializable {
 
 	@JsonProperty("supi")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@Pattern(regexp = Regex.supi)
 	private String supi = null;
 
 	@JsonProperty("intGroupId")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@Pattern(regexp = Regex.group_id)
 	private String intGroupId = null;
 
 	public UeMobility ts(OffsetDateTime ts) {

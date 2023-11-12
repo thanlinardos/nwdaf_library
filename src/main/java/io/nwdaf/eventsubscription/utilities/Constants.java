@@ -71,7 +71,6 @@ public class Constants {
 	.addTaisItem(new Tai().plmnId(plmnId).nid("00000000000").tac("0000"))
 	.addTaisItem(new Tai().plmnId(plmnId).nid("FFFFFFFFFFF").tac("FFFF"))
 	;
-
 	public static Map<UUID,NetworkAreaInfo> ExampleAOIsMap = initExampleAOIsMap();
 	public static Map<NetworkAreaInfo,UUID> ExampleAOIsToUUIDsMap = initExampleAOIsToUUIDsMap();
 
@@ -83,6 +82,7 @@ public class Constants {
 		res.put(AreaOfInterestExample3.getId(), AreaOfInterestExample3);
 		return res;
 	}
+
 	public static Map<NetworkAreaInfo,UUID> initExampleAOIsToUUIDsMap(){
 		Map<NetworkAreaInfo,UUID> res = new HashMap<>();
 		res.put(ServingAreaOfInterest, ServingAreaOfInterest.getId());
@@ -93,6 +93,6 @@ public class Constants {
 	}
 
 	public static String nfloadPostgresColumnFormat = "CAST(ROUND(AVG(CAST(data->>'%1$s' as numeric))) as integer) AS %1$s,";
-
 	public static BigDecimal ONE_BILLION = new BigDecimal(1_000_000_000);
+	public static String[] nfLoadThresholdProps = { "nfCpuUsage", "nfMemoryUsage", "nfStorageUsage", "nfLoadLevelAverage" };
 }

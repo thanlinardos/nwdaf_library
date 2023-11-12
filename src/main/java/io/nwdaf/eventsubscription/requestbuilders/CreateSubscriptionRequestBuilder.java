@@ -1,6 +1,5 @@
 package io.nwdaf.eventsubscription.requestbuilders;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

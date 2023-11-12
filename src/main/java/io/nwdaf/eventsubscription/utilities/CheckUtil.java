@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import io.nwdaf.eventsubscription.model.NetworkAreaInfo;
 import io.nwdaf.eventsubscription.model.NnwdafEventsSubscriptionNotification;
+import io.nwdaf.eventsubscription.model.NwdafEvent;
 
 public class CheckUtil {
     // checks if input string is neither null nor empty string ("")
@@ -78,6 +79,13 @@ public class CheckUtil {
             if(notificationSeconds<=milliseconds) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    public static Boolean safeCheckEqualsEvent(NwdafEvent e1, NwdafEvent e2) {
+        if(e1 != null && e2 !=null && e1.getEvent() !=null && e2.getEvent() !=null) {
+            return e1.getEvent().equals(e2.getEvent());
         }
         return false;
     }
