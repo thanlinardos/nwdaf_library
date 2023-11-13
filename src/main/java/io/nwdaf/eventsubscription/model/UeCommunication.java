@@ -8,8 +8,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
+import io.nwdaf.eventsubscription.utilities.Regex;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -35,7 +38,7 @@ public class UeCommunication {
 
     @JsonProperty("commDurVariance")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Float commDurVariance
+    private Double commDurVariance
             = null;
 
     @JsonProperty("perioTime")
@@ -45,7 +48,7 @@ public class UeCommunication {
 
     @JsonProperty("perioTimeVariance")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Float perioTimeVariance
+    private Double perioTimeVariance
             = null;
 
     @JsonProperty("ts")
@@ -53,7 +56,7 @@ public class UeCommunication {
 
     @JsonProperty("tsVariance")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Float tsVariance
+    private Double tsVariance
             = null;
 
     @JsonProperty("recurringTime")
@@ -81,6 +84,19 @@ public class UeCommunication {
     @JsonProperty("sessInactTimer")
     private SessInactTimerForUeComm sessInactTimer = null;
 
+    @JsonProperty("supi")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Pattern(regexp = Regex.supi)
+    private String supi = null;
+
+    @JsonProperty("intGroupId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Pattern(regexp = Regex.group_id)
+    private String intGroupId = null;
+
+    @JsonProperty("areaOfInterestId")
+    private UUID areaOfInterestId = null;
+
     public UeCommunication commDur(Integer commDur) {
         this.commDur = commDur;
         return this;
@@ -101,7 +117,7 @@ public class UeCommunication {
         this.commDur = commDur;
     }
 
-    public UeCommunication commDurVariance(Float commDurVariance) {
+    public UeCommunication commDurVariance(Double commDurVariance) {
         this.commDurVariance = commDurVariance;
         return this;
     }
@@ -113,11 +129,11 @@ public class UeCommunication {
      **/
     @Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-    public Float getCommDurVariance() {
+    public Double getCommDurVariance() {
         return commDurVariance;
     }
 
-    public void setCommDurVariance(Float commDurVariance) {
+    public void setCommDurVariance(Double commDurVariance) {
         this.commDurVariance = commDurVariance;
     }
 
@@ -141,7 +157,7 @@ public class UeCommunication {
         this.perioTime = perioTime;
     }
 
-    public UeCommunication perioTimeVariance(Float perioTimeVariance) {
+    public UeCommunication perioTimeVariance(Double perioTimeVariance) {
         this.perioTimeVariance = perioTimeVariance;
         return this;
     }
@@ -153,11 +169,11 @@ public class UeCommunication {
      **/
     @Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-    public Float getPerioTimeVariance() {
+    public Double getPerioTimeVariance() {
         return perioTimeVariance;
     }
 
-    public void setPerioTimeVariance(Float perioTimeVariance) {
+    public void setPerioTimeVariance(Double perioTimeVariance) {
         this.perioTimeVariance = perioTimeVariance;
     }
 
@@ -182,7 +198,7 @@ public class UeCommunication {
         this.ts = ts;
     }
 
-    public UeCommunication tsVariance(Float tsVariance) {
+    public UeCommunication tsVariance(Double tsVariance) {
         this.tsVariance = tsVariance;
         return this;
     }
@@ -194,11 +210,11 @@ public class UeCommunication {
      **/
     @Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-    public Float getTsVariance() {
+    public Double getTsVariance() {
         return tsVariance;
     }
 
-    public void setTsVariance(Float tsVariance) {
+    public void setTsVariance(Double tsVariance) {
         this.tsVariance = tsVariance;
     }
 
@@ -368,6 +384,58 @@ public class UeCommunication {
         this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
     }
 
+    public UeCommunication supi(String supi) {
+        this.supi = supi;
+        return this;
+    }
+
+
+    /**
+     * string with format 'SUPI' as defined in 3GPP.
+     *
+     * @return supi
+     **/
+    @Schema(description = "string with format 'SUPI' as defined in 3GPP.")
+    public String getSupi() {
+        return supi;
+    }
+
+    public void setSupi(String supi) {
+        this.supi = supi;
+    }
+
+    public UeCommunication intGroupId(String intGroupId) {
+        this.intGroupId = intGroupId;
+        return this;
+    }
+
+    /**
+     * string with format 'intGroupId' as defined in 3GPP.
+     *
+     * @return intGroupId
+     **/
+    @Schema(description = "string with format 'intGroupId' as defined in 3GPP.")
+    public String getIntGroupId() {
+        return intGroupId;
+    }
+
+    public void setIntGroupId(String intGroupId) {
+        this.intGroupId = intGroupId;
+    }
+
+    public UeCommunication areaOfInterestId(UUID id) {
+        this.areaOfInterestId = id;
+        return this;
+    }
+
+    public UUID getAreaOfInterestId() {
+        return this.areaOfInterestId;
+    }
+
+    public void setAreaOfInterestId(UUID id) {
+        this.areaOfInterestId = id;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -389,12 +457,15 @@ public class UeCommunication {
                 Objects.equals(this.perioCommInd, ueCommunication.perioCommInd) &&
                 Objects.equals(this.confidence, ueCommunication.confidence) &&
                 Objects.equals(this.anaOfAppList, ueCommunication.anaOfAppList) &&
-                Objects.equals(this.sessInactTimer, ueCommunication.sessInactTimer);
+                Objects.equals(this.sessInactTimer, ueCommunication.sessInactTimer) &&
+                Objects.equals(this.supi, ueCommunication.supi) &&
+                Objects.equals(this.intGroupId, ueCommunication.intGroupId) &&
+                Objects.equals(this.areaOfInterestId, ueCommunication.areaOfInterestId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commDur, commDurVariance, perioTime, perioTimeVariance, ts, tsVariance, recurringTime, trafChar, ratio, perioCommInd, confidence, anaOfAppList, sessInactTimer);
+        return Objects.hash(commDur, commDurVariance, perioTime, perioTimeVariance, ts, tsVariance, recurringTime, trafChar, ratio, perioCommInd, confidence, anaOfAppList, sessInactTimer, supi , intGroupId, areaOfInterestId);
     }
 
     @Override
@@ -415,6 +486,9 @@ public class UeCommunication {
         sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
         sb.append("    anaOfAppList: ").append(toIndentedString(anaOfAppList)).append("\n");
         sb.append("    sessInactTimer: ").append(toIndentedString(sessInactTimer)).append("\n");
+        sb.append("    supi: ").append(toIndentedString(supi)).append("\n");
+        sb.append("    intGroupId: ").append(toIndentedString(intGroupId)).append("\n");
+        sb.append("    areaOfInterestId: ").append(toIndentedString(areaOfInterestId)).append("\n");
         sb.append("}");
         return sb.toString();
     }
@@ -452,6 +526,9 @@ public class UeCommunication {
         map.put("tsVariance", this.getTsVariance());
         map.put("ratio", this.getRatio());
         map.put("perioCommInd", this.isPerioCommInd());
+        map.put("intGroupId", this.getIntGroupId());
+        map.put("supi", this.getSupi());
+        map.put("areaOfInterestId", ParserUtil.safeParseString(this.areaOfInterestId));
         return map;
     }
 
@@ -466,11 +543,14 @@ public class UeCommunication {
         result.setConfidence((Integer) map.get("confidence"));
         result.setSessInactTimer(SessInactTimerForUeComm.fromMap((Map<String, Object>) map.get("sessInactTimer")));
         result.setPerioTime((Integer) map.get("perioTime"));
-        result.setPerioTimeVariance((Float) map.get("perioTimeVariance"));
-        result.setTsVariance((Float) map.get("tsVariance"));
+        result.setPerioTimeVariance((Double) map.get("perioTimeVariance"));
+        result.setTsVariance((Double) map.get("tsVariance"));
         result.setTrafChar(TrafficCharacterization.fromMap((Map<String, Object>) map.get("trafChar")));
         result.setRatio((Integer) map.get("ratio"));
         result.setPerioCommInd((Boolean) map.get("perioCommInd"));
+        result.setSupi((String) map.get("supi"));
+        result.setIntGroupId((String) map.get("intGroupId"));
+        result.setAreaOfInterestId(ParserUtil.safeParseUUID((String) map.get("areaOfInterestId")));
         result.setAnaOfAppList(AppListForUeComm.fromMap((Map<String, Object>) map.get("anaOfAppList")));
         return result;
     }

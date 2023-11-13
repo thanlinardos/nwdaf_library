@@ -14,13 +14,14 @@ import io.nwdaf.eventsubscription.model.TransportProtocol.TransportProtocolEnum;
 import io.nwdaf.eventsubscription.model.LineType.LineTypeEnum;
 
 public class DummyDataGenerator {
-    public static List<NfLoadLevelInformation> generateDummyNfLoadLevelInfo(int c){
+    public static List<NfLoadLevelInformation> generateDummyNfLoadLevelInfo(int c) {
         List<NfLoadLevelInformation> result = new ArrayList<>();
-        for(int i=0;i<c;i++){
+        for (int i = 0; i < c; i++) {
             result.add(new NfLoadLevelInformation());
         }
         Random r = new Random();
         Instant now = Instant.now();
+        r.setSeed(now.toEpochMilli());
         for (NfLoadLevelInformation nfLoadLevelInfo : result) {
             int[] nums = {r.nextInt(101), r.nextInt(101), r.nextInt(101)};
             int[] peaks = {r.nextInt(nums[0], 101), r.nextInt(nums[1], 101), r.nextInt(nums[2], 101)};
@@ -30,12 +31,11 @@ public class DummyDataGenerator {
                     .time(now).nfInstanceId(UUID.randomUUID());
             int aoiIndex = r.nextInt(4);
             NFTypeEnum nfType = NFTypeEnum.values()[r.nextInt(NFTypeEnum.values().length)];
+            List<UUID> keys = new ArrayList<>(Constants.ExampleAOIsMap.keySet());
+            keys.remove(Constants.ServingAreaOfInterest.getId());
             switch (aoiIndex) {
                 case 0:
-                    List<UUID> keys = new ArrayList<>(Constants.ExampleAOIsMap.keySet());
-                    keys.remove(Constants.ServingAreaOfInterest.getId());
-                    int t = r.nextInt(keys.size());
-                    nfLoadLevelInfo.areaOfInterestId(keys.get(t));
+                    nfLoadLevelInfo.areaOfInterestId(keys.get(r.nextInt(keys.size())));
                     break;
                 case 1:
                     nfLoadLevelInfo.nfSetId("set" + (char) (r.nextInt(26) + 'a') + (char) (r.nextInt(26) + 'a') + (char) (r.nextInt(26) + 'a') + "." +
@@ -59,12 +59,14 @@ public class DummyDataGenerator {
                     .nfStatus(new NfStatus().statusRegistered(reg).statusUndiscoverable(undisc).statusUnregistered(100 - reg - undisc))
                     .confidence(r.nextInt(101));
         }
-        
+
         return result;
     }
-    public static List<NfLoadLevelInformation> changeNfLoadTimeDependentProperties(List<NfLoadLevelInformation> nfloadinfos){
+
+    public static List<NfLoadLevelInformation> changeNfLoadTimeDependentProperties(List<NfLoadLevelInformation> nfloadinfos) {
         Instant now = Instant.now();
         Random r = new Random();
+        r.setSeed(now.toEpochMilli());
         for (NfLoadLevelInformation nfloadinfo : nfloadinfos) {
             int[] nums = {r.nextInt(101), r.nextInt(101), r.nextInt(101)};
             int[] maxes = {r.nextInt(nums[0], 101), r.nextInt(nums[1], 101), r.nextInt(nums[2], 101)};
@@ -75,13 +77,14 @@ public class DummyDataGenerator {
         return nfloadinfos;
     }
 
-    public static List<UeMobility> generateDummyUeMobilities(int c){
+    public static List<UeMobility> generateDummyUeMobilities(int c) {
         List<UeMobility> ueMobilities = new ArrayList<>();
-        for(int i=0;i<c;i++){
+        for (int i = 0; i < c; i++) {
             ueMobilities.add(new UeMobility());
         }
         Random r = new Random();
         OffsetDateTime now = OffsetDateTime.now();
+        r.setSeed(now.toEpochSecond());
         for (UeMobility ueMobility : ueMobilities) {
             int locNum = r.nextInt(5);
             UserLocation userLocation = new UserLocation();
@@ -144,13 +147,14 @@ public class DummyDataGenerator {
         return ueMobilities;
     }
 
-    public static List<UeCommunication> generateDummyUeCommunications(int c){
+    public static List<UeCommunication> generateDummyUeCommunications(int c) {
         List<UeCommunication> ueCommunications = new ArrayList<>();
-        for(int i=0;i<c;i++){
+        for (int i = 0; i < c; i++) {
             ueCommunications.add(new UeCommunication());
         }
         Random r = new Random();
         OffsetDateTime now = OffsetDateTime.now();
+        r.setSeed(now.toEpochSecond());
         for (UeCommunication ueCommunication : ueCommunications) {
             NetworkAreaInfo spacialValidity;
             int locNum = r.nextInt(4);
@@ -160,9 +164,20 @@ public class DummyDataGenerator {
                 case 2 -> Constants.AreaOfInterestExample3;
                 default -> Constants.ServingAreaOfInterest;
             };
-            ueCommunication.time(now.toInstant()).commDur(r.nextInt(100)).commDurVariance(r.nextFloat(1)).confidence(r.nextInt(100))
+            List<UUID> keys = new ArrayList<>(Constants.ExampleAOIsMap.keySet());
+            keys.remove(Constants.ServingAreaOfInterest.getId());
+            int aoiIndex = r.nextInt(2);
+            if (aoiIndex == 0) {
+                ueCommunication.areaOfInterestId(keys.get(r.nextInt(keys.size())));
+            } else {
+                ueCommunication.intGroupId(randomInternalGroupId(false));
+            }
+            ueCommunication.supi(randomSupi(false))
+                    .time(now.toInstant()).commDur(r.nextInt(100))
+                    .commDurVariance(r.nextDouble(1))
+                    .confidence(r.nextInt(100))
                     .recurringTime(new ScheduledCommunicationTime()
-                            .daysOfWeek(List.of(1,2,5,7))
+                            .daysOfWeek(List.of(1, 2, 5, 7))
                             .timeOfDayStart("12:00")
                             .timeOfDayEnd("18:00"))
                     .anaOfAppList(new AppListForUeComm()
@@ -172,7 +187,7 @@ public class DummyDataGenerator {
                             .spatialValidity(spacialValidity)
                             .startTime(randomOffsetDateTime(now, r)))
                     .perioTime(Constants.MIN_PERIOD_SECONDS)
-                    .perioTimeVariance(r.nextFloat(1))
+                    .perioTimeVariance(r.nextDouble(1))
                     .perioCommInd(true)
                     .sessInactTimer(new SessInactTimerForUeComm()
                             .sessInactiveTimer(r.nextInt(10))
@@ -191,21 +206,21 @@ public class DummyDataGenerator {
                                             .destMacAddrEnd(randomMacAddress(r)))
                                     .ipTrafficFilter(Constants.exampleIpv4FilterRule.toAvp()))
                             .dnn(Constants.exampleDnn)
-                            .dlVol(r.nextLong(1_000_000L))
+                            .dlVol(r.nextInt(1_000_000))
                             .appId("nwdafSubCollector")
-                            .dlVolVariance(r.nextFloat(1))
+                            .dlVolVariance(r.nextDouble(1))
                             .snssai(randomSnssai(r))
-                            .ulVol(r.nextLong(1_000_000L))
-                            .ulVolVariance(r.nextFloat(1)))
-                    .tsVariance(r.nextFloat(1))
+                            .ulVol(r.nextInt(1_000_000))
+                            .ulVolVariance(r.nextDouble(1)))
+                    .tsVariance(r.nextDouble(1))
                     .ratio(r.nextInt(100));
         }
         return ueCommunications;
     }
 
     public static String randomSupi(boolean randomPlmnId) {
-        String mcc,mnc,msin;
-        if(randomPlmnId) {
+        String mcc, mnc, msin;
+        if (randomPlmnId) {
             mcc = OtherUtil.generateRandomNumericString(3);
             mnc = OtherUtil.generateRandomNumericString(2);
         } else {
@@ -213,12 +228,12 @@ public class DummyDataGenerator {
             mnc = Constants.plmnId.getMnc();
         }
         msin = OtherUtil.generateRandomNumericString(10);
-        return "imsi-"+mcc+mnc+msin;
+        return "imsi-" + mcc + mnc + msin;
     }
 
     public static String randomInternalGroupId(boolean randomPlmnId) {
-        String mcc,mnc,serviceId,localGroupId;
-        if(randomPlmnId) {
+        String mcc, mnc, serviceId, localGroupId;
+        if (randomPlmnId) {
             mcc = OtherUtil.generateRandomNumericString(3);
             mnc = OtherUtil.generateRandomNumericString(2);
         } else {
@@ -227,11 +242,11 @@ public class DummyDataGenerator {
         }
         serviceId = OtherUtil.generateRandomHexString(8);
         localGroupId = OtherUtil.generateRandomHexString(10);
-        return mcc+"-"+mnc+"-"+serviceId+"-"+localGroupId;
+        return mcc + "-" + mnc + "-" + serviceId + "-" + localGroupId;
     }
 
     public static OffsetDateTime randomOffsetDateTime(OffsetDateTime now, Random r) {
-        return OffsetDateTime.of(now.getYear(),now.getMonthValue(),now.getDayOfMonth(),r.nextInt(24),r.nextInt(60), r.nextInt(60),r.nextInt(1_000_000_000), now.getOffset());
+        return OffsetDateTime.of(now.getYear(), now.getMonthValue(), now.getDayOfMonth(), r.nextInt(24), r.nextInt(60), r.nextInt(60), r.nextInt(1_000_000_000), now.getOffset());
     }
 
     public static Snssai randomSnssai(Random r) {
@@ -240,14 +255,14 @@ public class DummyDataGenerator {
 
     public static String randomMacAddress(Random r) {
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<6;i++) {
+        for (int i = 0; i < 6; i++) {
             sb.append(OtherUtil.generateRandomHexString(2));
-            if(i!=5) sb.append("-");
+            if (i != 5) sb.append("-");
         }
         return sb.toString();
     }
 
-    public static List<UeMobility> changeUeMobilitiesTimeDependentProperties(List<UeMobility> ueMobilities){
+    public static List<UeMobility> changeUeMobilitiesTimeDependentProperties(List<UeMobility> ueMobilities) {
         Instant now = Instant.now();
         OffsetDateTime date = OffsetDateTime.ofInstant(now, TimeZone.getDefault().toZoneId());
         for (UeMobility ueMobility : ueMobilities) {
@@ -271,9 +286,8 @@ public class DummyDataGenerator {
         return ueMobilities;
     }
 
-    public static List<UeCommunication> changeUeCommunicationsTimeDependentProperties(List<UeCommunication> ueCommunications){
+    public static List<UeCommunication> changeUeCommunicationsTimeDependentProperties(List<UeCommunication> ueCommunications) {
         Instant now = Instant.now();
-        OffsetDateTime date = OffsetDateTime.ofInstant(now, TimeZone.getDefault().toZoneId());
         for (UeCommunication ueCommunication : ueCommunications) {
             ueCommunication.time(now);
         }

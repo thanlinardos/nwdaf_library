@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.nwdaf.eventsubscription.utilities.Regex;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
@@ -457,7 +458,7 @@ public class NetworkAreaInfo {
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("containedAreaIds",this.containedAreaIds);
-		map.put("id",this.id);
+		map.put("id",ParserUtil.safeParseString(this.id));
 		List<Map<String, Object>> tais = new ArrayList<>();
 		if (this.tais != null) {
 			for (int i = 0; i < this.tais.size(); i++) {
@@ -502,7 +503,7 @@ public class NetworkAreaInfo {
 			return null;
 		}
 		NetworkAreaInfo result = new NetworkAreaInfo();
-		result.setId((UUID) map.get("id"));
+		result.setId(ParserUtil.safeParseUUID((String) map.get("id")));
 		result.setContainedAreaIds((List<UUID>) map.get("containedAreaIds"));
 		List<Map<String, Object>> ecgis = (List<Map<String, Object>>) map.get("ecgis");
 		for (Map<String, Object> ecgi : ecgis) {

@@ -3,7 +3,6 @@ package io.nwdaf.eventsubscription.model;
 import java.util.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -34,8 +33,7 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
 
     @JsonProperty("appId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String appId
-            = null;
+    private String appId = null;
 
     @JsonProperty("fDescs")
     @Valid
@@ -43,23 +41,19 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
 
     @JsonProperty("ulVol")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Long ulVol
-            = null;
+    private Integer ulVol = null;
 
     @JsonProperty("ulVolVariance")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Float ulVolVariance
-            = null;
+    private Double ulVolVariance = null;
 
     @JsonProperty("dlVol")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Long dlVol
-            = null;
+    private Integer dlVol = null;
 
     @JsonProperty("dlVolVariance")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Float dlVolVariance
-            = null;
+    private Double dlVolVariance = null;
 
     public TrafficCharacterization dnn(String dnn) {
         this.dnn = dnn;
@@ -151,7 +145,7 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
         this.fDescs = fDescs;
     }
 
-    public TrafficCharacterization ulVol(Long ulVol) {
+    public TrafficCharacterization ulVol(Integer ulVol) {
         this.ulVol = ulVol;
         return this;
     }
@@ -164,16 +158,15 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
      **/
     @Schema(description = "Unsigned integer identifying a volume in units of bytes.")
 
-    @Min(0L)
-    public Long getUlVol() {
+    public Integer getUlVol() {
         return ulVol;
     }
 
-    public void setUlVol(Long ulVol) {
+    public void setUlVol(Integer ulVol) {
         this.ulVol = ulVol;
     }
 
-    public TrafficCharacterization ulVolVariance(Float ulVolVariance) {
+    public TrafficCharacterization ulVolVariance(Double ulVolVariance) {
         this.ulVolVariance = ulVolVariance;
         return this;
     }
@@ -185,15 +178,15 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
      **/
     @Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-    public Float getUlVolVariance() {
+    public Double getUlVolVariance() {
         return ulVolVariance;
     }
 
-    public void setUlVolVariance(Float ulVolVariance) {
+    public void setUlVolVariance(Double ulVolVariance) {
         this.ulVolVariance = ulVolVariance;
     }
 
-    public TrafficCharacterization dlVol(Long dlVol) {
+    public TrafficCharacterization dlVol(Integer dlVol) {
         this.dlVol = dlVol;
         return this;
     }
@@ -206,16 +199,15 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
      **/
     @Schema(description = "Unsigned integer identifying a volume in units of bytes.")
 
-    @Min(0L)
-    public Long getDlVol() {
+    public Integer getDlVol() {
         return dlVol;
     }
 
-    public void setDlVol(Long dlVol) {
+    public void setDlVol(Integer dlVol) {
         this.dlVol = dlVol;
     }
 
-    public TrafficCharacterization dlVolVariance(Float dlVolVariance) {
+    public TrafficCharacterization dlVolVariance(Double dlVolVariance) {
         this.dlVolVariance = dlVolVariance;
         return this;
     }
@@ -227,11 +219,11 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
      **/
     @Schema(description = "string with format 'float' as defined in OpenAPI.")
 
-    public Float getDlVolVariance() {
+    public Double getDlVolVariance() {
         return dlVolVariance;
     }
 
-    public void setDlVolVariance(Float dlVolVariance) {
+    public void setDlVolVariance(Double dlVolVariance) {
         this.dlVolVariance = dlVolVariance;
     }
 
@@ -318,10 +310,10 @@ public class TrafficCharacterization implements AnyOfTrafficCharacterization {
         TrafficCharacterization result = new TrafficCharacterization();
         result.setDnn((String) map.get("dnn"));
         result.setAppId((String) map.get("appId"));
-        result.setUlVol((Long) map.get("ulVol"));
-        result.setDlVol((Long) map.get("dlVol"));
-        result.setUlVolVariance((Float) map.get("ulVolVariance"));
-        result.setDlVolVariance((Float) map.get("dlVolVariance"));
+        result.setUlVol((Integer) map.get("ulVol"));
+        result.setDlVol((Integer) map.get("dlVol"));
+        result.setUlVolVariance((Double) map.get("ulVolVariance"));
+        result.setDlVolVariance((Double) map.get("dlVolVariance"));
         result.setSnssai(Snssai.fromMap((Map<String, Object>) map.get("snssai")));
         List<Map<String, Object>> fDescs = (List<Map<String, Object>>) map.get("fDescs");
         for (Map<String, Object> fDesc : fDescs) {
