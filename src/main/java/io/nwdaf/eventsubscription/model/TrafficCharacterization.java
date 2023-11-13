@@ -1,8 +1,6 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -25,257 +23,310 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
 
-public class TrafficCharacterization  implements AnyOfTrafficCharacterization {
-  @JsonProperty("dnn")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String dnn
- = null;
+public class TrafficCharacterization implements AnyOfTrafficCharacterization {
+    @JsonProperty("dnn")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String dnn
+            = null;
 
-  @JsonProperty("snssai")
-  private Snssai snssai = null;
+    @JsonProperty("snssai")
+    private Snssai snssai = null;
 
-  @JsonProperty("appId")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private String appId
- = null;
+    @JsonProperty("appId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String appId
+            = null;
 
-  @JsonProperty("fDescs")
-  @Valid
-  private List<IpEthFlowDescription> fDescs = null;
+    @JsonProperty("fDescs")
+    @Valid
+    private List<IpEthFlowDescription> fDescs = null;
 
-  @JsonProperty("ulVol")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Long ulVol
- = null;
+    @JsonProperty("ulVol")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long ulVol
+            = null;
 
-  @JsonProperty("ulVolVariance")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float ulVolVariance
- = null;
+    @JsonProperty("ulVolVariance")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Float ulVolVariance
+            = null;
 
-  @JsonProperty("dlVol")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Long dlVol
- = null;
+    @JsonProperty("dlVol")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long dlVol
+            = null;
 
-  @JsonProperty("dlVolVariance")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float dlVolVariance
- = null;
+    @JsonProperty("dlVolVariance")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Float dlVolVariance
+            = null;
 
-  public TrafficCharacterization dnn(String dnn) {
-    this.dnn = dnn;
-    return this;
-  }
+    public TrafficCharacterization dnn(String dnn) {
+        this.dnn = dnn;
+        return this;
+    }
 
-  /**
-   * String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\"). 
-   * @return dnn
-   **/
-  @Schema(description = "String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\"). ")
-  @Pattern(regexp = Regex.dnn)
+    /**
+     * String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\").
+     *
+     * @return dnn
+     **/
+    @Schema(description = "String representing a Data Network as defined in clause 9A of 3GPP TS 23.003;  it shall contain either a DNN Network Identifier, or a full DNN with both the Network  Identifier and Operator Identifier, as specified in 3GPP TS 23.003 clause 9.1.1 and 9.1.2. It shall be coded as string in which the labels are separated by dots  (e.g. \"Label1.Label2.Label3\"). ")
+    @Pattern(regexp = Regex.dnn)
     public String getDnn() {
-    return dnn;
-  }
+        return dnn;
+    }
 
-  public void setDnn(String dnn) {
-    this.dnn = dnn;
-  }
+    public void setDnn(String dnn) {
+        this.dnn = dnn;
+    }
 
-  public TrafficCharacterization snssai(Snssai snssai) {
-    this.snssai = snssai;
-    return this;
-  }
+    public TrafficCharacterization snssai(Snssai snssai) {
+        this.snssai = snssai;
+        return this;
+    }
 
-  /**
-   * Get snssai
-   * @return snssai
-   **/
-  @Schema(description = "")
-  
+    /**
+     * Get snssai
+     *
+     * @return snssai
+     **/
+    @Schema(description = "")
+
     @Valid
     public Snssai getSnssai() {
-    return snssai;
-  }
+        return snssai;
+    }
 
-  public void setSnssai(Snssai snssai) {
-    this.snssai = snssai;
-  }
+    public void setSnssai(Snssai snssai) {
+        this.snssai = snssai;
+    }
 
-  public TrafficCharacterization appId(String appId) {
-    this.appId = appId;
-    return this;
-  }
+    public TrafficCharacterization appId(String appId) {
+        this.appId = appId;
+        return this;
+    }
 
-  /**
-   * String providing an application identifier.
-   * @return appId
-   **/
-  @Schema(description = "String providing an application identifier.")
-  
+    /**
+     * String providing an application identifier.
+     *
+     * @return appId
+     **/
+    @Schema(description = "String providing an application identifier.")
+
     public String getAppId() {
-    return appId;
-  }
-
-  public void setAppId(String appId) {
-    this.appId = appId;
-  }
-
-  public TrafficCharacterization fDescs(List<IpEthFlowDescription> fDescs) {
-    this.fDescs = fDescs;
-    return this;
-  }
-
-  public TrafficCharacterization addFDescsItem(IpEthFlowDescription fDescsItem) {
-    if (this.fDescs == null) {
-      this.fDescs = new ArrayList<IpEthFlowDescription>();
+        return appId;
     }
-    this.fDescs.add(fDescsItem);
-    return this;
-  }
 
-  /**
-   * Get fDescs
-   * @return fDescs
-   **/
-  @Schema(description = "")
-      @Valid
-  @Size(min=1,max=2)   public List<IpEthFlowDescription> getFDescs() {
-    return fDescs;
-  }
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
-  public void setFDescs(List<IpEthFlowDescription> fDescs) {
-    this.fDescs = fDescs;
-  }
+    public TrafficCharacterization fDescs(List<IpEthFlowDescription> fDescs) {
+        this.fDescs = fDescs;
+        return this;
+    }
 
-  public TrafficCharacterization ulVol(Long ulVol) {
-    this.ulVol = ulVol;
-    return this;
-  }
+    public TrafficCharacterization addFDescsItem(IpEthFlowDescription fDescsItem) {
+        if (this.fDescs == null) {
+            this.fDescs = new ArrayList<IpEthFlowDescription>();
+        }
+        this.fDescs.add(fDescsItem);
+        return this;
+    }
 
-  /**
-   * Unsigned integer identifying a volume in units of bytes.
-   * minimum: 0
-   * @return ulVol
-   **/
-  @Schema(description = "Unsigned integer identifying a volume in units of bytes.")
-  
-  @Min(0L)  public Long getUlVol() {
-    return ulVol;
-  }
+    /**
+     * Get fDescs
+     *
+     * @return fDescs
+     **/
+    @Schema(description = "")
+    @Valid
+    @Size(min = 1, max = 2)
+    public List<IpEthFlowDescription> getFDescs() {
+        return fDescs;
+    }
 
-  public void setUlVol(Long ulVol) {
-    this.ulVol = ulVol;
-  }
+    public void setFDescs(List<IpEthFlowDescription> fDescs) {
+        this.fDescs = fDescs;
+    }
 
-  public TrafficCharacterization ulVolVariance(Float ulVolVariance) {
-    this.ulVolVariance = ulVolVariance;
-    return this;
-  }
+    public TrafficCharacterization ulVol(Long ulVol) {
+        this.ulVol = ulVol;
+        return this;
+    }
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return ulVolVariance
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
+    /**
+     * Unsigned integer identifying a volume in units of bytes.
+     * minimum: 0
+     *
+     * @return ulVol
+     **/
+    @Schema(description = "Unsigned integer identifying a volume in units of bytes.")
+
+    @Min(0L)
+    public Long getUlVol() {
+        return ulVol;
+    }
+
+    public void setUlVol(Long ulVol) {
+        this.ulVol = ulVol;
+    }
+
+    public TrafficCharacterization ulVolVariance(Float ulVolVariance) {
+        this.ulVolVariance = ulVolVariance;
+        return this;
+    }
+
+    /**
+     * string with format 'float' as defined in OpenAPI.
+     *
+     * @return ulVolVariance
+     **/
+    @Schema(description = "string with format 'float' as defined in OpenAPI.")
+
     public Float getUlVolVariance() {
-    return ulVolVariance;
-  }
+        return ulVolVariance;
+    }
 
-  public void setUlVolVariance(Float ulVolVariance) {
-    this.ulVolVariance = ulVolVariance;
-  }
+    public void setUlVolVariance(Float ulVolVariance) {
+        this.ulVolVariance = ulVolVariance;
+    }
 
-  public TrafficCharacterization dlVol(Long dlVol) {
-    this.dlVol = dlVol;
-    return this;
-  }
+    public TrafficCharacterization dlVol(Long dlVol) {
+        this.dlVol = dlVol;
+        return this;
+    }
 
-  /**
-   * Unsigned integer identifying a volume in units of bytes.
-   * minimum: 0
-   * @return dlVol
-   **/
-  @Schema(description = "Unsigned integer identifying a volume in units of bytes.")
-  
-  @Min(0L)  public Long getDlVol() {
-    return dlVol;
-  }
+    /**
+     * Unsigned integer identifying a volume in units of bytes.
+     * minimum: 0
+     *
+     * @return dlVol
+     **/
+    @Schema(description = "Unsigned integer identifying a volume in units of bytes.")
 
-  public void setDlVol(Long dlVol) {
-    this.dlVol = dlVol;
-  }
+    @Min(0L)
+    public Long getDlVol() {
+        return dlVol;
+    }
 
-  public TrafficCharacterization dlVolVariance(Float dlVolVariance) {
-    this.dlVolVariance = dlVolVariance;
-    return this;
-  }
+    public void setDlVol(Long dlVol) {
+        this.dlVol = dlVol;
+    }
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return dlVolVariance
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
+    public TrafficCharacterization dlVolVariance(Float dlVolVariance) {
+        this.dlVolVariance = dlVolVariance;
+        return this;
+    }
+
+    /**
+     * string with format 'float' as defined in OpenAPI.
+     *
+     * @return dlVolVariance
+     **/
+    @Schema(description = "string with format 'float' as defined in OpenAPI.")
+
     public Float getDlVolVariance() {
-    return dlVolVariance;
-  }
-
-  public void setDlVolVariance(Float dlVolVariance) {
-    this.dlVolVariance = dlVolVariance;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
+        return dlVolVariance;
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    public void setDlVolVariance(Float dlVolVariance) {
+        this.dlVolVariance = dlVolVariance;
     }
-    TrafficCharacterization trafficCharacterization = (TrafficCharacterization) o;
-    return Objects.equals(this.dnn, trafficCharacterization.dnn) &&
-        Objects.equals(this.snssai, trafficCharacterization.snssai) &&
-        Objects.equals(this.appId, trafficCharacterization.appId) &&
-        Objects.equals(this.fDescs, trafficCharacterization.fDescs) &&
-        Objects.equals(this.ulVol, trafficCharacterization.ulVol) &&
-        Objects.equals(this.ulVolVariance, trafficCharacterization.ulVolVariance) &&
-        Objects.equals(this.dlVol, trafficCharacterization.dlVol) &&
-        Objects.equals(this.dlVolVariance, trafficCharacterization.dlVolVariance);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(dnn, snssai, appId, fDescs, ulVol, ulVolVariance, dlVol, dlVolVariance);
-  }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class TrafficCharacterization {\n");
-    
-    sb.append("    dnn: ").append(toIndentedString(dnn)).append("\n");
-    sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
-    sb.append("    appId: ").append(toIndentedString(appId)).append("\n");
-    sb.append("    fDescs: ").append(toIndentedString(fDescs)).append("\n");
-    sb.append("    ulVol: ").append(toIndentedString(ulVol)).append("\n");
-    sb.append("    ulVolVariance: ").append(toIndentedString(ulVolVariance)).append("\n");
-    sb.append("    dlVol: ").append(toIndentedString(dlVol)).append("\n");
-    sb.append("    dlVolVariance: ").append(toIndentedString(dlVolVariance)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TrafficCharacterization trafficCharacterization = (TrafficCharacterization) o;
+        return Objects.equals(this.dnn, trafficCharacterization.dnn) &&
+                Objects.equals(this.snssai, trafficCharacterization.snssai) &&
+                Objects.equals(this.appId, trafficCharacterization.appId) &&
+                Objects.equals(this.fDescs, trafficCharacterization.fDescs) &&
+                Objects.equals(this.ulVol, trafficCharacterization.ulVol) &&
+                Objects.equals(this.ulVolVariance, trafficCharacterization.ulVolVariance) &&
+                Objects.equals(this.dlVol, trafficCharacterization.dlVol) &&
+                Objects.equals(this.dlVolVariance, trafficCharacterization.dlVolVariance);
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dnn, snssai, appId, fDescs, ulVol, ulVolVariance, dlVol, dlVolVariance);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class TrafficCharacterization {\n");
+
+        sb.append("    dnn: ").append(toIndentedString(dnn)).append("\n");
+        sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
+        sb.append("    appId: ").append(toIndentedString(appId)).append("\n");
+        sb.append("    fDescs: ").append(toIndentedString(fDescs)).append("\n");
+        sb.append("    ulVol: ").append(toIndentedString(ulVol)).append("\n");
+        sb.append("    ulVolVariance: ").append(toIndentedString(ulVolVariance)).append("\n");
+        sb.append("    dlVol: ").append(toIndentedString(dlVol)).append("\n");
+        sb.append("    dlVolVariance: ").append(toIndentedString(dlVolVariance)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("dnn", this.dnn);
+        map.put("appId", this.appId);
+        map.put("ulVol", this.ulVol);
+        map.put("ulVolVariance", this.ulVolVariance);
+        map.put("dlVol", this.dlVol);
+        map.put("dlVolVariance", this.dlVolVariance);
+        if (this.snssai != null) {
+            map.put("snssai",this.snssai.toMap());
+        }
+        List<Map<String, Object>> fDescsMapList = new ArrayList<>();
+        if (this.fDescs != null) {
+            for (int i = 0; i < this.fDescs.size(); i++) {
+                if (this.fDescs.get(i) != null) {
+                    fDescsMapList.add(this.fDescs.get(i).toMap());
+                }
+            }
+        }
+        map.put("fDescs",fDescsMapList);
+        return map;
+    }
+
+    public static TrafficCharacterization fromMap(Map<String, Object> map) {
+        if (map == null) {
+            return null;
+        }
+        TrafficCharacterization result = new TrafficCharacterization();
+        result.setDnn((String) map.get("dnn"));
+        result.setAppId((String) map.get("appId"));
+        result.setUlVol((Long) map.get("ulVol"));
+        result.setDlVol((Long) map.get("dlVol"));
+        result.setUlVolVariance((Float) map.get("ulVolVariance"));
+        result.setDlVolVariance((Float) map.get("dlVolVariance"));
+        result.setSnssai(Snssai.fromMap((Map<String, Object>) map.get("snssai")));
+        List<Map<String, Object>> fDescs = (List<Map<String, Object>>) map.get("fDescs");
+        for (Map<String, Object> fDesc : fDescs) {
+            result.addFDescsItem(IpEthFlowDescription.fromMap(fDesc));
+        }
+        return result;
+    }
 }

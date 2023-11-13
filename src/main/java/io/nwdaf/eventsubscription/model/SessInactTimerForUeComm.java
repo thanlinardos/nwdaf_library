@@ -1,11 +1,14 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -113,5 +116,22 @@ private Integer sessInactiveTimer
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
+  }
+
+  public Map<String, Object> toMap() {
+    Map<String, Object> map = new HashMap<>();
+    map.put("n4SessId",this.n4SessId);
+    map.put("sessInactiveTimer",this.sessInactiveTimer);
+    return map;
+  }
+
+  public static SessInactTimerForUeComm fromMap(Map<String, Object> map) {
+    if (map == null) {
+      return null;
+    }
+    SessInactTimerForUeComm result = new SessInactTimerForUeComm();
+    result.setN4SessId((Integer) map.get("n4SessId"));
+    result.setSessInactiveTimer((Integer) map.get("sessInactiveTimer"));
+    return result;
   }
 }

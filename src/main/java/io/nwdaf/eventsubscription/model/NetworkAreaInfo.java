@@ -1,15 +1,13 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.nwdaf.eventsubscription.utilities.Regex;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -454,5 +452,74 @@ public class NetworkAreaInfo {
 			}
 		}
 		return true;
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("containedAreaIds",this.containedAreaIds);
+		map.put("id",this.id);
+		List<Map<String, Object>> tais = new ArrayList<>();
+		if (this.tais != null) {
+			for (int i = 0; i < this.tais.size(); i++) {
+				if (this.tais.get(i) != null) {
+					tais.add(this.tais.get(i).toMap());
+				}
+			}
+		}
+		map.put("tais", tais);
+		List<Map<String, Object>> ncgis = new ArrayList<>();
+		if (this.ncgis != null) {
+			for (int i = 0; i < this.ncgis.size(); i++) {
+				if (this.ncgis.get(i) != null) {
+					ncgis.add(this.ncgis.get(i).toMap());
+				}
+			}
+		}
+		map.put("ncgis", ncgis);
+		List<Map<String, Object>> ecgis = new ArrayList<>();
+		if (this.ecgis != null) {
+			for (int i = 0; i < this.ecgis.size(); i++) {
+				if (this.ecgis.get(i) != null) {
+					ecgis.add(this.ecgis.get(i).toMap());
+				}
+			}
+		}
+		map.put("ecgis", ecgis);
+		List<Map<String, Object>> gRanNodeIds = new ArrayList<>();
+		if (this.gRanNodeIds != null) {
+			for (int i = 0; i < this.gRanNodeIds.size(); i++) {
+				if (this.gRanNodeIds.get(i) != null) {
+					gRanNodeIds.add(this.gRanNodeIds.get(i).toMap());
+				}
+			}
+		}
+		map.put("gRanNodeIds", gRanNodeIds);
+		return map;
+	}
+
+	public static NetworkAreaInfo fromMap(Map<String, Object> map) {
+		if (map == null) {
+			return null;
+		}
+		NetworkAreaInfo result = new NetworkAreaInfo();
+		result.setId((UUID) map.get("id"));
+		result.setContainedAreaIds((List<UUID>) map.get("containedAreaIds"));
+		List<Map<String, Object>> ecgis = (List<Map<String, Object>>) map.get("ecgis");
+		for (Map<String, Object> ecgi : ecgis) {
+			result.addEcgisItem(Ecgi.fromMap(ecgi));
+		}
+		List<Map<String, Object>> ncgis = (List<Map<String, Object>>) map.get("ncgis");
+		for (Map<String, Object> ncgi : ncgis) {
+			result.addNcgisItem(Ncgi.fromMap(ncgi));
+		}
+		List<Map<String, Object>> tais = (List<Map<String, Object>>) map.get("tais");
+		for (Map<String, Object> tai : tais) {
+			result.addTaisItem(Tai.fromMap(tai));
+		}
+		List<Map<String, Object>> gRanNodeIds = (List<Map<String, Object>>) map.get("gRanNodeIds");
+		for (Map<String, Object> gRanNodeId : gRanNodeIds) {
+			result.addGRanNodeIdsItem(GlobalRanNodeId.fromMap(gRanNodeId));
+		}
+		return result;
 	}
 }

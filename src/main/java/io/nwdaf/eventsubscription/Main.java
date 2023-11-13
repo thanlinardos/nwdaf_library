@@ -102,5 +102,6 @@ public class Main {
         }
         System.out.println(Constants.exampleIpv4FilterRule.toAvp());
         List<UeCommunication> ueCommunications = DummyDataGenerator.generateDummyUeCommunications(10);
+        System.out.println(UeCommunication.fromMap(ueCommunications.get(0).toMap()));
     }
 }

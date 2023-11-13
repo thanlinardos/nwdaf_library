@@ -1,6 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -8,6 +10,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -193,5 +196,28 @@ public class AppListForUeComm {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("appId", this.appId);
+		map.put("startTime", ConvertUtil.convertOffsetDateTimeToDouble(this.startTime));
+		if(spatialValidity!=null) {
+			map.put("spatialValidity", this.spatialValidity.toMap());
+		}
+		map.put("occurRatio", this.getOccurRatio());
+		return map;
+	}
+
+	public static AppListForUeComm fromMap(Map<String, Object> map) {
+		if (map == null) {
+			return null;
+		}
+		AppListForUeComm result = new AppListForUeComm();
+		result.setAppId((String) map.get("appId"));
+		result.setStartTime(ConvertUtil.convertDoubleToOffSetDateTime((Double) map.get("startTime")));
+		result.setSpatialValidity(NetworkAreaInfo.fromMap((Map<String, Object>) map.get("spatialValidity")));
+		result.setOccurRatio((Integer) map.get("occurRatio"));
+		return result;
 	}
 }

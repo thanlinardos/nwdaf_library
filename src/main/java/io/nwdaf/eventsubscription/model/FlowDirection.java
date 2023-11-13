@@ -1,7 +1,11 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -113,5 +117,20 @@ public class FlowDirection {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("fDir", ParserUtil.safeParseString(this.fDir));
+		return map;
+	}
+
+	public static FlowDirection fromMap(Map<String, Object> map) {
+		if(map==null) {
+			return null;
+		}
+		FlowDirection result = new FlowDirection();
+		result.setFDir(FlowDirection.FlowDirectionEnum.fromValue((String) map.get("fDir")));
+		return result;
 	}
 }

@@ -1,5 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -105,5 +108,24 @@ public class IpEthFlowDescription implements OneOfIpEthFlowDescription {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("ipTrafficFilter",this.ipTrafficFilter);
+		if(this.ethTrafficFilter!=null) {
+			map.put("ethTrafficFilter",this.ethTrafficFilter.toMap());
+		}
+		return map;
+	}
+
+	public static IpEthFlowDescription fromMap(Map<String, Object> map) {
+		if (map == null) {
+			return null;
+		}
+		IpEthFlowDescription result = new IpEthFlowDescription();
+		result.setIpTrafficFilter((String) map.get("ipTrafficFilter"));
+		result.setEthTrafficFilter(EthFlowDescription.fromMap((Map<String, Object>) map.get("ethTrafficFilter")));
+		return result;
 	}
 }

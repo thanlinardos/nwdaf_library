@@ -2,14 +2,14 @@ package io.nwdaf.eventsubscription.model;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.Objects;
-import java.util.TimeZone;
+import java.util.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,392 +25,453 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
 
-public class UeCommunication   {
+public class UeCommunication {
 
-  private Instant time;
-  @JsonProperty("commDur")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer commDur
- = null;
+    private Instant time;
+    @JsonProperty("commDur")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer commDur
+            = null;
 
-  @JsonProperty("commDurVariance")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float commDurVariance
- = null;
+    @JsonProperty("commDurVariance")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Float commDurVariance
+            = null;
 
-  @JsonProperty("perioTime")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer perioTime
- = null;
+    @JsonProperty("perioTime")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer perioTime
+            = null;
 
-  @JsonProperty("perioTimeVariance")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float perioTimeVariance
- = null;
+    @JsonProperty("perioTimeVariance")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Float perioTimeVariance
+            = null;
 
-  @JsonProperty("ts")
-  private OffsetDateTime ts = null;
+    @JsonProperty("ts")
+    private OffsetDateTime ts = null;
 
-  @JsonProperty("tsVariance")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Float tsVariance
- = null;
+    @JsonProperty("tsVariance")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Float tsVariance
+            = null;
 
-  @JsonProperty("recurringTime")
-  private ScheduledCommunicationTime recurringTime = null;
+    @JsonProperty("recurringTime")
+    private ScheduledCommunicationTime recurringTime = null;
 
-  @JsonProperty("trafChar")
-  private TrafficCharacterization trafChar = null;
+    @JsonProperty("trafChar")
+    private TrafficCharacterization trafChar = null;
 
-  @JsonProperty("ratio")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer ratio
- = null;
+    @JsonProperty("ratio")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer ratio
+            = null;
 
-  @JsonProperty("perioCommInd")
-  private Boolean perioCommInd = null;
+    @JsonProperty("perioCommInd")
+    private Boolean perioCommInd = null;
 
-  @JsonProperty("confidence")
-  @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer confidence
- = null;
+    @JsonProperty("confidence")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer confidence
+            = null;
 
-  @JsonProperty("anaOfAppList")
-  private AppListForUeComm anaOfAppList = null;
+    @JsonProperty("anaOfAppList")
+    private AppListForUeComm anaOfAppList = null;
 
-  @JsonProperty("sessInactTimer")
-  private SessInactTimerForUeComm sessInactTimer = null;
+    @JsonProperty("sessInactTimer")
+    private SessInactTimerForUeComm sessInactTimer = null;
 
-  public UeCommunication commDur(Integer commDur) {
-    this.commDur = commDur;
-    return this;
-  }
+    public UeCommunication commDur(Integer commDur) {
+        this.commDur = commDur;
+        return this;
+    }
 
-  /**
-   * indicating a time in seconds.
-   * @return commDur
-   **/
-  @Schema(description = "indicating a time in seconds.")
-  
+    /**
+     * indicating a time in seconds.
+     *
+     * @return commDur
+     **/
+    @Schema(description = "indicating a time in seconds.")
+
     public Integer getCommDur() {
-    return commDur;
-  }
+        return commDur;
+    }
 
-  public void setCommDur(Integer commDur) {
-    this.commDur = commDur;
-  }
+    public void setCommDur(Integer commDur) {
+        this.commDur = commDur;
+    }
 
-  public UeCommunication commDurVariance(Float commDurVariance) {
-    this.commDurVariance = commDurVariance;
-    return this;
-  }
+    public UeCommunication commDurVariance(Float commDurVariance) {
+        this.commDurVariance = commDurVariance;
+        return this;
+    }
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return commDurVariance
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
+    /**
+     * string with format 'float' as defined in OpenAPI.
+     *
+     * @return commDurVariance
+     **/
+    @Schema(description = "string with format 'float' as defined in OpenAPI.")
+
     public Float getCommDurVariance() {
-    return commDurVariance;
-  }
+        return commDurVariance;
+    }
 
-  public void setCommDurVariance(Float commDurVariance) {
-    this.commDurVariance = commDurVariance;
-  }
+    public void setCommDurVariance(Float commDurVariance) {
+        this.commDurVariance = commDurVariance;
+    }
 
-  public UeCommunication perioTime(Integer perioTime) {
-    this.perioTime = perioTime;
-    return this;
-  }
+    public UeCommunication perioTime(Integer perioTime) {
+        this.perioTime = perioTime;
+        return this;
+    }
 
-  /**
-   * indicating a time in seconds.
-   * @return perioTime
-   **/
-  @Schema(description = "indicating a time in seconds.")
-  
+    /**
+     * indicating a time in seconds.
+     *
+     * @return perioTime
+     **/
+    @Schema(description = "indicating a time in seconds.")
+
     public Integer getPerioTime() {
-    return perioTime;
-  }
+        return perioTime;
+    }
 
-  public void setPerioTime(Integer perioTime) {
-    this.perioTime = perioTime;
-  }
+    public void setPerioTime(Integer perioTime) {
+        this.perioTime = perioTime;
+    }
 
-  public UeCommunication perioTimeVariance(Float perioTimeVariance) {
-    this.perioTimeVariance = perioTimeVariance;
-    return this;
-  }
+    public UeCommunication perioTimeVariance(Float perioTimeVariance) {
+        this.perioTimeVariance = perioTimeVariance;
+        return this;
+    }
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return perioTimeVariance
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
+    /**
+     * string with format 'float' as defined in OpenAPI.
+     *
+     * @return perioTimeVariance
+     **/
+    @Schema(description = "string with format 'float' as defined in OpenAPI.")
+
     public Float getPerioTimeVariance() {
-    return perioTimeVariance;
-  }
+        return perioTimeVariance;
+    }
 
-  public void setPerioTimeVariance(Float perioTimeVariance) {
-    this.perioTimeVariance = perioTimeVariance;
-  }
+    public void setPerioTimeVariance(Float perioTimeVariance) {
+        this.perioTimeVariance = perioTimeVariance;
+    }
 
-  public UeCommunication ts(OffsetDateTime ts) {
-    this.ts = ts;
-    return this;
-  }
+    public UeCommunication ts(OffsetDateTime ts) {
+        this.ts = ts;
+        return this;
+    }
 
-  /**
-   * string with format 'date-time' as defined in OpenAPI.
-   * @return ts
-   **/
-  @Schema(description = "string with format 'date-time' as defined in OpenAPI.")
-  
+    /**
+     * string with format 'date-time' as defined in OpenAPI.
+     *
+     * @return ts
+     **/
+    @Schema(description = "string with format 'date-time' as defined in OpenAPI.")
+
     @Valid
     public OffsetDateTime getTs() {
-    return ts;
-  }
+        return ts;
+    }
 
-  public void setTs(OffsetDateTime ts) {
-    this.ts = ts;
-  }
+    public void setTs(OffsetDateTime ts) {
+        this.ts = ts;
+    }
 
-  public UeCommunication tsVariance(Float tsVariance) {
-    this.tsVariance = tsVariance;
-    return this;
-  }
+    public UeCommunication tsVariance(Float tsVariance) {
+        this.tsVariance = tsVariance;
+        return this;
+    }
 
-  /**
-   * string with format 'float' as defined in OpenAPI.
-   * @return tsVariance
-   **/
-  @Schema(description = "string with format 'float' as defined in OpenAPI.")
-  
+    /**
+     * string with format 'float' as defined in OpenAPI.
+     *
+     * @return tsVariance
+     **/
+    @Schema(description = "string with format 'float' as defined in OpenAPI.")
+
     public Float getTsVariance() {
-    return tsVariance;
-  }
+        return tsVariance;
+    }
 
-  public void setTsVariance(Float tsVariance) {
-    this.tsVariance = tsVariance;
-  }
+    public void setTsVariance(Float tsVariance) {
+        this.tsVariance = tsVariance;
+    }
 
-  public UeCommunication recurringTime(ScheduledCommunicationTime recurringTime) {
-    this.recurringTime = recurringTime;
-    return this;
-  }
+    public UeCommunication recurringTime(ScheduledCommunicationTime recurringTime) {
+        this.recurringTime = recurringTime;
+        return this;
+    }
 
-  /**
-   * Get recurringTime
-   * @return recurringTime
-   **/
-  @Schema(description = "")
-  
+    /**
+     * Get recurringTime
+     *
+     * @return recurringTime
+     **/
+    @Schema(description = "")
+
     @Valid
     public ScheduledCommunicationTime getRecurringTime() {
-    return recurringTime;
-  }
+        return recurringTime;
+    }
 
-  public void setRecurringTime(ScheduledCommunicationTime recurringTime) {
-    this.recurringTime = recurringTime;
-  }
+    public void setRecurringTime(ScheduledCommunicationTime recurringTime) {
+        this.recurringTime = recurringTime;
+    }
 
-  public UeCommunication trafChar(TrafficCharacterization trafChar) {
-    this.trafChar = trafChar;
-    return this;
-  }
+    public UeCommunication trafChar(TrafficCharacterization trafChar) {
+        this.trafChar = trafChar;
+        return this;
+    }
 
-  /**
-   * Get trafChar
-   * @return trafChar
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
+    /**
+     * Get trafChar
+     *
+     * @return trafChar
+     **/
+    @Schema(required = true, description = "")
+    @NotNull
 
     @Valid
     public TrafficCharacterization getTrafChar() {
-    return trafChar;
-  }
+        return trafChar;
+    }
 
-  public void setTrafChar(TrafficCharacterization trafChar) {
-    this.trafChar = trafChar;
-  }
+    public void setTrafChar(TrafficCharacterization trafChar) {
+        this.trafChar = trafChar;
+    }
 
-  public UeCommunication ratio(Integer ratio) {
-    this.ratio = ratio;
-    return this;
-  }
+    public UeCommunication ratio(Integer ratio) {
+        this.ratio = ratio;
+        return this;
+    }
 
-  /**
-   * Unsigned integer indicating Sampling Ratio (see clauses 4.15.1 of 3GPP TS 23.502), expressed in percent.  
-   * minimum: 1
-   * maximum: 100
-   * @return ratio
-   **/
-  @Schema(description = "Unsigned integer indicating Sampling Ratio (see clauses 4.15.1 of 3GPP TS 23.502), expressed in percent.  ")
-  
-  @Min(1) @Max(100)   public Integer getRatio() {
-    return ratio;
-  }
+    /**
+     * Unsigned integer indicating Sampling Ratio (see clauses 4.15.1 of 3GPP TS 23.502), expressed in percent.
+     * minimum: 1
+     * maximum: 100
+     *
+     * @return ratio
+     **/
+    @Schema(description = "Unsigned integer indicating Sampling Ratio (see clauses 4.15.1 of 3GPP TS 23.502), expressed in percent.  ")
 
-  public void setRatio(Integer ratio) {
-    this.ratio = ratio;
-  }
+    @Min(1)
+    @Max(100)
+    public Integer getRatio() {
+        return ratio;
+    }
 
-  public UeCommunication perioCommInd(Boolean perioCommInd) {
-    this.perioCommInd = perioCommInd;
-    return this;
-  }
+    public void setRatio(Integer ratio) {
+        this.ratio = ratio;
+    }
 
-  /**
-   * Get perioCommInd
-   * @return perioCommInd
-   **/
-  @Schema(description = "")
-  
+    public UeCommunication perioCommInd(Boolean perioCommInd) {
+        this.perioCommInd = perioCommInd;
+        return this;
+    }
+
+    /**
+     * Get perioCommInd
+     *
+     * @return perioCommInd
+     **/
+    @Schema(description = "")
+
     public Boolean isPerioCommInd() {
-    return perioCommInd;
-  }
+        return perioCommInd;
+    }
 
-  public void setPerioCommInd(Boolean perioCommInd) {
-    this.perioCommInd = perioCommInd;
-  }
+    public void setPerioCommInd(Boolean perioCommInd) {
+        this.perioCommInd = perioCommInd;
+    }
 
-  public UeCommunication confidence(Integer confidence) {
-    this.confidence = confidence;
-    return this;
-  }
+    public UeCommunication confidence(Integer confidence) {
+        this.confidence = confidence;
+        return this;
+    }
 
-  /**
-   * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
-   * minimum: 0
-   * @return confidence
-   **/
-  @Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
-  
-  @Min(0)  public Integer getConfidence() {
-    return confidence;
-  }
+    /**
+     * Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
+     * minimum: 0
+     *
+     * @return confidence
+     **/
+    @Schema(description = "Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.")
 
-  public void setConfidence(Integer confidence) {
-    this.confidence = confidence;
-  }
+    @Min(0)
+    public Integer getConfidence() {
+        return confidence;
+    }
 
-  public UeCommunication anaOfAppList(AppListForUeComm anaOfAppList) {
-    this.anaOfAppList = anaOfAppList;
-    return this;
-  }
+    public void setConfidence(Integer confidence) {
+        this.confidence = confidence;
+    }
 
-  /**
-   * Get anaOfAppList
-   * @return anaOfAppList
-   **/
-  @Schema(description = "")
-  
+    public UeCommunication anaOfAppList(AppListForUeComm anaOfAppList) {
+        this.anaOfAppList = anaOfAppList;
+        return this;
+    }
+
+    /**
+     * Get anaOfAppList
+     *
+     * @return anaOfAppList
+     **/
+    @Schema(description = "")
+
     @Valid
     public AppListForUeComm getAnaOfAppList() {
-    return anaOfAppList;
-  }
+        return anaOfAppList;
+    }
 
-  public void setAnaOfAppList(AppListForUeComm anaOfAppList) {
-    this.anaOfAppList = anaOfAppList;
-  }
+    public void setAnaOfAppList(AppListForUeComm anaOfAppList) {
+        this.anaOfAppList = anaOfAppList;
+    }
 
-  public UeCommunication sessInactTimer(SessInactTimerForUeComm sessInactTimer) {
-    this.sessInactTimer = sessInactTimer;
-    return this;
-  }
+    public UeCommunication sessInactTimer(SessInactTimerForUeComm sessInactTimer) {
+        this.sessInactTimer = sessInactTimer;
+        return this;
+    }
 
-  /**
-   * Get sessInactTimer
-   * @return sessInactTimer
-   **/
-  @Schema(description = "")
-  
+    /**
+     * Get sessInactTimer
+     *
+     * @return sessInactTimer
+     **/
+    @Schema(description = "")
+
     @Valid
     public SessInactTimerForUeComm getSessInactTimer() {
-    return sessInactTimer;
-  }
-
-  public void setSessInactTimer(SessInactTimerForUeComm sessInactTimer) {
-    this.sessInactTimer = sessInactTimer;
-  }
-
-  public UeCommunication time(Instant time) {
-    this.time = time;
-    this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
-    return this;
-  }
-
-  public Instant getTime() {
-    return time;
-  }
-
-  public void setTime(Instant time) {
-    this.time = time;
-    this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
-  }
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
+        return sessInactTimer;
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    public void setSessInactTimer(SessInactTimerForUeComm sessInactTimer) {
+        this.sessInactTimer = sessInactTimer;
     }
-    UeCommunication ueCommunication = (UeCommunication) o;
-    return Objects.equals(this.commDur, ueCommunication.commDur) &&
-        Objects.equals(this.commDurVariance, ueCommunication.commDurVariance) &&
-        Objects.equals(this.perioTime, ueCommunication.perioTime) &&
-        Objects.equals(this.perioTimeVariance, ueCommunication.perioTimeVariance) &&
-        Objects.equals(this.ts, ueCommunication.ts) &&
-        Objects.equals(this.tsVariance, ueCommunication.tsVariance) &&
-        Objects.equals(this.recurringTime, ueCommunication.recurringTime) &&
-        Objects.equals(this.trafChar, ueCommunication.trafChar) &&
-        Objects.equals(this.ratio, ueCommunication.ratio) &&
-        Objects.equals(this.perioCommInd, ueCommunication.perioCommInd) &&
-        Objects.equals(this.confidence, ueCommunication.confidence) &&
-        Objects.equals(this.anaOfAppList, ueCommunication.anaOfAppList) &&
-        Objects.equals(this.sessInactTimer, ueCommunication.sessInactTimer);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(commDur, commDurVariance, perioTime, perioTimeVariance, ts, tsVariance, recurringTime, trafChar, ratio, perioCommInd, confidence, anaOfAppList, sessInactTimer);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class UeCommunication {\n");
-    
-    sb.append("    commDur: ").append(toIndentedString(commDur)).append("\n");
-    sb.append("    commDurVariance: ").append(toIndentedString(commDurVariance)).append("\n");
-    sb.append("    perioTime: ").append(toIndentedString(perioTime)).append("\n");
-    sb.append("    perioTimeVariance: ").append(toIndentedString(perioTimeVariance)).append("\n");
-    sb.append("    ts: ").append(toIndentedString(ts)).append("\n");
-    sb.append("    tsVariance: ").append(toIndentedString(tsVariance)).append("\n");
-    sb.append("    recurringTime: ").append(toIndentedString(recurringTime)).append("\n");
-    sb.append("    trafChar: ").append(toIndentedString(trafChar)).append("\n");
-    sb.append("    ratio: ").append(toIndentedString(ratio)).append("\n");
-    sb.append("    perioCommInd: ").append(toIndentedString(perioCommInd)).append("\n");
-    sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
-    sb.append("    anaOfAppList: ").append(toIndentedString(anaOfAppList)).append("\n");
-    sb.append("    sessInactTimer: ").append(toIndentedString(sessInactTimer)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+    public UeCommunication time(Instant time) {
+        this.time = time;
+        this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+        return this;
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    public Instant getTime() {
+        return time;
+    }
+
+    public void setTime(Instant time) {
+        this.time = time;
+        this.ts = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UeCommunication ueCommunication = (UeCommunication) o;
+        return Objects.equals(this.commDur, ueCommunication.commDur) &&
+                Objects.equals(this.commDurVariance, ueCommunication.commDurVariance) &&
+                Objects.equals(this.perioTime, ueCommunication.perioTime) &&
+                Objects.equals(this.perioTimeVariance, ueCommunication.perioTimeVariance) &&
+                Objects.equals(this.ts, ueCommunication.ts) &&
+                Objects.equals(this.tsVariance, ueCommunication.tsVariance) &&
+                Objects.equals(this.recurringTime, ueCommunication.recurringTime) &&
+                Objects.equals(this.trafChar, ueCommunication.trafChar) &&
+                Objects.equals(this.ratio, ueCommunication.ratio) &&
+                Objects.equals(this.perioCommInd, ueCommunication.perioCommInd) &&
+                Objects.equals(this.confidence, ueCommunication.confidence) &&
+                Objects.equals(this.anaOfAppList, ueCommunication.anaOfAppList) &&
+                Objects.equals(this.sessInactTimer, ueCommunication.sessInactTimer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(commDur, commDurVariance, perioTime, perioTimeVariance, ts, tsVariance, recurringTime, trafChar, ratio, perioCommInd, confidence, anaOfAppList, sessInactTimer);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class UeCommunication {\n");
+
+        sb.append("    commDur: ").append(toIndentedString(commDur)).append("\n");
+        sb.append("    commDurVariance: ").append(toIndentedString(commDurVariance)).append("\n");
+        sb.append("    perioTime: ").append(toIndentedString(perioTime)).append("\n");
+        sb.append("    perioTimeVariance: ").append(toIndentedString(perioTimeVariance)).append("\n");
+        sb.append("    ts: ").append(toIndentedString(ts)).append("\n");
+        sb.append("    tsVariance: ").append(toIndentedString(tsVariance)).append("\n");
+        sb.append("    recurringTime: ").append(toIndentedString(recurringTime)).append("\n");
+        sb.append("    trafChar: ").append(toIndentedString(trafChar)).append("\n");
+        sb.append("    ratio: ").append(toIndentedString(ratio)).append("\n");
+        sb.append("    perioCommInd: ").append(toIndentedString(perioCommInd)).append("\n");
+        sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+        sb.append("    anaOfAppList: ").append(toIndentedString(anaOfAppList)).append("\n");
+        sb.append("    sessInactTimer: ").append(toIndentedString(sessInactTimer)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("time", ConvertUtil.convertInstantToDouble(this.getTime()));
+        if (this.getRecurringTime() != null) {
+            map.put("recurringTime", this.getRecurringTime().toMap());
+        }
+        map.put("commDur", this.getCommDur());
+        map.put("confidence", this.getConfidence());
+        if(sessInactTimer!=null) {
+            map.put("sessInactTimer", this.sessInactTimer.toMap());
+        }
+        if(trafChar!=null) {
+            map.put("trafChar", this.trafChar.toMap());
+        }
+        if(anaOfAppList!=null) {
+            map.put("anaOfAppList", this.anaOfAppList.toMap());
+        }
+        map.put("perioTime", this.getPerioTime());
+        map.put("perioTimeVariance", this.getPerioTimeVariance());
+        map.put("tsVariance", this.getTsVariance());
+        map.put("ratio", this.getRatio());
+        map.put("perioCommInd", this.isPerioCommInd());
+        return map;
+    }
+
+    public static UeCommunication fromMap(Map<String, Object> map) {
+        if (map == null) {
+            return null;
+        }
+        UeCommunication result = new UeCommunication();
+        result.setTime(ConvertUtil.convertDoubleToInstant((Double) map.get("time")));
+        result.setRecurringTime(ScheduledCommunicationTime.fromMap((Map<String, Object>) map.get("recurringTime")));
+        result.setCommDur((Integer) map.get("commDur"));
+        result.setConfidence((Integer) map.get("confidence"));
+        result.setSessInactTimer(SessInactTimerForUeComm.fromMap((Map<String, Object>) map.get("sessInactTimer")));
+        result.setPerioTime((Integer) map.get("perioTime"));
+        result.setPerioTimeVariance((Float) map.get("perioTimeVariance"));
+        result.setTsVariance((Float) map.get("tsVariance"));
+        result.setTrafChar(TrafficCharacterization.fromMap((Map<String, Object>) map.get("trafChar")));
+        result.setRatio((Integer) map.get("ratio"));
+        result.setPerioCommInd((Boolean) map.get("perioCommInd"));
+        result.setAnaOfAppList(AppListForUeComm.fromMap((Map<String, Object>) map.get("anaOfAppList")));
+        return result;
+    }
 }

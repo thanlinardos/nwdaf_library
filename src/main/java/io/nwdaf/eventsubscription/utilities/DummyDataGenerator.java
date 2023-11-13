@@ -137,7 +137,7 @@ public class DummyDataGenerator {
                 default:
                     break;
             }
-            ueMobility.ts(now).duration(1).durationVariance(0.0).supi(randomSupi(false)).intGroupId(randomInternalGroupId(false));
+            ueMobility.time(now.toInstant()).duration(1).durationVariance(0.0).supi(randomSupi(false)).intGroupId(randomInternalGroupId(false));
             ueMobility.addLocInfosItem(new LocationInfo().ratio(r.nextInt(1, 101)).confidence(r.nextInt(101))
                     .loc(userLocation));
         }
@@ -160,7 +160,7 @@ public class DummyDataGenerator {
                 case 2 -> Constants.AreaOfInterestExample3;
                 default -> Constants.ServingAreaOfInterest;
             };
-            ueCommunication.ts(now).commDur(r.nextInt(100)).commDurVariance(r.nextFloat(1)).confidence(r.nextInt(100))
+            ueCommunication.time(now.toInstant()).commDur(r.nextInt(100)).commDurVariance(r.nextFloat(1)).confidence(r.nextInt(100))
                     .recurringTime(new ScheduledCommunicationTime()
                             .daysOfWeek(List.of(1,2,5,7))
                             .timeOfDayStart("12:00")
