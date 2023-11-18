@@ -16,7 +16,7 @@ import static java.util.Map.entry;
 public class Constants {
 	public static Integer MIN_PERIOD_SECONDS = 1;
 	public static Integer MAX_PERIOD_SECONDS = 600;
-	public static List<NwdafEventEnum> supportedEvents = new ArrayList<>(Arrays.asList(NwdafEventEnum.NF_LOAD,NwdafEventEnum.UE_MOBILITY));
+	public static List<NwdafEventEnum> supportedEvents = new ArrayList<>(Arrays.asList(NwdafEventEnum.NF_LOAD,NwdafEventEnum.UE_MOBILITY,NwdafEventEnum.UE_COMM));
 	//check 5.1.8-1 table (135) from 3gpp 29520-h80 and for encoding : 29571-h80 (17) table 5.2.2-3
 	//Events supported: 2(UeMobility), 7(NfLoad), 11(EneNA), 17(NfLoadExt), 22(UeMobilityExt)
 	public static String supportedFeatures = "210442";  //all 24 features: FFFFFF

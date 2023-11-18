@@ -1,10 +1,8 @@
 package io.nwdaf.eventsubscription.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -25,6 +23,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
 public class NnwdafEventsSubscriptionNotification implements OneOfNnwdafEventsSubscriptionNotification {
+
+	private Instant time;
+
+	@JsonProperty("timeStamp")
+	private OffsetDateTime timeStamp = null;
+
 	@JsonProperty("eventNotifications")
 	@Valid
 	private List<EventNotification> eventNotifications = null;
@@ -133,6 +137,29 @@ public class NnwdafEventsSubscriptionNotification implements OneOfNnwdafEventsSu
 		this.oldSubscriptionId = oldSubscriptionId;
 	}
 
+	public Instant getTime() {
+		return time;
+	}
+
+	public void setTime(Instant time) {
+		this.time = time;
+		this.timeStamp = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+	}
+
+	public NnwdafEventsSubscriptionNotification time(Instant time) {
+		this.time = time;
+		this.timeStamp = OffsetDateTime.ofInstant(time, TimeZone.getDefault().toZoneId());
+		return this;
+	}
+
+	public OffsetDateTime getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(OffsetDateTime timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -158,6 +185,7 @@ public class NnwdafEventsSubscriptionNotification implements OneOfNnwdafEventsSu
 		StringBuilder sb = new StringBuilder();
 		sb.append("class NnwdafEventsSubscriptionNotification {\n");
 
+		sb.append("    timeStamp: ").append(toIndentedString(timeStamp)).append("\n");
 		sb.append("    eventNotifications: ").append(toIndentedString(eventNotifications)).append("\n");
 		sb.append("    subscriptionId: ").append(toIndentedString(subscriptionId)).append("\n");
 		sb.append("    notifCorrId: ").append(toIndentedString(notifCorrId)).append("\n");
