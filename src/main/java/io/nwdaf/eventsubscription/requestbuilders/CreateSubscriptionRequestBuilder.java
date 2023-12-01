@@ -138,7 +138,7 @@ public class CreateSubscriptionRequestBuilder {
 		eventSub.event(new NwdafEvent().event(NwdafEventEnum.fromValue(event)));
 		eventSub.notificationMethod(new NotificationMethod().notifMethod(NotificationMethodEnum.fromValue(notifMethod)));
 		EventReportingRequirement extraRepReq = new EventReportingRequirement();
-		if(optionals.size()>0) {
+		if(!optionals.isEmpty()) {
 			if(optionals.get(0)!=null) {
 				extraRepReq.maxObjectNbr(Integer.parseInt(optionals.get(0)));
 				
@@ -162,14 +162,14 @@ public class CreateSubscriptionRequestBuilder {
 				extraRepReq.offsetPeriod(Integer.parseInt(optionals.get(6)));
 			}
 		}
-		if(anaMeta.size()>0) {
-			List<AnalyticsMetadata> l = new ArrayList<AnalyticsMetadata>();
-			for(int i =0;i<anaMeta.size();i++) {
-				l.add(new AnalyticsMetadata().anaMeta(AnalyticsMetadataEnum.fromValue(anaMeta.get(i))));
-			}
+		if(!anaMeta.isEmpty()) {
+			List<AnalyticsMetadata> l = new ArrayList<>();
+            for (String s : anaMeta) {
+                l.add(new AnalyticsMetadata().anaMeta(AnalyticsMetadataEnum.fromValue(s)));
+            }
 			extraRepReq.anaMeta(l);
 		}
-		if(anaMetaInd.size()>0) {
+		if(!anaMetaInd.isEmpty()) {
 			AnalyticsMetadataIndication anametaind = new AnalyticsMetadataIndication();
 			TimeWindow tw = new TimeWindow();
 			if(anaMetaInd.get(0)!=null) {
@@ -182,10 +182,10 @@ public class CreateSubscriptionRequestBuilder {
 				anametaind.dataWindow(tw);
 			}
 			
-			if(dataStatProps.size()>0) {
-				for(int i=0;i<dataStatProps.size();i++) {
-					anametaind.addDataStatPropsItem(new DatasetStatisticalProperty().dataStatProps(DatasetStatisticalPropertyEnum.fromValue(dataStatProps.get(i))));
-				}
+			if(!dataStatProps.isEmpty()) {
+                for (String dataStatProp : dataStatProps) {
+                    anametaind.addDataStatPropsItem(new DatasetStatisticalProperty().dataStatProps(DatasetStatisticalPropertyEnum.fromValue(dataStatProp)));
+                }
 			}
 			if(anaMetaInd.get(2)!=null) {
 				anametaind.strategy(new OutputStrategy().strategy(OutputStrategyEnum.fromValue(anaMetaInd.get(2))));
@@ -195,10 +195,10 @@ public class CreateSubscriptionRequestBuilder {
 			}
 			extraRepReq.anaMetaInd(anametaind);
 		}
-		if(accPerSubset.size()>0) {
-			for(int i=0;i<accPerSubset.size();i++) {
-				extraRepReq.addAccPerSubsetItem(new Accuracy().accuracy(AccuracyEnum.fromValue(accPerSubset.get(i))));
-			}
+		if(!accPerSubset.isEmpty()) {
+            for (String s : accPerSubset) {
+                extraRepReq.addAccPerSubsetItem(new Accuracy().accuracy(AccuracyEnum.fromValue(s)));
+            }
 		}
 		if(optionals.size()>0 || anaMeta.size()>0 || anaMetaInd.size()>0 || accPerSubset.size()>0) {
 			eventSub.extraReportReq(extraRepReq);
@@ -214,9 +214,9 @@ public class CreateSubscriptionRequestBuilder {
 			eventSub.tgtUe(tgtUe);
 		}
 		if(nfInstanceIds.size()>0) {
-			for(int i=0;i<nfInstanceIds.size();i++) {
-				eventSub.addNfInstanceIdsItem(UUID.fromString(nfInstanceIds.get(i)));
-			}
+            for (String nfInstanceId : nfInstanceIds) {
+                eventSub.addNfInstanceIdsItem(UUID.fromString(nfInstanceId));
+            }
 		}
 		if(nfSetIds.size()>0) {
 			eventSub.nfSetIds(nfSetIds);
@@ -234,214 +234,214 @@ public class CreateSubscriptionRequestBuilder {
 			eventSub.ladnDnns(ladnDnns);
 		}
 		if(nfTypes.size()>0) {
-			for(int i=0;i<nfTypes.size();i++) {
-				eventSub.addNfTypesItem(new NFType().nfType(NFTypeEnum.fromValue(nfTypes.get(i))));
-			}
+            for (String nfType : nfTypes) {
+                eventSub.addNfTypesItem(new NFType().nfType(NFTypeEnum.fromValue(nfType)));
+            }
 		}
 		if(nfLoadLvlThds.size()>0) {
-			for(int i=0;i<nfLoadLvlThds.size();i++) {
-				eventSub.addNfLoadLvlThdsItem(new ThresholdLevel().congLevel(Integer.parseInt(nfLoadLvlThds.get(i).get(0))).nfLoadLevel(Integer.parseInt(nfLoadLvlThds.get(i).get(1))).nfCpuUsage(Integer.parseInt(nfLoadLvlThds.get(i).get(2))).nfMemoryUsage(Integer.parseInt(nfLoadLvlThds.get(i).get(3))).nfStorageUsage(Integer.parseInt(nfLoadLvlThds.get(i).get(4))).avgTrafficRate(nfLoadLvlThds.get(i).get(5)).maxTrafficRate(nfLoadLvlThds.get(i).get(6)).avgPacketDelay(Integer.parseInt(nfLoadLvlThds.get(i).get(7))).maxPacketDelay(Integer.parseInt(nfLoadLvlThds.get(i).get(8))).avgPacketLossRate(Integer.parseInt(nfLoadLvlThds.get(i).get(9))).svcExpLevel(Float.parseFloat(nfLoadLvlThds.get(i).get(10))));
-			}
+            for (List<String> nfLoadLvlThd : nfLoadLvlThds) {
+                eventSub.addNfLoadLvlThdsItem(new ThresholdLevel().congLevel(Integer.parseInt(nfLoadLvlThd.get(0))).nfLoadLevel(Integer.parseInt(nfLoadLvlThd.get(1))).nfCpuUsage(Integer.parseInt(nfLoadLvlThd.get(2))).nfMemoryUsage(Integer.parseInt(nfLoadLvlThd.get(3))).nfStorageUsage(Integer.parseInt(nfLoadLvlThd.get(4))).avgTrafficRate(nfLoadLvlThd.get(5)).maxTrafficRate(nfLoadLvlThd.get(6)).avgPacketDelay(Integer.parseInt(nfLoadLvlThd.get(7))).maxPacketDelay(Integer.parseInt(nfLoadLvlThd.get(8))).avgPacketLossRate(Integer.parseInt(nfLoadLvlThd.get(9))).svcExpLevel(Float.parseFloat(nfLoadLvlThd.get(10))));
+            }
 			
 		}
 		if(visitedAreas.size()>0) {
-			for(int n=0;n<visitedAreas.size();n++) {
-				NetworkAreaInfo area = new NetworkAreaInfo();
-				for(int i=0;i<visitedAreas.get(n).get(0).size();i++) {
-					Ecgi ecgi = new Ecgi();
-					if(visitedAreas.get(n).get(0).get(i).get(0)!=null&&visitedAreas.get(n).get(0).get(i).get(1)!=null) {
-						ecgi.plmnId(new PlmnId().mcc(visitedAreas.get(n).get(0).get(i).get(0)).mnc(visitedAreas.get(n).get(0).get(i).get(1)));
-					}
-					ecgi.eutraCellId(visitedAreas.get(n).get(0).get(i).get(2)).nid(visitedAreas.get(n).get(0).get(i).get(3));
-					area.addEcgisItem(ecgi);
-				}
-				
-				for(int i=0;i<visitedAreas.get(n).get(1).size();i++) {
-					Ncgi ncgi = new Ncgi();
-					if(visitedAreas.get(n).get(1).get(i).get(1)!=null&&visitedAreas.get(n).get(1).get(i).get(1)!=null) {
-						ncgi.plmnId(new PlmnId().mcc(visitedAreas.get(n).get(1).get(i).get(0)).mnc(visitedAreas.get(n).get(1).get(i).get(1)));
-					}
-					ncgi.nrCellId(visitedAreas.get(n).get(1).get(i).get(2)).nid(visitedAreas.get(n).get(1).get(i).get(3));
-					area.addNcgisItem(ncgi);
-				}
-				
-				for(int i=0;i<visitedAreas.get(n).get(2).size();i++) {
-					GlobalRanNodeId gRanNodeId = new GlobalRanNodeId();
-					if(visitedAreas.get(n).get(2).get(i).get(1)!=null&&visitedAreas.get(n).get(2).get(i).get(1)!=null) {
-						gRanNodeId.plmnId(new PlmnId().mcc(visitedAreas.get(n).get(2).get(i).get(0)).mnc(visitedAreas.get(n).get(2).get(i).get(1)));
-					}
-					gRanNodeId.n3IwfId(visitedAreas.get(n).get(2).get(i).get(2)).ngeNbId(visitedAreas.get(n).get(2).get(i).get(3))
-																		.wagfId(visitedAreas.get(n).get(2).get(i).get(4))
-																		.tngfId(visitedAreas.get(n).get(2).get(i).get(5))
-																		.nid(visitedAreas.get(n).get(2).get(i).get(6))
-																		.eNbId(visitedAreas.get(n).get(2).get(i).get(7));
-					if(visitedAreas.get(n).get(2).get(i).get(8)!=null&&visitedAreas.get(n).get(2).get(i).get(9)!=null) {
-						gRanNodeId.gNbId(new GNbId().bitLength(Integer.parseInt(visitedAreas.get(n).get(2).get(i).get(8))).gNBValue(visitedAreas.get(n).get(2).get(i).get(9)));
-					}
-					area.addGRanNodeIdsItem(gRanNodeId);
-				}
-				
-				for(int i=0;i<visitedAreas.get(n).get(3).size();i++) {
-					Tai tai = new Tai();
-					if(visitedAreas.get(n).get(3).get(i).get(1)!=null&&visitedAreas.get(n).get(3).get(i).get(1)!=null) {
-						tai.plmnId(new PlmnId().mcc(visitedAreas.get(n).get(3).get(i).get(0)).mnc(visitedAreas.get(n).get(3).get(i).get(1)));
-					}
-					tai.tac(visitedAreas.get(n).get(3).get(i).get(2)).nid(visitedAreas.get(n).get(3).get(i).get(3));
-					area.addTaisItem(tai);
-				}
-				eventSub.addVisitedAreasItem(area);
-			}
+            for (List<List<List<String>>> visitedArea : visitedAreas) {
+                NetworkAreaInfo area = new NetworkAreaInfo();
+                for (int i = 0; i < visitedArea.get(0).size(); i++) {
+                    Ecgi ecgi = new Ecgi();
+                    if (visitedArea.get(0).get(i).get(0) != null && visitedArea.get(0).get(i).get(1) != null) {
+                        ecgi.plmnId(new PlmnId().mcc(visitedArea.get(0).get(i).get(0)).mnc(visitedArea.get(0).get(i).get(1)));
+                    }
+                    ecgi.eutraCellId(visitedArea.get(0).get(i).get(2)).nid(visitedArea.get(0).get(i).get(3));
+                    area.addEcgisItem(ecgi);
+                }
+
+                for (int i = 0; i < visitedArea.get(1).size(); i++) {
+                    Ncgi ncgi = new Ncgi();
+                    if (visitedArea.get(1).get(i).get(1) != null && visitedArea.get(1).get(i).get(1) != null) {
+                        ncgi.plmnId(new PlmnId().mcc(visitedArea.get(1).get(i).get(0)).mnc(visitedArea.get(1).get(i).get(1)));
+                    }
+                    ncgi.nrCellId(visitedArea.get(1).get(i).get(2)).nid(visitedArea.get(1).get(i).get(3));
+                    area.addNcgisItem(ncgi);
+                }
+
+                for (int i = 0; i < visitedArea.get(2).size(); i++) {
+                    GlobalRanNodeId gRanNodeId = new GlobalRanNodeId();
+                    if (visitedArea.get(2).get(i).get(1) != null && visitedArea.get(2).get(i).get(1) != null) {
+                        gRanNodeId.plmnId(new PlmnId().mcc(visitedArea.get(2).get(i).get(0)).mnc(visitedArea.get(2).get(i).get(1)));
+                    }
+                    gRanNodeId.n3IwfId(visitedArea.get(2).get(i).get(2)).ngeNbId(visitedArea.get(2).get(i).get(3))
+                            .wagfId(visitedArea.get(2).get(i).get(4))
+                            .tngfId(visitedArea.get(2).get(i).get(5))
+                            .nid(visitedArea.get(2).get(i).get(6))
+                            .eNbId(visitedArea.get(2).get(i).get(7));
+                    if (visitedArea.get(2).get(i).get(8) != null && visitedArea.get(2).get(i).get(9) != null) {
+                        gRanNodeId.gNbId(new GNbId().bitLength(Integer.parseInt(visitedArea.get(2).get(i).get(8))).gNBValue(visitedArea.get(2).get(i).get(9)));
+                    }
+                    area.addGRanNodeIdsItem(gRanNodeId);
+                }
+
+                for (int i = 0; i < visitedArea.get(3).size(); i++) {
+                    Tai tai = new Tai();
+                    if (visitedArea.get(3).get(i).get(1) != null && visitedArea.get(3).get(i).get(1) != null) {
+                        tai.plmnId(new PlmnId().mcc(visitedArea.get(3).get(i).get(0)).mnc(visitedArea.get(3).get(i).get(1)));
+                    }
+                    tai.tac(visitedArea.get(3).get(i).get(2)).nid(visitedArea.get(3).get(i).get(3));
+                    area.addTaisItem(tai);
+                }
+                eventSub.addVisitedAreasItem(area);
+            }
 		}
 		if(nsiIdInfos.size()>0) {
-			for(int n=0;n<nsiIdInfos.size();n++) {
-				NsiIdInfo nsiIdInfo = new NsiIdInfo();
-				if(nsiIdInfos.get(n).get(0).get(0)!=null) {
-					nsiIdInfo.snssai(new Snssai().sst(Integer.parseInt(nsiIdInfos.get(n).get(0).get(0))).sd(nsiIdInfos.get(n).get(0).get(1)));
-				}
-				nsiIdInfo.nsiIds(nsiIdInfos.get(n).get(1));
-				eventSub.addNsiIdInfosItem(nsiIdInfo);
-			}
+            for (List<List<String>> idInfo : nsiIdInfos) {
+                NsiIdInfo nsiIdInfo = new NsiIdInfo();
+                if (idInfo.get(0).get(0) != null) {
+                    nsiIdInfo.snssai(new Snssai().sst(Integer.parseInt(idInfo.get(0).get(0))).sd(idInfo.get(0).get(1)));
+                }
+                nsiIdInfo.nsiIds(idInfo.get(1));
+                eventSub.addNsiIdInfosItem(nsiIdInfo);
+            }
 		}
 		if(nsiLevelThrds.size()>0) {
 			eventSub.nsiLevelThrds(nsiLevelThrds);
 		}
 		if(qosFlowRetThds.size()>0) {
-			for(int i=0;i<qosFlowRetThds.size();i++) {
-				if(qosFlowRetThds.get(i).get(0)!=null&&qosFlowRetThds.get(i).get(1)!=null&&qosFlowRetThds.get(i).get(2)!=null) {
-					eventSub.addQosFlowRetThdsItem(new RetainabilityThreshold().relFlowNum(Integer.parseInt(qosFlowRetThds.get(i).get(0))).relFlowRatio(Integer.parseInt(qosFlowRetThds.get(i).get(1))).relTimeUnit(new TimeUnit().relTimeUnit(TimeUnitEnum.fromValue(qosFlowRetThds.get(i).get(2)))));
-				}
-			}
+            for (List<String> qosFlowRetThd : qosFlowRetThds) {
+                if (qosFlowRetThd.get(0) != null && qosFlowRetThd.get(1) != null && qosFlowRetThd.get(2) != null) {
+                    eventSub.addQosFlowRetThdsItem(new RetainabilityThreshold().relFlowNum(Integer.parseInt(qosFlowRetThd.get(0))).relFlowRatio(Integer.parseInt(qosFlowRetThd.get(1))).relTimeUnit(new TimeUnit().relTimeUnit(TimeUnitEnum.fromValue(qosFlowRetThd.get(2)))));
+                }
+            }
 		}
 		if(ranUeThrouThds.size()>0) {
 			eventSub.ranUeThrouThds(ranUeThrouThds);
 		}
 		if(snssaia.size()>0) {
-			for(int i=0;i<snssaia.size();i++) {
-				eventSub.addSnssaiaItem(new Snssai().sst(Integer.parseInt(snssaia.get(i).get(0))).sd(snssaia.get(i).get(1)));
-			}
+            for (List<String> strings : snssaia) {
+                eventSub.addSnssaiaItem(new Snssai().sst(Integer.parseInt(strings.get(0))).sd(strings.get(1)));
+            }
 		}
 		if(congThresholds.size()>0) {
-			for(int i=0;i<congThresholds.size();i++) {
-				eventSub.addCongThresholdsItem(new ThresholdLevel().congLevel(Integer.parseInt(congThresholds.get(i).get(0))).nfLoadLevel(Integer.parseInt(congThresholds.get(i).get(1))).nfCpuUsage(Integer.parseInt(congThresholds.get(i).get(2))).nfMemoryUsage(Integer.parseInt(congThresholds.get(i).get(3))).nfStorageUsage(Integer.parseInt(congThresholds.get(i).get(4))).avgTrafficRate(congThresholds.get(i).get(5)).maxTrafficRate(congThresholds.get(i).get(6)).avgPacketDelay(Integer.parseInt(congThresholds.get(i).get(7))).maxPacketDelay(Integer.parseInt(congThresholds.get(i).get(8))).avgPacketLossRate(Integer.parseInt(congThresholds.get(i).get(9))).svcExpLevel(Float.parseFloat(congThresholds.get(i).get(10))));
-			}
+            for (List<String> congThreshold : congThresholds) {
+                eventSub.addCongThresholdsItem(new ThresholdLevel().congLevel(Integer.parseInt(congThreshold.get(0))).nfLoadLevel(Integer.parseInt(congThreshold.get(1))).nfCpuUsage(Integer.parseInt(congThreshold.get(2))).nfMemoryUsage(Integer.parseInt(congThreshold.get(3))).nfStorageUsage(Integer.parseInt(congThreshold.get(4))).avgTrafficRate(congThreshold.get(5)).maxTrafficRate(congThreshold.get(6)).avgPacketDelay(Integer.parseInt(congThreshold.get(7))).maxPacketDelay(Integer.parseInt(congThreshold.get(8))).avgPacketLossRate(Integer.parseInt(congThreshold.get(9))).svcExpLevel(Float.parseFloat(congThreshold.get(10))));
+            }
 			
 		}
 		if(nwPerfRequs.size()>0) {
-			for(int i=0;i<nwPerfRequs.size();i++) {
-				if(nwPerfRequs.get(i).get(0)!=null&&nwPerfRequs.get(i).get(1)!=null&&nwPerfRequs.get(i).get(2)!=null) {
-					eventSub.addNwPerfRequsItem(new NetworkPerfRequirement().nwPerfType(new NetworkPerfType().nwPerfType(NetworkPerfTypeEnum.fromValue(nwPerfRequs.get(i).get(0)))).relativeRatio(Integer.parseInt(nwPerfRequs.get(i).get(1))).absoluteNum(Integer.parseInt(nwPerfRequs.get(i).get(2))));
-				}
-			}
+            for (List<String> perfRequs : nwPerfRequs) {
+                if (perfRequs.get(0) != null && perfRequs.get(1) != null && perfRequs.get(2) != null) {
+                    eventSub.addNwPerfRequsItem(new NetworkPerfRequirement().nwPerfType(new NetworkPerfType().nwPerfType(NetworkPerfTypeEnum.fromValue(perfRequs.get(0)))).relativeRatio(Integer.parseInt(perfRequs.get(1))).absoluteNum(Integer.parseInt(perfRequs.get(2))));
+                }
+            }
 		}
 		if(bwRequs.size()>0) {
-			for(int i=0;i<bwRequs.size();i++) {
-				eventSub.addBwRequsItem(new BwRequirement().appId(bwRequs.get(i).get(0)).marBwDl(bwRequs.get(i).get(1)).marBwUl(bwRequs.get(i).get(2)).mirBwDl(bwRequs.get(i).get(3)).mirBwUl(bwRequs.get(i).get(4)));
-			}
+            for (List<String> requs : bwRequs) {
+                eventSub.addBwRequsItem(new BwRequirement().appId(requs.get(0)).marBwDl(requs.get(1)).marBwUl(requs.get(2)).mirBwDl(requs.get(3)).mirBwUl(requs.get(4)));
+            }
 		}
 		if(excepRequs.size()>0) {
-			for(int i=0;i<excepRequs.size();i++) {
-				if(excepRequs.get(i).get(0)!=null&&excepRequs.get(i).get(1)!=null&&excepRequs.get(i).get(2)!=null) {
-					eventSub.addExcepRequsItem(new Exception().excepId(new ExceptionId().excepId(ExceptionIdEnum.fromValue(excepRequs.get(i).get(0))))
-															.excepLevel(Integer.parseInt(excepRequs.get(i).get(1)))
-															.excepTrend(new ExceptionTrend().excepTrend(ExceptionTrendEnum.fromValue(excepRequs.get(i).get(2)))));
-				}
-			}
+            for (List<String> requs : excepRequs) {
+                if (requs.get(0) != null && requs.get(1) != null && requs.get(2) != null) {
+                    eventSub.addExcepRequsItem(new Exception().excepId(new ExceptionId().excepId(ExceptionIdEnum.fromValue(requs.get(0))))
+                            .excepLevel(Integer.parseInt(requs.get(1)))
+                            .excepTrend(new ExceptionTrend().excepTrend(ExceptionTrendEnum.fromValue(requs.get(2)))));
+                }
+            }
 		}
 		if(ratFreqs.size()>0) {
-			for(int i=0;i<ratFreqs.size();i++) {
-				RatFreqInformation ratFreq = new RatFreqInformation();
-				if(ratFreqs.get(i).get(0).get(0)!=null) {
-					ratFreq.allFreq(ratFreqs.get(i).get(0).get(0).equalsIgnoreCase("TRUE"));
-				}
-				if(ratFreqs.get(i).get(0).get(1)!=null) {
-					ratFreq.allRat(ratFreqs.get(i).get(0).get(1).equalsIgnoreCase("TRUE"));
-				}
-				if(ratFreqs.get(i).get(0).get(2)!=null) {
-					ratFreq.freq(Integer.parseInt(ratFreqs.get(i).get(0).get(2)));
-				}
-				if(ratFreqs.get(i).get(0).get(3)!=null) {
-					ratFreq.ratType(new RatType().ratType(RatTypeEnum.fromValue(ratFreqs.get(i).get(0).get(3))));
-				}
-				if(ratFreqs.get(i).get(0).get(4)!=null) {
-					ratFreq.matchingDir(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(ratFreqs.get(i).get(0).get(4))));
-				}
-				if(ratFreqs.get(i).get(1).size()>0) {
-					ratFreq.svcExpThreshold(new ThresholdLevel().congLevel(Integer.parseInt(ratFreqs.get(i).get(1).get(0))).nfLoadLevel(Integer.parseInt(ratFreqs.get(i).get(1).get(1))).nfCpuUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(2))).nfMemoryUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(3))).nfStorageUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(4))).avgTrafficRate(ratFreqs.get(i).get(1).get(5)).maxTrafficRate(ratFreqs.get(i).get(1).get(6)).avgPacketDelay(Integer.parseInt(ratFreqs.get(i).get(1).get(7))).maxPacketDelay(Integer.parseInt(ratFreqs.get(i).get(1).get(8))).avgPacketLossRate(Integer.parseInt(ratFreqs.get(i).get(1).get(9))).svcExpLevel(Float.parseFloat(ratFreqs.get(i).get(1).get(10))));
-				}
-				eventSub.addRatFreqsItem(ratFreq);
-			}
+            for (List<List<String>> freq : ratFreqs) {
+                RatFreqInformation ratFreq = new RatFreqInformation();
+                if (freq.get(0).get(0) != null) {
+                    ratFreq.allFreq(freq.get(0).get(0).equalsIgnoreCase("TRUE"));
+                }
+                if (freq.get(0).get(1) != null) {
+                    ratFreq.allRat(freq.get(0).get(1).equalsIgnoreCase("TRUE"));
+                }
+                if (freq.get(0).get(2) != null) {
+                    ratFreq.freq(Integer.parseInt(freq.get(0).get(2)));
+                }
+                if (freq.get(0).get(3) != null) {
+                    ratFreq.ratType(new RatType().ratType(RatTypeEnum.fromValue(freq.get(0).get(3))));
+                }
+                if (freq.get(0).get(4) != null) {
+                    ratFreq.matchingDir(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(freq.get(0).get(4))));
+                }
+                if (freq.get(1).size() > 0) {
+                    ratFreq.svcExpThreshold(new ThresholdLevel().congLevel(Integer.parseInt(freq.get(1).get(0))).nfLoadLevel(Integer.parseInt(freq.get(1).get(1))).nfCpuUsage(Integer.parseInt(freq.get(1).get(2))).nfMemoryUsage(Integer.parseInt(freq.get(1).get(3))).nfStorageUsage(Integer.parseInt(freq.get(1).get(4))).avgTrafficRate(freq.get(1).get(5)).maxTrafficRate(freq.get(1).get(6)).avgPacketDelay(Integer.parseInt(freq.get(1).get(7))).maxPacketDelay(Integer.parseInt(freq.get(1).get(8))).avgPacketLossRate(Integer.parseInt(freq.get(1).get(9))).svcExpLevel(Float.parseFloat(freq.get(1).get(10))));
+                }
+                eventSub.addRatFreqsItem(ratFreq);
+            }
 		}
 		if(listOfAnaSubsets.size()>0) {
-			for(int i=0;i<listOfAnaSubsets.size();i++) {
-				eventSub.addListOfAnaSubsetsItem(new AnalyticsSubset().anaSubset(AnalyticsSubsetEnum.fromValue(listOfAnaSubsets.get(i))));
-			}
+            for (String listOfAnaSubset : listOfAnaSubsets) {
+                eventSub.addListOfAnaSubsetsItem(new AnalyticsSubset().anaSubset(AnalyticsSubsetEnum.fromValue(listOfAnaSubset)));
+            }
 		}
 		if(disperReqs.size()>0) {
-			for(int n=0;n<disperReqs.size();n++) {
-				DispersionRequirement disperReq = new DispersionRequirement();
-				if(disperReqs.get(n).get(0).get(0).get(0)!=null) {
-					disperReq.disperType(new DispersionType().disperType(DispersionTypeEnum.fromValue(disperReqs.get(n).get(0).get(0).get(0))));
-				}
-				if(disperReqs.get(n).get(0).get(0).get(1)!=null) {
-					disperReq.dispOrderCriter(new DispersionOrderingCriterion().dispOrderCriter(DispersionOrderingCriterionEnum.fromValue(disperReqs.get(n).get(0).get(0).get(1))));
-				}
-				if(disperReqs.get(n).get(0).get(0).get(2)!=null) {
-					disperReq.order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(disperReqs.get(n).get(0).get(0).get(2))));
-				}
-				for(int i=0;i<disperReqs.get(n).get(1).size();i++) {
-					disperReq.addClassCritersItem(new ClassCriterion().disperClass(new DispersionClass().disperClass(DispersionClassEnum.fromValue(disperReqs.get(n).get(1).get(i).get(0))))
-																	.classThreshold(Integer.parseInt(disperReqs.get(n).get(1).get(i).get(1)))
-																	.thresMatch(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(disperReqs.get(n).get(1).get(i).get(2)))));
-				}
-				for(int i=0;i<disperReqs.get(n).get(2).size();i++) {
-					disperReq.addRankCritersItem(new RankingCriterion().highBase(Integer.parseInt(disperReqs.get(n).get(2).get(i).get(0)))
-																	.lowBase(Integer.parseInt(disperReqs.get(n).get(2).get(i).get(1))));
-				}
-				eventSub.addDisperReqsItem(disperReq);
-			}
+            for (List<List<List<String>>> req : disperReqs) {
+                DispersionRequirement disperReq = new DispersionRequirement();
+                if (req.get(0).get(0).get(0) != null) {
+                    disperReq.disperType(new DispersionType().disperType(DispersionTypeEnum.fromValue(req.get(0).get(0).get(0))));
+                }
+                if (req.get(0).get(0).get(1) != null) {
+                    disperReq.dispOrderCriter(new DispersionOrderingCriterion().dispOrderCriter(DispersionOrderingCriterionEnum.fromValue(req.get(0).get(0).get(1))));
+                }
+                if (req.get(0).get(0).get(2) != null) {
+                    disperReq.order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(req.get(0).get(0).get(2))));
+                }
+                for (int i = 0; i < req.get(1).size(); i++) {
+                    disperReq.addClassCritersItem(new ClassCriterion().disperClass(new DispersionClass().disperClass(DispersionClassEnum.fromValue(req.get(1).get(i).get(0))))
+                            .classThreshold(Integer.parseInt(req.get(1).get(i).get(1)))
+                            .thresMatch(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(req.get(1).get(i).get(2)))));
+                }
+                for (int i = 0; i < req.get(2).size(); i++) {
+                    disperReq.addRankCritersItem(new RankingCriterion().highBase(Integer.parseInt(req.get(2).get(i).get(0)))
+                            .lowBase(Integer.parseInt(req.get(2).get(i).get(1))));
+                }
+                eventSub.addDisperReqsItem(disperReq);
+            }
 		}
 		if(redTransReqs.size()>0) {
-			for(int  i=0;i<redTransReqs.size();i++) {
-				if(redTransReqs.get(i).get(0)!=null&&redTransReqs.get(i).get(1)!=null) {
-					eventSub.addRedTransReqsItem(new RedundantTransmissionExpReq().redTOrderCriter(new RedTransExpOrderingCriterion().redTOrderCriter(RedTransExpOrderingCriterionEnum.fromValue(redTransReqs.get(i).get(0))))
-							.order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(redTransReqs.get(i).get(1)))));
-				}
-			}
+            for (List<String> redTransReq : redTransReqs) {
+                if (redTransReq.get(0) != null && redTransReq.get(1) != null) {
+                    eventSub.addRedTransReqsItem(new RedundantTransmissionExpReq().redTOrderCriter(new RedTransExpOrderingCriterion().redTOrderCriter(RedTransExpOrderingCriterionEnum.fromValue(redTransReq.get(0))))
+                            .order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(redTransReq.get(1)))));
+                }
+            }
 		}
 		if(wlanReqs.size()>0) {
-			for(int n=0;n<wlanReqs.size();n++) {
-				WlanPerformanceReq wlanReq = new WlanPerformanceReq();
-				if(wlanReqs.get(n).get(0).get(0)!=null) {
-					wlanReq.wlanOrderCriter(new WlanOrderingCriterion().wlanOrderCriter(WlanOrderingCriterionEnum.fromValue(wlanReqs.get(n).get(0).get(0))));
-				}
-				if(wlanReqs.get(n).get(0).get(1)!=null) {
-					wlanReq.order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(wlanReqs.get(n).get(0).get(1))));
-				}
-				wlanReq.ssIds(wlanReqs.get(n).get(1));
-				wlanReq.bssIds(wlanReqs.get(n).get(2));
-				eventSub.addWlanReqsItem(wlanReq);
-			}
+            for (List<List<String>> req : wlanReqs) {
+                WlanPerformanceReq wlanReq = new WlanPerformanceReq();
+                if (req.get(0).get(0) != null) {
+                    wlanReq.wlanOrderCriter(new WlanOrderingCriterion().wlanOrderCriter(WlanOrderingCriterionEnum.fromValue(req.get(0).get(0))));
+                }
+                if (req.get(0).get(1) != null) {
+                    wlanReq.order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(req.get(0).get(1))));
+                }
+                wlanReq.ssIds(req.get(1));
+                wlanReq.bssIds(req.get(2));
+                eventSub.addWlanReqsItem(wlanReq);
+            }
 		}
 		if(appServerAddrs.size()>0) {
-			for(int i=0;i<appServerAddrs.size();i++) {
-				eventSub.addAppServerAddrsItem(new AddrFqdn().ipAddr(new IpAddr().ipv4Addr(appServerAddrs.get(i).get(0)).ipv6Addr(appServerAddrs.get(i).get(1)).ipv6Prefix(appServerAddrs.get(i).get(2)))
-															.fqdn(appServerAddrs.get(i).get(3)));
-			}
+            for (List<String> appServerAddr : appServerAddrs) {
+                eventSub.addAppServerAddrsItem(new AddrFqdn().ipAddr(new IpAddr().ipv4Addr(appServerAddr.get(0)).ipv6Addr(appServerAddr.get(1)).ipv6Prefix(appServerAddr.get(2)))
+                        .fqdn(appServerAddr.get(3)));
+            }
 		}
 		if(dnPerfReqs.size()>0) {
-			for(int n=0;n<dnPerfReqs.size();n++) {
-				DnPerformanceReq dnPerfReq = new DnPerformanceReq();
-				if(dnPerfReqs.get(n).get(0).get(0).get(0)!=null) {
-					dnPerfReq.dnPerfOrderCriter(new DnPerfOrderingCriterion().dnPerfOrderCriter(DnPerfOrderingCriterionEnum.fromValue(dnPerfReqs.get(n).get(0).get(0).get(0))));
-				}
-				if(dnPerfReqs.get(n).get(0).get(0).get(1)!=null) {
-					dnPerfReq.order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(dnPerfReqs.get(n).get(0).get(0).get(1))));
-				}
-				for(int i=0;i<dnPerfReqs.get(n).get(1).size();i++) {
-					dnPerfReq.addReportThresholdsItem(new ThresholdLevel().congLevel(Integer.parseInt(ratFreqs.get(i).get(1).get(0))).nfLoadLevel(Integer.parseInt(ratFreqs.get(i).get(1).get(1))).nfCpuUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(2))).nfMemoryUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(3))).nfStorageUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(4))).avgTrafficRate(ratFreqs.get(i).get(1).get(5)).maxTrafficRate(ratFreqs.get(i).get(1).get(6)).avgPacketDelay(Integer.parseInt(ratFreqs.get(i).get(1).get(7))).maxPacketDelay(Integer.parseInt(ratFreqs.get(i).get(1).get(8))).avgPacketLossRate(Integer.parseInt(ratFreqs.get(i).get(1).get(9))).svcExpLevel(Float.parseFloat(ratFreqs.get(i).get(1).get(10))));
-				}
-				eventSub.addDnPerfReqsItem(dnPerfReq);
-			}
+            for (List<List<List<String>>> perfReq : dnPerfReqs) {
+                DnPerformanceReq dnPerfReq = new DnPerformanceReq();
+                if (perfReq.get(0).get(0).get(0) != null) {
+                    dnPerfReq.dnPerfOrderCriter(new DnPerfOrderingCriterion().dnPerfOrderCriter(DnPerfOrderingCriterionEnum.fromValue(perfReq.get(0).get(0).get(0))));
+                }
+                if (perfReq.get(0).get(0).get(1) != null) {
+                    dnPerfReq.order(new MatchingDirection().matchingDir(MatchingDirectionEnum.fromValue(perfReq.get(0).get(0).get(1))));
+                }
+                for (int i = 0; i < perfReq.get(1).size(); i++) {
+                    dnPerfReq.addReportThresholdsItem(new ThresholdLevel().congLevel(Integer.parseInt(ratFreqs.get(i).get(1).get(0))).nfLoadLevel(Integer.parseInt(ratFreqs.get(i).get(1).get(1))).nfCpuUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(2))).nfMemoryUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(3))).nfStorageUsage(Integer.parseInt(ratFreqs.get(i).get(1).get(4))).avgTrafficRate(ratFreqs.get(i).get(1).get(5)).maxTrafficRate(ratFreqs.get(i).get(1).get(6)).avgPacketDelay(Integer.parseInt(ratFreqs.get(i).get(1).get(7))).maxPacketDelay(Integer.parseInt(ratFreqs.get(i).get(1).get(8))).avgPacketLossRate(Integer.parseInt(ratFreqs.get(i).get(1).get(9))).svcExpLevel(Float.parseFloat(ratFreqs.get(i).get(1).get(10))));
+                }
+                eventSub.addDnPerfReqsItem(dnPerfReq);
+            }
 		}
 		if(networkArea.size()>0) {
 			NetworkAreaInfo area = new NetworkAreaInfo();
@@ -781,9 +781,9 @@ public class CreateSubscriptionRequestBuilder {
 			evtReq.notifFlag(new NotificationFlag().notifFlag(NotificationFlagEnum.fromValue(optionals.get(7))));
 		}
 		if(partitionCriteria.size()>0) {
-			for(int i=0;i<partitionCriteria.size();i++) {
-				evtReq.addPartitionCriteriaItem(new PartitioningCriteria().partitionCriteria(PartitioningCriteriaEnum.fromValue(partitionCriteria.get(i))));
-			}
+            for (String partitionCriterion : partitionCriteria) {
+                evtReq.addPartitionCriteriaItem(new PartitioningCriteria().partitionCriteria(PartitioningCriteriaEnum.fromValue(partitionCriterion)));
+            }
 		}
 		if((optionals.get(0)!=null) ||(optionals.get(1)!=null)||(optionals.get(2)!=null) ||(optionals.get(3)!=null) ||(optionals.get(4)!=null) ||(optionals.get(5)!=null) ||(optionals.get(6)!=null) ||(optionals.get(7)!=null)){
 			sub.evtReq(evtReq);
@@ -798,21 +798,21 @@ public class CreateSubscriptionRequestBuilder {
 			prevSub.subscriptionId(optionals.get(10));
 		}
 		if(nfAnaEvents.size()>0) {
-			for(int i=0;i<nfAnaEvents.size();i++) {
-				prevSub.addNfAnaEventsItem(new NwdafEvent().event(NwdafEventEnum.fromValue(nfAnaEvents.get(i))));
-			}
+            for (String nfAnaEvent : nfAnaEvents) {
+                prevSub.addNfAnaEventsItem(new NwdafEvent().event(NwdafEventEnum.fromValue(nfAnaEvent)));
+            }
 		}
 		if(ueAnaEvents.size()>0) {
-			for(int i=0;i<ueAnaEvents.size();i++) {
-				if(ueAnaEvents.get(i).size()==2) {
-				UeAnalyticsContextDescriptor ueAnaEvent = new UeAnalyticsContextDescriptor();
-				ueAnaEvent.supi(ueAnaEvents.get(i).get(0).get(0));
-				for(int j=0;j<ueAnaEvents.get(i).get(1).size();j++) {
-					ueAnaEvent.addAnaTypesItem(new NwdafEvent().event(NwdafEventEnum.fromValue(ueAnaEvents.get(i).get(1).get(j))));
-				}
-				prevSub.addUeAnaEventsItem(ueAnaEvent);
-				}
-			}
+            for (List<List<String>> anaEvent : ueAnaEvents) {
+                if (anaEvent.size() == 2) {
+                    UeAnalyticsContextDescriptor ueAnaEvent = new UeAnalyticsContextDescriptor();
+                    ueAnaEvent.supi(anaEvent.get(0).get(0));
+                    for (int j = 0; j < anaEvent.get(1).size(); j++) {
+                        ueAnaEvent.addAnaTypesItem(new NwdafEvent().event(NwdafEventEnum.fromValue(anaEvent.get(1).get(j))));
+                    }
+                    prevSub.addUeAnaEventsItem(ueAnaEvent);
+                }
+            }
 		}
 		if(optionals.get(8)!=null||optionals.get(9)!=null||optionals.get(10)!=null||nfAnaEvents.size()>0||ueAnaEvents.size()>0) {
 			sub.prevSub(prevSub);
@@ -827,9 +827,9 @@ public class CreateSubscriptionRequestBuilder {
 			consNfInfo.nfSetId(optionals.get(13));
 		}
 		if(taiList.size()>0) {
-			for(int i=0;i<taiList.size();i++) {
-				consNfInfo.addTaiListItem(new Tai().plmnId(new PlmnId().mcc(taiList.get(i).get(0)).mnc(taiList.get(i).get(1))).tac(taiList.get(i).get(2)).nid(taiList.get(i).get(3)));
-			}
+            for (List<String> strings : taiList) {
+                consNfInfo.addTaiListItem(new Tai().plmnId(new PlmnId().mcc(strings.get(0)).mnc(strings.get(1))).tac(strings.get(2)).nid(strings.get(3)));
+            }
 		}
 		if((optionals.get(12)!=null)||(optionals.get(13)!=null)||taiList.size()>0) {
 			sub.consNfInfo(consNfInfo);

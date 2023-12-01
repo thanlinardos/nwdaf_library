@@ -23,7 +23,7 @@ public class DispersionType {
 		TDA("TDA"),
 		DVDA_AND_TDA("DVDA_AND_TDA");
 
-		private String value;
+		private final String value;
 
 		DispersionTypeEnum(String value) {
 			this.value = value;

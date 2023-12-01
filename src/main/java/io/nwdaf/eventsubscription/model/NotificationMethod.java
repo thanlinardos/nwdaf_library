@@ -23,7 +23,7 @@ public class NotificationMethod {
 		THRESHOLD("THRESHOLD"),
 		PERIODIC("PERIODIC");
 
-		private String value;
+		private final String value;
 
 		NotificationMethodEnum(String value) {
 			this.value = value;

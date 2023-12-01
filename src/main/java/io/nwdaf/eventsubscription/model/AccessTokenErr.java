@@ -33,7 +33,7 @@ public class AccessTokenErr {
 
 		INVALID_SCOPE("invalid_scope");
 
-		private String value;
+		private final String value;
 
 		ErrorEnum(String value) {
 			this.value = value;

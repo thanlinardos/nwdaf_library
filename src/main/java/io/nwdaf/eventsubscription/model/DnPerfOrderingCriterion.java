@@ -27,7 +27,7 @@ public class DnPerfOrderingCriterion {
 		MAXIMUM_PACKET_DELAY("MAXIMUM_PACKET_DELAY"),
 		AVERAGE_PACKET_LOSS_RATE("AVERAGE_PACKET_LOSS_RATE");
 
-		private String value;
+		private final String value;
 
 		DnPerfOrderingCriterionEnum(String value) {
 			this.value = value;

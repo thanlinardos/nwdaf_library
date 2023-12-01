@@ -24,7 +24,7 @@ public class OutputStrategy {
 		BINARY("BINARY "),
 		GRADIENT("GRADIENT");
 
-		private String value;
+		private final String value;
 
 		OutputStrategyEnum(String value) {
 			this.value = value;

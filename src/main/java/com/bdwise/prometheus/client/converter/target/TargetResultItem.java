@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TargetResultItem {
-	private Map<String, String> discoveredLabels = new HashMap<String,String>();
-	private Map<String, String> label = new HashMap<String,String>();
+	private Map<String, String> discoveredLabels = new HashMap<>();
+	private Map<String, String> label = new HashMap<>();
 	private String scrapeUrl;
 	private String lastError="";
 	private String lastScrape;

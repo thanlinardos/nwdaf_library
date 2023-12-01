@@ -24,7 +24,7 @@ public class NotificationFlag {
 		DEACTIVATE("DEACTIVATE"),
 		RETRIEVAL("RETRIEVAL");
 
-		private String value;
+		private final String value;
 
 		NotificationFlagEnum(String value) {
 			this.value = value;

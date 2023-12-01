@@ -6,8 +6,8 @@ import java.util.List;
 import com.bdwise.prometheus.client.converter.Result;
 
 public class DefaultAlertManagerResult extends Result<AlertManagerResultItem>{
-	List<AlertManagerResultItem> activeAlertmanagers = new ArrayList<AlertManagerResultItem>();
-	List<AlertManagerResultItem> droppedAlertmanagers = new ArrayList<AlertManagerResultItem>();
+	final List<AlertManagerResultItem> activeAlertmanagers = new ArrayList<>();
+	final List<AlertManagerResultItem> droppedAlertmanagers = new ArrayList<>();
 	public void addActiveManager(AlertManagerResultItem data) {
 		activeAlertmanagers.add(data);
 	}

@@ -24,7 +24,7 @@ public class TransportProtocol {
 		UDP("UDP"),
 		TCP("TCP");
 
-		private String value;
+		private final String value;
 
 		TransportProtocolEnum(String value) {
 			this.value = value;

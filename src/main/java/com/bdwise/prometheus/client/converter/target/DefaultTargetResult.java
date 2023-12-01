@@ -6,8 +6,8 @@ import java.util.List;
 import com.bdwise.prometheus.client.converter.Result;
 
 public class DefaultTargetResult extends Result<TargetResultItem>{
-	List<TargetResultItem> activeTargets = new ArrayList<TargetResultItem>();
-	List<TargetResultItem> droppedTargets = new ArrayList<TargetResultItem>();
+	final List<TargetResultItem> activeTargets = new ArrayList<>();
+	final List<TargetResultItem> droppedTargets = new ArrayList<>();
 	public void addActiveTarget(TargetResultItem data) {
 		activeTargets.add(data);
 	}

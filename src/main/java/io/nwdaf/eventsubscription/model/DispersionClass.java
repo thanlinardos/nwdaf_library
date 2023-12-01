@@ -32,7 +32,7 @@ public class DispersionClass {
 		TRAVELLER("TRAVELLER"),
 		TOP_HEAVY("TOP_HEAVY");
 
-		private String value;
+		private final String value;
 
 		DispersionClassEnum(String value) {
 			this.value = value;

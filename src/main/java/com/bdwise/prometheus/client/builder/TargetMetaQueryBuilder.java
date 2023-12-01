@@ -6,7 +6,7 @@ public class TargetMetaQueryBuilder implements QueryBuilder {
 
 	private static final String TARGET_URI_PATTERN_SUFFIX = "/api/v1/targets";
 	
-	private String targetUriPattern;
+	private final String targetUriPattern;
 	
 	public TargetMetaQueryBuilder(String serverUrl) {
 		this.targetUriPattern = serverUrl + TARGET_URI_PATTERN_SUFFIX;

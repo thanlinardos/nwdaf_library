@@ -135,7 +135,7 @@ public class AnalyticsSubset {
 		AVG_DL_PKT_DELAY("AVG_DL_PKT_DELAY"),
 		VAR_DL_PKT_DELAY("VAR_DL_PKT_DELAY");
 
-		private String value;
+		private final String value;
 
 		AnalyticsSubsetEnum(String value) {
 			this.value = value;

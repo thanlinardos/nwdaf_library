@@ -1,7 +1,6 @@
 package io.nwdaf.eventsubscription.model;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,7 +34,7 @@ public class FlowDirection {
 		BIDIRECTIONAL("BIDIRECTIONAL"),
 		UNSPECIFIED("UNSPECIFIED");
 
-		private String value;
+		private final String value;
 
 		FlowDirectionEnum(String value) {
 			this.value = value;

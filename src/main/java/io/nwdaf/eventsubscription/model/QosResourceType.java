@@ -24,7 +24,7 @@ public class QosResourceType {
 		NON_CRITICAL_GBR("NON_CRITICAL_GBR"),
 		CRITICAL_GBR("CRITICAL_GBR");
 
-		private String value;
+		private final String value;
 
 		QosResourceTypeEnum(String value) {
 			this.value = value;

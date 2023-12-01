@@ -21,7 +21,7 @@ public class PrometheusRequestModel {
 	@JsonProperty("time")
 	private OffsetDateTime time = null;
 	
-	@Schema(description = "")
+	@Schema()
 	  
 	@Valid	
 	public String getQuery() {
@@ -32,7 +32,7 @@ public class PrometheusRequestModel {
 		this.query = query;
 	}
 	
-	@Schema(description = "")
+	@Schema()
 	  
 	@Valid
 	public OffsetDateTime getTime() {

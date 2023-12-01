@@ -19,7 +19,7 @@ public class TransferRequestType {
   public enum TransferRequestTypeEnum {
     PREPARE("PREPARE"),
     TRANSFER("TRANSFER");
-    private String value;
+    private final String value;
 
     TransferRequestTypeEnum(String value) {
       this.value = value;

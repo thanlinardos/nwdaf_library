@@ -14,8 +14,8 @@ public class SeriesMetaQueryBuilder implements QueryBuilder{
 	private static final String END_TIME_EPOCH_TIME = "end";
 	private static final String QUERY_STRING = "selector";
 	
-	private String serverUrl;
-	private Map<String, Object> params = new HashMap<String, Object>();
+	private final String serverUrl;
+	private final Map<String, Object> params = new HashMap<>();
 	
 	public SeriesMetaQueryBuilder(String serverUrl) {
 		this.serverUrl = serverUrl + TARGET_URI;

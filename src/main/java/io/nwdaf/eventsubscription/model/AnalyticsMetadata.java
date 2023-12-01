@@ -28,7 +28,7 @@ public class AnalyticsMetadata {
 		STRATEGY("STRATEGY"),
 		ACCURACY("ACCURACY");
 
-		private String value;
+		private final String value;
 
 		AnalyticsMetadataEnum(String value) {
 			this.value = value;

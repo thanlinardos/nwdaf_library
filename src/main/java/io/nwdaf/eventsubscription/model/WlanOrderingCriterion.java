@@ -22,7 +22,7 @@ public class WlanOrderingCriterion {
     RSSI("RSSI"),
     RTT("RTT"),
     TRAFFIC_INFO("TRAFFIC_INFO");
-    private String value;
+    private final String value;
 
     WlanOrderingCriterionEnum(String value) {
       this.value = value;

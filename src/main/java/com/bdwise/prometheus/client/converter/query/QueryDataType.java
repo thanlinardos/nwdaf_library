@@ -19,7 +19,7 @@ public enum QueryDataType {
 			while(reader.hasNext()) {
 				String name = reader.nextName();
 				if("metric".equalsIgnoreCase(name)) {
-					Map<String,String> metric = new HashMap<String,String>();
+					Map<String,String> metric = new HashMap<>();
 					reader.beginObject();
 					while(reader.hasNext()) {
 						metric.put(reader.nextName(), reader.nextString());
@@ -27,7 +27,7 @@ public enum QueryDataType {
 					reader.endObject();
 					resultDataItem.setMetric(metric);
 				} else if("values".equalsIgnoreCase(name)) {
-					ArrayList<QueryResultItemValue> resultDataItemValue = new ArrayList<QueryResultItemValue>();
+					ArrayList<QueryResultItemValue> resultDataItemValue = new ArrayList<>();
 					reader.beginArray();
 					while(reader.hasNext()) {
 						reader.beginArray();
@@ -53,7 +53,7 @@ public enum QueryDataType {
 			while(reader.hasNext()) {
 				String name = reader.nextName();
 				if("metric".equalsIgnoreCase(name)) {
-					Map<String,String> metric = new HashMap<String,String>();
+					Map<String,String> metric = new HashMap<>();
 					reader.beginObject();
 					while(reader.hasNext()) {
 						metric.put(reader.nextName(), reader.nextString());

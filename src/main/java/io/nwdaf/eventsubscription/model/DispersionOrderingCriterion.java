@@ -28,7 +28,7 @@ public class DispersionOrderingCriterion {
 		RANKING("RANKING"),
 		PERCENTILE_RANKING("PERCENTILE_RANKING");
 
-		private String value;
+		private final String value;
 
 		DispersionOrderingCriterionEnum(String value) {
 			this.value = value;

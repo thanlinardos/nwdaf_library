@@ -24,7 +24,7 @@ public class LineType {
 		DSL("DSL"),
 		PON("PON");
 
-		private String value;
+		private final String value;
 
 		LineTypeEnum(String value) {
 			this.value = value;

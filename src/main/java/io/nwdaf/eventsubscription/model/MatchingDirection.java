@@ -23,7 +23,7 @@ public class MatchingDirection {
 		DESCENDING("DESCENDING"),
 		CROSSED("CROSSED");
 
-		private String value;
+		private final String value;
 
 		MatchingDirectionEnum(String value) {
 			this.value = value;

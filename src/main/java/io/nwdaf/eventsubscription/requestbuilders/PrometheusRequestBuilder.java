@@ -92,7 +92,7 @@ public class PrometheusRequestBuilder {
                 List<Double> maxCpus = new ArrayList<>();
                 List<Double> maxMems = new ArrayList<>();
                 List<Double> maxStorages = new ArrayList<>();
-                Integer c = 0;
+                int c = 0;
                 for (int i = 0; i < result.getResult().size(); i++) {
                     data.add(new ArrayList<>(Arrays.asList(null, null, null, null, null, null)));
                     dataOptionals.add(new ArrayList<>(Arrays.asList(null, null, null, null, null, null, null, null, null, null)));

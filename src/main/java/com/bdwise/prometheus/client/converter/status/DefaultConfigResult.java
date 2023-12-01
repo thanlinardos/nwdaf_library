@@ -6,7 +6,7 @@ import java.util.List;
 import com.bdwise.prometheus.client.converter.Result;
 
 public class DefaultConfigResult extends Result<String>{
-	List<String> result = new ArrayList<String>();
+	final List<String> result = new ArrayList<>();
 	public void addData(String data) {
 		result.add(data);
 	}

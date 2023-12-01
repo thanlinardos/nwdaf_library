@@ -10,10 +10,7 @@ import io.nwdaf.eventsubscription.model.NwdafEvent;
 public class CheckUtil {
     // checks if input string is neither null nor empty string ("")
     public static Boolean checkNotNullNorEmptyString(String in){
-        if(in!=null && !in.equals("")){
-            return true;
-        }
-        return false;
+        return in != null && !in.isEmpty();
     }
     // checks if left parameter list contains all the elements of the list on the right
     public static <T extends Object> Boolean listInside(List<T> l1, List<T> l2){
@@ -26,8 +23,8 @@ public class CheckUtil {
     }
     // contains at least 1 non null item
     public static <T> Boolean safeCheckContainsNotNull(List<T> list){
-        for(int i=0;i<list.size();i++){
-            if(list.get(i)!=null){
+        for (T t : list) {
+            if (t != null) {
                 return true;
             }
         }

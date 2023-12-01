@@ -26,7 +26,7 @@ public class PartitioningCriteria {
 		SNSSAI("SNSSAI"),
 		DNN("DNN");
 
-		private String value;
+		private final String value;
 
 		PartitioningCriteriaEnum(String value) {
 			this.value = value;

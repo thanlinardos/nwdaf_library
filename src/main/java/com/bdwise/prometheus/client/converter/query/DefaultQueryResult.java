@@ -9,7 +9,7 @@ import com.bdwise.prometheus.client.converter.Result;
 
 public class DefaultQueryResult<T extends Data> extends Result<T>{
 
-	List<T> result = new ArrayList<T>();
+	final List<T> result = new ArrayList<>();
 	public void addData(T data) {
 		result.add(data);
 	}

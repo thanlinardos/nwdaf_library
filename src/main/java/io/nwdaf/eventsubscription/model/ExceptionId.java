@@ -30,7 +30,7 @@ public class ExceptionId {
 		STRATEGY("STRATEGY"),
 		ACCURACY("ACCURACY");
 
-		private String value;
+		private final String value;
 
 		ExceptionIdEnum(String value) {
 			this.value = value;

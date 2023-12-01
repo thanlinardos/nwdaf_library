@@ -6,7 +6,7 @@ public class StatusMetaQueryBuilder implements QueryBuilder {
 
 	private static final String TARGET_URI_PATTERN_SUFFIX = "/api/v1/status/config";
 	
-	private String targetUriPattern;
+	private final String targetUriPattern;
 	
 	public StatusMetaQueryBuilder(String serverUrl) {
 		this.targetUriPattern = serverUrl + TARGET_URI_PATTERN_SUFFIX;

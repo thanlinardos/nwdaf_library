@@ -24,7 +24,7 @@ public class CongestionType {
 		CONTROL_PLANE("CONTROL_PLANE"),
 		USER_AND_CONTROL_PLANE("USER_AND_CONTROL_PLANE");
 
-		private String value;
+		private final String value;
 
 		CongestionTypeEnum(String value) {
 			this.value = value;

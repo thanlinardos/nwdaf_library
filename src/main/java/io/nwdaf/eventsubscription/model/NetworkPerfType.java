@@ -33,7 +33,7 @@ public class NetworkPerfType {
 		SESS_SUCC_RATIO("SESS_SUCC_RATIO"),
 		HO_SUCC_RATIO("HO_SUCC_RATIO");
 
-		private String value;
+		private final String value;
 
 		NetworkPerfTypeEnum(String value) {
 			this.value = value;

@@ -1,6 +1,5 @@
 package io.nwdaf.eventsubscription;
 
-import java.io.IOException;
 import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

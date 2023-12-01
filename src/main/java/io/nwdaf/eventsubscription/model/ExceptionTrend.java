@@ -24,7 +24,7 @@ public class ExceptionTrend {
 		UNKNOW("UNKNOW"),
 		STABLE("STABLE");
 
-		private String value;
+		private final String value;
 
 		ExceptionTrendEnum(String value) {
 			this.value = value;

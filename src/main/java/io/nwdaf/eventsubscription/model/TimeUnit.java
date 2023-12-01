@@ -20,7 +20,7 @@ public class TimeUnit {
     MINUTE("MINUTE"),
     HOUR("HOUR"),
     DAY("DAY");
-    private String value;
+    private final String value;
 
     TimeUnitEnum(String value) {
       this.value = value;

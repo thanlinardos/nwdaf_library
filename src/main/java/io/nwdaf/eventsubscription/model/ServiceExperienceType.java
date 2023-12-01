@@ -20,7 +20,7 @@ public class ServiceExperienceType {
     VOICE("VOICE"),
     VIDEO("VIDEO"),
     OTHER("OTHER");
-    private String value;
+    private final String value;
 
     ServiceExperienceTypeEnum(String value) {
       this.value = value;

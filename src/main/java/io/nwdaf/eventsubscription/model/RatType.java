@@ -38,7 +38,7 @@ public class RatType {
 		NR_OTHER_SAT("NR_OTHER_SAT"),
 		NR_REDCAP("NR_REDCAP");
 
-		private String value;
+		private final String value;
 
 		RatTypeEnum(String value) {
 			this.value = value;

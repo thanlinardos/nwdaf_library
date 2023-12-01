@@ -25,7 +25,7 @@ public class ExpectedAnalyticsType {
 		COMMUN("COMMUN"),
 		MOBILITY_AND_COMMUN("MOBILITY_AND_COMMUN");
 
-		private String value;
+		private final String value;
 
 		ExpectedAnalyticsTypeEnum(String value) {
 			this.value = value;

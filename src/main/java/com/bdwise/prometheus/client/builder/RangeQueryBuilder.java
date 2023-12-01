@@ -16,8 +16,8 @@ public class RangeQueryBuilder implements QueryBuilder {
 	private static final String QUERY_STRING = "query";
 	
 
-	private String targetUriPattern;
-	private Map<String, Object> params = new HashMap<String, Object>();
+	private final String targetUriPattern;
+	private final Map<String, Object> params = new HashMap<>();
 	
 	public RangeQueryBuilder(String serverUrl) {
 		targetUriPattern = serverUrl+ TARGET_URI_PATTERN_SUFFIX;

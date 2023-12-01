@@ -6,7 +6,7 @@ import java.util.List;
 import com.bdwise.prometheus.client.converter.Result;
 
 public class DefaultSeriesResult extends Result<SeriesResultItem>{
-	List<SeriesResultItem> result = new ArrayList<SeriesResultItem>();
+	final List<SeriesResultItem> result = new ArrayList<>();
 	public void addData(SeriesResultItem data) {
 		result.add(data);
 	}

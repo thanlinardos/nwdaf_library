@@ -27,7 +27,7 @@ public class AccessTokenReq {
 	public enum GrantTypeEnum {
 		CLIENT_CREDENTIALS("client_credentials");
 
-		private String value;
+		private final String value;
 
 		GrantTypeEnum(String value) {
 			this.value = value;

@@ -32,7 +32,7 @@ public class NwdafFailureCode {
 		UNSATISFIED_REQUESTED_ANALYTICS_TIME("UNSATISFIED_REQUESTED_ANALYTICS_TIME"),
 		OTHER("OTHER");
 
-		private String value;
+		private final String value;
 
 		NwdafFailureCodeEnum(String value) {
 			this.value = value;

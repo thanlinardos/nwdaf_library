@@ -7,8 +7,12 @@ import java.util.UUID;
 
 import io.nwdaf.eventsubscription.model.*;
 import io.nwdaf.eventsubscription.model.NFType.NFTypeEnum;
+import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
+
+import static io.nwdaf.eventsubscription.utilities.ConvertUtil.convertOffsetDateTimeToInstant;
+import static io.nwdaf.eventsubscription.utilities.ParserUtil.safeParseOffsetDateTime;
 
 public class NotificationBuilder {
     public NnwdafEventsSubscriptionNotification build(Long subId) {
@@ -62,7 +66,7 @@ public class NotificationBuilder {
                     info.confidence(Integer.parseInt(dataOptionals.get(i).get(8)));
                 }
                 if (dataOptionals.get(i).get(9) != null) {
-                    info.time(ParserUtil.safeParseOffsetDateTime(dataOptionals.get(i).get(9)).toInstant());
+                    info.time(convertOffsetDateTimeToInstant(safeParseOffsetDateTime(dataOptionals.get(i).get(9))));
                 }
 
             }
@@ -84,8 +88,8 @@ public class NotificationBuilder {
                     info.nfLoadLevelAverage(nfLoadLevelAverage);
                 }
                 if (data.get(i).get(4) != null) {
-                    Integer nfLoadLevelpeak = (Integer) data.get(i).get(4);
-                    info.nfLoadLevelpeak(nfLoadLevelpeak);
+                    Integer nfLoadLevelPeak = (Integer) data.get(i).get(4);
+                    info.nfLoadLevelpeak(nfLoadLevelPeak);
                 }
                 if (data.get(i).get(5) != null) {
                     Integer nfLoadAvgInAoi = (Integer) data.get(i).get(5);

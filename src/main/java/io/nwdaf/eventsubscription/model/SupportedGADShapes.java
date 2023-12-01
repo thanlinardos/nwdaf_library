@@ -26,7 +26,7 @@ public class SupportedGADShapes {
     EllipsoidArc("EllipsoidArc"),
     Local2dPointUncertaintyEllipse("Local2dPointUncertaintyEllipse"),
     Local3dPointUncertaintyEllipse("Local3dPointUncertaintyEllipse");
-    private String value;
+    private final String value;
 
     SupportedGADShapesEnum(String value) {
       this.value = value;
@@ -88,22 +88,6 @@ public class SupportedGADShapes {
 
   @Override
   public String toString() {
-    // StringBuilder sb = new StringBuilder();
-    // sb.append("class SupportedGADShapes {\n");
-    
-    // sb.append("    supportedGADShapes: ").append(toIndentedString(supportedGADShapes)).append("\n");
-    // sb.append("}");
-    // return sb.toString();
     return supportedGADShapes.toString();
   }
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  // private String toIndentedString(java.lang.Object o) {
-  //   if (o == null) {
-  //     return "null";
-  //   }
-  //   return o.toString().replace("\n", "\n    ");
-  // }
 }

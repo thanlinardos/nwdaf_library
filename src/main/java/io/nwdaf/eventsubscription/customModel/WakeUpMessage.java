@@ -11,7 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import static io.nwdaf.eventsubscription.utilities.ParserUtil.safeParseBoolean;
 import static io.nwdaf.eventsubscription.utilities.ParserUtil.safeParseInteger;
 
 @Getter @Setter @Builder @AllArgsConstructor @NoArgsConstructor

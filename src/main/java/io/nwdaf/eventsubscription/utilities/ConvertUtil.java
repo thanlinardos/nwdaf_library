@@ -16,7 +16,7 @@ public class ConvertUtil {
         if (in == null) {
             return null;
         }
-        if (in.equals("")) {
+        if (in.isEmpty()) {
             return null;
         } else {
             return in;
@@ -48,15 +48,13 @@ public class ConvertUtil {
     // objectWriter & jsonObject
     public static <T> List<String> convertObjectWriterList(List<T> list, ObjectWriter ow) {
         List<String> res = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
+        for (T t : list) {
             try {
-                res.add(ow.writeValueAsString(list.get(i)));
+                res.add(ow.writeValueAsString(t));
             } catch (JsonProcessingException e) {
                 System.out.println("jsonprocessing error!!");
-                continue;
             }
         }
-        // System.out.println("object list: "+res);
         return res;
     }
 
@@ -65,7 +63,7 @@ public class ConvertUtil {
             return null;
         }
         long secondsSinceEpoch = (long) d.doubleValue();
-        double fractionalPart = d.doubleValue() - secondsSinceEpoch;
+        double fractionalPart = d - secondsSinceEpoch;
         long nanoAdjustment = (long) (fractionalPart * 1_000_000_000);
         return Instant.ofEpochSecond(secondsSinceEpoch, nanoAdjustment);
     }
@@ -120,6 +118,6 @@ public class ConvertUtil {
         if(d==null) {
             return null;
         }
-        return Float.valueOf((float) d.doubleValue());
+        return (float) d.doubleValue();
     }
 }

@@ -23,7 +23,7 @@ public class DatasetStatisticalProperty {
 		UNIFORM_DIST_DATA("UNIFORM_DIST_DATA"),
 		NO_OUTLIERS("NO_OUTLIERS");
 
-		private String value;
+		private final String value;
 
 		DatasetStatisticalPropertyEnum(String value) {
 			this.value = value;

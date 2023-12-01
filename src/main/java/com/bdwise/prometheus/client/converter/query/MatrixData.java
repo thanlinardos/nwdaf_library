@@ -12,7 +12,7 @@ import com.bdwise.prometheus.client.converter.Data;
 
 public class MatrixData implements Data {
 
-	private Map<String,String> metric = new HashMap<String,String>();
+	private Map<String,String> metric = new HashMap<>();
 	
 	private QueryResultItemValue[] dataValues;
 	

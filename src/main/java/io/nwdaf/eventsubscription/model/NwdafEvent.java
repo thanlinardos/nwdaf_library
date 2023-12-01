@@ -52,7 +52,7 @@ public class NwdafEvent {
 		DN_PERFORMANCE("DN_PERFORMANCE"),
 		SM_CONGESTION("SM_CONGESTION");
 
-		private String value;
+		private final String value;
 
 		NwdafEventEnum(String value) {
 			this.value = value;

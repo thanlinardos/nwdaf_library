@@ -77,7 +77,7 @@ public class NFType {
 		MBSTF("MBSTF"),
 		PANF("PANF");
 
-		private String value;
+		private final String value;
 
 		NFTypeEnum(String value) {
 			this.value = value;

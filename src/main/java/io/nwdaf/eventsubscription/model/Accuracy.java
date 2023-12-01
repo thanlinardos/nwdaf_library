@@ -21,7 +21,7 @@ public class Accuracy {
 		LOW("LOW"),
 		HIGH("HIGH");
 
-		private String value;
+		private final String value;
 
 		AccuracyEnum(String value) {
 			this.value = value;

@@ -19,7 +19,7 @@ public class RedTransExpOrderingCriterion {
   public enum RedTransExpOrderingCriterionEnum {
     TIME_SLOT_START("TIME_SLOT_START"),
     RED_TRANS_EXP("RED_TRANS_EXP");
-    private String value;
+    private final String value;
 
     RedTransExpOrderingCriterionEnum(String value) {
       this.value = value;

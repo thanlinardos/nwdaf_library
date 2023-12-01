@@ -20,7 +20,7 @@ public class ScheduledCommunicationType {
     DOWNLINK_ONLY("DOWNLINK_ONLY"),
     UPLINK_ONLY("UPLINK_ONLY"),
     BIDIRECTIONA("BIDIRECTIONA");
-    private String value;
+    private final String value;
 
     ScheduledCommunicationTypeEnum(String value) {
       this.value = value;

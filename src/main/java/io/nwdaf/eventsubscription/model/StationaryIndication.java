@@ -19,7 +19,7 @@ public class StationaryIndication {
   public enum StationaryIndicationEnum {
     STATIONARY("STATIONARY"),
     MOBILE("MOBILE");
-    private String value;
+    private final String value;
 
     StationaryIndicationEnum(String value) {
       this.value = value;

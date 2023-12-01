@@ -22,7 +22,7 @@ public class TrafficProfile {
     DUAL_TRANS_UL_FIRST("DUAL_TRANS_UL_FIRST"),
     DUAL_TRANS_DL_FIRST("DUAL_TRANS_DL_FIRST"),
     MULTI_TRANS("MULTI_TRANS");
-    private String value;
+    private final String value;
 
     TrafficProfileEnum(String value) {
       this.value = value;
