@@ -1,20 +1,23 @@
 package io.nwdaf.eventsubscription.customModel;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
-import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static io.nwdaf.eventsubscription.utilities.ParserUtil.*;
+
 @Getter @Setter @Builder @AllArgsConstructor @NoArgsConstructor
 public class DiscoverMessage {
     @Builder.Default
     private OffsetDateTime timestamp = OffsetDateTime.now();
     private NwdafEventEnum requestedEvent;
+    private UUID collectorInstanceId;
     // (in seconds)
     private Integer requestedOffset;
     private Boolean hasData;
@@ -25,10 +28,26 @@ public class DiscoverMessage {
 
     public String toString(){
         return "{\"timestamp\":\"" + timestamp
-                +"\",\"requestedEvent\":\"" + ParserUtil.safeParseString(requestedEvent)
-                +"\",\"requestedOffset\":\"" + ParserUtil.safeParseString(requestedOffset)
-                +"\",\"hasData\":\"" + ParserUtil.safeParseString(hasData)
-                +"\",\"availableOffset\":\"" + ParserUtil.safeParseString(availableOffset)
-                +"\",\"expectedWaitTime\":\"" + ParserUtil.safeParseString(expectedWaitTime)+"\"}";
+                +"\",\"requestedEvent\":\"" + safeParseString(requestedEvent)
+                +"\",\"collectorInstanceId\":\"" + safeParseString(collectorInstanceId)
+                +"\",\"requestedOffset\":\"" + safeParseString(requestedOffset)
+                +"\",\"hasData\":\"" + safeParseString(hasData)
+                +"\",\"availableOffset\":\"" + safeParseString(availableOffset)
+                +"\",\"expectedWaitTime\":\"" + safeParseString(expectedWaitTime)+"\"}";
+    }
+
+    public static DiscoverMessage fromString(String input) {
+        DiscoverMessage result = new DiscoverMessage();
+        String[] attributes = input.substring(1,input.length()-1).split("\",");
+
+        result.setTimestamp(OffsetDateTime.parse(attributes[0].split(":\"")[1]));
+        result.setRequestedEvent(NwdafEventEnum.valueOf(attributes[1].split(":\"")[1]));
+        result.setCollectorInstanceId(UUID.fromString(attributes[2].split(":\"")[1]));
+        result.setRequestedOffset(safeParseInteger((attributes[3].split(":\"")[1])));
+        result.setHasData(safeParseBoolean((attributes[4].split(":\"")[1])));
+        result.setAvailableOffset(safeParseInteger((attributes[5].split(":\"")[1])));
+        result.setExpectedWaitTime(safeParseInteger((attributes[6].split(":\"")[1])));
+
+        return result;
     }
 }
