@@ -3,13 +3,7 @@ package io.nwdaf.eventsubscription.model;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -53,12 +47,12 @@ public class UeMobility implements Serializable {
 	@Valid
 	private List<LocationInfo> locInfos = new ArrayList<LocationInfo>();
 
-	/** List of the ids of areaOfInterests the ue has visited matching the location infos list (for each
-	* user location match it to an aoi or if it doesnt exist create a new one for
-	* this location)
+	/** List of the ids of areaOfInterests (aois) the ue has visited matching the location infos list (For each
+	* user location match it to a list of aois it is contained in from the known aois in the NWDAF's context. If none exist, then create a new one for
+	* this location. At the end, only get the unique ids of the aois.)
 	**/
 	@JsonProperty("areaOfInterestIds")
-	private List<UUID> areaOfInterestIds = new ArrayList<>();
+	private Set<UUID> areaOfInterestIds = new HashSet<>();
 
 	@JsonProperty("supi")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
@@ -179,7 +173,7 @@ public class UeMobility implements Serializable {
 		this.locInfos = locInfos;
 	}
 
-	public UeMobility areaOfInterestIds(List<UUID> areaOfInterestIds) {
+	public UeMobility areaOfInterestIds(Set<UUID> areaOfInterestIds) {
 		this.areaOfInterestIds = areaOfInterestIds;
 		return this;
 	}
@@ -199,11 +193,11 @@ public class UeMobility implements Serializable {
 	 **/
 	@Schema(description = "string with format 'UUID' as defined in OpenAPI.")
 
-	public List<UUID> getAreaOfInterestIds() {
+	public Set<UUID> getAreaOfInterestIds() {
 		return areaOfInterestIds;
 	}
 
-	public void setAreaOfInterestIds(List<UUID> areaOfInterestIds) {
+	public void setAreaOfInterestIds(Set<UUID> areaOfInterestIds) {
 		this.areaOfInterestIds = areaOfInterestIds;
 	}
 
@@ -345,7 +339,7 @@ public class UeMobility implements Serializable {
 		for (Map<String, Object> locInfo : locInfos) {
 			result.addLocInfosItem(LocationInfo.fromMap(locInfo));
 		}
-		result.setAreaOfInterestIds((List<UUID>) map.get("areaOfInterestIds"));
+		result.setAreaOfInterestIds(new HashSet<>((List<UUID>) map.get("areaOfInterestIds")));
 		result.setSupi((String) map.get("supi"));
 		result.setIntGroupId((String) map.get("intGroupId"));
 		return result;

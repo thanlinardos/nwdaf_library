@@ -91,8 +91,8 @@ public class DummyDataGenerator {
             switch (locNum) {
                 case (0):
                     userLocation.eutraLocation(new EutraLocation()
-                            .ecgi(Constants.AreaOfInterestExample3.getEcgis().get(0))
-                            .tai(Constants.AreaOfInterestExample3.getTais().get(0))
+                            .ecgi(Constants.AreaOfInterestExample3.getEcgis().getFirst())
+                            .tai(Constants.AreaOfInterestExample3.getTais().getFirst())
                             .globalNgenbId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(0))
                             .globalENbId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(1))
                             .ageOfLocationInformation(0).ueLocationTimestamp(now)
@@ -100,8 +100,8 @@ public class DummyDataGenerator {
                     break;
                 case (1):
                     userLocation.nrLocation(new NrLocation()
-                            .ncgi(Constants.AreaOfInterestExample1.getNcgis().get(0))
-                            .tai(Constants.AreaOfInterestExample1.getTais().get(0))
+                            .ncgi(Constants.AreaOfInterestExample1.getNcgis().getFirst())
+                            .tai(Constants.AreaOfInterestExample1.getTais().getFirst())
                             .ageOfLocationInformation(0).ueLocationTimestamp(now)
                             .geodeticInformation(null).geographicalInformation(null));
                     break;
@@ -111,7 +111,7 @@ public class DummyDataGenerator {
                             .gli(new Gli().data("gli-YXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZg=="))
                             .hfcNodeId(new HfcNodeId().hfcNId("YXNkZm"))
                             .n3IwfId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(2).getN3IwfId())
-                            .n3gppTai(Constants.AreaOfInterestExample3.getTais().get(0))
+                            .n3gppTai(Constants.AreaOfInterestExample3.getTais().getFirst())
                             .portNumber(8080).protocol(new TransportProtocol().transportProtocol(TransportProtocolEnum.TCP))
                             .tnapId(new TnapId().bssId(UUID.randomUUID().toString()).civicAddress("agioukonst12"))
                             .twapId(new TwapId().bssId(UUID.randomUUID().toString()).ssId(UUID.randomUUID().toString()).civicAddress("agioukonst12"))

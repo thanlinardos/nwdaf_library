@@ -357,8 +357,7 @@ public class NetworkAreaInfo {
 		return false;
 	}
 
-	public boolean containsLocationInfo(LocationInfo locationInfo) {
-		UserLocation userLocation = locationInfo.getLoc();
+	public boolean containsUserLocation(UserLocation userLocation) {
 		if (userLocation.getEutraLocation() != null) {
 			EutraLocation eutraLocation = userLocation.getEutraLocation();
 			if (eutraLocation.getEcgi() != null) {
