@@ -12,6 +12,10 @@ import io.nwdaf.eventsubscription.model.AnalyticsSubset.AnalyticsSubsetEnum;
 import io.nwdaf.eventsubscription.model.EventSubscription;
 import io.nwdaf.eventsubscription.model.GADShape;
 import io.nwdaf.eventsubscription.model.LocationArea;
+import io.nwdaf.eventsubscription.model.NnwdafEventsSubscriptionNotification;
+import io.nwdaf.eventsubscription.model.EventNotification;
+import io.nwdaf.eventsubscription.model.LocationInfo;
+import io.nwdaf.eventsubscription.model.UeMobility;
 
 public class OtherUtil {
     // set the shape attribute for each geographicArea
@@ -157,5 +161,16 @@ public class OtherUtil {
         }
 
         return sb.toString().toUpperCase();
+    }
+
+    public static void fillNotificationWithGeographicalInfo(NnwdafEventsSubscriptionNotification notification) {
+        for (EventNotification eventNotification : notification.getEventNotifications()) {
+            for (UeMobility ueMobility : eventNotification.getUeMobs()) {
+                for (LocationInfo locationInfo : ueMobility.getLocInfos()) {
+                    String geographicalInfo = locationInfo.getLoc().getNrLocation().getGeographicalInformation();
+                    locationInfo.getLoc().getNrLocation().setPointUncertaintyCircle(ConvertUtil.decodeEllipsoidPointWithUncertaintyCircle(geographicalInfo.substring(8)));
+                }
+            }
+        }
     }
 }

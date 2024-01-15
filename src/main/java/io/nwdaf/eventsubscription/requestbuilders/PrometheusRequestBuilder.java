@@ -31,6 +31,11 @@ import io.nwdaf.eventsubscription.responsebuilders.NotificationBuilder;
 public class PrometheusRequestBuilder {
 
     private static final Logger log = LoggerFactory.getLogger(PrometheusRequestBuilder.class);
+    private final RestTemplate template;
+
+    public PrometheusRequestBuilder() {
+        this.template = setupTemplate();
+    }
 
     private RestTemplate setupTemplate() {
         HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
@@ -42,12 +47,15 @@ public class PrometheusRequestBuilder {
     private HttpEntity<MultiValueMap<String, String>> setupRequest(OffsetDateTime now, String query) {
         String nowString = now.toString();
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/x-www-form-urlencoded");
-        headers.set("Accept-Encoding", "gzip, deflate, br");
-        headers.set("Connection", "keep-alive");
-        headers.set("Accept", "*/*");
+
+        headers.set(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
+        headers.set(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br");
+        headers.set(HttpHeaders.CONNECTION, "keep-alive");
+        headers.set(HttpHeaders.ACCEPT, "*/*");
+
         String encoding = Base64.getEncoder().encodeToString(("admin:admin").getBytes());
         headers.set(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("query", query);
         map.add("time", nowString);
@@ -57,8 +65,6 @@ public class PrometheusRequestBuilder {
     @SuppressWarnings("unchecked")
     public <T> List<T> execute(NwdafEventEnum eType, String prometheus_url) throws JsonProcessingException {
         OffsetDateTime now = OffsetDateTime.now();
-        //setup the connection rest template
-        RestTemplate template = setupTemplate();
 
         NotificationBuilder notifBuilder = new NotificationBuilder();
         switch (eType) {

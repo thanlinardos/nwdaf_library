@@ -16,6 +16,8 @@ import static java.util.Map.entry;
 public class Constants {
 	public static final Integer MIN_PERIOD_SECONDS = 1;
 	public static Integer MAX_PERIOD_SECONDS = 600;
+	public static Integer max_subs_per_process = 200;
+	public static Long max_bytes_per_subscription = 4 * 1_024L * 1_024L;
 	public static List<NwdafEventEnum> supportedEvents = new ArrayList<>(Arrays.asList(NwdafEventEnum.NF_LOAD,NwdafEventEnum.UE_MOBILITY,NwdafEventEnum.UE_COMM));
 	//check 5.1.8-1 table (135) from 3gpp 29520-h80 and for encoding : 29571-h80 (17) table 5.2.2-3
 	//Events supported: 2(UeMobility), 7(NfLoad), 11(EneNA), 17(NfLoadExt), 22(UeMobilityExt)
@@ -154,4 +156,24 @@ public class Constants {
                                                     Destination Port: 8080
                                                     Direction: Uplink""";
 	public static final String exampleDnn = "nidFFFFFFFFFFF.mcc123.mnc123.gprs";
+
+	public static final Map<String, String> decodeShapeTypeMap = Map.ofEntries(
+			entry("0000", "Point"),
+			entry("0001", "PointUncertaintyCircle"),
+			entry("0011", "PointUncertaintyEllipse"),
+			entry("0101", "Polygon"),
+			entry("1000", "PointAltitude"),
+			entry("1001", "PointAltitudeUncertainty"),
+			entry("1010", "EllipsoidArc")
+	);
+
+	public static final Map<String, String> encodeShapeTypeMap = Map.ofEntries(
+			entry("Point", "0000"),
+			entry("PointUncertaintyCircle", "0001"),
+			entry("PointUncertaintyEllipse", "0011"),
+			entry("Polygon", "0101"),
+			entry("PointAltitude", "1000"),
+			entry("PointAltitudeUncertainty", "1001"),
+			entry("EllipsoidArc", "1010")
+	);
 }

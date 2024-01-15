@@ -47,6 +47,9 @@ public class NrLocation {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String geographicalInformation = null;
 
+	@JsonProperty("pointUncertainyCircle")
+	private PointUncertaintyCircle pointUncertaintyCircle = null;
+
 	@JsonProperty("geodeticInformation")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String geodeticInformation = null;
@@ -234,6 +237,27 @@ public class NrLocation {
 
 	public void setGlobalGnbId(GlobalRanNodeId globalGnbId) {
 		this.globalGnbId = globalGnbId;
+	}
+
+	public NrLocation pointUncertaintyCircle(PointUncertaintyCircle pointUncertaintyCircle) {
+		this.pointUncertaintyCircle = pointUncertaintyCircle;
+		return this;
+	}
+
+	/**
+	 * Get pointUncertaintyCircle
+	 *
+	 * @return pointUncertaintyCircle
+	 **/
+	@Schema(description = "")
+
+	@Valid
+	public PointUncertaintyCircle getPointUncertaintyCircle() {
+		return pointUncertaintyCircle;
+	}
+
+	public void setPointUncertaintyCircle(PointUncertaintyCircle pointUncertaintyCircle) {
+		this.pointUncertaintyCircle = pointUncertaintyCircle;
 	}
 
 	@Override
