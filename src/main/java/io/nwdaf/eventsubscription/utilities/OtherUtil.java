@@ -166,11 +166,24 @@ public class OtherUtil {
     public static void fillNotificationWithGeographicalInfo(NnwdafEventsSubscriptionNotification notification) {
         for (EventNotification eventNotification : notification.getEventNotifications()) {
             for (UeMobility ueMobility : eventNotification.getUeMobs()) {
-                for (LocationInfo locationInfo : ueMobility.getLocInfos()) {
-                    String geographicalInfo = locationInfo.getLoc().getNrLocation().getGeographicalInformation();
-                    locationInfo.getLoc().getNrLocation().setPointUncertaintyCircle(ConvertUtil.decodeEllipsoidPointWithUncertaintyCircle(geographicalInfo.substring(8)));
-                }
+                fillUeMobilityWithGeographicalInfo(ueMobility);
             }
+        }
+    }
+
+    public static void fillUeMobilityWithGeographicalInfo(UeMobility ueMobility) {
+        if(ueMobility.getLocInfos() == null) {
+            return;
+        }
+        for (LocationInfo locationInfo : ueMobility.getLocInfos()) {
+            if(locationInfo.getLoc() == null || locationInfo.getLoc().getNrLocation() == null) {
+                continue;
+            }
+            String geographicalInfo = locationInfo.getLoc().getNrLocation().getGeographicalInformation();
+            if(geographicalInfo == null) {
+                continue;
+            }
+            locationInfo.getLoc().getNrLocation().setPointUncertaintyCircle(ConvertUtil.decodeEllipsoidPointWithUncertaintyCircle(geographicalInfo.substring(8)));
         }
     }
 }

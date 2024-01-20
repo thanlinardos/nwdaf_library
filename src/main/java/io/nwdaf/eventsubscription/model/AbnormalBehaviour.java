@@ -187,6 +187,10 @@ public class AbnormalBehaviour {
 		this.confidence = confidence;
 	}
 
+	/**
+	 * Add item to the list of additional measurement information
+	 * @return this
+	 **/
 	public AbnormalBehaviour addtMeasInfo(AdditionalMeasurement addtMeasInfo) {
 		this.addtMeasInfo = addtMeasInfo;
 		return this;

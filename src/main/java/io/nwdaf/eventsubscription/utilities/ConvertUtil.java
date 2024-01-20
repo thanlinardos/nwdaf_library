@@ -148,9 +148,11 @@ public class ConvertUtil {
 
         PointUncertaintyCircle result = new PointUncertaintyCircle();
         result.point(new GeographicalCoordinates()
-                .lat(decodeCoordinate(encodedLatitude))
-                .lon(decodeCoordinate(encodedLongitude)))
-                .uncertainty(decodeUncertaintyLevel(Integer.parseInt(uncertainty, 2)).floatValue());
+                        .lat(decodeCoordinate(encodedLatitude))
+                        .lon(decodeCoordinate(encodedLongitude)))
+                .uncertainty(decodeUncertaintyLevel(Integer.parseInt(uncertainty, 2)))
+                .shape(new SupportedGADShapes()
+                        .supportedGADShapes(SupportedGADShapes.SupportedGADShapesEnum.PointUncertaintyCircle));
         return result;
     }
 
@@ -222,7 +224,7 @@ public class ConvertUtil {
     }
 
     public static String encodeCoordinate(double x) {
-        if(x < -180.0 || x > 180.0) {
+        if (x < -180.0 || x > 180.0) {
             return null;
         }
         String signedBit = x > 0.0F ? "0" : "1";

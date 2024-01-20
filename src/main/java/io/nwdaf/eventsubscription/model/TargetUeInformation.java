@@ -57,6 +57,10 @@ public class TargetUeInformation   {
     return this;
   }
 
+  /**
+   * Add supi to the list of supis
+   * @return this
+   **/
   public TargetUeInformation addSupisItem(String supisItem) {
     if (this.supis == null) {
       this.supis = new ArrayList<String>();

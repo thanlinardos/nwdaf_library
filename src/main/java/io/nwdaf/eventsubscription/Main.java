@@ -13,11 +13,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import io.nwdaf.eventsubscription.customModel.NefUeState;
 import io.nwdaf.eventsubscription.model.*;
+import io.nwdaf.eventsubscription.utilities.BenchmarkUtil;
 import io.nwdaf.eventsubscription.utilities.Constants;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 
 public class Main {
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws JsonProcessingException, InterruptedException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
 
@@ -107,5 +108,21 @@ public class Main {
 
         System.out.println(ueMobilityList);
         System.out.println(ueCommunicationList);
+
+        PointUncertaintyCircle point = new PointUncertaintyCircle().point(new GeographicalCoordinates()
+                .lon(23.819015).lat(37.998709))
+                .uncertainty(10.0)
+                .type("PointUncertaintyCircle");
+        point.setShape(new SupportedGADShapes().supportedGADShapes(SupportedGADShapes.SupportedGADShapesEnum.PointUncertaintyCircle));
+        System.out.println(point);
+        PointUncertaintyCircle pp = PointUncertaintyCircle.fromMap(point.toMap());
+        System.out.println(pp);
+        PointUncertaintyCircle ppp = objectMapper.convertValue(point.toMap(), PointUncertaintyCircle.class);
+        System.out.println(ppp);
+
+        BenchmarkUtil benchmarkUtil = new BenchmarkUtil();
+        benchmarkUtil.start();
+        Thread.sleep(1000);
+        System.out.println(benchmarkUtil.end().toMillisStr());
     }
 }

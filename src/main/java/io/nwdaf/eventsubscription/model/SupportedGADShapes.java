@@ -1,8 +1,11 @@
 package io.nwdaf.eventsubscription.model;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
+import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -89,5 +92,20 @@ public class SupportedGADShapes {
   @Override
   public String toString() {
     return supportedGADShapes.toString();
+  }
+
+  public Map<String, Object> toMap() {
+    Map<String, Object> map = new HashMap<>();
+    map.put("supportedGADShapes", ParserUtil.safeParseString(this.supportedGADShapes));
+    return map;
+  }
+
+  public static SupportedGADShapes fromMap(Map<String, Object> map) {
+    if(map==null) {
+      return null;
+    }
+    SupportedGADShapes supportedGADShape = new SupportedGADShapes();
+    supportedGADShape.setSupportedGADShapes(SupportedGADShapesEnum.fromValue((String)map.get("supportedGADShapes")));
+    return supportedGADShape;
   }
 }

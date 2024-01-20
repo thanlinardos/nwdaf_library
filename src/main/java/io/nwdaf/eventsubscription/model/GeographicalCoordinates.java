@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.constraints.DecimalMax;
@@ -117,5 +119,19 @@ public class GeographicalCoordinates {
 			return "null";
 		}
 		return o.toString().replace("\n", "\n    ");
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("lon", lon);
+		map.put("lat", lat);
+		return map;
+	}
+
+	public static GeographicalCoordinates fromMap(Map<String, Object> map) {
+		GeographicalCoordinates geographicalCoordinates = new GeographicalCoordinates();
+		geographicalCoordinates.setLon((Double) map.get("lon"));
+		geographicalCoordinates.setLat((Double) map.get("lat"));
+		return geographicalCoordinates;
 	}
 }
