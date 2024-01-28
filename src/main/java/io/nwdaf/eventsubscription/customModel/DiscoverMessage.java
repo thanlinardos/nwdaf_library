@@ -46,7 +46,7 @@ public class DiscoverMessage {
         result.setRequestedOffset(safeParseInteger((attributes[3].split(":\"")[1])));
         result.setHasData(safeParseBoolean((attributes[4].split(":\"")[1])));
         result.setAvailableOffset(safeParseInteger((attributes[5].split(":\"")[1])));
-        result.setExpectedWaitTime(safeParseInteger((attributes[6].split(":\"")[1])));
+        result.setExpectedWaitTime(safeParseInteger((attributes[6].split(":\"")[1].replace("\"",""))));
 
         return result;
     }

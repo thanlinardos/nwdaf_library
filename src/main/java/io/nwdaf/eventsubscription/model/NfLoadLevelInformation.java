@@ -533,7 +533,11 @@ public class NfLoadLevelInformation implements Serializable {
 			return null;
 		}
 		NfLoadLevelInformation result = new NfLoadLevelInformation();
-		result.setTime(ConvertUtil.convertDoubleToInstant((Double) map.get("time")));
+		try {
+			result.setTime(ConvertUtil.convertDoubleToInstant((Double) map.get("time")));
+		} catch (ClassCastException e) {
+			result.setTime(ConvertUtil.convertDoubleToInstant(Double.valueOf((Integer) map.get("time"))));
+		}
 		result.setThresholdProperty((String) map.get("thresholdProperty"));
 		result.setThresholdValue((Integer) map.get("thresholdValue"));
 		result.setAreaOfInterestId(ParserUtil.safeParseUUID((String) map.get("areaOfInterestId")));

@@ -33,10 +33,7 @@ public class CheckUtil {
 
     // does all 3 necessary checks on a list (not null, size>0, at least 1 non null item)
     public static <T> Boolean safeCheckListNotEmpty(List<T> list){
-        if(list!=null && list.size()>0 && safeCheckContainsNotNull(list)){
-            return true;
-        }
-        return false;
+        return list != null && !list.isEmpty() && safeCheckContainsNotNull(list);
     }
     public static Boolean safeCheckEquals(String value,String comparisonValue) {
         if (value == null) {

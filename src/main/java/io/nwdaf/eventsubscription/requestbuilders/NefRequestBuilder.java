@@ -62,12 +62,19 @@ public class NefRequestBuilder {
         headers.set(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br");
         headers.set(HttpHeaders.CONNECTION, "keep-alive");
         headers.set(HttpHeaders.ACCEPT, "*/*");
-
-//        String encoding = Base64.getEncoder().encodeToString((token).getBytes());
         headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
-        System.out.println("Token: " + token);
-
         return new HttpEntity<>(headers);
+    }
+
+    public <T> HttpEntity<T> setupRequest(String token, T body) {
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        headers.set(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br");
+        headers.set(HttpHeaders.CONNECTION, "keep-alive");
+        headers.set(HttpHeaders.ACCEPT, "*/*");
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+        return new HttpEntity<>(body, headers);
     }
 
     @SuppressWarnings("unchecked")
@@ -79,7 +86,8 @@ public class NefRequestBuilder {
 
         if (eType.equals(NwdafEventEnum.UE_COMM) || eType.equals(NwdafEventEnum.UE_MOBILITY)) {
             String body = template.exchange(nef_url, HttpMethod.GET, request, String.class).getBody();
-            json = objectMapper.readValue(body, new TypeReference<>() {});
+            json = objectMapper.readValue(body, new TypeReference<>() {
+            });
         }
         if (json == null) {
             return null;

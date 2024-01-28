@@ -156,6 +156,9 @@ public class PointUncertaintyCircle extends GADShape implements GeographicArea {
     }
 
     public static PointUncertaintyCircle fromMap(Map<String, Object> map) {
+        if (map == null) {
+            return null;
+        }
         PointUncertaintyCircle obj = new PointUncertaintyCircle();
         obj.setPoint(GeographicalCoordinates.fromMap((Map<String, Object>) map.get("point")));
         obj.setUncertainty((Double) map.get("uncertainty"));

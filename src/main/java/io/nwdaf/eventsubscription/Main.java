@@ -1,20 +1,18 @@
 package io.nwdaf.eventsubscription;
 
-import java.time.Instant;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import io.nwdaf.eventsubscription.customModel.DiscoverMessage;
 import io.nwdaf.eventsubscription.customModel.NefUeState;
 import io.nwdaf.eventsubscription.model.*;
-import io.nwdaf.eventsubscription.utilities.BenchmarkUtil;
-import io.nwdaf.eventsubscription.utilities.Constants;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 
 public class Main {
@@ -120,9 +118,9 @@ public class Main {
         PointUncertaintyCircle ppp = objectMapper.convertValue(point.toMap(), PointUncertaintyCircle.class);
         System.out.println(ppp);
 
-        BenchmarkUtil benchmarkUtil = new BenchmarkUtil();
-        benchmarkUtil.start();
-        Thread.sleep(1000);
-        System.out.println(benchmarkUtil.end().toMillisStr());
+        DiscoverMessage msg = DiscoverMessage.builder()
+                .availableOffset(12).requestedOffset(12).collectorInstanceId(UUID.randomUUID()).expectedWaitTime(1).requestedEvent(NwdafEvent.NwdafEventEnum.NF_LOAD).build();
+        String str = msg.toString();
+        System.out.println(DiscoverMessage.fromString(str));
     }
 }

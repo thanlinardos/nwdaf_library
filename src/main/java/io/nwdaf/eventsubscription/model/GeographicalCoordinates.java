@@ -129,6 +129,9 @@ public class GeographicalCoordinates {
 	}
 
 	public static GeographicalCoordinates fromMap(Map<String, Object> map) {
+		if (map == null) {
+			return null;
+		}
 		GeographicalCoordinates geographicalCoordinates = new GeographicalCoordinates();
 		geographicalCoordinates.setLon((Double) map.get("lon"));
 		geographicalCoordinates.setLat((Double) map.get("lat"));

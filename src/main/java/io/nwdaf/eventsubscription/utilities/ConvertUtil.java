@@ -325,4 +325,83 @@ public class ConvertUtil {
 
         return ueCommunication;
     }
+
+    public static Double setAccuracy(Double input, DecimalFormat df) {
+        if (input == null) {
+            return null;
+        }
+        return Double.parseDouble(df.format(input));
+    }
+
+    public static List<Double> convertGpsToECEF(double lat, double lon, double alt) {
+
+        double a = 6378.1;
+        double b = 6356.8;
+        double N;
+        double b2DivA2 = Math.pow(b, 2) / Math.pow(a, 2);
+        double e = 1 - b2DivA2;
+        N = a / (Math.sqrt(1.0 - (e * Math.pow(Math.sin(Math.toRadians(lat)), 2))));
+        double cosLatRad = Math.cos(Math.toRadians(lat));
+        double cosLongiRad = Math.cos(Math.toRadians(lon));
+        double sinLatRad = Math.sin(Math.toRadians(lat));
+        double sinLongiRad = Math.sin(Math.toRadians(lon));
+        double x = (N + 0.001 * alt) * cosLatRad * cosLongiRad;
+        double y = (N + 0.001 * alt) * cosLatRad * sinLongiRad;
+        double z = (b2DivA2 * N + 0.001 * alt) * sinLatRad;
+
+        List<Double> ecef = new ArrayList<>();
+        ecef.add(x);
+        ecef.add(y);
+        ecef.add(z);
+
+        return ecef;
+    }
+
+
+    public static List<Double> convertECEFtoENU(List<Double> ecefUser, List<Double> ecefPOI, double lat, double longi) {
+
+        double cosLatRad = Math.cos(Math.toRadians(lat));
+        double cosLongiRad = Math.cos(Math.toRadians(longi));
+        double sinLatRad = Math.sin(Math.toRadians(lat));
+        double sinLongiRad = Math.sin(Math.toRadians(longi));
+
+
+        List<Double> vector = new ArrayList<>();
+
+        vector.add(ecefUser.get(0) - ecefPOI.get(0));
+        vector.add(ecefUser.get(1) - ecefPOI.get(1));
+        vector.add(ecefUser.get(2) - ecefPOI.get(2));
+
+        double e = vector.get(0) * (-sinLongiRad) + vector.get(1) * (cosLongiRad);
+        double n = vector.get(0) * (-sinLatRad) * (cosLongiRad) + vector.get(1) * (-sinLatRad) * (sinLongiRad) + vector.get(2) * cosLatRad;
+        double u = vector.get(0) * (cosLatRad) * (cosLongiRad) + vector.get(1) * (cosLatRad) * (sinLongiRad) + vector.get(2) * sinLatRad;
+
+
+        List<Double> enu = new ArrayList<>();
+        enu.add(e);
+        enu.add(n);
+        enu.add(u);
+
+        return enu;
+    }
+
+    public static List<Double> convertENUtoECEF(List<Double> ecefUser, List<Double> enuPOI, double lat, double longi) {
+
+        double cosLatRad = Math.cos(Math.toRadians(lat));
+        double cosLongiRad = Math.cos(Math.toRadians(longi));
+        double sinLatRad = Math.sin(Math.toRadians(lat));
+        double sinLongiRad = Math.sin(Math.toRadians(longi));
+
+        double x = enuPOI.get(0) * (-sinLongiRad) + enuPOI.get(1) * (cosLongiRad);
+        double y = enuPOI.get(0) * (-sinLatRad) * (cosLongiRad) + enuPOI.get(1) * (-sinLatRad) * (sinLongiRad) + enuPOI.get(2) * cosLatRad;
+        double z = enuPOI.get(0) * (cosLatRad) * (cosLongiRad) + enuPOI.get(1) * (cosLatRad) * (sinLongiRad) + enuPOI.get(2) * sinLatRad;
+
+        List<Double> ecef = new ArrayList<>();
+
+        ecef.add(ecefUser.get(0) + x);
+        ecef.add(ecefUser.get(1) + y);
+        ecef.add(ecefUser.get(2) + z);
+
+        return ecef;
+    }
 }
