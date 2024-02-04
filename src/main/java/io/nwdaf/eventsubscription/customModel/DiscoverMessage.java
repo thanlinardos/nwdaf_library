@@ -19,12 +19,12 @@ public class DiscoverMessage {
     private NwdafEventEnum requestedEvent;
     private UUID collectorInstanceId;
     // (in seconds)
-    private Integer requestedOffset;
+    private Long requestedOffset;
     private Boolean hasData;
     // (in seconds)
-    private Integer availableOffset;
+    private Long availableOffset;
     // (in seconds)
-    private Integer expectedWaitTime; 
+    private Long expectedWaitTime;
 
     public String toString(){
         return "{\"timestamp\":\"" + timestamp
@@ -43,10 +43,10 @@ public class DiscoverMessage {
         result.setTimestamp(OffsetDateTime.parse(attributes[0].split(":\"")[1]));
         result.setRequestedEvent(NwdafEventEnum.valueOf(attributes[1].split(":\"")[1]));
         result.setCollectorInstanceId(UUID.fromString(attributes[2].split(":\"")[1]));
-        result.setRequestedOffset(safeParseInteger((attributes[3].split(":\"")[1])));
+        result.setRequestedOffset(safeParseLong((attributes[3].split(":\"")[1])));
         result.setHasData(safeParseBoolean((attributes[4].split(":\"")[1])));
-        result.setAvailableOffset(safeParseInteger((attributes[5].split(":\"")[1])));
-        result.setExpectedWaitTime(safeParseInteger((attributes[6].split(":\"")[1].replace("\"",""))));
+        result.setAvailableOffset(safeParseLong((attributes[5].split(":\"")[1])));
+        result.setExpectedWaitTime(safeParseLong((attributes[6].split(":\"")[1].replace("\"",""))));
 
         return result;
     }

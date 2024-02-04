@@ -16,6 +16,8 @@ import static java.util.Map.entry;
 public class Constants {
 	public static final Integer MIN_PERIOD_SECONDS = 1;
 	public static Integer MAX_PERIOD_SECONDS = 600;
+	public static Integer METRICS_PERIOD_SECONDS = 1;
+	public static Integer COMPRESSED_METRICS_PERIOD_SECONDS = 60;
 	public static Integer max_subs_per_process = 200;
 	public static Long max_bytes_per_subscription = 4 * 1_024L * 1_024L;
 	public static List<NwdafEventEnum> supportedEvents = new ArrayList<>(Arrays.asList(NwdafEventEnum.NF_LOAD,NwdafEventEnum.UE_MOBILITY,NwdafEventEnum.UE_COMM));

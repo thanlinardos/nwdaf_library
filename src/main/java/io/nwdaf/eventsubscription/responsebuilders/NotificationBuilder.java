@@ -21,7 +21,7 @@ public class NotificationBuilder {
 
     @SuppressWarnings("unchecked")
     public <T> NnwdafEventsSubscriptionNotification addEvent(NnwdafEventsSubscriptionNotification self, NwdafEventEnum event, OffsetDateTime start,
-                                                             OffsetDateTime expiry, OffsetDateTime timeStampGen, NwdafFailureCode failNotifyCode, Integer rvWaitTime, AnalyticsMetadataInfo anaMetaInfo,
+                                                             OffsetDateTime expiry, OffsetDateTime timeStampGen, NwdafFailureCode failNotifyCode, Long rvWaitTime, AnalyticsMetadataInfo anaMetaInfo,
                                                              List<T> infoList) {
         EventNotification e = new EventNotification();
         e.event(new NwdafEvent().event(event)).start(start).expiry(expiry).timeStampGen(timeStampGen).failNotifyCode(failNotifyCode).rvWaitTime(rvWaitTime).anaMetaInfo(anaMetaInfo);

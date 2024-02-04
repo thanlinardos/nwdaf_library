@@ -1,21 +1,15 @@
 package io.nwdaf.eventsubscription.utilities;
 
 import java.security.SecureRandom;
+import java.time.OffsetDateTime;
 import java.util.List;
 
-import io.nwdaf.eventsubscription.model.AnalyticsSubset;
-import io.nwdaf.eventsubscription.model.NfLoadLevelInformation;
-import io.nwdaf.eventsubscription.model.NnwdafEventsSubscription;
-import io.nwdaf.eventsubscription.model.SupportedGADShapes;
+import io.nwdaf.eventsubscription.model.*;
 import io.nwdaf.eventsubscription.model.SupportedGADShapes.SupportedGADShapesEnum;
 import io.nwdaf.eventsubscription.model.AnalyticsSubset.AnalyticsSubsetEnum;
-import io.nwdaf.eventsubscription.model.EventSubscription;
-import io.nwdaf.eventsubscription.model.GADShape;
-import io.nwdaf.eventsubscription.model.LocationArea;
-import io.nwdaf.eventsubscription.model.NnwdafEventsSubscriptionNotification;
-import io.nwdaf.eventsubscription.model.EventNotification;
-import io.nwdaf.eventsubscription.model.LocationInfo;
-import io.nwdaf.eventsubscription.model.UeMobility;
+
+import static io.nwdaf.eventsubscription.utilities.Constants.METRICS_PERIOD_SECONDS;
+import static io.nwdaf.eventsubscription.utilities.Constants.MIN_PERIOD_SECONDS;
 
 public class OtherUtil {
     // set the shape attribute for each geographicArea
@@ -172,18 +166,121 @@ public class OtherUtil {
     }
 
     public static void fillUeMobilityWithGeographicalInfo(UeMobility ueMobility) {
-        if(ueMobility.getLocInfos() == null) {
+        if (ueMobility.getLocInfos() == null) {
             return;
         }
         for (LocationInfo locationInfo : ueMobility.getLocInfos()) {
-            if(locationInfo.getLoc() == null || locationInfo.getLoc().getNrLocation() == null) {
+            if (locationInfo.getLoc() == null || locationInfo.getLoc().getNrLocation() == null) {
                 continue;
             }
             String geographicalInfo = locationInfo.getLoc().getNrLocation().getGeographicalInformation();
-            if(geographicalInfo == null) {
+            if (geographicalInfo == null) {
                 continue;
             }
             locationInfo.getLoc().getNrLocation().setPointUncertaintyCircle(ConvertUtil.decodeEllipsoidPointWithUncertaintyCircle(geographicalInfo.substring(8)));
+        }
+    }
+
+    public static boolean checkOffsetInsideAvailableData(Long start, Long end, Integer period, List<OffsetDateTime> availableTimeStamps, Boolean isCompressed) {
+        OffsetDateTime now = OffsetDateTime.now().withNano(0);
+        start = start == null ? MIN_PERIOD_SECONDS : start;
+        OffsetDateTime startOffset = now.minusSeconds(start);
+        OffsetDateTime endOffset = null;
+        OffsetDateTime mostRecent = now.minusSeconds(period);
+        if (isCompressed) {
+            startOffset = startOffset.withSecond(0);
+            mostRecent = mostRecent.withSecond(0);
+        }
+        if (end != null && end > 0) {
+            if (end > start) {
+                return false;
+            }
+            endOffset = now.minusSeconds(end);
+            if (isCompressed) {
+                endOffset = endOffset.withSecond(0);
+            }
+        }
+        if ((!isCompressed && start > 3600 * 24) ||
+                period < METRICS_PERIOD_SECONDS ||
+                availableTimeStamps == null ||
+                availableTimeStamps.size() < 2 ||
+                availableTimeStamps.getFirst() == null ||
+                availableTimeStamps.getLast() == null) {
+            return false;
+        }
+        OffsetDateTime last = availableTimeStamps.getFirst();
+        OffsetDateTime first = availableTimeStamps.getLast();
+        boolean withinRange = (startOffset.isAfter(first) || startOffset.isEqual(first)) &&
+                ((endOffset == null && (last.isAfter(mostRecent) || last.isEqual(mostRecent))) ||
+                        (endOffset != null && (endOffset.isBefore(last) || endOffset.isEqual(last))));
+
+        int startIndex = availableTimeStamps.indexOf(startOffset);
+        if (!withinRange || startIndex < 0) {
+            return false;
+        }
+        if (endOffset == null) {
+            for (int i = startIndex + 1; i < availableTimeStamps.size(); i++) {
+                if (availableTimeStamps.get(i).toEpochSecond() - availableTimeStamps.get(i - 1).toEpochSecond() > period) {
+                    return false;
+                }
+            }
+        } else {
+            int endIndex = availableTimeStamps.indexOf(endOffset);
+            if (endIndex < 0) {
+                return false;
+            }
+            for (int i = startIndex; i < endIndex; i++) {
+                if (availableTimeStamps.get(i).toEpochSecond() - availableTimeStamps.get(i - 1).toEpochSecond() > period) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void setPastOffsetCutoff(EventSubscription eventSubscription, Integer repPeriod) {
+        EventReportingRequirement eventRepReq = eventSubscription.getExtraReportReq();
+        if (eventRepReq == null) {
+            return;
+        }
+        OffsetDateTime now = OffsetDateTime.now();
+        if (eventRepReq.getEndTs() != null && eventRepReq.getStartTs() != null) {
+            long start = eventRepReq.getStartTs().toEpochSecond();
+            long end = eventRepReq.getEndTs().toEpochSecond();
+            if (end < start) {
+                return;
+            }
+            if (end > now.toEpochSecond() &&
+                    start < now.toEpochSecond()) {
+                return;
+            }
+            if (end - start > repPeriod) {
+                eventRepReq.setStartTs(now.minusSeconds(repPeriod));
+            }
+            return;
+        }
+        if (eventRepReq.getStartTs() != null) {
+            long start = eventRepReq.getStartTs().toEpochSecond();
+            if (now.toEpochSecond() - start > repPeriod) {
+                eventRepReq.setStartTs(now.minusSeconds(repPeriod));
+            }
+            return;
+        }
+        if (eventRepReq.getOffsetPeriod() != null &&
+                eventRepReq.getOffsetPeriod() < 0) {
+            eventRepReq.setOffsetPeriod((-1) * Math.min((-1) * eventRepReq.getOffsetPeriod(), repPeriod));
+        }
+    }
+
+    public static void muteSubscription(NnwdafEventsSubscription subscription) {
+        if(subscription == null) {
+            return;
+        }
+        NotificationFlag mutedFlag = new NotificationFlag().notifFlag(NotificationFlag.NotificationFlagEnum.DEACTIVATE);
+        if (subscription.getEvtReq() == null) {
+            subscription.setEvtReq(new ReportingInformation().notifFlag(mutedFlag));
+        } else {
+            subscription.getEvtReq().setNotifFlag(mutedFlag);
         }
     }
 }

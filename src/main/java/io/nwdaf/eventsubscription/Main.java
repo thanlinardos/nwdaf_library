@@ -1,22 +1,22 @@
 package io.nwdaf.eventsubscription;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+import java.util.stream.IntStream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import io.nwdaf.eventsubscription.customModel.DiscoverMessage;
 import io.nwdaf.eventsubscription.customModel.NefUeState;
 import io.nwdaf.eventsubscription.model.*;
 import io.nwdaf.eventsubscription.utilities.ConvertUtil;
 
 public class Main {
-    public static void main(String[] args) throws JsonProcessingException, InterruptedException {
+    public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
 
@@ -107,20 +107,12 @@ public class Main {
         System.out.println(ueMobilityList);
         System.out.println(ueCommunicationList);
 
-        PointUncertaintyCircle point = new PointUncertaintyCircle().point(new GeographicalCoordinates()
-                .lon(23.819015).lat(37.998709))
-                .uncertainty(10.0)
-                .type("PointUncertaintyCircle");
-        point.setShape(new SupportedGADShapes().supportedGADShapes(SupportedGADShapes.SupportedGADShapesEnum.PointUncertaintyCircle));
-        System.out.println(point);
-        PointUncertaintyCircle pp = PointUncertaintyCircle.fromMap(point.toMap());
-        System.out.println(pp);
-        PointUncertaintyCircle ppp = objectMapper.convertValue(point.toMap(), PointUncertaintyCircle.class);
-        System.out.println(ppp);
-
-        DiscoverMessage msg = DiscoverMessage.builder()
-                .availableOffset(12).requestedOffset(12).collectorInstanceId(UUID.randomUUID()).expectedWaitTime(1).requestedEvent(NwdafEvent.NwdafEventEnum.NF_LOAD).build();
-        String str = msg.toString();
-        System.out.println(DiscoverMessage.fromString(str));
+        OffsetDateTime now = OffsetDateTime.now().withNano(0);
+        OffsetDateTime current = OffsetDateTime.now().withNano(0).withSecond(0);
+        List<OffsetDateTime> offsetDateTimeList = IntStream
+                .range(0, 11)
+                .mapToObj(current::minusMinutes)
+                .toList();
+        System.out.println(NotificationFlag.NotificationFlagEnum.DEACTIVATE);
     }
 }

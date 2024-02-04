@@ -41,7 +41,7 @@ public class EventNotification {
 
 	@JsonProperty("rvWaitTime")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Integer rvWaitTime = null;
+	private Long rvWaitTime = null;
 
 	@JsonProperty("anaMetaInfo")
 	private AnalyticsMetadataInfo anaMetaInfo = null;
@@ -211,7 +211,7 @@ public class EventNotification {
 		this.failNotifyCode = failNotifyCode;
 	}
 
-	public EventNotification rvWaitTime(Integer rvWaitTime) {
+	public EventNotification rvWaitTime(Long rvWaitTime) {
 		this.rvWaitTime = rvWaitTime;
 		return this;
 	}
@@ -223,11 +223,11 @@ public class EventNotification {
 	 **/
 	@Schema(description = "indicating a time in seconds.")
 
-	public Integer getRvWaitTime() {
+	public Long getRvWaitTime() {
 		return rvWaitTime;
 	}
 
-	public void setRvWaitTime(Integer rvWaitTime) {
+	public void setRvWaitTime(Long rvWaitTime) {
 		this.rvWaitTime = rvWaitTime;
 	}
 
