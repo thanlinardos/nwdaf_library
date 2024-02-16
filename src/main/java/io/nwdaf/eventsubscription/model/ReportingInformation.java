@@ -34,21 +34,18 @@ public class ReportingInformation   {
 
   @JsonProperty("maxReportNbr")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer maxReportNbr
- = null;
+private Integer maxReportNbr = null;
 
   @JsonProperty("monDur")
   private OffsetDateTime monDur = null;
 
   @JsonProperty("repPeriod")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer repPeriod
- = null;
+private Integer repPeriod = null;
 
   @JsonProperty("sampRatio")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer sampRatio
- = null;
+private Integer sampRatio = null;
 
   @JsonProperty("partitionCriteria")
   @Valid
@@ -56,8 +53,7 @@ private Integer sampRatio
 
   @JsonProperty("grpRepTime")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-private Integer grpRepTime
- = null;
+private Integer grpRepTime = null;
 
   @JsonProperty("notifFlag")
   private NotificationFlag notifFlag = null;
