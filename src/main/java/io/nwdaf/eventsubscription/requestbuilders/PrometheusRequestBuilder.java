@@ -4,11 +4,7 @@ import org.apache.hc.client5.http.classic.HttpClient;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.slf4j.Logger;
@@ -27,6 +23,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import io.nwdaf.eventsubscription.utilities.Constants;
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
 import io.nwdaf.eventsubscription.responsebuilders.NotificationBuilder;
+
+import static io.nwdaf.eventsubscription.utilities.ConvertUtil.convertDockerIdToUUID;
+import static io.nwdaf.eventsubscription.utilities.ConvertUtil.getStartOfDigitsInDockerId;
 
 public class PrometheusRequestBuilder {
 
@@ -91,8 +90,8 @@ public class PrometheusRequestBuilder {
 //			long diff = (System.nanoTime()-start) / 1000000l;
 //        	System.out.println("prometheus actual post req delay: "+diff+"ms");
                 DefaultQueryResult<VectorData> result = ConvertUtil.convertQueryResultString(rtVal);
-                String resTime = null;
-                Double value = null;
+                String resTime;
+                double value;
                 List<List<Integer>> data = new ArrayList<>();
                 List<List<String>> dataOptionals = new ArrayList<>();
                 List<Double> maxCpus = new ArrayList<>();
@@ -100,11 +99,14 @@ public class PrometheusRequestBuilder {
                 List<Double> maxStorages = new ArrayList<>();
                 int c = 0;
                 for (int i = 0; i < result.getResult().size(); i++) {
-                    data.add(new ArrayList<>(Arrays.asList(null, null, null, null, null, null)));
-                    dataOptionals.add(new ArrayList<>(Arrays.asList(null, null, null, null, null, null, null, null, null, null)));
+                    data.add(new ArrayList<>(Collections.nCopies(6, null)));
+                    dataOptionals.add(new ArrayList<>(Collections.nCopies(11, null)));
                 }
                 for (VectorData vectorData : result.getResult()) {
-                    resTime = OffsetDateTime.ofInstant(Instant.ofEpochMilli(Math.round(vectorData.getDataValue().getTimestamp() * 1000)), TimeZone.getDefault().toZoneId()).toString();
+                    resTime = OffsetDateTime
+                            .ofInstant(Instant
+                                    .ofEpochMilli(Math.round(vectorData.getDataValue().getTimestamp() * 1000)),
+                                    TimeZone.getDefault().toZoneId()).toString();
                     if (dataOptionals.get(c).get(9) == null) {
                         dataOptionals.get(c).set(9, resTime);
                     }
@@ -112,20 +114,15 @@ public class PrometheusRequestBuilder {
                         dataOptionals.get(c).set(0, vectorData.getMetric().get("nfType"));
                     }
                     if (dataOptionals.get(c).get(1) == null) {
-                        // add hyphens '-' to docker/id/[first 32 digits] -> nf instance id (UUID)
-                        String str = vectorData.getMetric().get("id");
-                        String modifier = "docker-";
-                        int st_index = str.indexOf(modifier);
-                        // in windows docker desktop it is usually formatted with slash instead of hyphen as below:
-                        if (st_index == -1 || str.charAt(st_index + modifier.length()) == 'r') {
-                            modifier = "docker/";
-                            st_index = str.indexOf(modifier);
-                        }
-                        int start = st_index + modifier.length();
-                        String uuid = str.substring(start, start + 32).replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5");
-                        uuid = uuid.substring(0, 14) + "4" + uuid.substring(15);
-                        uuid = uuid.substring(0, 19) + "8" + uuid.substring(20);
+                        String dockerId = vectorData.getMetric().get("id");
+                        String uuid = convertDockerIdToUUID(dockerId);
                         dataOptionals.get(c).set(1, uuid);
+                    }
+                    if (dataOptionals.get(c).get(2) == null) {
+                        dataOptionals.get(c).set(2, vectorData.getMetric().get("nfSetId"));
+                    }
+                    if (dataOptionals.get(c).get(10) == null) {
+                        dataOptionals.get(c).set(10, vectorData.getMetric().get("name"));
                     }
                     value = vectorData.getDataValue().getValue();
                     // log.info(String.format("%s", vectorData.getMetric().get("name")));

@@ -1,5 +1,7 @@
 package io.nwdaf.eventsubscription.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -23,226 +25,274 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
 public class EllipsoidArc extends GADShape implements GeographicArea {
-	@JsonProperty("point")
-	private GeographicalCoordinates point = null;
+    @JsonProperty("point")
+    private GeographicalCoordinates point = null;
 
-	@JsonProperty("innerRadius")
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Integer innerRadius = null;
+    @JsonProperty("innerRadius")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer innerRadius = null;
 
-	@JsonProperty("uncertaintyRadius")
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Float uncertaintyRadius = null;
+    @JsonProperty("uncertaintyRadius")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Double uncertaintyRadius = null;
 
-	@JsonProperty("offsetAngle")
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Integer offsetAngle = null;
+    @JsonProperty("offsetAngle")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer offsetAngle = null;
 
-	@JsonProperty("includedAngle")
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Integer includedAngle = null;
+    @JsonProperty("includedAngle")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer includedAngle = null;
 
-	@JsonProperty("confidence")
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Integer confidence = null;
+    @JsonProperty("confidence")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer confidence = null;
 
-	public EllipsoidArc point(GeographicalCoordinates point) {
-		this.point = point;
-		return this;
-	}
+    @JsonProperty("type")
+    private String type = null;
 
-	/**
-	 * Get point
-	 * 
-	 * @return point
-	 **/
-	@Schema(required = true, description = "")
-	@NotNull
+    public EllipsoidArc point(GeographicalCoordinates point) {
+        this.point = point;
+        return this;
+    }
 
-	@Valid
-	public GeographicalCoordinates getPoint() {
-		return point;
-	}
+    /**
+     * Get point
+     *
+     * @return point
+     **/
+    @Schema(required = true, description = "")
+    @NotNull
 
-	public void setPoint(GeographicalCoordinates point) {
-		this.point = point;
-	}
+    @Valid
+    public GeographicalCoordinates getPoint() {
+        return point;
+    }
 
-	public EllipsoidArc innerRadius(Integer innerRadius) {
-		this.innerRadius = innerRadius;
-		return this;
-	}
+    public void setPoint(GeographicalCoordinates point) {
+        this.point = point;
+    }
 
-	/**
-	 * Indicates value of the inner radius.
-	 * minimum: 0
-	 * maximum: 327675
-	 * 
-	 * @return innerRadius
-	 **/
-	@Schema(required = true, description = "Indicates value of the inner radius.")
-	@NotNull
+    public EllipsoidArc innerRadius(Integer innerRadius) {
+        this.innerRadius = innerRadius;
+        return this;
+    }
 
-	@Min(0)
-	@Max(327675)
-	public Integer getInnerRadius() {
-		return innerRadius;
-	}
+    /**
+     * Indicates value of the inner radius.
+     * minimum: 0
+     * maximum: 327675
+     *
+     * @return innerRadius
+     **/
+    @Schema(required = true, description = "Indicates value of the inner radius.")
+    @NotNull
 
-	public void setInnerRadius(Integer innerRadius) {
-		this.innerRadius = innerRadius;
-	}
+    @Min(0)
+    @Max(327675)
+    public Integer getInnerRadius() {
+        return innerRadius;
+    }
 
-	public EllipsoidArc uncertaintyRadius(Float uncertaintyRadius) {
-		this.uncertaintyRadius = uncertaintyRadius;
-		return this;
-	}
+    public void setInnerRadius(Integer innerRadius) {
+        this.innerRadius = innerRadius;
+    }
 
-	/**
-	 * Indicates value of uncertainty.
-	 * minimum: 0
-	 * 
-	 * @return uncertaintyRadius
-	 **/
-	@Schema(required = true, description = "Indicates value of uncertainty.")
-	@NotNull
+    public EllipsoidArc uncertaintyRadius(Double uncertaintyRadius) {
+        this.uncertaintyRadius = uncertaintyRadius;
+        return this;
+    }
 
-	@DecimalMin("0")
-	public Float getUncertaintyRadius() {
-		return uncertaintyRadius;
-	}
+    /**
+     * Indicates value of uncertainty.
+     * minimum: 0
+     *
+     * @return uncertaintyRadius
+     **/
+    @Schema(required = true, description = "Indicates value of uncertainty.")
+    @NotNull
 
-	public void setUncertaintyRadius(Float uncertaintyRadius) {
-		this.uncertaintyRadius = uncertaintyRadius;
-	}
+    @DecimalMin("0")
+    public Double getUncertaintyRadius() {
+        return uncertaintyRadius;
+    }
 
-	public EllipsoidArc offsetAngle(Integer offsetAngle) {
-		this.offsetAngle = offsetAngle;
-		return this;
-	}
+    public void setUncertaintyRadius(Double uncertaintyRadius) {
+        this.uncertaintyRadius = uncertaintyRadius;
+    }
 
-	/**
-	 * Indicates value of angle.
-	 * minimum: 0
-	 * maximum: 360
-	 * 
-	 * @return offsetAngle
-	 **/
-	@Schema(required = true, description = "Indicates value of angle.")
-	@NotNull
+    public EllipsoidArc offsetAngle(Integer offsetAngle) {
+        this.offsetAngle = offsetAngle;
+        return this;
+    }
 
-	@Min(0)
-	@Max(360)
-	public Integer getOffsetAngle() {
-		return offsetAngle;
-	}
+    /**
+     * Indicates value of angle.
+     * minimum: 0
+     * maximum: 360
+     *
+     * @return offsetAngle
+     **/
+    @Schema(required = true, description = "Indicates value of angle.")
+    @NotNull
 
-	public void setOffsetAngle(Integer offsetAngle) {
-		this.offsetAngle = offsetAngle;
-	}
+    @Min(0)
+    @Max(360)
+    public Integer getOffsetAngle() {
+        return offsetAngle;
+    }
 
-	public EllipsoidArc includedAngle(Integer includedAngle) {
-		this.includedAngle = includedAngle;
-		return this;
-	}
+    public void setOffsetAngle(Integer offsetAngle) {
+        this.offsetAngle = offsetAngle;
+    }
 
-	/**
-	 * Indicates value of angle.
-	 * minimum: 0
-	 * maximum: 360
-	 * 
-	 * @return includedAngle
-	 **/
-	@Schema(required = true, description = "Indicates value of angle.")
-	@NotNull
+    public EllipsoidArc includedAngle(Integer includedAngle) {
+        this.includedAngle = includedAngle;
+        return this;
+    }
 
-	@Min(0)
-	@Max(360)
-	public Integer getIncludedAngle() {
-		return includedAngle;
-	}
+    /**
+     * Indicates value of angle.
+     * minimum: 0
+     * maximum: 360
+     *
+     * @return includedAngle
+     **/
+    @Schema(required = true, description = "Indicates value of angle.")
+    @NotNull
 
-	public void setIncludedAngle(Integer includedAngle) {
-		this.includedAngle = includedAngle;
-	}
+    @Min(0)
+    @Max(360)
+    public Integer getIncludedAngle() {
+        return includedAngle;
+    }
 
-	public EllipsoidArc confidence(Integer confidence) {
-		this.confidence = confidence;
-		return this;
-	}
+    public void setIncludedAngle(Integer includedAngle) {
+        this.includedAngle = includedAngle;
+    }
 
-	/**
-	 * Indicates value of confidence.
-	 * minimum: 0
-	 * maximum: 100
-	 * 
-	 * @return confidence
-	 **/
-	@Schema(required = true, description = "Indicates value of confidence.")
-	@NotNull
+    public EllipsoidArc confidence(Integer confidence) {
+        this.confidence = confidence;
+        return this;
+    }
 
-	@Min(0)
-	@Max(100)
-	public Integer getConfidence() {
-		return confidence;
-	}
+    /**
+     * Indicates value of confidence.
+     * minimum: 0
+     * maximum: 100
+     *
+     * @return confidence
+     **/
+    @Schema(required = true, description = "Indicates value of confidence.")
+    @NotNull
 
-	public void setConfidence(Integer confidence) {
-		this.confidence = confidence;
-	}
+    @Min(0)
+    @Max(100)
+    public Integer getConfidence() {
+        return confidence;
+    }
 
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		EllipsoidArc ellipsoidArc = (EllipsoidArc) o;
-		return Objects.equals(this.point, ellipsoidArc.point) &&
-				Objects.equals(this.innerRadius, ellipsoidArc.innerRadius) &&
-				Objects.equals(this.uncertaintyRadius, ellipsoidArc.uncertaintyRadius) &&
-				Objects.equals(this.offsetAngle, ellipsoidArc.offsetAngle) &&
-				Objects.equals(this.includedAngle, ellipsoidArc.includedAngle) &&
-				Objects.equals(this.confidence, ellipsoidArc.confidence) &&
-				super.equals(o);
-	}
+    public void setConfidence(Integer confidence) {
+        this.confidence = confidence;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(point, innerRadius, uncertaintyRadius, offsetAngle, includedAngle, confidence,
-				super.hashCode());
-	}
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        EllipsoidArc ellipsoidArc = (EllipsoidArc) o;
+        return Objects.equals(this.point, ellipsoidArc.point) &&
+                Objects.equals(this.innerRadius, ellipsoidArc.innerRadius) &&
+                Objects.equals(this.uncertaintyRadius, ellipsoidArc.uncertaintyRadius) &&
+                Objects.equals(this.offsetAngle, ellipsoidArc.offsetAngle) &&
+                Objects.equals(this.includedAngle, ellipsoidArc.includedAngle) &&
+                Objects.equals(this.confidence, ellipsoidArc.confidence) &&
+                super.equals(o);
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class EllipsoidArc {\n");
-		sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-		sb.append("    point: ").append(toIndentedString(point)).append("\n");
-		sb.append("    innerRadius: ").append(toIndentedString(innerRadius)).append("\n");
-		sb.append("    uncertaintyRadius: ").append(toIndentedString(uncertaintyRadius)).append("\n");
-		sb.append("    offsetAngle: ").append(toIndentedString(offsetAngle)).append("\n");
-		sb.append("    includedAngle: ").append(toIndentedString(includedAngle)).append("\n");
-		sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(point, innerRadius, uncertaintyRadius, offsetAngle, includedAngle, confidence,
+                super.hashCode());
+    }
 
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
-	}
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class EllipsoidArc {\n");
+        sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+        sb.append("    point: ").append(toIndentedString(point)).append("\n");
+        sb.append("    innerRadius: ").append(toIndentedString(innerRadius)).append("\n");
+        sb.append("    uncertaintyRadius: ").append(toIndentedString(uncertaintyRadius)).append("\n");
+        sb.append("    offsetAngle: ").append(toIndentedString(offsetAngle)).append("\n");
+        sb.append("    includedAngle: ").append(toIndentedString(includedAngle)).append("\n");
+        sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
 
-	@Override
-	public String getType() {
-		return getClass().getSimpleName();
-	}
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+    @Override
+    public String getType() {
+        return getClass().getSimpleName();
+    }
+
+    public void setType(String type) {
+        this.type = getClass().getSimpleName();
+    }
+
+    public EllipsoidArc type(String type) {
+        this.type = getClass().getSimpleName();
+        return this;
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+        if (this.point != null) {
+            map.put("point", this.point.toMap());
+        }
+        map.put("innerRadius", this.innerRadius);
+        map.put("uncertaintyRadius", this.uncertaintyRadius);
+        map.put("offsetAngle", this.offsetAngle);
+        map.put("includedAngle", this.includedAngle);
+        map.put("confidence", this.confidence);
+
+        if (this.getShape() != null) {
+            map.put("shape", this.getShape().toMap());
+        }
+        if (getType() != null) {
+            map.put("type", getType());
+        }
+        return map;
+    }
+
+    public static EllipsoidArc fromMap(Map<String, Object> map) {
+        if (map == null) {
+            return null;
+        }
+        EllipsoidArc result = new EllipsoidArc();
+        result.setPoint(GeographicalCoordinates.fromMap((Map<String, Object>) map.get("point")));
+        result.setInnerRadius((Integer) map.get("innerRadius"));
+        result.setUncertaintyRadius((Double) map.get("uncertaintyRadius"));
+        result.setOffsetAngle((Integer) map.get("offsetAngle"));
+        result.setIncludedAngle((Integer) map.get("includedAngle"));
+        result.setConfidence((Integer) map.get("confidence"));
+        result.setShape(SupportedGADShapes.fromMap((Map<String, Object>) map.get("shape")));
+        result.setType((String) map.get("type"));
+        return result;
+    }
 }

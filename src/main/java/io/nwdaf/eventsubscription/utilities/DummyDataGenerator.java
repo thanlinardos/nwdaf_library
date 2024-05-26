@@ -13,6 +13,8 @@ import io.nwdaf.eventsubscription.model.NFType.NFTypeEnum;
 import io.nwdaf.eventsubscription.model.TransportProtocol.TransportProtocolEnum;
 import io.nwdaf.eventsubscription.model.LineType.LineTypeEnum;
 
+import static io.nwdaf.eventsubscription.utilities.ConvertUtil.toOptional;
+
 public class DummyDataGenerator {
     public static List<NfLoadLevelInformation> generateDummyNfLoadLevelInfo(int c) {
         List<NfLoadLevelInformation> result = new ArrayList<>();
@@ -32,7 +34,7 @@ public class DummyDataGenerator {
             int aoiIndex = r.nextInt(4);
             NFTypeEnum nfType = NFTypeEnum.values()[r.nextInt(NFTypeEnum.values().length)];
             List<UUID> keys = new ArrayList<>(Constants.ExampleAOIsMap.keySet());
-            keys.remove(Constants.ServingAreaOfInterest.getId());
+            keys.remove(Constants.InitialServingAreaOfInterest.getId());
             switch (aoiIndex) {
                 case 0:
                     nfLoadLevelInfo.areaOfInterestId(keys.get(r.nextInt(keys.size())));
@@ -63,7 +65,7 @@ public class DummyDataGenerator {
         return result;
     }
 
-    public static List<NfLoadLevelInformation> changeNfLoadTimeDependentProperties(List<NfLoadLevelInformation> nfloadinfos) {
+    public static void changeNfLoadTimeDependentProperties(List<NfLoadLevelInformation> nfloadinfos) {
         Instant now = Instant.now();
         Random r = new Random();
         r.setSeed(now.toEpochMilli());
@@ -74,10 +76,9 @@ public class DummyDataGenerator {
                     .nfMemoryUsage(nums[1]).nfStorageUsage(nums[2]).nfLoadLevelAverage((nums[0] + nums[1] + nums[2]) / 3)
                     .nfLoadLevelpeak((maxes[0] + maxes[1] + maxes[2]) / 3).nfLoadAvgInAoi(r.nextInt(101)).time(now);
         }
-        return nfloadinfos;
     }
 
-    public static List<UeMobility> generateDummyUeMobilities(int c) {
+    public static List<UeMobility> generateDummyUeMobilities(int c, UeMobility locationInfosInput) {
         List<UeMobility> ueMobilities = new ArrayList<>();
         for (int i = 0; i < c; i++) {
             ueMobilities.add(new UeMobility());
@@ -86,56 +87,65 @@ public class DummyDataGenerator {
         OffsetDateTime now = OffsetDateTime.now();
         r.setSeed(now.toEpochSecond());
         for (UeMobility ueMobility : ueMobilities) {
-            int locNum = r.nextInt(5);
+            int locNum = r.nextInt(6);
+            EutraLocation eutraLocation = new EutraLocation()
+                    .ecgi(Constants.AreaOfInterestExample3.getEcgis().getFirst())
+                    .tai(Constants.AreaOfInterestExample3.getTais().getFirst())
+                    .globalNgenbId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(0))
+                    .globalENbId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(1))
+                    .ageOfLocationInformation(0).ueLocationTimestamp(now)
+                    .geodeticInformation(null).geographicalInformation(null);
+            NrLocation nrLocation = new NrLocation()
+                    .ncgi(Constants.AreaOfInterestExample1.getNcgis().getFirst())
+                    .tai(Constants.AreaOfInterestExample1.getTais().getFirst())
+                    .ageOfLocationInformation(0).ueLocationTimestamp(now)
+                    .geodeticInformation(null).geographicalInformation(null);
+            N3gaLocation n3gaLocation = new N3gaLocation()
+                    .gci("00-00-5E-00-53-00@5gc.mnc123.mcc123.example.com")
+                    .gli(new Gli().data("gli-YXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZg=="))
+                    .hfcNodeId(new HfcNodeId().hfcNId("YXNkZm"))
+                    .n3IwfId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(2).getN3IwfId())
+                    .n3gppTai(Constants.AreaOfInterestExample3.getTais().getFirst())
+                    .portNumber(8080).protocol(new TransportProtocol().transportProtocol(TransportProtocolEnum.TCP))
+                    .tnapId(new TnapId().bssId(UUID.randomUUID().toString()).civicAddress("agioukonst12"))
+                    .twapId(new TwapId().bssId(UUID.randomUUID().toString()).ssId(UUID.randomUUID().toString()).civicAddress("agioukonst12"))
+                    .ueIpv4Addr("61.166.76.219").ueIpv6Addr("1702:b2fc:b695:2e32:8541:4020:5abe:bc46")
+                    .w5gbanLineType(new LineType().lType(LineTypeEnum.DSL));
+            GeraLocation geraLocation = new GeraLocation()
+                    .cgi(new CellGlobalId().plmnId(Constants.plmnId).cellId("FFFF").lac("FFFF"))
+                    .lai(new LocationAreaId().plmnId(Constants.plmnId).lac("FFFF"))
+                    .rai(new RoutingAreaId().plmnId(Constants.plmnId).lac("FFFF").rac("00"))
+                    .sai(new ServiceAreaId().plmnId(Constants.plmnId).lac("FFFF").sac("FFFF"))
+                    .vlrNumber(Constants.plmnId.toFormattedString() + ".vlrYXNkZmFzZGZh")
+                    .ageOfLocationInformation(0).ueLocationTimestamp(now)
+                    .geodeticInformation(null).geographicalInformation(null);
+            UtraLocation utraLocation = new UtraLocation()
+                    .cgi(new CellGlobalId().plmnId(Constants.plmnId).cellId("0000").lac("FFFF"))
+                    .lai(new LocationAreaId().plmnId(Constants.plmnId).lac("FFFF"))
+                    .rai(new RoutingAreaId().plmnId(Constants.plmnId).lac("FFFF").rac("FF"))
+                    .sai(new ServiceAreaId().plmnId(Constants.plmnId).lac("FFFF").sac("0000"))
+                    .ageOfLocationInformation(0).ueLocationTimestamp(now)
+                    .geodeticInformation(null).geographicalInformation(null);
+
             UserLocation userLocation = new UserLocation();
             switch (locNum) {
                 case (0):
-                    userLocation.eutraLocation(new EutraLocation()
-                            .ecgi(Constants.AreaOfInterestExample3.getEcgis().getFirst())
-                            .tai(Constants.AreaOfInterestExample3.getTais().getFirst())
-                            .globalNgenbId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(0))
-                            .globalENbId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(1))
-                            .ageOfLocationInformation(0).ueLocationTimestamp(now)
-                            .geodeticInformation(null).geographicalInformation(null));
+                    userLocation.eutraLocation(eutraLocation);
                     break;
                 case (1):
-                    userLocation.nrLocation(new NrLocation()
-                            .ncgi(Constants.AreaOfInterestExample1.getNcgis().getFirst())
-                            .tai(Constants.AreaOfInterestExample1.getTais().getFirst())
-                            .ageOfLocationInformation(0).ueLocationTimestamp(now)
-                            .geodeticInformation(null).geographicalInformation(null));
+                    userLocation.nrLocation(nrLocation);
                     break;
                 case (2):
-                    userLocation.n3gaLocation(new N3gaLocation()
-                            .gci("00-00-5E-00-53-00@5gc.mnc123.mcc123.example.com")
-                            .gli(new Gli().data("gli-YXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZmFzZGZhc2RmYXNkZg=="))
-                            .hfcNodeId(new HfcNodeId().hfcNId("YXNkZm"))
-                            .n3IwfId(Constants.AreaOfInterestExample3.getGRanNodeIds().get(2).getN3IwfId())
-                            .n3gppTai(Constants.AreaOfInterestExample3.getTais().getFirst())
-                            .portNumber(8080).protocol(new TransportProtocol().transportProtocol(TransportProtocolEnum.TCP))
-                            .tnapId(new TnapId().bssId(UUID.randomUUID().toString()).civicAddress("agioukonst12"))
-                            .twapId(new TwapId().bssId(UUID.randomUUID().toString()).ssId(UUID.randomUUID().toString()).civicAddress("agioukonst12"))
-                            .ueIpv4Addr("61.166.76.219").ueIpv6Addr("1702:b2fc:b695:2e32:8541:4020:5abe:bc46")
-                            .w5gbanLineType(new LineType().lType(LineTypeEnum.DSL)));
+                    userLocation.n3gaLocation(n3gaLocation);
                     break;
                 case (3):
-                    userLocation.geraLocation(new GeraLocation()
-                            .cgi(new CellGlobalId().plmnId(Constants.plmnId).cellId("FFFF").lac("FFFF"))
-                            .lai(new LocationAreaId().plmnId(Constants.plmnId).lac("FFFF"))
-                            .rai(new RoutingAreaId().plmnId(Constants.plmnId).lac("FFFF").rac("00"))
-                            .sai(new ServiceAreaId().plmnId(Constants.plmnId).lac("FFFF").sac("FFFF"))
-                            .vlrNumber(Constants.plmnId.toFormattedString() + ".vlrYXNkZmFzZGZh")
-                            .ageOfLocationInformation(0).ueLocationTimestamp(now)
-                            .geodeticInformation(null).geographicalInformation(null));
+                    userLocation.geraLocation(geraLocation);
                     break;
                 case (4):
-                    userLocation.utraLocation(new UtraLocation()
-                            .cgi(new CellGlobalId().plmnId(Constants.plmnId).cellId("0000").lac("FFFF"))
-                            .lai(new LocationAreaId().plmnId(Constants.plmnId).lac("FFFF"))
-                            .rai(new RoutingAreaId().plmnId(Constants.plmnId).lac("FFFF").rac("FF"))
-                            .sai(new ServiceAreaId().plmnId(Constants.plmnId).lac("FFFF").sac("0000"))
-                            .ageOfLocationInformation(0).ueLocationTimestamp(now)
-                            .geodeticInformation(null).geographicalInformation(null));
+                    userLocation.utraLocation(utraLocation);
+                    break;
+                case (5):
+                    ueMobility.ladnDnn(Constants.exampleDnn);
                     break;
                 default:
                     break;
@@ -143,6 +153,10 @@ public class DummyDataGenerator {
             ueMobility.time(now.toInstant()).duration(1).durationVariance(0.0).supi(randomSupi(false)).intGroupId(randomInternalGroupId(false));
             ueMobility.addLocInfosItem(new LocationInfo().ratio(r.nextInt(1, 101)).confidence(r.nextInt(101))
                     .loc(userLocation));
+            if (r.nextInt(3) == 0) {
+                ueMobility.setLocInfos(toOptional(locationInfosInput).map(UeMobility::getLocInfos).orElse(null));
+                ueMobility.setAreaOfInterestIds(toOptional(locationInfosInput).map(UeMobility::getAreaOfInterestIds).orElse(null));
+            }
         }
         return ueMobilities;
     }
@@ -162,10 +176,10 @@ public class DummyDataGenerator {
                 case 0 -> Constants.AreaOfInterestExample1;
                 case 1 -> Constants.AreaOfInterestExample2;
                 case 2 -> Constants.AreaOfInterestExample3;
-                default -> Constants.ServingAreaOfInterest;
+                default -> Constants.InitialServingAreaOfInterest;
             };
             List<UUID> keys = new ArrayList<>(Constants.ExampleAOIsMap.keySet());
-            keys.remove(Constants.ServingAreaOfInterest.getId());
+            keys.remove(Constants.InitialServingAreaOfInterest.getId());
             int aoiIndex = r.nextInt(2);
             if (aoiIndex == 0) {
                 ueCommunication.areaOfInterestId(keys.get(r.nextInt(keys.size())));
@@ -198,12 +212,12 @@ public class DummyDataGenerator {
                                             .ethType(Constants.ethernetTypes.get(r.nextInt(32)))
                                             .addVlanTagsItem(OtherUtil.generateRandomHexString(4))  // customer-vlan tag
                                             .addVlanTagsItem(OtherUtil.generateRandomHexString(4))  // service-vlan tag
-                                            .destMacAddr(randomMacAddress(r))
+                                            .destMacAddr(randomMacAddress())
                                             .fDir(new FlowDirection()
                                                     .fDir(FlowDirection.FlowDirectionEnum.UPLINK))
                                             .fDesc(Constants.exampleIpv4FilterRule.toAvp())
-                                            .sourceMacAddr(randomMacAddress(r))
-                                            .destMacAddrEnd(randomMacAddress(r)))
+                                            .sourceMacAddr(randomMacAddress())
+                                            .destMacAddrEnd(randomMacAddress()))
                                     .ipTrafficFilter(Constants.exampleIpv4FilterRule.toAvp()))
                             .dnn(Constants.exampleDnn)
                             .dlVol(r.nextInt(1_000_000))
@@ -242,18 +256,21 @@ public class DummyDataGenerator {
         }
         serviceId = OtherUtil.generateRandomHexString(8);
         localGroupId = OtherUtil.generateRandomHexString(10);
-        return mcc + "-" + mnc + "-" + serviceId + "-" + localGroupId;
+        return serviceId + "-" + mcc + "-" + mnc + "-" + localGroupId;
     }
 
     public static OffsetDateTime randomOffsetDateTime(OffsetDateTime now, Random r) {
-        return OffsetDateTime.of(now.getYear(), now.getMonthValue(), now.getDayOfMonth(), r.nextInt(24), r.nextInt(60), r.nextInt(60), r.nextInt(1_000_000_000), now.getOffset());
+        return OffsetDateTime
+                .of(now.getYear(), now.getMonthValue(), now.getDayOfMonth(),
+                        r.nextInt(24), r.nextInt(60), r.nextInt(60),
+                        r.nextInt(1_000_000_000), now.getOffset());
     }
 
     public static Snssai randomSnssai(Random r) {
         return new Snssai().sd(Integer.toHexString(r.nextInt(0, 16777216))).sst(r.nextInt(0, 256));
     }
 
-    public static String randomMacAddress(Random r) {
+    public static String randomMacAddress() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 6; i++) {
             sb.append(OtherUtil.generateRandomHexString(2));
@@ -262,35 +279,26 @@ public class DummyDataGenerator {
         return sb.toString();
     }
 
-    public static List<UeMobility> changeUeMobilitiesTimeDependentProperties(List<UeMobility> ueMobilities) {
+    public static void changeUeMobilitiesTimeDependentProperties(List<UeMobility> ueMobilities, long offsetSeconds) {
         Instant now = Instant.now();
         OffsetDateTime date = OffsetDateTime.ofInstant(now, TimeZone.getDefault().toZoneId());
         for (UeMobility ueMobility : ueMobilities) {
             ueMobility.time(now);
             for (int j = 0; j < ueMobility.getLocInfos().size(); j++) {
                 UserLocation userLocation = ueMobility.getLocInfos().get(j).getLoc();
-                if (userLocation.getEutraLocation() != null) {
-                    userLocation.getEutraLocation().ueLocationTimestamp(date);
-                }
-                if (userLocation.getNrLocation() != null) {
-                    userLocation.getNrLocation().ueLocationTimestamp(date);
-                }
-                if (userLocation.getGeraLocation() != null) {
-                    userLocation.getGeraLocation().ueLocationTimestamp(date);
-                }
-                if (userLocation.getUtraLocation() != null) {
-                    userLocation.getUtraLocation().ueLocationTimestamp(date);
-                }
+                OffsetDateTime ueLocationTimestamp = date.minusSeconds(j * offsetSeconds);
+                toOptional(userLocation.getNrLocation()).ifPresent(loc -> loc.ueLocationTimestamp(ueLocationTimestamp));
+                toOptional(userLocation.getEutraLocation()).ifPresent(loc -> loc.ueLocationTimestamp(ueLocationTimestamp));
+                toOptional(userLocation.getUtraLocation()).ifPresent(loc -> loc.ueLocationTimestamp(ueLocationTimestamp));
+                toOptional(userLocation.getGeraLocation()).ifPresent(loc -> loc.ueLocationTimestamp(ueLocationTimestamp));
             }
         }
-        return ueMobilities;
     }
 
-    public static List<UeCommunication> changeUeCommunicationsTimeDependentProperties(List<UeCommunication> ueCommunications) {
+    public static void changeUeCommunicationsTimeDependentProperties(List<UeCommunication> ueCommunications) {
         Instant now = Instant.now();
         for (UeCommunication ueCommunication : ueCommunications) {
             ueCommunication.time(now);
         }
-        return ueCommunications;
     }
 }

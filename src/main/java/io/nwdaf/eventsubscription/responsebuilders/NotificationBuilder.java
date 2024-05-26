@@ -7,8 +7,6 @@ import java.util.UUID;
 
 import io.nwdaf.eventsubscription.model.*;
 import io.nwdaf.eventsubscription.model.NFType.NFTypeEnum;
-import io.nwdaf.eventsubscription.utilities.ConvertUtil;
-import io.nwdaf.eventsubscription.utilities.ParserUtil;
 import io.nwdaf.eventsubscription.model.NwdafEvent.NwdafEventEnum;
 
 import static io.nwdaf.eventsubscription.utilities.ConvertUtil.convertOffsetDateTimeToInstant;
@@ -42,7 +40,7 @@ public class NotificationBuilder {
             NfLoadLevelInformation info = new NfLoadLevelInformation();
             if (dataOptionals.get(i) != null) {
                 if (dataOptionals.get(i).get(0) != null) {
-                    info.nfType(new NFType().nfType(NFTypeEnum.fromValue(dataOptionals.get(i).get(0))));
+                    info.nfType(new NFType().nfType(NFTypeEnum.fromValue(dataOptionals.get(i).getFirst())));
                 }
                 if (dataOptionals.get(i).get(1) != null) {
                     info.nfInstanceId(UUID.fromString(dataOptionals.get(i).get(1)));
@@ -68,11 +66,14 @@ public class NotificationBuilder {
                 if (dataOptionals.get(i).get(9) != null) {
                     info.time(convertOffsetDateTimeToInstant(safeParseOffsetDateTime(dataOptionals.get(i).get(9))));
                 }
+                if (dataOptionals.get(i).get(10) != null) {
+                    info.serviceId(dataOptionals.get(i).get(10));
+                }
 
             }
             if (data.get(i) != null) {
                 if (data.get(i).get(0) != null) {
-                    Integer nfCpuUsage = (Integer) data.get(i).get(0);
+                    Integer nfCpuUsage = (Integer) data.get(i).getFirst();
                     info.nfCpuUsage(nfCpuUsage);
                 }
                 if (data.get(i).get(1) != null) {

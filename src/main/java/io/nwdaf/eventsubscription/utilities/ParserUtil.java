@@ -5,12 +5,13 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import io.nwdaf.eventsubscription.model.NfLoadLevelInformation;
+import io.nwdaf.eventsubscription.model.ThresholdLevel;
 
 public class ParserUtil {
     public static Integer safeParseInteger(String str) {
         try {
             return Integer.parseInt(str);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return null;
         }
     }
@@ -18,9 +19,7 @@ public class ParserUtil {
     public static Float safeParseFloat(String str) {
         try {
             return Float.parseFloat(str);
-        } catch (NumberFormatException e) {
-            return null;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return null;
         }
     }
@@ -28,9 +27,7 @@ public class ParserUtil {
     public static Double safeParseDouble(String str) {
         try {
             return Double.parseDouble(str);
-        } catch (NumberFormatException e) {
-            return null;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return null;
         }
     }
@@ -38,9 +35,7 @@ public class ParserUtil {
     public static OffsetDateTime safeParseOffsetDateTime(String str) {
         try {
             return OffsetDateTime.parse(str);
-        } catch (DateTimeParseException e) {
-            return null;
-        } catch (NullPointerException e) {
+        } catch (DateTimeParseException | NullPointerException e) {
             return null;
         }
     }
@@ -48,9 +43,7 @@ public class ParserUtil {
     public static UUID safeParseUUID(String str) {
         try {
             return UUID.fromString(str);
-        } catch (IllegalArgumentException e) {
-            return null;
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             return null;
         }
     }
@@ -119,7 +112,7 @@ public class ParserUtil {
 
     public static String parseQuerryFilterContains(List<String> filterList, String subProperty) {
         String res = "(";
-        if (filterList == null || filterList.size() == 0) {
+        if (filterList == null || filterList.isEmpty()) {
             return null;
         }
         for (int i = 0; i < filterList.size(); i++) {
@@ -162,17 +155,35 @@ public class ParserUtil {
     // get only the current time nfloadlevelinfo (remove past offset nfloadlevelinfos)
     public static List<NfLoadLevelInformation> parsePresentNfLoadLevelInformations(List<NfLoadLevelInformation> nfLoadLevelInformations) {
         List<NfLoadLevelInformation> res = new ArrayList<>();
-        OffsetDateTime latest = nfLoadLevelInformations.get(0).getTimeStamp();
+        OffsetDateTime latest = nfLoadLevelInformations.getFirst().getTimeStamp();
         for (int i = 1; i < nfLoadLevelInformations.size(); i++) {
-            if (nfLoadLevelInformations.get(i).getTimeStamp().compareTo(latest) > 0) {
+            if (nfLoadLevelInformations.get(i).getTimeStamp().isAfter(latest)) {
                 latest = nfLoadLevelInformations.get(i).getTimeStamp();
             }
         }
         for (NfLoadLevelInformation nfLoadLevelInformation : nfLoadLevelInformations) {
-            if (nfLoadLevelInformation.getTimeStamp().compareTo(latest.minusNanos((Constants.MIN_PERIOD_SECONDS / 2) * 1_000_000_000L)) >= 0) {
+            if (!nfLoadLevelInformation.getTimeStamp().isBefore(latest.minusNanos(Constants.MIN_PERIOD_NANOS / 2))) {
                 res.add(nfLoadLevelInformation);
             }
         }
         return res;
+    }
+
+    public static List<String> parseThresholdLevelToStringArray(ThresholdLevel thresholdLevel) {
+        if (thresholdLevel == null) {
+            return null;
+        }
+        return new ArrayList<>(Arrays.asList(safeParseString(thresholdLevel.getCongLevel()),
+                safeParseString(thresholdLevel.getNfLoadLevel()),
+                safeParseString(thresholdLevel.getNfCpuUsage()),
+                safeParseString(thresholdLevel.getNfMemoryUsage()),
+                safeParseString(thresholdLevel.getNfStorageUsage()),
+                safeParseString(thresholdLevel.getAvgTrafficRate()),
+                safeParseString(thresholdLevel.getMaxTrafficRate()),
+                safeParseString(thresholdLevel.getAvgPacketDelay()),
+                safeParseString(thresholdLevel.getMaxPacketDelay()),
+                safeParseString(thresholdLevel.getAvgPacketLossRate()),
+                safeParseString(thresholdLevel.getSvcExpLevel())
+        ));
     }
 }

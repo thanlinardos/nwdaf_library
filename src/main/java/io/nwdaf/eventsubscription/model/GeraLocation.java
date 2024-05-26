@@ -65,6 +65,9 @@ public class GeraLocation implements OneOfGeraLocation {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String geodeticInformation = null;
 
+	@JsonProperty("cellLocation")
+	private EllipsoidArc cellLocation = null;
+
 	public GeraLocation locationNumber(String locationNumber) {
 		this.locationNumber = locationNumber;
 		return this;
@@ -306,6 +309,27 @@ public class GeraLocation implements OneOfGeraLocation {
 		this.geodeticInformation = geodeticInformation;
 	}
 
+	public GeraLocation cellLocation(EllipsoidArc cellLocation) {
+		this.cellLocation = cellLocation;
+		return this;
+	}
+
+	/**
+	 * Get cellLocation
+	 *
+	 * @return cellLocation
+	 **/
+	@Schema(description = "")
+
+	@Valid
+	public EllipsoidArc getCellLocation() {
+		return cellLocation;
+	}
+
+	public void setCellLocation(EllipsoidArc cellLocation) {
+		this.cellLocation = cellLocation;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -386,6 +410,9 @@ public class GeraLocation implements OneOfGeraLocation {
 		map.put("vlrNumber", this.vlrNumber);
 		map.put("mscNumber", this.mscNumber);
 		map.put("locationNumber", this.locationNumber);
+		if (this.cellLocation != null) {
+			map.put("cellLocation", this.cellLocation.toMap());
+		}
 		return map;
 	}
 
@@ -405,6 +432,7 @@ public class GeraLocation implements OneOfGeraLocation {
 		result.setGeodeticInformation((String) map.get("geodeticInformation"));
 		result.setGeographicalInformation((String) map.get("geographicalInformation"));
 		result.setUeLocationTimestamp(ConvertUtil.convertDoubleToOffSetDateTime((Double) map.get("ueLocationTimestamp")));
+		result.setCellLocation(EllipsoidArc.fromMap((Map<String, Object>) map.get("cellLocation")));
 		return result;
 	}
 }

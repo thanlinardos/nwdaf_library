@@ -361,7 +361,7 @@ public class NnwdafEventsSubscription implements Identifiable {
 	}
 
 	public static NnwdafEventsSubscription fromMap(Map<String, Object> map) {
-		if(map==null) {
+		if (map == null) {
 			return null;
 		}
 		NnwdafEventsSubscription result = new NnwdafEventsSubscription();

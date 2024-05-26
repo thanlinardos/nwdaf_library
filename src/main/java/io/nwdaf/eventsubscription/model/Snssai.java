@@ -16,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import static io.nwdaf.eventsubscription.utilities.ParserUtil.safeParseInteger;
+
 /**
  * When Snssai needs to be converted to string (e.g. when used in maps as key),
  * the string shall be composed of one to three digits \&quot;sst\&quot;
@@ -141,6 +143,14 @@ public class Snssai {
 			sb.append("-").append(sd);
 		}
 		return sb.toString();
+	}
+
+	public static Snssai fromKeyString(String key) {
+		String[] elements = key.split("-");
+		if(elements.length < 2) return null;
+		return new Snssai()
+				.sst(safeParseInteger(elements[0]))
+				.sd(elements[1]);
 	}
 
 	public Map<String, Object> toMap() {

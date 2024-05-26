@@ -52,6 +52,9 @@ public class NfLoadLevelInformation implements Serializable {
 	@JsonProperty("nfType")
 	private NFType nfType = null;
 
+	@JsonProperty("serviceId")
+	private String serviceId = null;
+
 	@JsonProperty("nfInstanceId")
 	private UUID nfInstanceId = null;
 
@@ -408,72 +411,17 @@ public class NfLoadLevelInformation implements Serializable {
 		this.supis = supis;
 	}
 
-	@Override
-	public boolean equals(java.lang.Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		NfLoadLevelInformation nfLoadLevelInformation = (NfLoadLevelInformation) o;
-		return Objects.equals(this.nfType, nfLoadLevelInformation.nfType) &&
-				Objects.equals(this.areaOfInterestId, nfLoadLevelInformation.areaOfInterestId) &&
-				Objects.equals(this.nfInstanceId, nfLoadLevelInformation.nfInstanceId) &&
-				Objects.equals(this.nfSetId, nfLoadLevelInformation.nfSetId) &&
-				Objects.equals(this.nfStatus, nfLoadLevelInformation.nfStatus) &&
-				Objects.equals(this.nfCpuUsage, nfLoadLevelInformation.nfCpuUsage) &&
-				Objects.equals(this.nfMemoryUsage, nfLoadLevelInformation.nfMemoryUsage) &&
-				Objects.equals(this.nfStorageUsage, nfLoadLevelInformation.nfStorageUsage) &&
-				Objects.equals(this.nfLoadLevelAverage, nfLoadLevelInformation.nfLoadLevelAverage) &&
-				Objects.equals(this.nfLoadLevelpeak, nfLoadLevelInformation.nfLoadLevelpeak) &&
-				Objects.equals(this.nfLoadAvgInAoi, nfLoadLevelInformation.nfLoadAvgInAoi) &&
-				Objects.equals(this.snssai, nfLoadLevelInformation.snssai) &&
-				Objects.equals(this.confidence, nfLoadLevelInformation.confidence) &&
-				Objects.equals(this.supis, nfLoadLevelInformation.supis);
+	public NfLoadLevelInformation serviceId(String serviceId) {
+		this.serviceId = serviceId;
+		return this;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(areaOfInterestId, nfType, nfInstanceId, nfSetId, nfStatus, nfCpuUsage, nfMemoryUsage,
-				nfStorageUsage, nfLoadLevelAverage, nfLoadLevelpeak, nfLoadAvgInAoi, snssai, confidence, supis);
+	public String getServiceId() {
+		return serviceId;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("class NfLoadLevelInformation {\n");
-
-		sb.append("    timeStamp: ").append(toIndentedString(timeStamp)).append("\n");
-		sb.append("    thresholdProperty: ").append(toIndentedString(thresholdProperty)).append("\n");
-		sb.append("    thresholdValue: ").append(toIndentedString(thresholdValue)).append("\n");
-		sb.append("    areaOfInterestId: ").append(toIndentedString(areaOfInterestId)).append("\n");
-		sb.append("    nfType: ").append(toIndentedString(nfType)).append("\n");
-		sb.append("    nfInstanceId: ").append(toIndentedString(nfInstanceId)).append("\n");
-		sb.append("    nfSetId: ").append(toIndentedString(nfSetId)).append("\n");
-		sb.append("    nfStatus: ").append(toIndentedString(nfStatus)).append("\n");
-		sb.append("    nfCpuUsage: ").append(toIndentedString(nfCpuUsage)).append("\n");
-		sb.append("    nfMemoryUsage: ").append(toIndentedString(nfMemoryUsage)).append("\n");
-		sb.append("    nfStorageUsage: ").append(toIndentedString(nfStorageUsage)).append("\n");
-		sb.append("    nfLoadLevelAverage: ").append(toIndentedString(nfLoadLevelAverage)).append("\n");
-		sb.append("    nfLoadLevelpeak: ").append(toIndentedString(nfLoadLevelpeak)).append("\n");
-		sb.append("    nfLoadAvgInAoi: ").append(toIndentedString(nfLoadAvgInAoi)).append("\n");
-		sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
-		sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
-		sb.append("    supis: ").append(toIndentedString(supis)).append("\n");
-		sb.append("}");
-		return sb.toString();
-	}
-
-	/**
-	 * Convert the given object to string with each line indented by 4 spaces
-	 * (except the first line).
-	 */
-	private String toIndentedString(java.lang.Object o) {
-		if (o == null) {
-			return "null";
-		}
-		return o.toString().replace("\n", "\n    ");
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
 	}
 
 	public OffsetDateTime getTimeStamp() {
@@ -500,6 +448,76 @@ public class NfLoadLevelInformation implements Serializable {
 		this.thresholdValue = thresholdValue;
 	}
 
+	@Override
+	public boolean equals(java.lang.Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		NfLoadLevelInformation nfLoadLevelInformation = (NfLoadLevelInformation) o;
+		return Objects.equals(this.nfType, nfLoadLevelInformation.nfType) &&
+				Objects.equals(this.areaOfInterestId, nfLoadLevelInformation.areaOfInterestId) &&
+				Objects.equals(this.nfInstanceId, nfLoadLevelInformation.nfInstanceId) &&
+				Objects.equals(this.nfSetId, nfLoadLevelInformation.nfSetId) &&
+				Objects.equals(this.serviceId, nfLoadLevelInformation.serviceId) &&
+				Objects.equals(this.nfStatus, nfLoadLevelInformation.nfStatus) &&
+				Objects.equals(this.nfCpuUsage, nfLoadLevelInformation.nfCpuUsage) &&
+				Objects.equals(this.nfMemoryUsage, nfLoadLevelInformation.nfMemoryUsage) &&
+				Objects.equals(this.nfStorageUsage, nfLoadLevelInformation.nfStorageUsage) &&
+				Objects.equals(this.nfLoadLevelAverage, nfLoadLevelInformation.nfLoadLevelAverage) &&
+				Objects.equals(this.nfLoadLevelpeak, nfLoadLevelInformation.nfLoadLevelpeak) &&
+				Objects.equals(this.nfLoadAvgInAoi, nfLoadLevelInformation.nfLoadAvgInAoi) &&
+				Objects.equals(this.snssai, nfLoadLevelInformation.snssai) &&
+				Objects.equals(this.confidence, nfLoadLevelInformation.confidence) &&
+				Objects.equals(this.supis, nfLoadLevelInformation.supis);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(areaOfInterestId, nfType, nfInstanceId, nfSetId, serviceId, nfStatus, nfCpuUsage, nfMemoryUsage,
+				nfStorageUsage, nfLoadLevelAverage, nfLoadLevelpeak, nfLoadAvgInAoi, snssai, confidence, supis);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("class NfLoadLevelInformation {\n");
+
+		sb.append("    timeStamp: ").append(toIndentedString(timeStamp)).append("\n");
+		sb.append("    thresholdProperty: ").append(toIndentedString(thresholdProperty)).append("\n");
+		sb.append("    thresholdValue: ").append(toIndentedString(thresholdValue)).append("\n");
+		sb.append("    areaOfInterestId: ").append(toIndentedString(areaOfInterestId)).append("\n");
+		sb.append("    nfType: ").append(toIndentedString(nfType)).append("\n");
+		sb.append("    nfInstanceId: ").append(toIndentedString(nfInstanceId)).append("\n");
+		sb.append("    nfSetId: ").append(toIndentedString(nfSetId)).append("\n");
+		sb.append("    serviceId: ").append(toIndentedString(serviceId)).append("\n");
+		sb.append("    nfStatus: ").append(toIndentedString(nfStatus)).append("\n");
+		sb.append("    nfCpuUsage: ").append(toIndentedString(nfCpuUsage)).append("\n");
+		sb.append("    nfMemoryUsage: ").append(toIndentedString(nfMemoryUsage)).append("\n");
+		sb.append("    nfStorageUsage: ").append(toIndentedString(nfStorageUsage)).append("\n");
+		sb.append("    nfLoadLevelAverage: ").append(toIndentedString(nfLoadLevelAverage)).append("\n");
+		sb.append("    nfLoadLevelpeak: ").append(toIndentedString(nfLoadLevelpeak)).append("\n");
+		sb.append("    nfLoadAvgInAoi: ").append(toIndentedString(nfLoadAvgInAoi)).append("\n");
+		sb.append("    snssai: ").append(toIndentedString(snssai)).append("\n");
+		sb.append("    confidence: ").append(toIndentedString(confidence)).append("\n");
+		sb.append("    supis: ").append(toIndentedString(supis)).append("\n");
+		sb.append("}");
+		return sb.toString();
+	}
+
+	/**
+	 * Convert the given object to string with each line indented by 4 spaces
+	 * (except the first line).
+	 */
+	private String toIndentedString(java.lang.Object o) {
+		if (o == null) {
+			return "null";
+		}
+		return o.toString().replace("\n", "\n    ");
+	}
+
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("time", ConvertUtil.convertInstantToDouble(this.getTime()));
@@ -512,6 +530,7 @@ public class NfLoadLevelInformation implements Serializable {
 		}
 		map.put("nfInstanceId", ParserUtil.safeParseString(this.getNfInstanceId()));
 		map.put("nfSetId", this.getNfSetId());
+		map.put("serviceId", this.getServiceId());
 		if(this.getNfStatus()!=null) {
 			map.put("nfStatus", this.getNfStatus().toMap());
 		}
@@ -545,6 +564,7 @@ public class NfLoadLevelInformation implements Serializable {
 		result.setNfType(NFType.fromMap((Map<String, Object>) map.get("nfType")));
 		result.setNfInstanceId(ParserUtil.safeParseUUID((String) map.get("nfInstanceId")));
 		result.setNfSetId((String) map.get("nfSetId"));
+		result.setServiceId((String) map.get("serviceId"));
 		result.setNfStatus(NfStatus.fromMap((Map<String,Object>) map.get("nfStatus")));
 		result.setNfCpuUsage((Integer) map.get("nfCpuUsage"));
 		result.setNfMemoryUsage((Integer) map.get("nfMemoryUsage"));

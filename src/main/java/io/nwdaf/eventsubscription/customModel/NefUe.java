@@ -3,16 +3,15 @@ package io.nwdaf.eventsubscription.customModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class NefUe {
     private Integer id;
     private String supi;
-    private String mcc;
-    private String mnc;
+    private Integer mcc;
+    private Integer mnc;
     private String name;
     private String external_identifier;
     private String description;
@@ -28,6 +27,7 @@ public class NefUe {
     @JsonProperty("Cell_id")
     private String Cell_id;
     private String cell_id_hex;
+    @JsonProperty("gNB_id")
     private String gNB_id;
 
     @Override

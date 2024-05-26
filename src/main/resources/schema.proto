@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package eventsubscription;
+
+option java_multiple_files = true;
+option java_package = "io.nwdaf.eventsubscription.protos";
+
+enum NFTypeEnum {
+  NRF = 0;
+  UDM = 1;
+  AMF = 2;
+  SMF = 3;
+  AUSF = 4;
+  NEF = 5;
+  PCF = 6;
+  SMSF = 7;
+  NSSF = 8;
+  UDR = 9;
+  LMF = 10;
+  GMLC = 11;
+  _5G_EIR = 12;
+  SEPP = 13;
+  UPF = 14;
+  N3IWF = 15;
+  AF = 16;
+  UDSF = 17;
+  BSF = 18;
+  CHF = 19;
+  NWDAF = 20;
+  PCSCF = 21;
+  CBCF = 22;
+  UCMF = 23;
+  HSS = 24;
+  SOR_AF = 25;
+  SPAF = 26;
+  MME = 27;
+  SCSAS = 28;
+  SCEF = 29;
+  SCP = 30;
+  NSSAAF = 31;
+  ICSCF = 32;
+  SCSCF = 33;
+  DRA = 34;
+  IMS_AS = 35;
+  AANF = 36;
+  _5G_DDNMF = 37;
+  NSACF = 38;
+  MFAF = 39;
+  EASDF = 40;
+  DCCF = 41;
+  MB_SMF = 42;
+  TSCTSF = 43;
+  ADRF = 44;
+  GBA_BSF = 45;
+  CEF = 46;
+  MB_UPF = 47;
+  NSWOF = 48;
+  PKMF = 49;
+  MNPF = 50;
+  SMS_GMSC = 51;
+  SMS_IWMSC = 52;
+  MBSF = 53;
+  MBSTF = 54;
+  PANF = 55;
+}
+
+message NFType {
+  NFTypeEnum nfType = 1;
+}
+
+message NFStatus {
+  optional int32 statusRegistered = 1;
+  optional int32 statusUnregistered = 2;
+  optional int32 statusUndiscoverable = 3;
+}
+
+message Snssai {
+  optional int32 sst = 1;
+  optional string sd = 2;
+}
+
+message NfLoadLevelInformation {
+  optional google.protobuf.Timestamp time = 1;
+  optional string thresholdProperty = 2;
+  optional int32 thresholdValue = 3;
+  optional string areaOfInterestId = 4;
+  repeated string supis = 5;
+  optional NFType nfType = 6;
+  optional string nfInstanceId = 7;
+  optional string nfSetId = 8;
+  optional int32 nfCpuUsage = 9;
+  optional int32 nfMemoryUsage = 10;
+  optional int32 nfStorageUsage = 11;
+  optional int32 nfLoadLevelAverage = 12;
+  optional int32 nfLoadLevelPeak = 13;
+  optional int32 nfLoadAvgInAoi = 14;
+  optional Snssai snssai = 15;
+  optional int32 confidence = 16;
+}

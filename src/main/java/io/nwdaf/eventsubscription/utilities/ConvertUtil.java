@@ -7,12 +7,20 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import io.nwdaf.eventsubscription.customModel.NefCell;
+import io.nwdaf.eventsubscription.customModel.NefScenario;
 import io.nwdaf.eventsubscription.customModel.NefUeState;
+import io.nwdaf.eventsubscription.customModel.NefgNB;
 import io.nwdaf.eventsubscription.model.*;
 
+import static io.nwdaf.eventsubscription.utilities.Regex.uuidFromDockerId;
+
+@SuppressWarnings("unused")
 public class ConvertUtil {
     // converts empty string to null
     public static String convertEmptyStringToNull(String in) {
@@ -44,6 +52,48 @@ public class ConvertUtil {
             }
         }
 
+        return res;
+    }
+
+    /**
+     * Wraps a nullable object with an Optional
+     **/
+    public static <T> Optional<T> toOptional(T value) {
+        return Optional.ofNullable(value);
+    }
+
+    public static String convertListToFeatures(List<Integer> list) {
+        int res = 0;
+        for (int i : list) {
+            if (i < 1 || i > 24) {
+                throw new IllegalArgumentException("Each integer in the list must be between 1 and 24 (inclusive).");
+            }
+
+            res |= 1 << (i - 1);
+        }
+
+        return String.format("%06x", res);
+    }
+
+    public static List<Boolean> convertListToBooleans(List<Integer> list) {
+        List<Boolean> res = new ArrayList<>();
+        for (int i = 1; i < 25; i++) {
+            if (list.contains(i)) {
+                res.add(true);
+            } else {
+                res.add(false);
+            }
+        }
+        return res;
+    }
+
+    public static List<Integer> convertBooleansToList(List<Boolean> b) {
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < 24; i++) {
+            if (b.get(i)) {
+                res.add(i + 1);
+            }
+        }
         return res;
     }
 
@@ -128,9 +178,9 @@ public class ConvertUtil {
         if (latitude == null || longitude == null || uncertaintyLevel == null || uncertaintyLevel < 0 || uncertaintyLevel > 127) {
             return null;
         }
-        String uncertainty = Integer.toBinaryString(encodeInteger(uncertaintyLevel, 7));
+        StringBuilder uncertainty = new StringBuilder(Integer.toBinaryString(encodeInteger(uncertaintyLevel, 7)));
         while (uncertainty.length() < 7) {
-            uncertainty = "0" + uncertainty;
+            uncertainty.insert(0, "0");
         }
         String encodedLatitude = encodeCoordinate(latitude);
         String encodedLongitude = encodeCoordinate(longitude);
@@ -168,24 +218,24 @@ public class ConvertUtil {
         int intValue = Math.abs((int) x);
         String integerDigits = Integer.toBinaryString(intValue);
         int exponent = integerDigits.length() + 126;
-        String exponentDigits = Integer.toBinaryString(exponent);
+        StringBuilder exponentDigits = new StringBuilder(Integer.toBinaryString(exponent));
         while (exponentDigits.length() < 8) {
-            exponentDigits = "0" + exponentDigits;
+            exponentDigits.insert(0, "0");
         }
 
         String floatDecimalDigits = singlePrecisionFormat.format(Math.abs(x) - intValue);
         float remainder = Float.parseFloat(floatDecimalDigits);
-        String floatDigits = "";
+        StringBuilder floatDigits = new StringBuilder();
 
         while (remainder > 0.0F && floatDigits.length() + integerDigits.length() - 1 < 23) {
             remainder *= 2;
             intValue = (int) remainder;
-            floatDigits += intValue;
+            floatDigits.append(intValue);
             remainder = Float.parseFloat(singlePrecisionFormat.format(remainder - intValue));
         }
-        String mantissa = integerDigits.substring(1) + floatDigits;
+        StringBuilder mantissa = new StringBuilder(integerDigits.substring(1) + floatDigits);
         while (mantissa.length() < 23) {
-            mantissa += "0";
+            mantissa.append("0");
         }
 
         return signedBit + exponentDigits + mantissa;
@@ -229,24 +279,24 @@ public class ConvertUtil {
         }
         String signedBit = x > 0.0F ? "0" : "1";
         int intValue = Math.abs((int) x);
-        String integerDigits = Integer.toBinaryString(intValue);
+        StringBuilder integerDigits = new StringBuilder(Integer.toBinaryString(intValue));
         while (integerDigits.length() < 8) {
-            integerDigits = "0" + integerDigits;
+            integerDigits.insert(0, "0");
         }
 
         String floatDecimalDigits = singlePrecisionFormat.format(Math.abs(x) - intValue);
         double remainder = Double.parseDouble(floatDecimalDigits);
-        String floatDigits = "";
+        StringBuilder floatDigits = new StringBuilder();
 
         while (Double.parseDouble(singlePrecisionFormat.format(remainder)) > 0.0F && floatDigits.length() + integerDigits.length() < 23) {
             remainder *= 2;
             intValue = (int) remainder;
-            floatDigits += intValue;
+            floatDigits.append(intValue);
             remainder = remainder - intValue;
         }
-        String mantissa = integerDigits + floatDigits;
+        StringBuilder mantissa = new StringBuilder(integerDigits + floatDigits.toString());
         while (mantissa.length() < 23) {
-            mantissa += "0";
+            mantissa.append("0");
         }
 
         return signedBit + mantissa;
@@ -272,24 +322,30 @@ public class ConvertUtil {
         return Double.parseDouble(singlePrecisionFormat.format(result));
     }
 
-    public static UeMobility mapNefUeStateToUeMobility(NefUeState nefUeState) {
+    public static UeMobility mapNefUeStateToUeMobility(NefUeState nefUeState, NefCell nefCell) {
         UeMobility ueMobility = new UeMobility();
-
-        String geographicalInformation = ConvertUtil.encodeEllipsoidPointWithUncertaintyCircle(nefUeState.getLatitude(), nefUeState.getLongitude(), 3);
 
         ueMobility.time(Instant.now()).supi(nefUeState.getSupi());
         UserLocation userLocation = new UserLocation();
+
         NrLocation nrLocation = new NrLocation();
+
+        String geographicalInformation = encodeEllipsoidPointWithUncertaintyCircle(nefUeState.getLatitude(),
+                nefUeState.getLongitude(), 3);
+        PlmnId plmnId = parsePlmnId(nefUeState.getMcc(), nefUeState.getMnc());
         nrLocation.ueLocationTimestamp(OffsetDateTime.now())
                 .ncgi(new Ncgi()
                         .nrCellId(nefUeState.getCell_id_hex())
-                        .plmnId(new PlmnId()
-                                .mcc(nefUeState.getMcc())
-                                .mnc(nefUeState.getMnc())))
+                        .plmnId(plmnId))
                 .globalGnbId(new GlobalRanNodeId()
-                        .ngeNbId("LMacroNGeNB-" + nefUeState.getGnb_id_hex()))
+                        .ngeNbId("LMacroNGeNB-" + nefUeState.getGnb_id_hex())
+                        .plmnId(plmnId))
                 .geographicalInformation(geographicalInformation);
+        if (nefCell != null) {
+            nrLocation.cellLocation(mapNefCellLocation(nefCell));
+        }
         userLocation.nrLocation(nrLocation);
+
         N3gaLocation n3gaLocation = new N3gaLocation();
         n3gaLocation.ueIpv4Addr(nefUeState.getIp_address_v4())
                 .ueIpv6Addr(nefUeState.getIp_address_v6())
@@ -298,6 +354,118 @@ public class ConvertUtil {
 
         ueMobility.addLocInfosItem(new LocationInfo().loc(userLocation));
         return ueMobility;
+    }
+
+    public static PlmnId parsePlmnId(String mcc, String mnc) {
+        StringBuilder mccSb = new StringBuilder(mcc);
+        while (mccSb.length() < 3) {
+            mccSb.insert(0, "0");
+        }
+        StringBuilder mncSb = new StringBuilder(mnc);
+        while (mncSb.length() < 2) {
+            mncSb.insert(0, "0");
+        }
+        return new PlmnId().mcc(mccSb.toString()).mnc(mncSb.toString());
+    }
+
+    public static PlmnId getNefScenarioPlmnId(NefScenario nefScenario) {
+        if (nefScenario.getUEs().isEmpty() ||
+                nefScenario.getUEs().getFirst() == null ||
+                nefScenario.getUEs().getFirst().getMcc() == null ||
+                nefScenario.getUEs().getFirst().getMnc() == null) return null;
+
+        String mcc = nefScenario.getUEs().getFirst().getMcc().toString();
+        String mnc = nefScenario.getUEs().getFirst().getMnc().toString();
+        return parsePlmnId(mcc, mnc);
+    }
+
+    public static NetworkAreaInfo mapNefCellToAOI(NefCell nefCell, List<NefgNB> nefgNBs, PlmnId plmnId) {
+        return new NetworkAreaInfo()
+                .ncgis(List.of(new Ncgi()
+                        .nrCellId(nefCell.getCell_id())
+                        .plmnId(plmnId)))
+                .gRanNodeIds(List.of(new GlobalRanNodeId()
+                        .ngeNbId("LMacroNGeNB-" + nefgNBs.stream()
+                                .filter(gnB -> gnB.getGNB_id().endsWith(nefCell.getGNB_id().toString()))
+                                .findFirst().orElse(new NefgNB())
+                                .getGNB_id())
+                        .plmnId(plmnId)));
+    }
+
+    public static void removeAoIDuplicates(NetworkAreaInfo aoi) {
+        if (aoi.getNcgis() != null) {
+            aoi.setNcgis(new ArrayList<>(aoi.getNcgis().stream().distinct().toList()));
+        }
+        if (aoi.getGRanNodeIds() != null) {
+            aoi.setGRanNodeIds(new ArrayList<>(aoi.getGRanNodeIds().stream().distinct().toList()));
+        }
+        if (aoi.getEcgis() != null) {
+            aoi.setEcgis(new ArrayList<>(aoi.getEcgis().stream().distinct().toList()));
+        }
+        if (aoi.getTais() != null) {
+            aoi.setTais(new ArrayList<>(aoi.getTais().stream().distinct().toList()));
+        }
+    }
+
+    public static NetworkAreaInfo concatenateAoIs(List<NetworkAreaInfo> aois, UUID id) {
+        NetworkAreaInfo result = new NetworkAreaInfo().id(id);
+        for (NetworkAreaInfo aoi : aois) {
+            if (aoi.getNcgis() != null) {
+                aoi.getNcgis().forEach(result::addNcgisItem);
+            }
+            if (aoi.getGRanNodeIds() != null) {
+                aoi.getGRanNodeIds().forEach(result::addGRanNodeIdsItem);
+            }
+            if (aoi.getEcgis() != null) {
+                aoi.getEcgis().forEach(result::addEcgisItem);
+            }
+            if (aoi.getTais() != null) {
+                aoi.getTais().forEach(result::addTaisItem);
+            }
+        }
+        removeAoIDuplicates(result);
+        return result;
+    }
+
+    public static EllipsoidArc mapNefCellLocation(NefCell nefCell) {
+        EllipsoidArc result = new EllipsoidArc()
+                .point(new GeographicalCoordinates()
+                        .lat(Double.valueOf(nefCell.getLatitude()))
+                        .lon(Double.valueOf(nefCell.getLongitude())
+                        ))
+                .innerRadius(Math.round(nefCell.getRadius()))
+                .includedAngle(360)
+                .offsetAngle(0)
+                .uncertaintyRadius(0.0);
+        result.setShape(new SupportedGADShapes().supportedGADShapes(SupportedGADShapes.SupportedGADShapesEnum.EllipsoidArc));
+        return result;
+    }
+
+    public static NetworkAreaInfo mapUeMobilityToAOI(UeMobility ueMobility) {
+        NetworkAreaInfo result = new NetworkAreaInfo();
+        if (ueMobility.getLocInfos() != null) {
+            for (LocationInfo locationInfo : ueMobility.getLocInfos()) {
+                UserLocation userLocation = locationInfo.getLoc();
+                if (userLocation != null) {
+
+                    toOptional(userLocation.getNrLocation()).ifPresent( nrLocation -> {
+                        toOptional(nrLocation.getNcgi()).ifPresent(result::addNcgisItem);
+                        toOptional(nrLocation.getGlobalGnbId()).ifPresent(result::addGRanNodeIdsItem);
+                        toOptional(nrLocation.getTai()).ifPresent(result::addTaisItem);
+                    });
+                    toOptional(userLocation.getEutraLocation()).ifPresent( eutraLocation -> {
+                        toOptional(eutraLocation.getEcgi()).ifPresent(result::addEcgisItem);
+                        toOptional(eutraLocation.getGlobalENbId()).ifPresent(result::addGRanNodeIdsItem);
+                        toOptional(eutraLocation.getGlobalNgenbId()).ifPresent(result::addGRanNodeIdsItem);
+                        toOptional(eutraLocation.getTai()).ifPresent(result::addTaisItem);
+                    });
+                    toOptional(userLocation.getN3gaLocation()).ifPresent( n3gaLocation -> {
+                        toOptional(n3gaLocation.getN3gppTai()).ifPresent(result::addTaisItem);
+                    });
+                }
+            }
+        }
+        return result;
     }
 
     public static UeCommunication mapNefUeStateToUeCommunication(NefUeState nefUeState) {
@@ -327,10 +495,7 @@ public class ConvertUtil {
     }
 
     public static Double setAccuracy(Double input, DecimalFormat df) {
-        if (input == null) {
-            return null;
-        }
-        return Double.parseDouble(df.format(input));
+        return toOptional(input).map(df::format).map(Double::parseDouble).orElse(null);
     }
 
     public static List<Double> convertGpsToECEF(double lat, double lon, double alt) {
@@ -403,5 +568,36 @@ public class ConvertUtil {
         ecef.add(ecefUser.get(2) + z);
 
         return ecef;
+    }
+
+    /**
+     * Converts a docker id with format docker/id/[first 32 digits] to a UUID
+     *
+     * @param dockerId the docker id
+     * @return the UUID
+     */
+    public static String convertDockerIdToUUID(String dockerId) {
+        int start = getStartOfDigitsInDockerId(dockerId);
+        String uuid = dockerId.substring(start, start + 32).replaceFirst(uuidFromDockerId, "$1-$2-$3-$4-$5");
+        uuid = uuid.substring(0, 14) + "4" + uuid.substring(15);
+        uuid = uuid.substring(0, 19) + "8" + uuid.substring(20);
+        return uuid;
+    }
+
+    /**
+     * Returns the start index of the digits in the docker id with format docker/id/[digits]
+     *
+     * @param dockerId the docker id
+     * @return the start index of the digits in the docker id
+     */
+    public static int getStartOfDigitsInDockerId(String dockerId) {
+        String modifier = "docker-";
+        int st_index = dockerId.indexOf(modifier);
+        // in windows docker desktop it is usually formatted with slash instead of hyphen as below:
+        if (st_index == -1 || dockerId.charAt(st_index + modifier.length()) == 'r') {
+            modifier = "docker/";
+            st_index = dockerId.indexOf(modifier);
+        }
+        return st_index + modifier.length();
     }
 }

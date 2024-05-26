@@ -60,6 +60,9 @@ public class EutraLocation {
 	@JsonProperty("globalENbId")
 	private GlobalRanNodeId globalENbId = null;
 
+	@JsonProperty("cellLocation")
+	private EllipsoidArc cellLocation = null;
+
 	public EutraLocation tai(Tai tai) {
 		this.tai = tai;
 		return this;
@@ -285,6 +288,27 @@ public class EutraLocation {
 		this.globalENbId = globalENbId;
 	}
 
+	public EutraLocation cellLocation(EllipsoidArc cellLocation) {
+		this.cellLocation = cellLocation;
+		return this;
+	}
+
+	/**
+	 * Get cellLocation
+	 *
+	 * @return cellLocation
+	 **/
+	@Schema(description = "")
+
+	@Valid
+	public EllipsoidArc getCellLocation() {
+		return cellLocation;
+	}
+
+	public void setCellLocation(EllipsoidArc cellLocation) {
+		this.cellLocation = cellLocation;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -362,6 +386,9 @@ public class EutraLocation {
 		map.put("geographicalInformation", this.geographicalInformation);
 		map.put("ignoreEcgi", this.ignoreEcgi);
 		map.put("ignoreTai", this.ignoreTai);
+		if (this.cellLocation != null) {
+			map.put("cellLocation", this.cellLocation.toMap());
+		}
 		return map;
 	}
 
@@ -380,6 +407,7 @@ public class EutraLocation {
 		result.setIgnoreTai((Boolean) map.get("ignoreTai"));
 		result.setTai(Tai.fromMap((Map<String,Object>) map.get("tai")));
 		result.setUeLocationTimestamp(ConvertUtil.convertDoubleToOffSetDateTime((Double) map.get("ueLocationTimestamp")));
+		result.setCellLocation(EllipsoidArc.fromMap((Map<String, Object>) map.get("cellLocation")));
 		return result;
 	}
 }

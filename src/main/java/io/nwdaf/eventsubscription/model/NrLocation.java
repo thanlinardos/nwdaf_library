@@ -47,8 +47,11 @@ public class NrLocation {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String geographicalInformation = null;
 
-    @JsonProperty("pointUncertainyCircle")
+    @JsonProperty("pointUncertaintyCircle")
     private PointUncertaintyCircle pointUncertaintyCircle = null;
+
+    @JsonProperty("cellLocation")
+    private EllipsoidArc cellLocation = null;
 
     @JsonProperty("geodeticInformation")
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -260,6 +263,27 @@ public class NrLocation {
         this.pointUncertaintyCircle = pointUncertaintyCircle;
     }
 
+    public NrLocation cellLocation(EllipsoidArc cellLocation) {
+        this.cellLocation = cellLocation;
+        return this;
+    }
+
+    /**
+     * Get cellLocation
+     *
+     * @return cellLocation
+     **/
+    @Schema(description = "")
+
+    @Valid
+    public EllipsoidArc getCellLocation() {
+        return cellLocation;
+    }
+
+    public void setCellLocation(EllipsoidArc cellLocation) {
+        this.cellLocation = cellLocation;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -332,6 +356,9 @@ public class NrLocation {
         if (this.pointUncertaintyCircle != null) {
             map.put("pointUncertaintyCircle", this.pointUncertaintyCircle.toMap());
         }
+        if (this.cellLocation != null) {
+            map.put("cellLocation", this.cellLocation.toMap());
+        }
         return map;
     }
 
@@ -349,6 +376,7 @@ public class NrLocation {
         result.setTai(Tai.fromMap((Map<String, Object>) map.get("tai")));
         result.setUeLocationTimestamp(ConvertUtil.convertDoubleToOffSetDateTime((Double) map.get("ueLocationTimestamp")));
         result.setPointUncertaintyCircle(PointUncertaintyCircle.fromMap((Map<String, Object>) map.get("pointUncertaintyCircle")));
+        result.setCellLocation(EllipsoidArc.fromMap((Map<String, Object>) map.get("cellLocation")));
         return result;
     }
 }

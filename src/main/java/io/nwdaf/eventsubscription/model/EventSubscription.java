@@ -8,8 +8,10 @@ import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import io.nwdaf.eventsubscription.utilities.Regex;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -340,13 +342,12 @@ public class EventSubscription {
 
 	/**
 	 * Identification(s) of LADN DNN to indicate the LADN service area as the AOI.
-	 * 
+	 * Each element is a string representation of a (Local Area) Data Network as defined in clause 9A of 3GPP TS 23.003.
 	 * @return ladnDnns
 	 **/
 	@Schema(description = "Identification(s) of LADN DNN to indicate the LADN service area as the AOI.")
-
 	@Size(min = 1)
-	public List<String> getLadnDnns() {
+	public List<@Pattern(regexp = Regex.dnn) String> getLadnDnns() {
 		return ladnDnns;
 	}
 

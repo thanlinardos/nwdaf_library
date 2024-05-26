@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,6 +24,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-10T19:22:40.843464800+03:00[Europe/Athens]")
 
+@AllArgsConstructor
 public class LocationInfo {
 	@JsonProperty("loc")
 	private UserLocation loc = null;
@@ -34,6 +36,10 @@ public class LocationInfo {
 	@JsonProperty("confidence")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer confidence = null;
+
+	public LocationInfo() {
+
+	}
 
 	public LocationInfo loc(UserLocation loc) {
 		this.loc = loc;

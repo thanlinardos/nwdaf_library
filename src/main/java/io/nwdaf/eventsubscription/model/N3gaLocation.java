@@ -64,6 +64,9 @@ public class N3gaLocation {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String gci = null;
 
+	@JsonProperty("cellLocation")
+	private EllipsoidArc cellLocation = null;
+
 	public N3gaLocation n3gppTai(Tai n3gppTai) {
 		this.n3gppTai = n3gppTai;
 		return this;
@@ -326,6 +329,27 @@ public class N3gaLocation {
 		this.gci = gci;
 	}
 
+	public N3gaLocation cellLocation(EllipsoidArc cellLocation) {
+		this.cellLocation = cellLocation;
+		return this;
+	}
+
+	/**
+	 * Get cellLocation
+	 *
+	 * @return cellLocation
+	 **/
+	@Schema(description = "")
+
+	@Valid
+	public EllipsoidArc getCellLocation() {
+		return cellLocation;
+	}
+
+	public void setCellLocation(EllipsoidArc cellLocation) {
+		this.cellLocation = cellLocation;
+	}
+
 	@Override
 	public boolean equals(java.lang.Object o) {
 		if (this == o) {
@@ -415,6 +439,9 @@ public class N3gaLocation {
 		map.put("portNumber", this.portNumber);
 		map.put("ueIpv4Addr", this.ueIpv4Addr);
 		map.put("ueIpv6Addr", this.ueIpv6Addr);
+		if (this.cellLocation != null) {
+			map.put("cellLocation", this.cellLocation.toMap());
+		}
 		return map;
 	}
 
@@ -435,6 +462,7 @@ public class N3gaLocation {
 		result.setUeIpv4Addr((String) map.get("ueIpv4Addr"));
 		result.setUeIpv6Addr((String) map.get("ueIpv6Addr"));
 		result.setW5gbanLineType(LineType.fromMap((Map<String,Object>) map.get("w5gbanLineType")));
+		result.setCellLocation(EllipsoidArc.fromMap((Map<String, Object>) map.get("cellLocation")));
 		return result;
 	}
 }
