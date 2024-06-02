@@ -409,20 +409,7 @@ public class ConvertUtil {
 
     public static NetworkAreaInfo concatenateAoIs(List<NetworkAreaInfo> aois, UUID id) {
         NetworkAreaInfo result = new NetworkAreaInfo().id(id);
-        for (NetworkAreaInfo aoi : aois) {
-            if (aoi.getNcgis() != null) {
-                aoi.getNcgis().forEach(result::addNcgisItem);
-            }
-            if (aoi.getGRanNodeIds() != null) {
-                aoi.getGRanNodeIds().forEach(result::addGRanNodeIdsItem);
-            }
-            if (aoi.getEcgis() != null) {
-                aoi.getEcgis().forEach(result::addEcgisItem);
-            }
-            if (aoi.getTais() != null) {
-                aoi.getTais().forEach(result::addTaisItem);
-            }
-        }
+        aois.forEach(aoi -> fillAoIContents(result, aoi));
         removeAoIDuplicates(result);
         return result;
     }
@@ -599,5 +586,23 @@ public class ConvertUtil {
             st_index = dockerId.indexOf(modifier);
         }
         return st_index + modifier.length();
+    }
+
+    public static void fillAoIContents(NetworkAreaInfo result, NetworkAreaInfo aoi) {
+        if (aoi == null) {
+            return;
+        }
+        if (aoi.getNcgis() != null) {
+            aoi.getNcgis().forEach(result::addNcgisItem);
+        }
+        if (aoi.getGRanNodeIds() != null) {
+            aoi.getGRanNodeIds().forEach(result::addGRanNodeIdsItem);
+        }
+        if (aoi.getEcgis() != null) {
+            aoi.getEcgis().forEach(result::addEcgisItem);
+        }
+        if (aoi.getTais() != null) {
+            aoi.getTais().forEach(result::addTaisItem);
+        }
     }
 }

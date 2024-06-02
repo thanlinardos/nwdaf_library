@@ -125,6 +125,21 @@ public class ParserUtil {
         return res;
     }
 
+    public static String parseQuerryFilterListContains(List<String> filterList, String subProperty) {
+        String res = "(";
+        if (filterList == null || filterList.isEmpty()) {
+            return null;
+        }
+        for (int i = 0; i < filterList.size(); i++) {
+            res += "data->'" + subProperty + "' @> '[\"" + filterList.get(i) + "\"]'";
+            if (i != filterList.size() - 1) {
+                res += " or ";
+            }
+        }
+        res += ")";
+        return res;
+    }
+
     // remove edge cases from list of filters
     public static List<String> parseObjectListToFilterList(List<String> list) {
         List<String> filterList = new ArrayList<>();
